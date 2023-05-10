@@ -1,15 +1,15 @@
 
 # AutoElite - Frontend
 
-AutoElite es una aplicación web que le permite al público buscar, publicar y vender vehículos de la manera mas ágil y cómoda posible
+AutoElite es una aplicación web que le permite al público buscar, publicar y vender vehículos de la manera mas ágil y cómoda posible.
 
 
 ## Authors
 
-- [@PaolaAndreaDominguez](https://www.github.com/JuanFelipeJaramillo20)
-- [@ValentinaCobo](https://www.github.com/JuanFelipeJaramillo20)
+- [@PaolaAndreaDominguez](https://www.github.com/JuanFelipeJaramillo20](https://github.com/Paoladevelopment)
+- [@ValentinaCobo](https://www.github.com/JuanFelipeJaramillo20](https://github.com/J-khol-R)
 - [@JuanDavidMoreno](https://www.github.com/heisjuanda)
-- [@DavidArce](https://www.github.com/JuanFelipeJaramillo20)
+- [@DavidArce](https://www.github.com/JuanFelipeJaramillo20](https://github.com/david-arce)
 - [@JuanFelipeJaramillo](https://www.github.com/JuanFelipeJaramillo20)
 ## Acknowledgements
 
