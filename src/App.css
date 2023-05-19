@@ -4,7 +4,8 @@
   /* primary/main color */
   --main-txt-color: #000;
   --card-main-color: #f3f4e5;
-  --white-primary-color: #fff;
+  --card-white-color: #fff;
+  --black-76-primary-color: #000000c2;
 
   /*colors used for inputs and form elements*/
   --gray-opacity-24: #ffffff3d;
