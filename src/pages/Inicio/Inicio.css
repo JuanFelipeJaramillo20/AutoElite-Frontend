@@ -2,6 +2,7 @@
 .home {
     font-family: 'Noto Sans', sans-serif;
     padding-inline: 7%;
+    overflow: hidden;
 }
 
 .home h2 {
@@ -25,7 +26,6 @@
     align-items: center;
     justify-content: center;
 
-    overflow: hidden;
     height: 100vh;
 }
 
@@ -33,13 +33,14 @@
     width: 0px;
     height: 0px;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 0px;
+    left: 0px;
 }
 
 .intro-section__background-line>img {
     width: 100vw;
     height: 100vh;
+    transform: translateX(-7%);
 }
 
 .intro-section__table {
