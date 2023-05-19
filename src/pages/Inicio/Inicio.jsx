@@ -18,14 +18,14 @@ export const Inicio = () => {
     const areDefinedElements = (reasonCar && aboutSection) ? true : false;
 
     window.addEventListener('scroll', () => {
-      const scroll = scrollY + (window.innerHeight / 2);
+      const scroll = scrollY + (window.innerHeight);
 
       if (areDefinedElements) {
         const isVisible = scroll > aboutSection.offsetTop;
-        
+
         if (isVisible) {
           const movement = scroll - aboutSection.offsetTop;
-          reasonCar.style.transform = `translateY(${movement * 0.2}px)`;
+          reasonCar.style.transform = `translateY(${-50 + (movement * 0.12)}px)`;
         }
       }
     });
@@ -68,7 +68,7 @@ export const Inicio = () => {
               Ver más
             </p>
           </header>
-          <article>
+          <article className='offer-section__content'>
             <div></div>
           </article>
         </section>

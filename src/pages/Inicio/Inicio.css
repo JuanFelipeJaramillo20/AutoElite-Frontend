@@ -4,6 +4,18 @@
     padding-inline: 7%;
 }
 
+.home h2 {
+    font-weight: 700;
+}
+
+.home h3 {
+    font-weight: 600;
+}
+
+.home p {
+    font-weight: 400;
+}
+
 /* Intro section */
 .intro-section {
     background-color: #A1C1BE;
@@ -81,10 +93,15 @@
     font-size: clamp(15px, 4vw, 20px);
 }
 
+.offer-section__content {
+    height: 100vh;
+}
+
 /* Why AutoElite section */
 .about-section {
     background-color: #A1C1BE;
     border: 1px solid transparent;
+    height: 100vh;
 }
 
 .about-section__title>h2 {
@@ -118,7 +135,7 @@
     width: 0px;
     height: 0px;
     position: absolute;
-    top: 30%;
+    top: 15%;
     left: 49%;
 }
 
@@ -132,6 +149,7 @@
     z-index: 2;
     width: 400px;
     height: 400px;
+    transform: translateY(-50px);
 }
 
 #middle-side {
