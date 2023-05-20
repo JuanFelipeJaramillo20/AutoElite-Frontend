@@ -14,16 +14,24 @@ export const Inicio = () => {
   useEffect(() => {
     const reasonCar = document.getElementById('little-car__movement');
     const aboutSection = document.querySelector('.about-section');
+    const offerSection = document.querySelector('.offer-section');
+    const homeCar = document.getElementById('home-car');
 
-    const areDefinedElements = (reasonCar && aboutSection) ? true : false;
-
+    const areDefinedElements = (reasonCar && aboutSection && homeCar && offerSection) ? true : false;
     window.addEventListener('scroll', () => {
       const scroll = scrollY + (window.innerHeight);
+      const simpleScroll = scrollY;
 
       if (areDefinedElements) {
-        const isVisible = scroll > aboutSection.offsetTop;
+        const isVisibleAboutSection = scroll > aboutSection.offsetTop;
+        const isInHomeSection = simpleScroll < offerSection.offsetTop;
+        
+        if (isInHomeSection) {
+          const increment = simpleScroll * 0.0001
+          homeCar.style.transform = `scale(${0.8 + increment})`;
+        }
 
-        if (isVisible) {
+        if (isVisibleAboutSection) {
           const movement = scroll - aboutSection.offsetTop;
           reasonCar.style.transform = `translateY(${-50 + (movement * 0.12)}px)`;
         }
@@ -54,7 +62,7 @@ export const Inicio = () => {
           </div>
 
           <div className='intro-section__image'>
-            <img src={homeCar} alt="Home car" width={780} height={596} />
+            <img id='home-car' src={homeCar} alt="Home car" width={780} height={596} />
           </div>
 
         </section>

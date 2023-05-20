@@ -75,6 +75,7 @@
     max-height: 596px;
     height: 50vw;
     min-height: 519px;
+    transform: scale(0.8);
 }
 
 /* Offers section */
