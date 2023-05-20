@@ -18,14 +18,15 @@ export const Inicio = () => {
     const homeCar = document.getElementById('home-car');
 
     const areDefinedElements = (reasonCar && aboutSection && homeCar && offerSection) ? true : false;
-    window.addEventListener('scroll', () => {
+
+    function handleScrollEvent() {
       const scroll = scrollY + (window.innerHeight);
       const simpleScroll = scrollY;
 
       if (areDefinedElements) {
         const isVisibleAboutSection = scroll > aboutSection.offsetTop;
         const isInHomeSection = simpleScroll < offerSection.offsetTop;
-        
+
         if (isInHomeSection) {
           const increment = simpleScroll * 0.0001
           homeCar.style.transform = `scale(${0.8 + increment})`;
@@ -36,7 +37,12 @@ export const Inicio = () => {
           reasonCar.style.transform = `translateY(${-50 + (movement * 0.12)}px)`;
         }
       }
-    });
+    }
+    window.addEventListener('scroll', handleScrollEvent);
+
+    return () => {
+      window.removeEventListener('scroll', handleScrollEvent);
+    };
   }, []);
 
   return (
