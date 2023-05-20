@@ -1,0 +1,4 @@
+export const LOGOUT = 'LOGOUT';
+export const SET_USER = 'SET_USER';
+export const DELETE_PUBLICACION = 'DELETE_PUBLICACION';
+export const DELETE_GUARDADO = 'DELETE_GUARDADO';
