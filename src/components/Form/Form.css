@@ -1,0 +1,12 @@
+.app-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.app-form__inputs {
+  margin-bottom: 3.25rem;
+}
+
+.app-form button {
+  align-self: center;
+}

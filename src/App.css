@@ -10,11 +10,15 @@
   /*colors used for inputs and form elements*/
   --gray-opacity-24: #ffffff3d;
   --gray-opacity-12: #ffffff1f;
+  --gray-opacity-48: #ffffff7a;
   /*Gray for the text that goes in the card for the car*/
   --gray--opacity-65: rgba(0, 0, 0, 0.65);
   --checkbox-main-color: #666276;
   --btn-main-color: #59554e;
   --option-main-color: #d9d9d9;
+
+  /*Other colors*/
+  --white-color: #fff;
 }
 
 /*general styling*/
