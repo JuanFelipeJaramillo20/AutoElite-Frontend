@@ -1,0 +1,68 @@
+.logIn-container {
+    width: 100%;
+    height: 100%;
+    padding: 5%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.welcomed__title,.welcomed__img {
+    margin-bottom: 10%;
+}
+
+.welcomed__title>h2 {
+    font-size: clamp(26px, 5vw, 32px);
+}
+
+.welcomed__img>img {
+    width: 40vw;
+    min-width: 300px;
+    max-width: 350px;
+
+    height: 33vw;
+    max-height: 298px;
+    min-height: 255px;
+}
+
+.welcomed__no-account {
+    display: flex;
+    flex-direction: row;
+    gap: 5%;
+}
+
+.welcomed__no-account p {
+    font-size: clamp(12px, 3vw, 16px);
+}
+
+.welcomed__no-account>p, .form_forgot-password p {
+    text-decoration: underline;
+}
+
+.container__form {
+    display: flex;
+    flex-direction: column;
+}
+
+.google-login {
+    margin-top: 10%;
+    margin-bottom: 20%;
+}
+
+.google-login button{
+    border: 2px solid gray;
+    background-color: transparent;
+    color: gray;
+    width: 90%;
+    height: 50px;
+    border-radius: 1.2vmax;
+    cursor: pointer;
+    font-size: clamp(12px,3vw,16px);
+}
+
+.form-login label, .form-login input, .form-login button, .form_forgot-password p{
+    font-size: clamp(12px, 3vw, 16px);
+}
+
+.form_forgot-password {
+    margin-top: 11%;
+}
