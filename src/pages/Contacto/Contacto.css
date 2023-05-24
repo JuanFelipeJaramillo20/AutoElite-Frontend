@@ -1,5 +1,55 @@
 .app-contact {
   display: flex;
-  width: 80%;
-  margin: 0 auto;
+  width: 90%;
+  justify-content: space-between;
+  margin: 6.25rem auto 5rem auto;
+}
+
+.app-contact section {
+  width: 50%;
+}
+
+.app-contact .app-form {
+  width: 40%;
+  max-width: 510px;
+}
+
+.app-contact__info {
+  margin-bottom: 2.5rem;
+}
+
+.app-contact__info div {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.app-contact__title {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.app-contact__subtitle {
+  font-size: 1.25rem;
+}
+
+.fa-circle-question,
+.fa-envelope {
+  font-size: 1.875rem;
+}
+
+::placeholder {
+  color: var(--white-color);
+}
+
+.app-underlineformat {
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+@media screen and (min-width: 1080px) {
+  .app-contact {
+    width: 70%;
+  }
 }

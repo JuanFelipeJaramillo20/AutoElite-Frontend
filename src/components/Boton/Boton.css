@@ -5,10 +5,10 @@
   border: none;
   border-radius: 0.5rem;
   cursor: pointer;
-  background-color: var(--gray-opacity-24);
+  color: var(--white-color);
+  background-color: var(--btn-main-color);
 }
 
 .app-btn:hover {
-  background-color: var(--white-color);
-  color: var(--btn-main-color);
+  background-color: var(--btn-secundary-color);
 }

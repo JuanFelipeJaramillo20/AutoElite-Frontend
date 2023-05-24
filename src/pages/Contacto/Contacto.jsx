@@ -32,30 +32,38 @@ export const Contacto = () => {
         onSubmit={onSubmitContacto}
       />
 
-      <div className='app-contact__info'>
-        <div>
-          <h1>Contáctanos</h1>
+      <section>
+        <div className='app-contact__info'>
+          <h1 className='app-contact__title'>Contáctanos</h1>
           <p>
-            Llena el formulario y nuestro equipo se pondrá en contacto contigo
-            tan rápido como sea posible.
+            Llena el formulario y nuestro equipo se pondrá en <br />
+            contacto contigo tan rápido como sea posible.
           </p>
         </div>
 
-        <div>
-          <h2>Comunicación general</h2>
+        <div className='app-contact__info'>
+          <div>
+            <i className='fa-solid fa-envelope'></i>
+            <h2 className='app-contact__subtitle'>Comunicación general</h2>
+          </div>
           <p>
-            Para dudas, problemas o sugerencias envía un correo electrónico a:{' '}
-            <span>example@example.com</span>
+            Para dudas, problemas o sugerencias envía <br /> un correo
+            electrónico a:{' '}
+            <span className='app-underlineformat'>example@example.com</span>
           </p>
         </div>
 
-        <div>
-          <h2>Preguntas frecuentes</h2>
+        <div className='app-contact__info'>
+          <div>
+            <i className='fa-solid fa-circle-question'></i>
+            <h2 className='app-contact__subtitle'>Preguntas frecuentes</h2>
+          </div>
           <p>
-            Si tienes preguntas, por favor dirigite aquí <span>FAQ</span>
+            Si tienes preguntas, por favor dirigite aquí{' '}
+            <span className='app-underlineformat'>FAQ</span>
           </p>
         </div>
-      </div>
+      </section>
     </div>
   );
 };
