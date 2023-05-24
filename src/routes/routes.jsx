@@ -7,6 +7,10 @@ import { PerfilUsuario } from '../pages/PerfilUsuario/PerfilUsuario';
 import { PerfilVendedor } from '../pages/perfilVendedor/perfilVendedor';
 import { Header } from '../components/Header/Header';
 import { Footer } from '../components/Footer/Footer';
+import { PrivateRouter } from './PrivateRouter';
+import { CrearPublicacion } from '../pages/CrearPublicacion/CrearPublicacion';
+import { EditarPublicacion } from '../pages/EditarPublicacion/EditarPublicacion';
+import { Favoritos } from '../pages/Favoritos/Favoritos';
 
 export const RoutesConfiguration = () => {
   return (
@@ -17,8 +21,16 @@ export const RoutesConfiguration = () => {
         <Route path='/catalogo' element={<Catalogo />} />
         <Route path='/contacto' element={<Contacto />} />
         <Route path='/publicacion/:publicacionId' element={<Publicacion />} />
-        <Route path='/perfil' element={<PerfilUsuario />} />
         <Route path='/perfil/:usuarioId' element={<PerfilVendedor />} />
+        <Route element={<PrivateRouter isAuth={false} />}>
+          <Route path='/perfil' element={<PerfilUsuario />} />
+          <Route path='/publicacion/nueva' element={<CrearPublicacion />} />
+          <Route
+            path='/publicacion/editar/:publicacionId'
+            element={<EditarPublicacion />}
+          />
+          <Route path='/favoritos' element={<Favoritos />} />
+        </Route>
       </Routes>
       <Footer />
     </Router>
