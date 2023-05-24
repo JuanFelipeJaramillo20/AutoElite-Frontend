@@ -20,6 +20,7 @@
     right: 3%;
     width: 25px;
     height: 25px;
+    z-index: 50;
 }
 
 .modal__close-bton button {
