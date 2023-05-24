@@ -1,20 +1,25 @@
 /* variables */
 :root {
-  --main-background: #a1c1be;
+  --main-background: #fff;
   /* primary/main color */
   --main-txt-color: #000;
-  --card-main-color: #f3f4e5;
+  --secundary-text-color: #000000c2;
+  --card-main-color: #282435;
   --card-white-color: #fff;
-  --black-76-primary-color: #000000c2;
+  --card-white-regularText: rgb(255, 255, 255, 70);
 
   /*colors used for inputs and form elements*/
-  --gray-opacity-24: #ffffff3d;
-  --gray-opacity-12: #ffffff1f;
-  /*Gray for the text that goes in the card for the car*/
-  --gray--opacity-65: rgba(0, 0, 0, 0.65);
+  --input-main-color: #282435;
+  --input-outline-color: #2824351f;
+
   --checkbox-main-color: #666276;
-  --btn-main-color: #59554e;
-  --option-main-color: #d9d9d9;
+  --btn-main-color: #282435;
+  --btn-secundary-color: #282435cc;
+  --option-main-color: #282435;
+  --option-secundary-color: #282435cc;
+
+  /*Other colors*/
+  --white-color: #fff;
 }
 
 /*general styling*/
