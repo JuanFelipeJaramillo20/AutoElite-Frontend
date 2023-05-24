@@ -1,0 +1,24 @@
+.footer {
+    width: 99vw;
+    height: 100px;
+    background-color: #282435;
+    display: grid;
+    grid-template-columns: repeat(3, 33.33%);
+    place-items: center;
+
+}
+
+.footer__title>h1, .footer__FAQ>h2{
+    color: white;
+    font-size: clamp(19px, 5vw,24px);
+}
+
+.footer__icons {
+    display: flex;
+    gap: 30%;
+}
+
+.footer__icons>a {
+    color: white;
+    font-size: clamp(10px, 4vw,25px);
+}

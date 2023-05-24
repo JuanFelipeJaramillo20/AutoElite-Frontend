@@ -1,14 +1,15 @@
 .app-btn {
-  width: 9.5rem;
-  height: 3.125rem;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  color: var(--white-color);
-  background-color: var(--btn-main-color);
-}
-
-.app-btn:hover {
-  background-color: var(--btn-secundary-color);
-}
+    width: 9.5rem;
+    height: 3.125rem;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    color: var(--white-color);
+    background-color: var(--btn-main-color);
+  }
+  
+  .app-btn:hover {
+    background-color: var(--btn-secundary-color);
+  }
+  

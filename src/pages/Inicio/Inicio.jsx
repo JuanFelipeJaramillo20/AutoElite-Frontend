@@ -7,6 +7,8 @@ import roadLine from '../../assets/img/inicio/roadLine.png';
 
 import './inicio.css';
 
+import { Login } from '../../components/Login/Login';
+
 export const Inicio = () => {
 
   const [razonesAmmount] = useState(Array.from({ length: 3 }));
@@ -47,6 +49,7 @@ export const Inicio = () => {
 
   return (
     <>
+      <Login />
       <main className='home'>
         <section className='intro-section'>
           <div className='intro-section__background-line'>
