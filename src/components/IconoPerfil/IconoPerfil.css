@@ -1,0 +1,11 @@
+.app-iconoPerfil {
+  width: 50px;
+  height: 50px;
+}
+
+.app-iconoPerfil img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
