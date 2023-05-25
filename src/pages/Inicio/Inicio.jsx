@@ -7,10 +7,7 @@ import roadLine from '../../assets/img/inicio/roadLine.png';
 
 import './inicio.css';
 
-import { Login } from '../../components/Login/Login';
-
 export const Inicio = () => {
-
   const [razonesAmmount] = useState(Array.from({ length: 3 }));
 
   useEffect(() => {
@@ -19,10 +16,11 @@ export const Inicio = () => {
     const offerSection = document.querySelector('.offer-section');
     const homeCar = document.getElementById('home-car');
 
-    const areDefinedElements = (reasonCar && aboutSection && homeCar && offerSection) ? true : false;
+    const areDefinedElements =
+      reasonCar && aboutSection && homeCar && offerSection ? true : false;
 
     function handleScrollEvent() {
-      const scroll = scrollY + (window.innerHeight);
+      const scroll = scrollY + window.innerHeight;
       const simpleScroll = scrollY;
 
       if (areDefinedElements) {
@@ -30,13 +28,13 @@ export const Inicio = () => {
         const isInHomeSection = simpleScroll < offerSection.offsetTop;
 
         if (isInHomeSection) {
-          const increment = simpleScroll * 0.0001
+          const increment = simpleScroll * 0.0001;
           homeCar.style.transform = `scale(${0.8 + increment})`;
         }
 
         if (isVisibleAboutSection) {
           const movement = scroll - aboutSection.offsetTop;
-          reasonCar.style.transform = `translateY(${-50 + (movement * 0.12)}px)`;
+          reasonCar.style.transform = `translateY(${-50 + movement * 0.12}px)`;
         }
       }
     }
@@ -49,11 +47,10 @@ export const Inicio = () => {
 
   return (
     <>
-      <Login />
       <main className='home'>
         <section className='intro-section'>
           <div className='intro-section__background-line'>
-            <img src={backgroundLine} alt="background line for home section" />
+            <img src={backgroundLine} alt='background line for home section' />
           </div>
           <div className='intro-section__table'>
             <header>
@@ -64,26 +61,29 @@ export const Inicio = () => {
 
             <article>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
               </p>
             </article>
           </div>
 
           <div className='intro-section__image'>
-            <img id='home-car' src={homeCar} alt="Home car" width={780} height={596} />
+            <img
+              id='home-car'
+              src={homeCar}
+              alt='Home car'
+              width={780}
+              height={596}
+            />
           </div>
-
         </section>
 
         <section className='offer-section'>
           <header className='offer-section__header'>
-            <h2>
-              últimas ofertas
-            </h2>
-            <p>
-              Ver más
-            </p>
+            <h2>últimas ofertas</h2>
+            <p>Ver más</p>
           </header>
           <article className='offer-section__content'>
             <div></div>
@@ -92,9 +92,7 @@ export const Inicio = () => {
 
         <section className='about-section'>
           <header className='about-section__title'>
-            <h2>
-              ¿Por qué nosotros?
-            </h2>
+            <h2>¿Por qué nosotros?</h2>
           </header>
           <article>
             <table className='about-section__table-reason'>
@@ -106,8 +104,9 @@ export const Inicio = () => {
                         <td className='table-reason__left-side'>
                           <h3>Razon {index + 1}</h3>
                           <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua.
                           </p>
                         </td>
                       </tr>
@@ -119,10 +118,14 @@ export const Inicio = () => {
                 <tr>
                   <td className='table-reason__middle-side'>
                     <div>
-                      <img id='little-car__movement' src={carRoad} alt="Little car" />
+                      <img
+                        id='little-car__movement'
+                        src={carRoad}
+                        alt='Little car'
+                      />
                     </div>
                     <div>
-                      <img src={roadLine} alt="road line for the little car" />
+                      <img src={roadLine} alt='road line for the little car' />
                     </div>
                   </td>
                 </tr>
@@ -135,8 +138,9 @@ export const Inicio = () => {
                         <td className='table-reason__rigth-side'>
                           <h3>Razon {index + 1}</h3>
                           <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua.
                           </p>
                         </td>
                       </tr>

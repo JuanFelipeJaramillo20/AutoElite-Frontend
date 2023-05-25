@@ -7,7 +7,7 @@ export const Contacto = () => {
   return (
     <div className='app-contact'>
       <Form
-        inputsIds={['nombre', 'email', 'asunto', 'mensaje']}
+        inputsIds={['nombre', 'email-contacto', 'asunto', 'mensaje']}
         labelTextInputs={[
           'Nombre completo',
           'Correo electrónico',
