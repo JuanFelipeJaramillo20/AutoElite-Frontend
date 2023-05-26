@@ -1,0 +1,7 @@
+.registro-container {
+  width: 100%;
+  height: 100%;
+  padding: 5%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}

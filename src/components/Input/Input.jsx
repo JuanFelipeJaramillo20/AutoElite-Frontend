@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import './input.css';
+import './Input.css';
 
 export const Input = (props) => {
   const {
