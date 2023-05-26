@@ -12,7 +12,11 @@
 }
 
 .user-review {
+    padding: 1%;
     margin-bottom: 2%;
+    border: 0px solid var(--checkbox-main-color);
+    border-radius: 1vw;
+    box-shadow: 0.3vw 0.3vw 0.5vw var(--checkbox-main-color);
 }
 
 .profile-username {
@@ -21,6 +25,10 @@
     flex-direction: row;
     gap: 2%;
     align-items: center;
+}
+
+.profile-username>img {
+    border-radius: 50%;
 }
 
 .profile-username>p:first-child {

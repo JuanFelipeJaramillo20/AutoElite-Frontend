@@ -7,7 +7,7 @@ import { Modal } from "../../../../components/Modal/Modal";
 import { LeaveReview } from "./components/LeaveReview/LeaveReview";
 import { Boton } from "../../../../components/Boton/Boton";
 
-import testImg from '../../../../assets/img/inicio/carRoad.png';
+import testImg from '../../../../assets/img/perfil/perfil-ejemplo.jpg';
 
 import './AddCalificacion.css';
 
@@ -108,7 +108,7 @@ export const AddCalificacion = (props) => {
                                     </div>
                                     <div className="user-review__description">
                                         <p>
-                                            Elementum ut quam tincidunt egestas vitae elit, hendrerit. Ullamcorper nulla amet lobortis elit, nibh condimentum enim. Aliquam felis nisl tellus sodales lectus dictum tristique proin vitae. Odio fermentum viverra tortor quis.
+                                           {review.Descripcion}
                                         </p>
                                     </div>
                                 </div>
