@@ -2,7 +2,10 @@ import PropTypes from "prop-types";
 
 import { useEffect, useState } from "react";
 
-import { Start } from "./components/Star";
+import { Star } from "./components/Star/Star";
+import { Modal } from "../../../../components/Modal/Modal";
+import { LeaveReview } from "./components/LeaveReview/LeaveReview";
+import { Boton } from "../../../../components/Boton/Boton";
 
 import testImg from '../../../../assets/img/inicio/carRoad.png';
 
@@ -26,22 +29,28 @@ export const AddCalificacion = (props) => {
                     // eslint-disable-next-line no-const-assign
                     setFiveStars(() => fiveStars++);
                 }
-                if (review.StarRate === 5) {
+                if (review.StarRate === 4) {
                     setFourStars(() => fourStars++);
                 }
-                if (review.StarRate === 5) {
+                if (review.StarRate === 3) {
                     setThreeStars(() => threeStars++);
                 }
-                if (review.StarRate === 5) {
+                if (review.StarRate === 2) {
                     setTwoStars(() => twoStars++);
                 }
-                if (review.StarRate === 5) {
+                if (review.StarRate === 1) {
                     setOneStars(() => oneStars++);
                 }
             });
         }
         getStars(totalReviewsVendor);
-    }, [])
+    }, []);
+
+    let [ShowLeaveReview, setShowLeaveReview] = useState(false);
+
+    function handleShowLeaveReview() {
+        setShowLeaveReview(!ShowLeaveReview);
+    }
 
     return (
         <>
@@ -51,7 +60,7 @@ export const AddCalificacion = (props) => {
                         Reviews del vendedor ({totalReviewsVendor.length})
                     </h2>
                     <div>
-                        <Start
+                        <Star
                             five={fiveStars}
                             four={fourStars}
                             three={threeStars}
@@ -60,6 +69,22 @@ export const AddCalificacion = (props) => {
                         />
                     </div>
                 </header>
+                <div className="reviews-leave">
+                    <Boton texto={'Dejar calificación'} onClick={handleShowLeaveReview} />
+                </div>
+
+                {ShowLeaveReview ? (
+                    <>
+                        <Modal
+                            handleModal={handleShowLeaveReview}
+                            width={400}
+                            heigth={300}
+                        >
+                            <LeaveReview />
+                        </Modal>
+                    </>
+                ) : null}
+
                 <article>
                     {totalReviewsVendor.map((review) => {
                         return (

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 import './Star.css';
 
-export const Start = (props) => {
+export const Star = (props) => {
     const {
         five,
         four,
@@ -119,7 +119,7 @@ export const Start = (props) => {
         </>
     );
 }
-Start.propTypes = {
+Star.propTypes = {
     five: PropTypes.number,
     four: PropTypes.number,
     three: PropTypes.number,

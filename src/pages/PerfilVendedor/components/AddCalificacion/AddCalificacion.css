@@ -25,3 +25,7 @@
 .profile-username>p {
     font-size: clamp(12px, 3vw, 16px);
 }
+
+.reviews-leave {
+    margin-bottom: 2.5%;
+}
