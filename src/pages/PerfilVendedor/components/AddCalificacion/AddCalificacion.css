@@ -1,0 +1,27 @@
+.reviews-section {
+    padding: 5%;
+}
+
+.reviews-section__title>h2 {
+    font-size: clamp(29px, 8vw, 32px);
+    margin-bottom: 2.5%;
+}
+
+.reviews-section__title {
+    margin-bottom: 2.5%;
+}
+
+.user-review {
+    margin-bottom: 2%;
+}
+
+.profile-username {
+    display: flex;
+    flex-direction: row;
+    gap: 2%;
+    align-items: center;
+}
+
+.profile-username>p {
+    font-size: clamp(12px, 3vw, 16px);
+}

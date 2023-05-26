@@ -317,4 +317,66 @@ export const PUBLICACION = [
     }
 ];
 
+export const REVIEWS = [
+    {
+        "IdReview": "001",
+        "Descripcion": "Excelente carro, muy confiable y cómodo. Lo recomiendo completamente.",
+        "StarRate": 5,
+        "DocumentoIdentidad": "123456789"
+    },
+    {
+        "IdReview": "002",
+        "Descripcion": "Buen rendimiento de combustible y gran capacidad de carga. Ideal para viajes largos.",
+        "StarRate": 4,
+        "DocumentoIdentidad": "987654321"
+    },
+    {
+        "IdReview": "003",
+        "Descripcion": "El vehículo tiene un manejo suave y seguro. Muy contento con mi compra.",
+        "StarRate": 4,
+        "DocumentoIdentidad": "456789123"
+    },
+    {
+        "IdReview": "004",
+        "Descripcion": "No estoy satisfecho con el consumo de combustible. Esperaba algo más eficiente.",
+        "StarRate": 2,
+        "DocumentoIdentidad": "321654987"
+    },
+    {
+        "IdReview": "005",
+        "Descripcion": "El carro es elegante y tiene un excelente sistema de sonido. Me encanta conducirlo.",
+        "StarRate": 5,
+        "DocumentoIdentidad": "789123456"
+    },
+    {
+        "IdReview": "006",
+        "Descripcion": "El espacio interior es un poco limitado. No lo recomendaría para familias grandes.",
+        "StarRate": 3,
+        "DocumentoIdentidad": "654987321"
+    },
+    {
+        "IdReview": "007",
+        "Descripcion": "El vehículo tiene un buen desempeño en carretera. Muy contento con la compra.",
+        "StarRate": 4,
+        "DocumentoIdentidad": "234567891"
+    },
+    {
+        "IdReview": "008",
+        "Descripcion": "El mantenimiento es costoso y ha tenido varios problemas mecánicos desde que lo compré.",
+        "StarRate": 2,
+        "DocumentoIdentidad": "890123456"
+    },
+    {
+        "IdReview": "009",
+        "Descripcion": "El diseño exterior es llamativo y deportivo. Recibo muchos elogios por mi carro.",
+        "StarRate": 5,
+        "DocumentoIdentidad": "567891234"
+    },
+    {
+        "IdReview": "010",
+        "Descripcion": "El carro es muy seguro y cuenta con características avanzadas de asistencia al conductor.",
+        "StarRate": 4,
+        "DocumentoIdentidad": "432156789"
+    }
+]
 
