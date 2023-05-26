@@ -11,7 +11,7 @@ export const LeaveReview = (props) => {
 
     const {
         handleCloseModal,
-    } = props;
+    } = props
 
     const { register, handleSubmit, setValue } = useForm();
 
