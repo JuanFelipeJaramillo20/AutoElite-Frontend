@@ -1,0 +1,83 @@
+.app-cardCar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  height: 500px;
+  max-width: 500px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  background-color: var(--card-main-color);
+  color: var(--white-color);
+  font-weight: 700;
+}
+
+.app-cardCar i {
+  font-size: 20px;
+}
+
+.app-cardCar hr {
+  width: 92%;
+  margin: 0 auto;
+}
+.app-cardCar__container-img {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.app-cardCar__container-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.app-cardCar_general-info {
+  padding: 0 20px;
+}
+
+.app-cardCar_general-info p {
+  margin-bottom: 4px;
+}
+
+.app-cardCar_general-info p:last-of-type {
+  margin-bottom: 0;
+}
+
+.app-cardCar_general-info p:nth-child(2) {
+  font-size: 1.125rem;
+}
+
+.app-cardCar_other-info {
+  width: 80%;
+  height: 60px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 24px;
+  margin: 0 auto;
+}
+
+.app-cardCar_item {
+  width: 100%;
+  background-color: var(--white-color);
+  color: var(--main-txt-color);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875rem;
+}
+
+.app-cardCar--text-style1 {
+  color: var(--card-white-regularText);
+  font-size: 0.875rem;
+}
+
+.app-cardCar--logVersion {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 20px;
+}

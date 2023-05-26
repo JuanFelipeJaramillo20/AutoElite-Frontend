@@ -6,7 +6,7 @@
   --secundary-text-color: #000000c2;
   --card-main-color: #282435;
   --card-white-color: #fff;
-  --card-white-regularText: rgb(255, 255, 255, 70);
+  --card-white-regularText: rgba(255, 255, 255, 0.7);
 
   /*colors used for inputs and form elements*/
   --input-main-color: #282435;
