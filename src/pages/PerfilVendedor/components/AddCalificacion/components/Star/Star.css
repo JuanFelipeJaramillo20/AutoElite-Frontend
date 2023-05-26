@@ -1,0 +1,27 @@
+.fa-star {
+    color: white;
+    -webkit-text-stroke: 1px black;
+}
+
+.progress-bar {
+    position: relative;
+    width: 70%;
+    height: 20px;
+    background-color: var(--checkbox-main-color);
+    border-radius: 10px;
+}
+
+.progress-bar>p{
+    position: absolute;
+    right: -5%;
+    top: 0;
+}
+
+.progress {
+    width: 0%;
+    height: 100%;
+    background-color: var(--option-secundary-color);
+    border-radius: 10px;
+    transition: width 0.5s ease-in-out;
+}
+

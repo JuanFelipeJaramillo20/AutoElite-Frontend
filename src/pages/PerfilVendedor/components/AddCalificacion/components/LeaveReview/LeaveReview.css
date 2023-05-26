@@ -1,0 +1,50 @@
+.review-form {
+    padding: 5%;
+}
+
+.stars {
+    cursor: pointer;
+    font-size: clamp(10px, 3vw, 20px);
+    margin-top: 5%;
+    margin-bottom: 10%;
+}
+
+.review-valoration {
+    display: grid;
+    place-items: center;
+}
+
+.review-valoration>input {
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+
+.review-valoration>label {
+    font-size: clamp(12px, 3vw, 18px);
+}
+
+.review-comment {
+    display: flex;
+    flex-direction: column;
+}
+
+.review-comment>label {
+    font-size: clamp(12px, 3vw, 18px);
+}
+
+.review-comment>textarea {
+    width: 100%;
+    resize: none;
+    border: 1px solid var(--input-outline-color);
+    border-radius: 1vw;
+    padding: 2%;
+    color: white;
+    background-color: var(--input-main-color);
+}
+
+.review-send {
+    display: grid;
+    place-items: center;
+    margin-top: 3%;
+}

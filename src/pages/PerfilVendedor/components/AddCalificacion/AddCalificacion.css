@@ -1,0 +1,46 @@
+.reviews-section {
+    padding: 5%;
+}
+
+.reviews-section__title>h2 {
+    font-size: clamp(29px, 8vw, 32px);
+    margin-bottom: 2.5%;
+}
+
+.reviews-section__title {
+    margin-bottom: 2.5%;
+}
+
+.user-review {
+    padding: 1%;
+    margin-bottom: 2%;
+    border: 0px solid var(--checkbox-main-color);
+    border-radius: 1vw;
+    box-shadow: 0.3vw 0.3vw 0.5vw var(--checkbox-main-color);
+}
+
+.profile-username {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    gap: 2%;
+    align-items: center;
+}
+
+.profile-username>img {
+    border-radius: 50%;
+}
+
+.profile-username>p:first-child {
+    font-size: clamp(12px, 3vw, 16px);
+}
+
+.profile-username>p:last-child {
+    position: absolute;
+    right: 0;    
+    font-size: clamp(8px, 2vw, 12px);
+}
+
+.reviews-leave {
+    margin-bottom: 2.5%;
+}

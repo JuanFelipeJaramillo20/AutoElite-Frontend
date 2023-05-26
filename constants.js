@@ -317,4 +317,77 @@ export const PUBLICACION = [
     }
 ];
 
+export const REVIEWS = [
+    {
+        "IdReview": "001",
+        "Descripcion": "Un asco de carro, no es confiable ni cómodo. No lo recomiendo completamente.",
+        "StarRate": 1,
+        "Nombre": "Juan David Moreno",
+        "fechaReview": "2023-05-25"
+    },
+    {
+        "IdReview": "002",
+        "Descripcion": "Buen rendimiento de combustible y gran capacidad de carga. Ideal para viajes largos.",
+        "StarRate": 4,
+        "Nombre": "HOLAhola",
+        "fechaReview": "2023-05-24"
+    },
+    {
+        "IdReview": "003",
+        "Descripcion": "El vehículo tiene un manejo suave y seguro. Muy contento con mi compra.",
+        "StarRate": 4,
+        "Nombre": "nombre apellido",
+        "fechaReview": "2023-05-23"
+    },
+    {
+        "IdReview": "004",
+        "Descripcion": "No estoy satisfecho con el consumo de combustible. Esperaba algo más eficiente.",
+        "StarRate": 2,
+        "Nombre": "JuanDa",
+        "fechaReview": "2023-05-22"
+    },
+    {
+        "IdReview": "005",
+        "Descripcion": "El carro es elegante y tiene un excelente sistema de sonido. Me encanta conducirlo.",
+        "StarRate": 5,
+        "Nombre": "Valentina",
+        "fechaReview": "2023-05-21"
+    },
+    {
+        "IdReview": "006",
+        "Descripcion": "El espacio interior es un poco limitado. No lo recomendaría para familias grandes.",
+        "StarRate": 3,
+        "Nombre": "Paola",
+        "fechaReview": "2023-05-20"
+    },
+    {
+        "IdReview": "007",
+        "Descripcion": "El vehículo tiene un buen desempeño en carretera. Muy contento con la compra.",
+        "StarRate": 4,
+        "Nombre": "Moreno",
+        "fechaReview": "2023-05-19"
+    },
+    {
+        "IdReview": "008",
+        "Descripcion": "El mantenimiento es costoso y ha tenido varios problemas mecánicos desde que lo compré.",
+        "StarRate": 2,
+        "Nombre": "Juan",
+        "fechaReview": "2023-05-18"
+    },
+    {
+        "IdReview": "009",
+        "Descripcion": "El diseño exterior es llamativo y deportivo. Recibo muchos elogios por mi carro.",
+        "StarRate": 5,
+        "Nombre": "Jaramillo",
+        "fechaReview": "2023-05-17"
+    },
+    {
+        "IdReview": "010",
+        "Descripcion": "El carro es muy seguro y cuenta con características avanzadas de asistencia al conductor.",
+        "StarRate": 4,
+        "Nombre": "David",
+        "fechaReview": "2023-05-16"
+    }
+];
+
 
