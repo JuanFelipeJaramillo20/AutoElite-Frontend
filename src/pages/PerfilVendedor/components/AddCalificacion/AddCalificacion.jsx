@@ -80,7 +80,7 @@ export const AddCalificacion = (props) => {
                             width={400}
                             heigth={300}
                         >
-                            <LeaveReview />
+                            <LeaveReview handleCloseModal={handleShowLeaveReview} />
                         </Modal>
                     </>
                 ) : null}
@@ -94,7 +94,10 @@ export const AddCalificacion = (props) => {
                                         <div className="profile-username">
                                             <img src={testImg} alt="person" width={'50px'} height={'50px'} />
                                             <p>
-                                                <b>{review.DocumentoIdentidad}</b>
+                                                <b>{review.Nombre}</b>
+                                            </p>
+                                            <p>
+                                                {review.fechaReview.split('-').join('/')}
                                             </p>
                                         </div>
                                         {Array(5).fill().map((el, id) => {

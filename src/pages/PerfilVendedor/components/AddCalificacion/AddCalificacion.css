@@ -16,14 +16,21 @@
 }
 
 .profile-username {
+    position: relative;
     display: flex;
     flex-direction: row;
     gap: 2%;
     align-items: center;
 }
 
-.profile-username>p {
+.profile-username>p:first-child {
     font-size: clamp(12px, 3vw, 16px);
+}
+
+.profile-username>p:last-child {
+    position: absolute;
+    right: 0;    
+    font-size: clamp(8px, 2vw, 12px);
 }
 
 .reviews-leave {
