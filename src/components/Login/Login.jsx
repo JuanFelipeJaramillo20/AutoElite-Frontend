@@ -18,6 +18,9 @@ export const Login = ({ handleShowLogin }) => {
           handleShowRegistro={() => {
             handleShowLogin(false);
           }}
+          handleShowLogin={() => {
+            setShowRegistro(false);
+          }}
         />
       ) : (
         <Modal width={800} heigth={600} handleModal={handleShowLogin}>
@@ -37,12 +40,12 @@ export const Login = ({ handleShowLogin }) => {
                 <b>
                   <p>¿No tienes una cuenta?</p>
                 </b>
-                <p onClick={handleRegistro}>Creala aqui</p>
+                <p onClick={handleRegistro}>Creala aquí</p>
               </div>
             </div>
             <div className='container__form'>
               <div className='google-login'>
-                <button>Google</button>
+                <button>Ingresar con Google</button>
               </div>
               <div className='form-login'>
                 <Form

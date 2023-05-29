@@ -5,3 +5,23 @@
   display: grid;
   grid-template-columns: 50% 50%;
 }
+
+.welcomed__information {
+  margin-bottom: 10%;
+}
+
+.welcomed__information div {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  margin-bottom: 2%;
+}
+
+.welcomed__information div:last-of-type {
+  margin-bottom: 0;
+}
+
+.welcomed__information p {
+  font-size: 0.875rem;
+  font-weight: 700;
+}
