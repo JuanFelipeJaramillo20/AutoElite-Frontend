@@ -8,6 +8,7 @@ import roadLine from '../../assets/img/inicio/roadLine.png';
 import './inicio.css';
 
 export const Inicio = () => {
+
   const [razonesAmmount] = useState(Array.from({ length: 3 }));
 
   useEffect(() => {
