@@ -16,7 +16,6 @@ export const Login = ({ handleShowLogin }) => {
       {showRegistro ? (
         <Registro
           handleShowRegistro={() => {
-            setShowRegistro(false);
             handleShowLogin(false);
           }}
         />
@@ -47,23 +46,34 @@ export const Login = ({ handleShowLogin }) => {
               </div>
               <div className='form-login'>
                 <Form
-                  inputsIds={['email-login', 'password']}
-                  labelTextInputs={['Correo electrónico', 'Contraseña']}
-                  placeHolders={[
-                    'Digita tu correo electrónico',
-                    'Digita tu contraseña',
-                  ]}
-                  typesInputs={['email', 'password']}
-                  validacionesEnInputs={[
+                  inputs={[
                     {
-                      required: true,
-                      maxLength: 50,
-                      minLength: 8,
+                      type: 'email',
+                      id: 'email-login',
+                      label: 'Correo electrónico',
+                      placeHolder: 'Digita tu correo electrónico',
+                      validacion: {
+                        required: true,
+                        pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
+                      },
+                      error: {
+                        required: 'El correo electrónico es obligatorio.',
+                        pattern: 'Correo electrónico no válido',
+                      },
                     },
                     {
-                      required: true,
-                      maxLength: 50,
-                      minLength: 8,
+                      type: 'password',
+                      id: 'password',
+                      label: 'Contraseña',
+                      placeHolder: 'Digita tu contraseña',
+                      validacion: {
+                        required: true,
+                        minLength: 8,
+                      },
+                      error: {
+                        required: 'La contraseña es obligatoria.',
+                        minLength: 'Mínimo 8 caracteres.',
+                      },
                     },
                   ]}
                   btnText={'Iniciar sesión'}

@@ -28,23 +28,28 @@ export const Registro = ({ handleShowRegistro }) => {
           </div>
           <div className='form-login'>
             <Form
-              inputsIds={['email-login', 'password']}
-              labelTextInputs={['Correo electrónico', 'Contraseña']}
-              placeHolders={[
-                'Digita tu correo electrónico',
-                'Digita tu contraseña',
-              ]}
-              typesInputs={['email', 'password']}
-              validacionesEnInputs={[
+              inputs={[
                 {
-                  required: true,
-                  maxLength: 50,
-                  minLength: 8,
+                  type: 'email',
+                  id: 'email-login',
+                  label: 'Correo electrónico',
+                  placeHolder: 'Digita tu correo electrónico',
+                  validacion: {
+                    required: true,
+                    maxLength: 50,
+                    minLength: 8,
+                  },
                 },
                 {
-                  required: true,
-                  maxLength: 50,
-                  minLength: 8,
+                  type: 'password',
+                  id: 'password',
+                  label: 'Contraseña',
+                  placeHolder: 'Digita tu contraseña',
+                  validacion: {
+                    required: true,
+                    maxLength: 50,
+                    minLength: 8,
+                  },
                 },
               ]}
               btnText={'Iniciar sesión'}

@@ -40,7 +40,7 @@
 }
 
 ::placeholder {
-  color: var(--white-color);
+  color: var(--secundary-text-color);
 }
 
 .app-underlineformat {
