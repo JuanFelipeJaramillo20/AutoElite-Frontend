@@ -18,8 +18,7 @@ export const RoutesConfiguration = () => {
     <Router>
       <Header />
       <Routes>
-        <Route path='/' element={<PreguntasFrecuentes />} />
-        <Route path='/a' element={<Inicio />} />
+        <Route path='/' element={<Inicio />} />
         <Route path='/catalogo' element={<Catalogo />} />
         <Route path='/contacto' element={<Contacto />} />
         <Route path='/publicacion/:publicacionId' element={<Publicacion />} />
@@ -31,6 +30,7 @@ export const RoutesConfiguration = () => {
             path='/publicacion/editar/:publicacionId'
             element={<EditarPublicacion />}
           />
+          <Route path='/preguntasFrecuentes' element={<PreguntasFrecuentes />} />
           <Route path='/favoritos' element={<Favoritos />} />
         </Route>
       </Routes>
