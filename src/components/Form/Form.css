@@ -1,12 +1,23 @@
 .app-form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .app-form__inputs {
-    margin-bottom: 3.25rem;
-  }
-  
-  .app-form button {
-    align-self: center;
-  }
+  display: flex;
+  flex-direction: column;
+}
+
+.app-form__input:last-of-type {
+  margin-bottom: 3.25rem;
+}
+
+.app-form__input {
+  margin-bottom: 1.625rem;
+}
+
+.app-form button {
+  align-self: center;
+}
+
+.error-message {
+  color: #fff;
+  background-color: #cc2a24;
+  padding: 10px;
+  margin-top: 10px;
+}

@@ -3,58 +3,92 @@ import { Form } from '../Form/Form';
 import PropTypes from 'prop-types';
 import registroImg from '../../assets/img/registro/registroImg.png';
 import './Registro.css';
-export const Registro = ({ handleShowRegistro }) => {
+export const Registro = ({ handleShowRegistro, handleShowLogin }) => {
   return (
-    <Modal width={800} heigth={700} handleModal={handleShowRegistro}>
+    <Modal width={900} heigth={750} handleModal={handleShowRegistro}>
       <div className='registro-container'>
         <div className='container__welcomed'>
           <div className='welcomed__title'>
-            <h2>Hola!</h2>
-            <h2>Bienvenido otra vez.</h2>
+            <h2>Empieza esta aventura</h2>
+            <h2>con nosotros!</h2>
+          </div>
+          <div className='welcomed__information'>
+            <div>
+              <i className='fa-solid fa-circle-check'></i>
+              <p>Publica tus carros.</p>
+            </div>
+            <div>
+              <i className='fa-solid fa-circle-check'></i>
+              <p>Descubre carros.</p>
+            </div>
+            <div>
+              <i className='fa-solid fa-circle-check'></i>
+              <p>Maneja tu lista de deseados.</p>
+            </div>
           </div>
           <div className='welcomed__img'>
             <img src={registroImg} alt='vector that animates people to login' />
           </div>
           <div className='welcomed__no-account'>
             <b>
-              <p>¿No tienes una cuenta?</p>
+              <p>¿Ya tienes una cuenta?</p>
             </b>
-            <p onClick={() => console.log('bien')}>Creala aqui</p>
+            <p onClick={handleShowLogin}>Inicia sesión aquí</p>
           </div>
         </div>
         <div className='container__form'>
           <div className='google-login'>
-            <button>Google</button>
+            <button>Registro con Google</button>
           </div>
           <div className='form-login'>
             <Form
-              inputsIds={['email-login', 'password']}
-              labelTextInputs={['Correo electrónico', 'Contraseña']}
-              placeHolders={[
-                'Digita tu correo electrónico',
-                'Digita tu contraseña',
-              ]}
-              typesInputs={['email', 'password']}
-              validacionesEnInputs={[
+              inputs={[
                 {
-                  required: true,
-                  maxLength: 50,
-                  minLength: 8,
+                  type: 'text',
+                  id: 'nombre-registro',
+                  label: 'Nombre completo:',
+                  placeHolder: 'Escribe tu nombre completo',
+                  validacion: {
+                    required: true,
+                  },
+                  error: {
+                    required: 'El nombre es obligatorio',
+                  },
                 },
                 {
-                  required: true,
-                  maxLength: 50,
-                  minLength: 8,
+                  type: 'email',
+                  id: 'email-registro',
+                  label: 'Correo electrónico:',
+                  placeHolder: 'Digita tu correo electrónico',
+                  validacion: {
+                    required: true,
+                    pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
+                  },
+                  error: {
+                    required: 'El correo electrónico es obligatorio.',
+                    pattern: 'Correo electrónico no válido',
+                  },
+                },
+                {
+                  type: 'password',
+                  id: 'password-registro',
+                  label: 'Crear contraseña:',
+                  placeHolder: 'Contraseña',
+                  validacion: {
+                    required: true,
+                    minLength: 8,
+                  },
+                  error: {
+                    required: 'La contraseña es obligatoria.',
+                    minLength: 'Mínimo 8 caracteres.',
+                  },
                 },
               ]}
-              btnText={'Iniciar sesión'}
+              btnText={'Registrate'}
               onSubmit={(data) => {
                 console.log(data);
               }}
             />
-          </div>
-          <div className='form_forgot-password'>
-            <p>Olvidé la contraseña</p>
           </div>
         </div>
       </div>
@@ -64,4 +98,5 @@ export const Registro = ({ handleShowRegistro }) => {
 
 Registro.propTypes = {
   handleShowRegistro: PropTypes.func,
+  handleShowLogin: PropTypes.func,
 };

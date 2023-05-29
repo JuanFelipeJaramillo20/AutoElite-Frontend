@@ -4,46 +4,47 @@ import { Input } from '../Input/Input';
 import { Boton } from '../Boton/Boton';
 import './Form.css';
 export const Form = (props) => {
-  const {
-    inputsIds,
-    labelTextInputs,
-    placeHolders,
-    typesInputs,
-    validacionesEnInputs,
-    btnText,
-    onSubmit,
-  } = props;
+  const { inputs, btnText, onSubmit } = props;
 
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+
+  const handleSubmitForm = (data) => {
+    onSubmit(data, reset);
+  };
   return (
-    <form className='app-form' onSubmit={handleSubmit(onSubmit)}>
-      <div className='app-form__inputs'>
-        {inputsIds.map((input, index) => {
-          return (
+    <form className='app-form' onSubmit={handleSubmit(handleSubmitForm)}>
+      {inputs.map((input) => {
+        return (
+          <div className='app-form__input' key={input.id}>
             <Input
-              key={input}
-              labelText={labelTextInputs[index]}
-              type={typesInputs[index]}
-              id={input}
+              labelText={input.label}
+              type={input.type}
+              id={input.id}
               register={register}
-              validators={validacionesEnInputs[index]}
-              placeholder={placeHolders[index]}
-              name={input}
+              validators={input.validacion}
+              placeholder={input.placeHolder}
+              opciones={input.options}
             />
-          );
-        })}
-      </div>
+            {errors[input.id] && (
+              <p className='error-message'>
+                {input.error && input.error[errors[input.id].type]}
+              </p>
+            )}
+          </div>
+        );
+      })}
       <Boton texto={btnText} tipo='submit' />
     </form>
   );
 };
 
 Form.propTypes = {
-  inputsIds: PropTypes.arrayOf(PropTypes.string),
-  labelTextInputs: PropTypes.arrayOf(PropTypes.string),
-  placeHolders: PropTypes.arrayOf(PropTypes.string),
-  typesInputs: PropTypes.arrayOf(PropTypes.string),
-  validacionesEnInputs: PropTypes.arrayOf(PropTypes.object),
+  inputs: PropTypes.arrayOf(PropTypes.object).isRequired,
   btnText: PropTypes.string,
   onSubmit: PropTypes.func,
 };

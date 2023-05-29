@@ -1,32 +1,58 @@
 import { Form } from '../../components/Form/Form';
 import './Contacto.css';
 export const Contacto = () => {
-  const onSubmitContacto = (data) => {
+  const onSubmitContacto = (data, reset) => {
     console.log(data);
+    reset();
   };
   return (
     <div className='app-contact'>
       <Form
-        inputsIds={['nombre', 'email-contacto', 'asunto', 'mensaje']}
-        labelTextInputs={[
-          'Nombre completo',
-          'Correo electrónico',
-          'Asunto del correo',
-          'Mensaje',
-        ]}
-        placeHolders={[
-          'Ingresa tu nombre completo',
-          'Ingresa tu correo electrónico',
-          'Ingresa el asunto del correo',
-          '¿Qué mensaje quieres enviar?',
-        ]}
-        typesInputs={['text', 'email', 'text', 'textarea']}
-        validacionesEnInputs={[
-          { required: true },
-          { required: true },
-          { required: true },
-          { required: true },
-          { required: true },
+        inputs={[
+          {
+            type: 'text',
+            id: 'nombre',
+            label: 'Nombre completo:',
+            placeHolder: 'Ingresa tu nombre completo',
+            validacion: { required: true },
+            error: {
+              required: 'Campo obligatorio.',
+            },
+          },
+          {
+            type: 'email',
+            id: 'email-contacto',
+            label: 'Correo electrónico:',
+            placeHolder: 'Ingresa tu correo electrónico',
+            validacion: {
+              required: true,
+              pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
+            },
+            error: {
+              required: 'Campo obligatorio.',
+              pattern: 'Email no válido.',
+            },
+          },
+          {
+            type: 'text',
+            id: 'asunto',
+            label: 'Asunto del correo:',
+            placeHolder: 'Ingresa el asunto del correo',
+            validacion: { required: true },
+            error: {
+              required: 'Campo obligatorio.',
+            },
+          },
+          {
+            type: 'textarea',
+            id: 'mensaje',
+            label: 'Mensaje: ',
+            placeHolder: '¿Qué mensaje quieres enviar?',
+            validacion: { required: true },
+            error: {
+              required: 'Campo obligatorio.',
+            },
+          },
         ]}
         btnText='Enviar mensaje'
         onSubmit={onSubmitContacto}
