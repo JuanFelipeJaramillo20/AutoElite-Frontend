@@ -84,10 +84,13 @@
     flex-direction: row;
     gap: 2%;
     align-items: center;
+    width: 100%;
+    margin-bottom: 5%;
 }
 
 .offer-section__header>h2 {
     font-size: clamp(25px, 5vw, 32px);
+    text-align: start;
 }
 
 .offer-section__header>p {
@@ -100,7 +103,15 @@
 
 .offer-section__content {
     height: 100vh;
+    width: 100%;
 }
+
+.offer-car__container {
+    display: grid;
+    grid-template-columns: repeat(3, 33%);
+    gap: 2%;
+}
+
 
 /* Why AutoElite section */
 .about-section {

@@ -4,11 +4,21 @@ import homeCar from '../../assets/img/inicio/homeCar.png';
 import backgroundLine from '../../assets/img/inicio/backgroundLine.png';
 import carRoad from '../../assets/img/inicio/carRoad.png';
 import roadLine from '../../assets/img/inicio/roadLine.png';
+import carroJuandaInicioUno from '../../assets/img/inicio/carroJuanda.jpeg';
+import carroJuandaInicioDos from '../../assets/img/inicio/elMejor.jpeg';
+import carroJuandaInicioTres from '../../assets/img/inicio/si.jpeg';
+
+import { CardCar } from '../../components/CardCar/CardCar';
+
+import { PUBLICACION, CARROS } from '../../../constants';
 
 import './inicio.css';
 
 export const Inicio = () => {
+
   const [razonesAmmount] = useState(Array.from({ length: 3 }));
+
+  const [carrosJuanda] = useState([carroJuandaInicioUno, carroJuandaInicioDos, carroJuandaInicioTres]);
 
   useEffect(() => {
     const reasonCar = document.getElementById('little-car__movement');
@@ -86,7 +96,29 @@ export const Inicio = () => {
             <p>Ver más</p>
           </header>
           <article className='offer-section__content'>
-            <div></div>
+            <div className='offer-car__container'>
+              {PUBLICACION.map((el, id) => {
+                return (
+                  id < 3 ? (
+                    <div className='container-car' key={id}>
+                      <CardCar
+                        key={el.IDCarro}
+                        ciudadVenta={el.Ciudad}
+                        idPublicacion={el.IDPublicación}
+                        kilometraje={CARROS[id].Kilómetros}
+                        marcaCarro={CARROS[id].Marca}
+                        modeloCarro={CARROS[id].Modelo}
+                        precio={CARROS[id].Precio}
+                        tipoCombustible={CARROS[id].Combustible}
+                        tipoTransmision={CARROS[id].Transmisión}
+                        yearCarro={CARROS[id].Año}
+                        srcImageCar={carrosJuanda[id]}
+                      />
+                    </div>
+                  ) : null
+                );
+              })}
+            </div>
           </article>
         </section>
 
@@ -134,9 +166,9 @@ export const Inicio = () => {
                 {razonesAmmount.map((el, index) => {
                   return (
                     <>
-                      <tr key={index}>
+                      <tr key={index + 3}>
                         <td className='table-reason__rigth-side'>
-                          <h3>Razon {index + 1}</h3>
+                          <h3>Razon {index + 4}</h3>
                           <p>
                             Lorem ipsum dolor sit amet, consectetur adipiscing
                             elit, sed do eiusmod tempor incididunt ut labore et
