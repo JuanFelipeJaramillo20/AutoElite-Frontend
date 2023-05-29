@@ -11,6 +11,7 @@ import { PrivateRouter } from './PrivateRouter';
 import { CrearPublicacion } from '../pages/CrearPublicacion/CrearPublicacion';
 import { EditarPublicacion } from '../pages/EditarPublicacion/EditarPublicacion';
 import { Favoritos } from '../pages/Favoritos/Favoritos';
+import { PreguntasFrecuentes } from '../pages/PreguntasFrecuentes/PreguntasFrecuentes';
 
 export const RoutesConfiguration = () => {
   return (
@@ -29,6 +30,7 @@ export const RoutesConfiguration = () => {
             path='/publicacion/editar/:publicacionId'
             element={<EditarPublicacion />}
           />
+          <Route path='/preguntasFrecuentes' element={<PreguntasFrecuentes />} />
           <Route path='/favoritos' element={<Favoritos />} />
         </Route>
       </Routes>
