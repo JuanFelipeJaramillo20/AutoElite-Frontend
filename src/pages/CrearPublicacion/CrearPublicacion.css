@@ -1,0 +1,15 @@
+.post__form, .post__title {
+    margin-top: 5%;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 5%;
+    padding: 5%;
+    margin-bottom: 5%;
+}
+
+.form-pics {
+    margin-top: 5%;
+}
