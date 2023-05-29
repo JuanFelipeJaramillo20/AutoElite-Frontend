@@ -11,14 +11,14 @@ import { PrivateRouter } from './PrivateRouter';
 import { CrearPublicacion } from '../pages/CrearPublicacion/CrearPublicacion';
 import { EditarPublicacion } from '../pages/EditarPublicacion/EditarPublicacion';
 import { Favoritos } from '../pages/Favoritos/Favoritos';
-import { PreguntasYRespuestas } from '../pages/PreguntasYRespuestas/PreguntasYRespuestas';
+import { PreguntasFrecuentes } from '../pages/PreguntasFrecuentes/PreguntasFrecuentes';
 
 export const RoutesConfiguration = () => {
   return (
     <Router>
       <Header />
       <Routes>
-        <Route path='/' element={<PreguntasYRespuestas/>} />
+        <Route path='/' element={<PreguntasFrecuentes />} />
         <Route path='/a' element={<Inicio />} />
         <Route path='/catalogo' element={<Catalogo />} />
         <Route path='/contacto' element={<Contacto />} />
