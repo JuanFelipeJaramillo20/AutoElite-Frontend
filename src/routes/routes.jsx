@@ -30,7 +30,10 @@ export const RoutesConfiguration = () => {
             path='/publicacion/editar/:publicacionId'
             element={<EditarPublicacion />}
           />
-          <Route path='/preguntasFrecuentes' element={<PreguntasFrecuentes />} />
+          <Route
+            path='/preguntasFrecuentes'
+            element={<PreguntasFrecuentes />}
+          />
           <Route path='/favoritos' element={<Favoritos />} />
         </Route>
       </Routes>

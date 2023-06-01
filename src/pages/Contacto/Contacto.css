@@ -11,7 +11,6 @@
 
 .app-contact .app-form {
   width: 40%;
-  max-width: 510px;
 }
 
 .app-contact__info {
@@ -21,7 +20,6 @@
 .app-contact__info div {
   display: flex;
   gap: 0.25rem;
-  align-items: center;
   margin-bottom: 0.75rem;
 }
 
@@ -51,5 +49,25 @@
 @media screen and (min-width: 1080px) {
   .app-contact {
     width: 70%;
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .app-contact {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .app-contact section,
+  .app-contact .app-form {
+    width: 100%;
+  }
+
+  .app-contact section {
+    text-align: center;
+  }
+
+  .app-contact__info div {
+    justify-content: center;
   }
 }
