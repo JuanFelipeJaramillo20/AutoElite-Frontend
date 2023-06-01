@@ -44,3 +44,9 @@
 .reviews-leave {
     margin-bottom: 2.5%;
 }
+
+@media screen and (max-width:700px) {
+    .user-review,.reviews-leave {
+        margin-bottom: 8%;
+    }
+}

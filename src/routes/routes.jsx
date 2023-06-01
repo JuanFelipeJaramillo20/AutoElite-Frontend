@@ -13,12 +13,17 @@ import { EditarPublicacion } from '../pages/EditarPublicacion/EditarPublicacion'
 import { Favoritos } from '../pages/Favoritos/Favoritos';
 import { PreguntasFrecuentes } from '../pages/PreguntasFrecuentes/PreguntasFrecuentes';
 
+import { Login } from '../pages/Login/Login';
+import { Register } from '../pages/Register/Register';
 export const RoutesConfiguration = () => {
+  // <Header />
   return (
     <Router>
-      <Header />
+     <Header />
       <Routes>
         <Route path='/' element={<Inicio />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
         <Route path='/catalogo' element={<Catalogo />} />
         <Route path='/contacto' element={<Contacto />} />
         <Route path='/publicacion/:publicacionId' element={<Publicacion />} />
