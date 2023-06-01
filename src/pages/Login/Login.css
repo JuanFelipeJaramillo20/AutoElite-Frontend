@@ -1,0 +1,127 @@
+.logIn-container {
+    width: 100vw;
+    height: 100vh;
+    padding: 10%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.container__welcomed {
+    position: relative;
+}
+
+.welcomed__title,
+.welcomed__img {
+    margin-bottom: 10%;
+}
+
+.welcomed__title>h2 {
+    font-size: clamp(30px, 5vw, 32px);
+}
+
+.welcomed__img>img {
+    width: 350px;
+    height: 298px;
+}
+
+.welcomed__no-account {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2,40%);
+    text-align: center;
+    justify-content: center;
+}
+
+.welcomed__no-account p {
+    font-size: clamp(12px, 3vw, 16px);
+    cursor: pointer;
+}
+
+.welcomed__no-account p:hover {
+    font-weight: 700;
+}
+
+.welcomed__no-account>p,
+.form_forgot-password p {
+    text-decoration: underline;
+}
+
+.container__form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.google-login {
+    margin-top: 10%;
+    margin-bottom: 4%;
+    width: 100%;
+    height: 25%;
+}
+
+.google-login button {
+    border: 2px solid gray;
+    background-color: transparent;
+    color: gray;
+    width: 95%;
+    height: 50px;
+    border-radius: 1.2vmax;
+    cursor: pointer;
+    font-size: clamp(12px, 3vw, 16px);
+}
+
+.form-login label,
+.form-login input,
+.form-login button,
+.form_forgot-password p {
+    font-size: clamp(12px, 3vw, 16px);
+}
+
+.form_forgot-password {
+    margin-top: 5%;
+}
+
+
+@media screen and (max-width:825px) {
+    .logIn-container {
+        margin-top: 10%;
+        position: relative;
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .google-login button{
+        width: 100%;
+    }
+
+    .welcomed__title {
+        position: absolute;
+        text-align: left;
+        top: 5%;
+        left: 0;
+        text-align: center;
+        width: 100%;
+    }
+
+    .container__welcomed {
+        position: unset;
+        width: 100%;
+    }
+
+    .welcomed__img {
+        display: none;
+    }
+
+    .welcomed__no-account {
+        position: initial;
+    }
+
+    .welcomed__no-account {
+        margin-top: 5%;
+    }
+}
