@@ -1,0 +1,108 @@
+/* Catalog page container */
+.catalog-page {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .contenedor-botones-filtros{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+  }
+
+  .columna-filtros{
+    width: 20%;
+    padding: 20px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .columna-filtros > * {
+    margin: 10px;
+    font-size: 18px;
+  }
+
+  .dropdown-menu-catalogo{
+    background-color: var(--btn-main-color);
+    color: white;
+    height: 50px;
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+  }
+
+
+  .contenedor-horizontal{
+    display: flex;
+    width: 100%;
+  }
+
+  .input-precio{
+    margin: 5px;
+    width: 100px;
+    height: 40px;
+    background-color: var(--btn-main-color);
+    color: white;
+    font-size: 18px;
+    border-radius: 5px;
+    padding: 5px;
+  }
+
+  .botones-filtros{
+    margin: 10px;
+    width: 80px;
+  }
+
+  .catalog-label{
+    color: var(--main-txt-color);
+    font-weight: bold;
+  }
+
+  .checkbox-input{
+    width: 30px;
+    margin: 5px;
+    margin-bottom: 10px;
+  }
+
+  .input-label{
+    display: inline-block;
+    width: 100%;
+  }
+
+  li{
+    list-style-type: none;
+  }
+
+  /* Car list */
+  .car-list {
+    width: 80%;
+    padding: 20px;
+  }
+  
+  /* Car card */
+  .car-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  /* Pagination */
+  .pagination {
+    margin-top: 20px;
+  }
+  
+  .pagination button {
+    margin-right: 5px;
+    padding: 5px 10px;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+  }
+  
+  .pagination button:hover {
+    background-color: #e0e0e0;
+  }
+  

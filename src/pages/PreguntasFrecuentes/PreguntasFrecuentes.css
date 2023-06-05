@@ -2,7 +2,7 @@
     min-height: 100vh;
 }
 
-section {
+.section {
     width: 80%;
     margin: 0 auto;
     display: flex;

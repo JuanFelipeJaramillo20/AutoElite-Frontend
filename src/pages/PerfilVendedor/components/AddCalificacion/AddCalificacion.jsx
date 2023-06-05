@@ -59,7 +59,7 @@ export const AddCalificacion = (props) => {
                     <h2>
                         Reviews del vendedor ({totalReviewsVendor.length})
                     </h2>
-                    <div>
+                    <div className="star-vendor__rate">
                         <Star
                             five={fiveStars}
                             four={fourStars}

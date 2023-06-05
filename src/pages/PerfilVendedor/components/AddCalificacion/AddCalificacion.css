@@ -13,6 +13,7 @@
 
 .user-review {
     padding: 1%;
+    width: 100%;
     margin-bottom: 2%;
     border: 0px solid var(--checkbox-main-color);
     border-radius: 1vw;
@@ -48,5 +49,16 @@
 @media screen and (max-width:700px) {
     .user-review,.reviews-leave {
         margin-bottom: 8%;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .reviews-leave {
+        display: flex;
+        justify-content: center;
+    }
+    .star-vendor__rate {
+        width: 90%;
+        margin-inline: auto;
     }
 }

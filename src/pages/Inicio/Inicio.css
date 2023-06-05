@@ -37,7 +37,7 @@
     height: 0px;
     position: absolute;
     top: 0px;
-    left: 0px;
+    left: 10%;
 }
 
 .intro-section__background-line>img {
@@ -195,7 +195,6 @@
     .container-car {
         max-width: 500px;
         width: 100%;
-        border: 1px solid red;
     }
 }
 
