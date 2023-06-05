@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import './CargarFotos.css';
 
 export const CargarFotos = () => {
+
+    const showUploadedImagesContainer = useRef();
 
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [dragging, setDragging] = useState(false);
@@ -30,6 +32,22 @@ export const CargarFotos = () => {
         }
     };
 
+    const handleDeleteImage = (id) => {
+        const newPictures = [...selectedFiles];
+        newPictures.splice(id,1);
+        setSelectedFiles(newPictures);
+    }
+
+    useEffect(() => {
+        if (showUploadedImagesContainer.current) {
+            if (selectedFiles.length < 0) {
+                showUploadedImagesContainer.current.style.display = 'none';
+            } else {
+                showUploadedImagesContainer.current.style.display = 'flex';
+            }
+        }
+    }, [selectedFiles.length]);
+
     return (
         <>
             <label
@@ -54,9 +72,14 @@ export const CargarFotos = () => {
                     }}
                 />
             </label>
-            <div>
+            <div ref={showUploadedImagesContainer} className="show-images__car">
                 {selectedFiles.map((file, index) => (
-                    <img key={index} src={URL.createObjectURL(file)} alt={`Image ${index}`} />
+                    <div key={index} className="image-card">
+                        <button onClick={() => {handleDeleteImage(index)}}>
+                            <span><i className="fa-solid fa-xmark"></i></span>
+                        </button>
+                        <img className="card-image__uploaded" src={URL.createObjectURL(file)} alt={`Image ${index}`} />
+                    </div>
                 ))}
             </div>
         </>
