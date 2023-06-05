@@ -1,129 +1,72 @@
-.container{
-    min-height: 100vh;
+.preguntasFrecuentes {
+  min-height: 100vh;
 }
 
-.section {
-    width: 80%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.preguntasFrecuentes__preguntas {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.title {
-    font-size: 3rem;
-    margin: 2rem 0rem;
-    text-align: center;
+.preguntasFrecuentes_title {
+  font-size: 3rem;
+  margin: 2rem 0rem;
+  text-align: center;
 }
 
-.faq {
-    max-width: 700px;
-    margin-top: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid rgb(129, 129, 129);
-    cursor: pointer;
+.preguntasFrecuentes__faq {
+  max-width: 700px;
+  margin-top: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgb(129, 129, 129);
+  cursor: pointer;
 }
 
-.question {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.preguntasFrecuentes__question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.question h3 {
-    font-size: 1.8rem;
+.preguntasFrecuentes__question h3 {
+  font-size: 1.8rem;
 }
 
-.answer {
-    max-height: 0;
-    overflow: hidden;
+.preguntasFrecuentes__answer {
+  max-height: 0;
+  overflow: hidden;
 }
 
 .answer p {
-    padding-top: 1rem;
-    line-height: 1.6;
-    font-size: 1rem;
-    transition: max-height 1.4s ease;
+  padding-top: 1rem;
+  line-height: 1.6;
+  font-size: 1rem;
+  transition: max-height 1.4s ease;
 }
 
-.faq.active .answer {
-    max-height: 300px;
-    animation: fade 1s ease-in-out;
+.preguntasFrecuentes__faq.active .preguntasFrecuentes__answer {
+  max-height: 300px;
+  animation: fade 1s ease-in-out;
 }
 
-.faq.active svg {
-    transform: rotate(180deg);
+.preguntasFrecuentes__faq.active svg {
+  transform: rotate(180deg);
 }
 
-svg {
-    transition: transform 0.5s ease-in;
+.preguntasFrecuentes svg {
+  transition: transform 0.5s ease-in;
 }
 
 @keyframes fade {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    
-    to {
-        opacity: 1;
-        transform: translateY(0px);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
 }
-
-
-
-/* otra versión */
-/* .faq{
-    min-height: 100vh;
-}
-
-.title {
-    font-size: 2rem;
-    margin: 2rem 0rem;
-    text-align: center;
-}
-
-details {
-    width: 50%;
-    margin: 0 auto;
-    padding: .5rem;
-    margin-bottom: 3rem;
-    overflow: hidden;
-    border-bottom: 1px solid rgb(180, 176, 176);
-    
-}
-
-
-summary {
-    font-size: 1.2rem;
-    cursor: pointer;
-    list-style: none;
-    font-weight: bold;
-    position: relative;
-    
-}
-
-summary::after {
-    content: "▼";
-    position: absolute;
-    top: 50%;
-    right: 0;
-    transform: translateY(-50%);
-    width: 8px;
-    height: 20px;
-    transition: transform 0.2s ease-in-out;
-    
-}
-
-details[open] summary::after {
-    content: '▲';   
-}
-
-p {
-    margin-top: 5px;
-    padding-top: 1rem;
-    line-height: 1.6;
-    font-size: 1rem;
-    transition: max-height 1.4s ease;
-} */

@@ -1,0 +1,13 @@
+.filtros-activos ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5%;
+}
+
+.filtros-activos li {
+  background-color: var(--btn-main-color);
+  padding: 5%;
+  color: #fff;
+  margin-bottom: 5%;
+  border-radius: 1rem;
+}

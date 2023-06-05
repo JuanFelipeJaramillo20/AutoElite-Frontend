@@ -1,189 +1,205 @@
-
-.contenedor {
-    width: 80%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-}
-  
-.contenidoCarro {
-    width: 100%;
-    margin-right: 20px;
+.app-publicacion {
+  width: 90%;
+  margin: 10% auto;
+  display: grid;
+  grid-template-rows: 5% 20% repeat(2, fr);
 }
 
+.app-publicacion__infoPublicacion {
+  grid-row: 2/3;
+}
+
+.app-publicacion span {
+  font-weight: bold;
+}
+
+.app-publicacion__devolver {
+  cursor: pointer;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
 .botonDevolver {
-    border: none;
-    background-color: transparent;
-    font-size: 14px;
-    font-weight: bold;
-    margin-top: 10rem;
+  border: none;
+  background-color: transparent;
+  font-size: 0.875rem;
+  font-weight: bold;
+  text-align: left;
+  cursor: pointer;
 }
-  
-.FotosCarro {
-    text-align: left;
-}
-  
+
 .imagen-principal {
-    width: 95%;
-    height: 300px; 
-    background-color: #d9d9d9;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    margin-top: 1.5rem;
+  height: 300px;
+  background-color: #d9d9d9;
+  border-radius: 10px;
+  margin-bottom: 0.625rem;
+  margin-top: 1.5rem;
 }
-  
+
 .imagen-secundaria {
-    width: 95%;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 5rem;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5rem;
 }
-  
-  
+
 .imagenPequeña {
-    width: 100%;
-    height: 80px; 
-    background-color: #d9d9d9;
-    border-radius: 10px;
-    margin: 0 5px 0 5px;
+  width: 100%;
+  height: 80px;
+  background-color: #d9d9d9;
+  border-radius: 10px;
+  margin: 0 5px 0 5px;
 }
-    
-.inicio{
-  margin: 0 5px 0 0;
+
+.app-publicacion__especificaciones {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 3.5rem;
 }
-  
-.final{
-  margin: 0 0 0 5px;
+
+.app-publicacion__tituloEspecificaciones {
+  flex-basis: 100%;
+  text-align: left;
+  font-weight: bold;
 }
-  
-.especificaciones {
-    width: 100%;
-    height: auto;
-    margin-bottom: 3.5rem;
-    display: flex;
-    flex-wrap: wrap;
+
+.app-publicacion__especificacionesLista {
+  flex-basis: 50%;
+  box-sizing: border-box;
 }
-      
-.tituloEspecificaciones {
-    flex-basis: 100%;
-    text-align: left;
-    font-weight: bold;
-}
-      
-.especificacionesLista {
-    flex-basis: 50%; 
-    box-sizing: border-box;
-}
-      
+
 .item {
-    margin: 0.75rem 0;
-}
-      
-.item span {
-    font-weight: bold;
+  margin: 0.75rem 0;
 }
 
-.descripcion {
-    width: 100%;
-    height: 250px; 
-    margin-bottom: 3rem;
-}
-  
-.datosPublicacion {
-    width: 100%;
-    height: auto;
-    margin-bottom: 5rem;
-    display: flex;
+.app-publicacion__descripcion {
+  margin-bottom: 3rem;
 }
 
-.dato{
-    margin-right: 2.5rem;
+.app-publicacion__descripcion h2 {
+  margin-bottom: 1rem;
 }
 
-.dato span{
-    font-weight: bold;  
-}
-  
-.sideBar {
-    width: 60%;
-    margin: 15.29rem 0 10rem 0;
-}
-  
-.boton {
-    text-align: center;
-    font-weight: bold;
-    background-color: #3c76f2;
-    color: white;
-    border-radius: 6px;
-    margin-right: 21rem;
-    padding: 0.5rem;
-}
-  
-.precio {
-    font-weight: bold;
-    font-size: 36px;
-    margin: 1rem 0;
+.app-publicacion__datosPublicacion {
+  width: 100%;
+  height: auto;
+  margin-bottom: 5rem;
+  display: flex;
 }
 
-.ciudad {
-    font-size: 18px;
-    color: var(--secundary-text-color);
-    margin-bottom: 1rem;
-}
-  
-.infoPublicacion {
-    display: flex;
-    flex-direction: column;
+.app-publicacion__dato {
+  margin-right: 2.5rem;
 }
 
-.infoVendedor-datos {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-bottom: 1.5rem;
-}
-  
-.infoVendedor {
-    height: 13.8rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: var(--card-main-color);
-    padding: 1.8rem 5.6rem;
-    border-radius: 12px;
-}
-  
-.fotoVendedor {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: gray;
-    margin-right: 1.75rem;
-}
-  
-.NombreVendedor {
-    font-weight: bold;
-    margin-left: auto;
-    margin: 0;
-    color: white;
+.app-publicacion__info-uso {
+  width: 20%;
+  text-align: center;
+  font-weight: bold;
+  background-color: #3c76f2;
+  color: white;
+  border-radius: 6px;
+  margin-right: 21rem;
+  padding: 0.5rem;
 }
 
-.reviews {
-    color: white;
+.app-publicacion__precio {
+  font-weight: bold;
+  font-size: 36px;
+  margin: 1rem 0;
 }
-  
+
+.app-publicacion__ciudad {
+  font-size: 18px;
+  color: var(--secundary-text-color);
+  margin-bottom: 1rem;
+}
+
+.app-publicacion__infoVendedor-datos {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.app-publicacion__infoVendedor {
+  height: 13.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--card-main-color);
+  padding: 1.8rem 5.6rem;
+  border-radius: 12px;
+  color: var(--white-color);
+  cursor: pointer;
+}
+
+.app-publicacion__fotoVendedor {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: gray;
+  margin-right: 1.75rem;
+}
+
+.app-publicacion__NombreVendedor {
+  font-weight: bold;
+  margin-left: auto;
+  margin: 0;
+}
+
 .estrellas {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
 }
-  
-.estrella {
-    width: 10px;
-    height: 10px;
-    background-color: yellow;
-    margin-right: 5px;
-}
-  
 
-  
+.estrella {
+  width: 10px;
+  height: 10px;
+  background-color: yellow;
+  margin-right: 5px;
+}
+
+.app-publicacion__contactoVendedor {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.app-publicacion__contactoVendedor h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+@media screen and (min-width: 940px) {
+  .app-publicacion {
+    grid-template-columns: 60% 40%;
+    grid-template-rows: 5% 20% 75%;
+  }
+
+  .botonDevolver {
+    grid-row: 1/2;
+  }
+
+  .app-publicacion__carro-detalles {
+    margin-right: 20px;
+    grid-row: 2/4;
+  }
+
+  .app-publicacion__sideBar {
+    grid-column: 2/3;
+    grid-row: 3/-1;
+    align-self: start;
+  }
+
+  .app-publicacion__infoPublicacion {
+    grid-column: 2/3;
+    grid-row: 2/3;
+    align-self: end;
+  }
+}
+
+@media screen and (max-width: 1020px) {
+  .app-publicacion__infoVendedor {
+    padding: 1.8rem;
+  }
+}

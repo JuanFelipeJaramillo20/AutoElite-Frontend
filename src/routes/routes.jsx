@@ -12,18 +12,18 @@ import { CrearPublicacion } from '../pages/CrearPublicacion/CrearPublicacion';
 import { EditarPublicacion } from '../pages/EditarPublicacion/EditarPublicacion';
 import { Favoritos } from '../pages/Favoritos/Favoritos';
 import { PreguntasFrecuentes } from '../pages/PreguntasFrecuentes/PreguntasFrecuentes';
+import { LoginPage } from '../pages/LoginPage/LoginPage';
+import { RegisterPage } from '../pages/RegisterPage/RegisterPage';
 
-import { Login } from '../pages/Login/Login';
-import { Register } from '../pages/Register/Register';
 export const RoutesConfiguration = () => {
   // <Header />
   return (
     <Router>
-     <Header />
+      <Header />
       <Routes>
         <Route path='/' element={<Inicio />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
+        <Route path='/login' element={<LoginPage />} />
+        <Route path='/registro' element={<RegisterPage />} />
         <Route path='/catalogo' element={<Catalogo />} />
         <Route path='/contacto' element={<Contacto />} />
         <Route path='/publicacion/:publicacionId' element={<Publicacion />} />
@@ -35,9 +35,9 @@ export const RoutesConfiguration = () => {
             path='/publicacion/editar/:publicacionId'
             element={<EditarPublicacion />}
           />
-          <Route path='/preguntasFrecuentes' element={<PreguntasFrecuentes />} />
           <Route path='/favoritos' element={<Favoritos />} />
         </Route>
+        <Route path='/preguntasFrecuentes' element={<PreguntasFrecuentes />} />
       </Routes>
       <Footer />
     </Router>

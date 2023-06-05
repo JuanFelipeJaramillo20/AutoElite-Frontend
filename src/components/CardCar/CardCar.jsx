@@ -16,6 +16,7 @@ export const CardCar = ({
   kilometraje,
   tipoTransmision,
   tipoCombustible,
+  usado,
 }) => {
   const isLoggedIn = useSelector(getAuth);
   const [ShowFillHeart, setShowFillHeart] = useState(false);
@@ -75,6 +76,11 @@ export const CardCar = ({
           <p>{tipoCombustible}</p>
         </div>
       </div>
+      {usado ? (
+        <div className='app-carCard_estado'>Usado</div>
+      ) : (
+        <div className='app-carCard_estado'>Nuevo</div>
+      )}
     </div>
   );
 };
@@ -82,12 +88,13 @@ export const CardCar = ({
 CardCar.propTypes = {
   idPublicacion: PropTypes.string.isRequired,
   srcImageCar: PropTypes.string.isRequired,
-  yearCarro: PropTypes.string.isRequired,
+  yearCarro: PropTypes.number.isRequired,
   modeloCarro: PropTypes.string.isRequired,
   marcaCarro: PropTypes.string.isRequired,
-  precio: PropTypes.string.isRequired,
+  precio: PropTypes.number.isRequired,
   ciudadVenta: PropTypes.string.isRequired,
-  kilometraje: PropTypes.string.isRequired,
+  kilometraje: PropTypes.number.isRequired,
   tipoTransmision: PropTypes.string.isRequired,
   tipoCombustible: PropTypes.string.isRequired,
+  usado: PropTypes.bool.isRequired,
 };
