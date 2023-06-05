@@ -1,262 +1,258 @@
 /* Home component */
 .home {
-    font-family: 'Noto Sans', sans-serif;
-    padding-inline: 0%;
-    overflow: hidden;
-    background-color: var(--main-background);
-    padding: 10%;
+  font-family: 'Noto Sans', sans-serif;
+  padding-inline: 0%;
+  overflow: hidden;
+  background-color: var(--main-background);
+  padding: 0 10% 10% 10%;
 }
 
 .home h2 {
-    font-weight: 700;
-    color: var(--main-txt-color);
+  font-weight: 700;
+  color: var(--main-txt-color);
 }
 
 .home h3 {
-    font-weight: 600;
-    color: var(--main-txt-color);
+  font-weight: 600;
+  color: var(--main-txt-color);
 }
 
 .home p {
-    font-weight: 400;
-    color: var(--black-76-primary-color);
+  font-weight: 400;
+  color: var(--black-76-primary-color);
 }
 
 /* Intro section */
 .intro-section {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 
 .intro-section__background-line {
-    width: 0px;
-    height: 0px;
-    position: absolute;
-    top: 0px;
-    left: 0px;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
 }
 
-.intro-section__background-line>img {
-    width: 100vw;
-    height: 100vh;
-    transform: translateX(-18%);
+.intro-section__background-line > img {
+  width: 100vw;
+  height: 100vh;
+  transform: translateX(-18%);
 }
 
 .intro-section__table {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .intro-section__table header {
-    margin-bottom: 5%;
+  margin-bottom: 5%;
 }
 
 .intro-section__table h2 {
-    font-size: clamp(30px, 4vw, 56px);
+  font-size: clamp(30px, 4vw, 56px);
 }
 
 .intro-section__table p {
-    font-size: clamp(10px, 2vw, 18px);
-    color: rgba(0, 0, 0, 0.76);
+  font-size: clamp(10px, 2vw, 18px);
+  color: rgba(0, 0, 0, 0.76);
 }
 
 .intro-section__image img {
-    position: relative;
-    z-index: 2;
-    max-width: 700px;
-    width: 50vw;
-    min-width: 200px;
-    max-height: 534px;
-    height: 38vw;
-    min-height: 152.8px;
-    transform: scale(0.8);
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+  width: 50vw;
+  min-width: 200px;
+  max-height: 534px;
+  height: 38vw;
+  min-height: 152.8px;
+  transform: scale(0.8);
 }
 
 /* Offers section */
 .offer-section__header {
-    display: flex;
-    flex-direction: row;
-    gap: 2%;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 5%;
+  display: flex;
+  flex-direction: row;
+  gap: 2%;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 5%;
 }
 
-.offer-section__header>h2 {
-    font-size: clamp(25px, 5vw, 32px);
-    text-align: start;
+.offer-section__header > h2 {
+  font-size: clamp(25px, 5vw, 32px);
+  text-align: start;
 }
 
-.offer-section__header>p {
-    font-size: clamp(15px, 4vw, 20px);
+.offer-section__header > p {
+  font-size: clamp(15px, 4vw, 20px);
 }
 
 #see-more {
-    font-size: clamp(15px, 4vw, 20px);
+  font-size: clamp(15px, 4vw, 20px);
 }
 
 .offer-section__content {
-    height: auto;
-    width: 100%;
-    margin-bottom: 10%;
+  height: auto;
+  width: 100%;
+  margin-bottom: 10%;
 }
 
 .offer-car__container {
-    display: grid;
-    grid-template-columns: repeat(3, 33%);
-    gap: 2%;
+  display: grid;
+  grid-template-columns: repeat(3, 33%);
+  gap: 2%;
 }
-
 
 /* Why AutoElite section */
 .about-section {
-    border: 1px solid transparent;
-    height: auto;
+  border: 1px solid transparent;
+  height: auto;
 }
 
 .about-section__title {
-    margin-bottom: 5%;
+  margin-bottom: 5%;
 }
 
-.about-section__title>h2 {
-    font-size: clamp(25px, 5vw, 32px);
+.about-section__title > h2 {
+  font-size: clamp(25px, 5vw, 32px);
 }
 
 .about-section__table-reason {
-    display: grid;
-    grid-template-columns: repeat(3, 33%);
+  display: grid;
+  grid-template-columns: repeat(3, 33%);
 }
 
 .about-section__table-reason h3 {
-    font-size: clamp(17px, 9vw, 20px);
+  font-size: clamp(17px, 9vw, 20px);
 }
 
 .about-section__table-reason p {
-    font-size: clamp(15px, 5vw, 18px);
+  font-size: clamp(15px, 5vw, 18px);
 }
 
-.table-reason__left-side>h3,
-.table-reason__left-side>p {
-    text-align: right;
+.table-reason__left-side > h3,
+.table-reason__left-side > p {
+  text-align: right;
 }
 
-.table-reason__rigth-side>h3,
-.table-reason__rigth-side>p {
-    text-align: left;
+.table-reason__rigth-side > h3,
+.table-reason__rigth-side > p {
+  text-align: left;
 }
 
 .table-reason__middle-side div:last-child {
-    width: 0px;
-    height: 0px;
-    position: absolute;
-    top: 15%;
-    left: 49%;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  top: 15%;
+  left: 49%;
 }
 
 .table-reason__middle-side div:last-child img {
-    width: 11px;
-    height: 300px;
+  width: 11px;
+  height: 300px;
 }
 
 .table-reason__middle-side div:first-child img {
-    position: relative;
-    z-index: 2;
-    width: 400px;
-    height: 400px;
-    transform: translateY(-50px);
+  position: relative;
+  z-index: 1;
+  width: 400px;
+  height: 400px;
+  transform: translateY(-50px);
 }
 
 #middle-side {
-    padding-right: auto;
+  padding-right: auto;
+  display: grid;
+  place-content: center;
+  position: relative;
+}
+
+@media screen and (max-width: 1370px) {
+  .offer-section {
+    margin-bottom: 20%;
+  }
+
+  .offer-car__container {
     display: grid;
-    place-content: center;
+    grid-template-columns: 100%;
+    gap: 2%;
+    place-items: center;
+  }
+
+  .container-car {
+    max-width: 500px;
+    width: 100%;
+    border: 1px solid red;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  /*Home*/
+  .intro-section {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .intro-section__table {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .intro-section__image img {
+    width: 60vw;
+    height: 45vw;
+  }
+
+  .intro-section__table h2 {
+    font-size: clamp(30px, 4vw, 56px);
+  }
+
+  .intro-section__table p {
+    font-size: clamp(10px, 3vw, 18px);
+    color: rgba(0, 0, 0, 0.76);
+  }
 }
 
+@media screen and (max-width: 635px) {
+  /*Home*/
+  .intro-section__table {
+    flex-direction: column;
+  }
 
-@media screen and (max-width:1370px) {
-    .offer-section {
-        margin-bottom: 20%;
-    }
-    
-    .offer-car__container {
-        display: grid;
-        grid-template-columns: 100%;
-        gap: 2%;
-        place-items: center;
-    }
+  .intro-section__image img {
+    width: 100vw;
+    height: 76vw;
+  }
 
-    .container-car {
-        max-width: 500px;
-        width: 100%;
-        border: 1px solid red;
-    }
-}
+  /*why AutoElite*/
+  .about-section {
+    margin-bottom: 5%;
+  }
 
-@media screen and (max-width:850px) {
+  .about-section__table-reason {
+    grid-template-columns: 100%;
+  }
 
-    /*Home*/
-    .intro-section {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
+  #middle-side {
+    transform: rotate(60deg);
+  }
 
-    .intro-section__table {
-        display: flex;
-        flex-direction: row;
-    }
-
-    .intro-section__image img {
-        width: 60vw;
-        height: 45vw;
-    }
-
-    .intro-section__table h2 {
-        font-size: clamp(30px, 4vw, 56px);
-    }
-
-    .intro-section__table p {
-        font-size: clamp(10px, 3vw, 18px);
-        color: rgba(0, 0, 0, 0.76);
-    }
-}
-
-@media screen and (max-width:635px) {
-
-    /*Home*/
-    .intro-section__table {
-        flex-direction: column;
-    }
-
-    .intro-section__image img {
-        width: 100vw;
-        height: 76vw;
-    }
-
-    /*why AutoElite*/
-    .about-section {
-        margin-bottom: 5%;
-    }
-
-    .about-section__table-reason {
-        grid-template-columns: 100%;
-    }
-
-    #middle-side {
-        transform: rotate(60deg);
-    }
-
-    tbody {
-        width: 76vw;
-        min-width: 200px;
-    }
+  tbody {
+    width: 76vw;
+    min-width: 200px;
+  }
 }

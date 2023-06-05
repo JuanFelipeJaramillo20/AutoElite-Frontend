@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-
+import { useEffect } from 'react';
 //import homeCar from '../../assets/img/inicio/homeCar.png';
 import jdcar from '../../assets/img/inicio/finished-transformed.png';
 import backgroundLine from '../../assets/img/inicio/backgroundLine.png';
@@ -16,10 +15,49 @@ import { PUBLICACION, CARROS } from '../../../constants';
 import './inicio.css';
 
 export const Inicio = () => {
-
-  const [razonesAmmount] = useState(Array.from({ length: 3 }));
-
-  const [carrosJuanda] = useState([carroJuandaInicioUno, carroJuandaInicioDos, carroJuandaInicioTres]);
+  const razones = [
+    {
+      id: 1,
+      razon_titulo: 'Razon 1',
+      texto:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+    },
+    {
+      id: 2,
+      razon_titulo: 'Razon 2',
+      texto:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+    },
+    {
+      id: 3,
+      razon_titulo: 'Razon 3',
+      texto:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+    },
+    {
+      id: 4,
+      razon_titulo: 'Razon 4',
+      texto:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+    },
+    {
+      id: 5,
+      razon_titulo: 'Razon 5',
+      texto:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+    },
+    {
+      id: 6,
+      razon_titulo: 'Razon 6',
+      texto:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+    },
+  ];
+  const carrosJuanda = [
+    carroJuandaInicioUno,
+    carroJuandaInicioDos,
+    carroJuandaInicioTres,
+  ];
 
   useEffect(() => {
     const reasonCar = document.getElementById('little-car__movement');
@@ -99,25 +137,21 @@ export const Inicio = () => {
           <article className='offer-section__content'>
             <div className='offer-car__container'>
               {PUBLICACION.map((el, id) => {
-                return (
-                  id < 3 ? (
-                    <div className='container-car' key={id}>
-                      <CardCar
-                        key={el.IDCarro}
-                        ciudadVenta={el.Ciudad}
-                        idPublicacion={el.IDPublicación}
-                        kilometraje={CARROS[id].Kilómetros}
-                        marcaCarro={CARROS[id].Marca}
-                        modeloCarro={CARROS[id].Modelo}
-                        precio={CARROS[id].Precio}
-                        tipoCombustible={CARROS[id].Combustible}
-                        tipoTransmision={CARROS[id].Transmisión}
-                        yearCarro={CARROS[id].Año}
-                        srcImageCar={carrosJuanda[id]}
-                      />
-                    </div>
-                  ) : null
-                );
+                return id < 3 ? (
+                  <CardCar
+                    key={el.IDCarro}
+                    ciudadVenta={el.Ciudad}
+                    idPublicacion={el.IDPublicación}
+                    kilometraje={CARROS[id].Kilómetros}
+                    marcaCarro={CARROS[id].Marca}
+                    modeloCarro={CARROS[id].Modelo}
+                    precio={CARROS[id].Precio}
+                    tipoCombustible={CARROS[id].Combustible}
+                    tipoTransmision={CARROS[id].Transmisión}
+                    yearCarro={CARROS[id].Año}
+                    srcImageCar={carrosJuanda[id]}
+                  />
+                ) : null;
               })}
             </div>
           </article>
@@ -130,21 +164,17 @@ export const Inicio = () => {
           <article>
             <table className='about-section__table-reason'>
               <tbody>
-                {razonesAmmount.map((el, index) => {
-                  return (
-                    <>
-                      <tr key={index}>
+                {razones.map((razon) => {
+                  if (razon.id <= 3) {
+                    return (
+                      <tr key={razon.id}>
                         <td className='table-reason__left-side'>
-                          <h3>Razon {index + 1}</h3>
-                          <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit, sed do eiusmod tempor incididunt ut labore et
-                            dolore magna aliqua.
-                          </p>
+                          <h3>{razon.razon_titulo}</h3>
+                          <p>{razon.texto}</p>
                         </td>
                       </tr>
-                    </>
-                  );
+                    );
+                  }
                 })}
               </tbody>
               <tbody id='middle-side'>
@@ -164,21 +194,17 @@ export const Inicio = () => {
                 </tr>
               </tbody>
               <tbody>
-                {razonesAmmount.map((el, index) => {
-                  return (
-                    <>
-                      <tr key={index + 3}>
+                {razones.map((razon) => {
+                  if (razon.id > 3) {
+                    return (
+                      <tr key={razon.id}>
                         <td className='table-reason__rigth-side'>
-                          <h3>Razon {index + 4}</h3>
-                          <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit, sed do eiusmod tempor incididunt ut labore et
-                            dolore magna aliqua.
-                          </p>
+                          <h3>{razon.razon_titulo}</h3>
+                          <p>{razon.texto}</p>
                         </td>
                       </tr>
-                    </>
-                  );
+                    );
+                  }
                 })}
               </tbody>
             </table>

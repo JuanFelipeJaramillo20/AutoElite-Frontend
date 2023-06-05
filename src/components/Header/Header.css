@@ -1,30 +1,25 @@
 .app-header {
   display: flex;
-  width: 80%;
-  justify-content: space-between;
+  width: 90%;
   align-items: center;
   height: 100px;
   margin: 0 auto;
-}
-
-.app-navlink {
-  text-decoration: none;
-  color: var(--secundary-text-color);
-  font-size: 1.125rem;
-  margin-left: 12px;
-}
-
-.app-header__navigation {
-  display: flex;
-  align-items: center;
-  gap: 10%;
+  gap: 5%;
 }
 
 .app-header__title {
   font-size: 2rem;
 }
 
-.app-header__sign-in {
+.app-header__navigation {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.app-header__sign-in,
+.app-header__logged-in {
   display: flex;
   align-items: center;
   gap: 0.25rem;
@@ -32,15 +27,26 @@
   padding: 0.25rem;
 }
 
-.app-header__logged-in {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
+.app-header__sign-in {
+  cursor: pointer;
+  padding: 0.25rem;
+}
+
+.app-navBtn,
+.app-closeBtn {
+  display: none;
 }
 
 .app-header__sign-in:hover {
   border: 0.125rem solid;
   border-radius: 0.25rem;
+}
+
+.app-navlink {
+  text-decoration: none;
+  color: var(--secundary-text-color);
+  font-size: 1.125rem;
+  margin-left: 12px;
 }
 
 .active,
@@ -52,4 +58,71 @@
 .fa-heart {
   cursor: pointer;
   font-size: 2rem;
+}
+
+@media screen and (max-width: 920px) {
+  .app-header {
+    justify-content: space-between;
+  }
+  .app-header__navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #282435;
+    color: #fff;
+    transform: translateY(-100vh);
+    transition: 1s;
+    z-index: 2;
+  }
+
+  .app-header__navigation nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .app-header__responsive-navigation {
+    transform: none;
+  }
+
+  .app-navBtn {
+    display: block;
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .app-closeBtn {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    color: #fff;
+  }
+  .app-navlink {
+    color: #ffffffb3;
+    font-size: 1.5rem;
+  }
+
+  .active,
+  .app-navlink:hover {
+    color: #fff;
+  }
+
+  .app-header__sign-in,
+  .app-header__logged-in,
+  .app-navBtn {
+    font-size: 1.5rem;
+  }
+
+  .app-header__sign-in {
+    gap: 0.5rem;
+  }
 }

@@ -1,0 +1,15 @@
+.logIn-container--p {
+  display: grid;
+  text-align: center;
+  padding: 10%;
+  grid-template-rows: 12% 80% 8%;
+}
+
+@media screen and (min-width: 825px) {
+  .logIn-container--p {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 90% 10%;
+    padding-bottom: 10%;
+    gap: 5%;
+  }
+}

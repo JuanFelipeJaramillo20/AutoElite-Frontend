@@ -1,0 +1,84 @@
+.registro-container--p {
+  display: grid;
+  padding: 10% 10% 20% 10%;
+  text-align: center;
+  grid-template-rows: 25% 75% 8%;
+  align-content: flex-start;
+}
+
+.welcomed__information--p {
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+.welcomed__information--p div {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2%;
+}
+.welcomed__information--p div:last-of-type {
+  margin-bottom: 0;
+}
+
+.welcomed__title--p {
+  margin-bottom: 10%;
+}
+.welcomed__img--p img {
+  display: none;
+}
+
+.welcomed__no-account--p {
+  grid-row: 3/4;
+}
+
+.welcomed__no-account--p p:hover {
+  font-weight: 700;
+}
+.welcomed__no-account--p span {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.container__form--p {
+  margin-top: 10%;
+  grid-row: 2/3;
+}
+
+.google-login--p {
+  width: 100%;
+  margin-bottom: 5%;
+}
+
+.google-login--p button {
+  border: 2px solid gray;
+  background-color: transparent;
+  color: gray;
+  width: 95%;
+  height: 50px;
+  border-radius: 1.2vmax;
+  cursor: pointer;
+  font-size: clamp(12px, 3vw, 16px);
+}
+
+@media screen and (min-width: 835px) {
+  .registro-container--p {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 90% 10%;
+    padding-bottom: 10%;
+  }
+
+  .welcomed__img--p img {
+    display: block;
+  }
+
+  .container__form--p {
+    grid-row: 1/-1;
+  }
+
+  .welcomed__no-account--p {
+    grid-row: 2/3;
+    display: flex;
+    gap: 0.25rem;
+  }
+}

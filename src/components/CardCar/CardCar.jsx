@@ -82,12 +82,12 @@ export const CardCar = ({
 CardCar.propTypes = {
   idPublicacion: PropTypes.string.isRequired,
   srcImageCar: PropTypes.string.isRequired,
-  yearCarro: PropTypes.string.isRequired,
+  yearCarro: PropTypes.number.isRequired,
   modeloCarro: PropTypes.string.isRequired,
   marcaCarro: PropTypes.string.isRequired,
-  precio: PropTypes.string.isRequired,
+  precio: PropTypes.number.isRequired,
   ciudadVenta: PropTypes.string.isRequired,
-  kilometraje: PropTypes.string.isRequired,
+  kilometraje: PropTypes.number.isRequired,
   tipoTransmision: PropTypes.string.isRequired,
   tipoCombustible: PropTypes.string.isRequired,
 };

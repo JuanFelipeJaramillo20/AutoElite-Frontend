@@ -1,18 +1,22 @@
-import { Modal } from '../Modal/Modal';
-import { Form } from '../Form/Form';
-import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
+
+import { Form } from '../../components/Form/Form';
+
 import registroImg from '../../assets/img/registro/registroImg.png';
-import './Registro.css';
-export const Registro = ({ handleShowModal, handleShowPage }) => {
+
+import './Register.css';
+
+export const RegisterPage = () => {
+  const history = useNavigate();
   return (
-    <Modal width={900} heigth={750} handleModal={handleShowModal}>
-      <div className='registro-container'>
-        <div className='container__welcomed'>
-          <div className='welcomed__title'>
+    <>
+      <div className='registro-container--p'>
+        <div className='container__welcomed--p'>
+          <div className='welcomed__title--p'>
             <h2>Empieza esta aventura</h2>
             <h2>con nosotros!</h2>
           </div>
-          <div className='welcomed__information'>
+          <div className='welcomed__information--p'>
             <div>
               <i className='fa-solid fa-circle-check'></i>
               <p>Publica tus carros.</p>
@@ -26,18 +30,26 @@ export const Registro = ({ handleShowModal, handleShowPage }) => {
               <p>Maneja tu lista de deseados.</p>
             </div>
           </div>
-          <div className='welcomed__img'>
+          <div className='welcomed__img--p'>
             <img src={registroImg} alt='vector that animates people to login' />
           </div>
-          <div className='welcomed__no-account'>
-            <b>
-              <p>¿Ya tienes una cuenta?</p>
-            </b>
-            <p onClick={handleShowPage}>Inicia sesión aquí</p>
-          </div>
         </div>
-        <div className='container__form'>
-          <div className='google-login'>
+        <div className='welcomed__no-account--p'>
+          <b>
+            <p>¿Ya tienes una cuenta?</p>
+          </b>
+          <p>
+            <span
+              onClick={() => {
+                history('/login');
+              }}
+            >
+              Inicia sesión aquí
+            </span>
+          </p>
+        </div>
+        <div className='container__form--p'>
+          <div className='google-login--p'>
             <button>Registro con Google</button>
           </div>
           <div className='form-login'>
@@ -92,11 +104,6 @@ export const Registro = ({ handleShowModal, handleShowPage }) => {
           </div>
         </div>
       </div>
-    </Modal>
+    </>
   );
-};
-
-Registro.propTypes = {
-  handleShowModal: PropTypes.func,
-  handleShowPage: PropTypes.func,
 };

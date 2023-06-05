@@ -4,26 +4,19 @@ import PropTypes from 'prop-types';
 import logInImg from '../../assets/img/login/LoginImg.png';
 
 import './Login.css';
-import { useState } from 'react';
 import { Registro } from '../Registro/Registro';
-export const Login = ({ handleShowLogin }) => {
-  const [showRegistro, setShowRegistro] = useState(false);
-  const handleRegistro = () => {
-    setShowRegistro(true);
-  };
+export const Login = ({ handleShowModal, pageToShow, changePageToShow }) => {
   return (
     <>
-      {showRegistro ? (
+      {pageToShow === 'registro' ? (
         <Registro
-          handleShowRegistro={() => {
-            handleShowLogin(false);
-          }}
-          handleShowLogin={() => {
-            setShowRegistro(false);
+          handleShowModal={handleShowModal}
+          handleShowPage={() => {
+            changePageToShow('login');
           }}
         />
       ) : (
-        <Modal width={800} heigth={600} handleModal={handleShowLogin}>
+        <Modal width={800} heigth={600} handleModal={handleShowModal}>
           <div className='logIn-container'>
             <div className='container__welcomed'>
               <div className='welcomed__title'>
@@ -40,7 +33,7 @@ export const Login = ({ handleShowLogin }) => {
                 <b>
                   <p>¿No tienes una cuenta?</p>
                 </b>
-                <p onClick={handleRegistro}>Creala aquí</p>
+                <p onClick={() => changePageToShow('registro')}>Creala aquí</p>
               </div>
             </div>
             <div className='container__form'>
@@ -97,5 +90,7 @@ export const Login = ({ handleShowLogin }) => {
 };
 
 Login.propTypes = {
-  handleShowLogin: PropTypes.func,
+  handleShowModal: PropTypes.func,
+  pageToShow: PropTypes.string,
+  changePageToShow: PropTypes.func,
 };
