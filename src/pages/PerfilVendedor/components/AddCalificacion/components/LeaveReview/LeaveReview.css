@@ -39,7 +39,7 @@
     border: 1px solid var(--input-outline-color);
     border-radius: 1vw;
     padding: 2%;
-    color: white;
+    color: black;
     background-color: var(--input-main-color);
 }
 

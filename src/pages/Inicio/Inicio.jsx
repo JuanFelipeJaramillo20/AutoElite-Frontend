@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
-import homeCar from '../../assets/img/inicio/homeCar.png';
+//import homeCar from '../../assets/img/inicio/homeCar.png';
+import jdcar from '../../assets/img/inicio/finished-transformed.png';
 import backgroundLine from '../../assets/img/inicio/backgroundLine.png';
 import carRoad from '../../assets/img/inicio/carRoad.png';
 import roadLine from '../../assets/img/inicio/roadLine.png';
@@ -82,7 +83,7 @@ export const Inicio = () => {
           <div className='intro-section__image'>
             <img
               id='home-car'
-              src={homeCar}
+              src={jdcar}
               alt='Home car'
               width={780}
               height={596}

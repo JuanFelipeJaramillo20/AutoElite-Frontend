@@ -1,9 +1,10 @@
 /* Home component */
 .home {
     font-family: 'Noto Sans', sans-serif;
-    padding-inline: 7%;
+    padding-inline: 0%;
     overflow: hidden;
     background-color: var(--main-background);
+    padding: 10%;
 }
 
 .home h2 {
@@ -28,7 +29,6 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-
     height: 100vh;
 }
 
@@ -37,13 +37,13 @@
     height: 0px;
     position: absolute;
     top: 0px;
-    left: 0px;
+    left: 10%;
 }
 
 .intro-section__background-line>img {
     width: 100vw;
     height: 100vh;
-    transform: translateX(-7%);
+    transform: translateX(-18%);
 }
 
 .intro-section__table {
@@ -58,7 +58,7 @@
 }
 
 .intro-section__table h2 {
-    font-size: clamp(46px, 10vw, 56px);
+    font-size: clamp(30px, 4vw, 56px);
 }
 
 .intro-section__table p {
@@ -69,12 +69,12 @@
 .intro-section__image img {
     position: relative;
     z-index: 2;
-    max-width: 780px;
-    width: 90vw;
-    min-width: 680px;
-    max-height: 596px;
-    height: 50vw;
-    min-height: 519px;
+    max-width: 700px;
+    width: 50vw;
+    min-width: 200px;
+    max-height: 534px;
+    height: 38vw;
+    min-height: 152.8px;
     transform: scale(0.8);
 }
 
@@ -102,8 +102,9 @@
 }
 
 .offer-section__content {
-    height: 100vh;
+    height: auto;
     width: 100%;
+    margin-bottom: 10%;
 }
 
 .offer-car__container {
@@ -116,7 +117,7 @@
 /* Why AutoElite section */
 .about-section {
     border: 1px solid transparent;
-    height: 100vh;
+    height: auto;
 }
 
 .about-section__title {
@@ -179,3 +180,82 @@
 }
 
 
+@media screen and (max-width:1370px) {
+    .offer-section {
+        margin-bottom: 20%;
+    }
+    
+    .offer-car__container {
+        display: grid;
+        grid-template-columns: 100%;
+        gap: 2%;
+        place-items: center;
+    }
+
+    .container-car {
+        max-width: 500px;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width:850px) {
+
+    /*Home*/
+    .intro-section {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .intro-section__table {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .intro-section__image img {
+        width: 60vw;
+        height: 45vw;
+    }
+
+    .intro-section__table h2 {
+        font-size: clamp(30px, 4vw, 56px);
+    }
+
+    .intro-section__table p {
+        font-size: clamp(10px, 3vw, 18px);
+        color: rgba(0, 0, 0, 0.76);
+    }
+}
+
+@media screen and (max-width:635px) {
+
+    /*Home*/
+    .intro-section__table {
+        flex-direction: column;
+    }
+
+    .intro-section__image img {
+        width: 100vw;
+        height: 76vw;
+    }
+
+    /*why AutoElite*/
+    .about-section {
+        margin-bottom: 5%;
+    }
+
+    .about-section__table-reason {
+        grid-template-columns: 100%;
+    }
+
+    #middle-side {
+        transform: rotate(60deg);
+    }
+
+    tbody {
+        width: 76vw;
+        min-width: 200px;
+    }
+}

@@ -12,7 +12,7 @@ export const PreguntasFrecuentes = () => {
         <>
             <div className="container">
                 <h2 className="title">FAQs</h2>
-                <section>
+                <section className='section'>
                     <div className={`faq ${activeIndex === 0 ? 'active' : ''}`} onClick={() => toggleActive(0)}>
                         <div className="question">
                             <h3>Question???????</h3>
