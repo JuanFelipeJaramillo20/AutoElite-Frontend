@@ -33,7 +33,12 @@ export const Header = () => {
 
   useEffect(() => {
     if (windowWidth >= 920 && showModal) {
-      navigate('/');
+      if (
+        window.location.pathname === '/login' ||
+        window.location.pathname === '/registro'
+      ) {
+        navigate('/');
+      }
     } else if (windowWidth < 920 && showModal) {
       if (toPage === 'registro') {
         navigate('/registro');
