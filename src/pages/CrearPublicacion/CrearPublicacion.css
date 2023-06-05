@@ -2,6 +2,11 @@
     margin-top: 5%;
 }
 
+.post__title {
+    margin-inline: auto;
+    width: 90%;
+}
+
 .form {
     display: flex;
     flex-direction: column;
