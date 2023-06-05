@@ -40,3 +40,42 @@
 .file-upload-label .fa-photo-film {
     font-size: clamp(32px, 8vw, 40px);
 }
+
+.show-images__car {
+    margin-top: 2%;
+    width: 80%;
+    margin-inline: auto;
+    border: 2px rgba(0, 0, 0, 0.2);
+    border-radius: 2vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2%;
+    background-color: rgba(220, 220, 220, 0.2);
+}
+
+.image-card {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 20%;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 1vw;
+    overflow: hidden;
+}
+
+.image-card>button {
+    position: absolute;
+    top: 3%;
+    right: 5%;
+    border: none;
+    background-color: transparent;
+    font-size: clamp(20px,2.5vw,25px);
+    cursor: pointer;
+}
+
+.image-card>img {
+    width: 12vw;
+    min-width: 50px;
+}
