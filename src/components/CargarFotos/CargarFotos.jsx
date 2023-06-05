@@ -40,7 +40,7 @@ export const CargarFotos = () => {
 
     useEffect(() => {
         if (showUploadedImagesContainer.current) {
-            if (selectedFiles.length < 0) {
+            if (selectedFiles.length <= 0) {
                 showUploadedImagesContainer.current.style.display = 'none';
             } else {
                 showUploadedImagesContainer.current.style.display = 'flex';
