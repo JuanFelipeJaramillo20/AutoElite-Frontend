@@ -12,13 +12,19 @@
 .app-publicacion span {
   font-weight: bold;
 }
+
+.app-publicacion__devolver {
+  cursor: pointer;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
 .botonDevolver {
   border: none;
   background-color: transparent;
   font-size: 0.875rem;
   font-weight: bold;
   text-align: left;
-  margin-bottom: 1rem;
   cursor: pointer;
 }
 
@@ -123,6 +129,7 @@
   padding: 1.8rem 5.6rem;
   border-radius: 12px;
   color: var(--white-color);
+  cursor: pointer;
 }
 
 .app-publicacion__fotoVendedor {

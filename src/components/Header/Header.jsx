@@ -81,11 +81,10 @@ export const Header = () => {
                 classIcon='fa-solid fa-plus'
                 texto='Nueva publicación'
                 tipo='btn'
+                onClick={() => {
+                  navigate('/publicacion/nueva');
+                }}
               />
-              <i
-                className='fa-solid fa-heart'
-                onClick={() => console.log('estás acá')}
-              ></i>
             </div>
           ) : (
             <div

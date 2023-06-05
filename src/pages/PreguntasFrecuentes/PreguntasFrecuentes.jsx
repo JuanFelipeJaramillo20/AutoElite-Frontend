@@ -40,7 +40,7 @@ export const PreguntasFrecuentes = () => {
             </div>
           </div>
         </section>
-        <section>
+        <section className='preguntasFrecuentes__preguntas'>
           <div
             className={`preguntasFrecuentes__faq ${
               activeIndex === 1 ? 'active' : ''
@@ -68,7 +68,7 @@ export const PreguntasFrecuentes = () => {
             </div>
           </div>
         </section>
-        <section>
+        <section className='preguntasFrecuentes__preguntas'>
           <div
             className={`preguntasFrecuentes__faq ${
               activeIndex === 2 ? 'active' : ''

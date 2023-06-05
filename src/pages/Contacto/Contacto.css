@@ -44,6 +44,7 @@
 .app-underlineformat {
   text-decoration: underline;
   font-weight: 700;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 1080px) {

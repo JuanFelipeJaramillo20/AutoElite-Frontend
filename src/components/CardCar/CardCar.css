@@ -10,6 +10,7 @@
   background-color: var(--card-main-color);
   color: var(--white-color);
   font-weight: 700;
+  position: relative;
 }
 
 .app-cardCar i {
@@ -81,6 +82,16 @@
   display: flex;
   justify-content: space-between;
   margin-right: 20px;
+}
+
+.app-carCard_estado {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  background-color: #3c76f2;
+  width: 4rem;
+  padding: 0.5rem;
+  border-radius: 6px;
 }
 
 @media screen and (max-width: 620px) {

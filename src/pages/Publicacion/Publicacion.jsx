@@ -1,10 +1,20 @@
+import { useNavigate } from 'react-router-dom';
 import { Form } from '../../components/Form/Form';
 import './Publicacion.css';
 
 export const Publicacion = () => {
+  const navigate = useNavigate();
   return (
     <div className='app-publicacion'>
-      <button className='botonDevolver'>Devolverse</button>
+      <div
+        className='app-publicacion__devolver'
+        onClick={() => {
+          navigate('/catalogo');
+        }}
+      >
+        <i className='fa-solid fa-circle-chevron-left'></i>
+        <button className='botonDevolver'>Devolverse</button>
+      </div>
       <main className='app-publicacion__carro-detalles'>
         <div className='FotosCarro'>
           <h1>Nombre del vehículo</h1>
@@ -102,7 +112,10 @@ export const Publicacion = () => {
         <p className='app-publicacion__ciudad'>Ciudad</p>
       </div>
       <aside className='app-publicacion__sideBar'>
-        <div className='app-publicacion__infoVendedor'>
+        <div
+          className='app-publicacion__infoVendedor'
+          onClick={() => navigate('/perfil/:usuarioId')}
+        >
           <div className='app-publicacion__infoVendedor-datos'>
             <div className='app-publicacion__fotoVendedor'></div>
             <p className='app-publicacion__NombreVendedor'>Nombre vendedor</p>

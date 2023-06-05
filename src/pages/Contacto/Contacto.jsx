@@ -1,6 +1,8 @@
+import { useNavigate } from 'react-router-dom';
 import { Form } from '../../components/Form/Form';
 import './Contacto.css';
 export const Contacto = () => {
+  const navigate = useNavigate();
   const onSubmitContacto = (data, reset) => {
     console.log(data);
     reset();
@@ -86,7 +88,12 @@ export const Contacto = () => {
           </div>
           <p>
             Si tienes preguntas, por favor dirigite aquí{' '}
-            <span className='app-underlineformat'>FAQ</span>
+            <span
+              className='app-underlineformat'
+              onClick={() => navigate('/preguntasFrecuentes')}
+            >
+              FAQ
+            </span>
           </p>
         </div>
       </section>

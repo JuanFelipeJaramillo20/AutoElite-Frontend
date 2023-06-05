@@ -46,7 +46,7 @@
   transition: max-height 1.4s ease;
 }
 
-.preguntasFrecuentes__faq.active .answer {
+.preguntasFrecuentes__faq.active .preguntasFrecuentes__answer {
   max-height: 300px;
   animation: fade 1s ease-in-out;
 }

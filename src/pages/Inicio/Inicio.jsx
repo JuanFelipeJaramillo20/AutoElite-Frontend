@@ -150,6 +150,7 @@ export const Inicio = () => {
                     tipoTransmision={CARROS[id].Transmisión}
                     yearCarro={CARROS[id].Año}
                     srcImageCar={carrosJuanda[id]}
+                    usado={CARROS[id].Usado}
                   />
                 ) : null;
               })}
