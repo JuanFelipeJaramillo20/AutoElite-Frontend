@@ -18,7 +18,31 @@ export const Catalogo = () => {
 
   const addFilter = (newProp, value) => {
     if (value !== null) {
-      if (activeFilters[`${newProp}`]) {
+      if (newProp === 'PrecioMax' && isNaN(value)) {
+        setActiveFilters((prevFilter) => {
+          const filter = {...prevFilter};
+          delete filter[`${newProp}`];
+          return filter;
+        });
+      } else if (newProp === 'PrecioMin' && isNaN(value)) {
+        setActiveFilters((prevFilter) => {
+          const filter = {...prevFilter};
+          delete filter[`${newProp}`];
+          return filter;
+        });
+      } else if (newProp === 'KilometrajeMin' && isNaN(value)) {
+        setActiveFilters((prevFilter) => {
+          const filter = {...prevFilter};
+          delete filter[`${newProp}`];
+          return filter;
+        });
+      } else if (newProp === 'KilometrajeMax' && isNaN(value)) {
+        setActiveFilters((prevFilter) => {
+          const filter = {...prevFilter};
+          delete filter[`${newProp}`];
+          return filter;
+        });
+      } else if (activeFilters[`${newProp}`]) {
         activeFilters[`${newProp}`] = value;
         setActiveFilters(prevFilter => {
           return {
