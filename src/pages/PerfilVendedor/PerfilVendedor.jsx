@@ -15,12 +15,24 @@ export const PerfilVendedor = () => {
   const vendorMore = useRef();
 
   useEffect(() => {
-    const areDefined = vendorProfile.current && vendorMore.current;
-    const iswider = window.innerWidth > 925;
-    if (areDefined && iswider) {
-      let moreHeight = vendorMore.current.clientHeight;
-      vendorProfile.current.style.height = `${moreHeight}px`;
-    }
+    const handleResize = () => {
+      const areDefined = vendorProfile.current && vendorMore.current;
+      const iswider = window.innerWidth > 925;
+      if (areDefined) {
+        if (iswider) {
+          let moreHeight = vendorMore.current.clientHeight;
+          vendorProfile.current.style.height = `${moreHeight}px`;
+        } else {
+          vendorProfile.current.style.height = `auto`;
+        }
+      }
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   return (

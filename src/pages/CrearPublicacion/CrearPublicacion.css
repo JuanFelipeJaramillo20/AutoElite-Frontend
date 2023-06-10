@@ -1,4 +1,5 @@
-.post__form, .post__title {
+.post__form,
+.post__title {
     margin-top: 5%;
 }
 
@@ -15,6 +16,136 @@
     margin-bottom: 5%;
 }
 
+.form .app-form div:first-child {
+    grid-area: name;
+}
+
+.form .app-form div:nth-child(2) {
+    grid-area: state;
+}
+
+.form .app-form div:nth-child(3) {
+    grid-area: price;
+}
+
+.form .app-form div:nth-child(4) {
+    grid-area: isOffer;
+}
+
+.form .app-form div:nth-child(5) {
+    grid-area: model;
+}
+
+.form .app-form div:nth-child(6) {
+    grid-area: brand;
+}
+
+.form .app-form div:nth-child(7) {
+    grid-area: color;
+}
+
+.form .app-form div:nth-child(8) {
+    grid-area: transmision;
+}
+
+.form .app-form div:nth-child(9) {
+    grid-area: city;
+}
+
+.form .app-form div:nth-child(10) {
+    grid-area: fuel;
+}
+
+.form .app-form div:nth-child(11) {
+    grid-area: doors;
+}
+
+.form .app-form div:nth-child(12) {
+    grid-area: engine;
+}
+
+.form .app-form div:nth-child(13) {
+    grid-area: kilometers;
+}
+
+.form .app-form div:nth-child(14) {
+    grid-area: year;
+}
+
+.form .app-form div:nth-child(15) {
+    grid-area: description;
+}
+
+.form .app-form .app-btn {
+    grid-area: send;
+    margin-inline: auto;
+}
+
 .form-pics {
     margin-top: 5%;
+    grid-area: photos;
+    margin-top: 25%;
+    margin-bottom: 5%;
+}
+
+.form .app-form {
+    display: grid;
+    gap: 5%;
+    padding: 1%;
+    grid-template-areas:
+        'name model fuel'
+        'state brand doors'
+        'state color engine'
+        'state transmision kilometers'
+        'price city year'
+        'isOffer description description'
+        /*'photos photos photos'*/
+        'send send send'
+    ;
+
+}
+
+@media screen and (max-width:1300px) {
+
+    .form .app-form div:first-child,
+    .form .app-form div:nth-child(2),
+    .form .app-form div:nth-child(3),
+    .form .app-form div:nth-child(4),
+    .form .app-form div:nth-child(5),
+    .form .app-form div:nth-child(6),
+    .form .app-form div:nth-child(7),
+    .form .app-form div:nth-child(8),
+    .form .app-form div:nth-child(9),
+    .form .app-form div:nth-child(10),
+    .form .app-form div:nth-child(11),
+    .form .app-form div:nth-child(12),
+    .form .app-form div:nth-child(13),
+    .form .app-form div:nth-child(14),
+    .form .app-form div:nth-child(15),
+    .form .app-form .app-btn,
+    .form-pics {
+        grid-area: auto;
+    }
+
+    .form-pics {
+        margin-top: 40%;
+    }
+
+    .form .app-form {
+        grid-template-areas: none;
+        grid-template-columns: 50% 50%;
+        gap: 4%;
+    }
+}
+
+@media screen and (max-width:800px) {
+    .form .app-form {
+        gap: 1%;
+        grid-template-columns: 100%;
+    }
+
+    .form-pics {
+        margin-top: 50%;
+    }
+
 }
