@@ -32,4 +32,5 @@ body {
   background-color: var(--main-background);
   font-family: 'Noto Sans';
   color: var(--main-txt-color);
+  padding-top: 100px;
 }
