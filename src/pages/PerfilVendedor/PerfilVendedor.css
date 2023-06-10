@@ -23,6 +23,7 @@
 .vendor-section__profile {
     width: 100%;
     top: 0;
+    border: 1px solid transparent;
 }
 
 .profile-data {
@@ -96,6 +97,10 @@
     .vendor-section {
         display: flex;
         flex-direction: column;
+    }
+
+    .vendor-section__profile {
+        height: auto;
     }
 
     .profile-data,.profile-data_about {

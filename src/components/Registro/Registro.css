@@ -1,3 +1,7 @@
+.register-container__modal .modal{
+   transform: scale(0.9);
+}
+
 .modal .registro-container {
   width: 100%;
   height: 100%;
@@ -24,4 +28,12 @@
 .welcomed__information p {
   font-size: 0.875rem;
   font-weight: 700;
+}
+
+.form-register .app-form {
+  display: grid;
+}
+.form-register .app-form .error-message {
+  padding: 2px;
+  margin-top: 2px;
 }

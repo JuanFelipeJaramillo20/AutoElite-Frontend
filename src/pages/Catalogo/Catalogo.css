@@ -79,6 +79,7 @@ li {
 /* Car list */
 .car-list {
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: center;
   margin-left: 5%;
@@ -106,6 +107,11 @@ li {
 
 .pagination button:hover {
   background-color: #e0e0e0;
+}
+
+.loader-cars {
+  position: absolute;
+  top: 0;
 }
 
 @media screen and (min-width: 1480px) {

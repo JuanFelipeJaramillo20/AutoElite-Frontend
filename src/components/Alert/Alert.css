@@ -1,0 +1,20 @@
+.container-alert {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    z-index: 100;
+}
+
+.alert__body {
+    position: fixed;
+    top: 1%;
+    background-color: white;
+    padding: 1%;
+    margin-top: 1%;
+    border: 1px solid black;
+    border-radius: 2vw;
+    width: 25%;
+    text-align: center;
+}

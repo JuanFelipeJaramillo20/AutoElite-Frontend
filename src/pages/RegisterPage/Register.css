@@ -10,6 +10,7 @@
   font-size: 0.875rem;
   font-weight: 700;
 }
+
 .welcomed__information--p div {
   display: flex;
   gap: 4px;
@@ -17,6 +18,7 @@
   justify-content: center;
   margin-bottom: 2%;
 }
+
 .welcomed__information--p div:last-of-type {
   margin-bottom: 0;
 }
@@ -24,6 +26,7 @@
 .welcomed__title--p {
   margin-bottom: 10%;
 }
+
 .welcomed__img--p img {
   display: none;
 }
@@ -35,6 +38,7 @@
 .welcomed__no-account--p p:hover {
   font-weight: 700;
 }
+
 .welcomed__no-account--p span {
   text-decoration: underline;
   cursor: pointer;
@@ -60,6 +64,15 @@
   cursor: pointer;
   font-size: clamp(12px, 3vw, 16px);
 }
+
+.form-register .app-form .app-bton {
+  grid-area: registerBton;
+}
+
+.form-register .app-form .app-bton {
+  grid-area: registerBton;
+}
+
 
 @media screen and (min-width: 835px) {
   .registro-container--p {
