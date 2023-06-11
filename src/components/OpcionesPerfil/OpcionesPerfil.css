@@ -1,0 +1,22 @@
+.app-configuracion__sideBar {
+  width: 40%;
+}
+
+.app-configuracion__lstOp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.app-configuracion__lstOp a {
+  text-decoration: none;
+  color: var(--secundary-text-color);
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
+}
+
+.active,
+.app-configuracion__lstOp a:hover {
+  color: var(--main-txt-color);
+  font-weight: 700;
+}

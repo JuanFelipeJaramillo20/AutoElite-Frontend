@@ -36,6 +36,8 @@ export const RoutesConfiguration = () => {
             element={<EditarPublicacion />}
           />
           <Route path='/favoritos' element={<Favoritos />} />
+
+          <Route path='/miPerfil' element={<PerfilUsuario />} />
         </Route>
         <Route path='/preguntasFrecuentes' element={<PreguntasFrecuentes />} />
       </Routes>

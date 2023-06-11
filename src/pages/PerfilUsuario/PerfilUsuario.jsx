@@ -1,3 +1,9 @@
+import { OpcionesPerfil } from '../../components/OpcionesPerfil/OpcionesPerfil';
+import './PerfilUsuario.css';
 export const PerfilUsuario = () => {
-  return <div>PerfilUsuario</div>;
+  return (
+    <div className='app-configuracion'>
+      <OpcionesPerfil />
+    </div>
+  );
 };

@@ -82,7 +82,8 @@ export const Header = () => {
     function handleScroll() {
       const scroll = window.scrollY;
       if (headerContainerRef.current) {
-        const noScrolling = headerContainerRef.current.getClientRects()[0].height
+        const noScrolling =
+          headerContainerRef.current.getClientRects()[0].height;
         if (scroll > noScrolling) {
           headerContainerRef.current.style.transform = `translateY(-100%)`;
           clearTimeout(isScrolling);
@@ -110,7 +111,9 @@ export const Header = () => {
   }, []);
 
   useEffect(() => {
-    const divContainerProfile = document.querySelector('.app-header__logged-in');
+    const divContainerProfile = document.querySelector(
+      '.app-header__logged-in'
+    );
     profileRef.current = divContainerProfile?.querySelector('.app-iconoPerfil');
 
     const handleShowInfoWindow = () => {
@@ -126,42 +129,56 @@ export const Header = () => {
       profileRef.current.addEventListener('mouseenter', handleShowInfoWindow);
       divContainerProfile.addEventListener('mouseleave', handleHideInfoWindow);
       if (isADefinedObjet) {
-        windowInformationRef.current.addEventListener('mouseleave', handleHideInfoWindow)
+        windowInformationRef.current.addEventListener(
+          'mouseleave',
+          handleHideInfoWindow
+        );
       }
     }
 
     return () => {
       if (profileRef.current) {
-        profileRef.current.removeEventListener('mouseenter', handleShowInfoWindow);
-        divContainerProfile.removeEventListener('mouseleave', handleHideInfoWindow);
+        profileRef.current.removeEventListener(
+          'mouseenter',
+          handleShowInfoWindow
+        );
+        divContainerProfile.removeEventListener(
+          'mouseleave',
+          handleHideInfoWindow
+        );
       }
     };
   }, [isADefinedObjet]);
 
   function handleMenuBton(isOpen) {
-    const isDefined = firstLineBurgerBtnRef && secondLineBurgerBtnRef && thirdLineBurgerBtnRef;
+    const isDefined =
+      firstLineBurgerBtnRef && secondLineBurgerBtnRef && thirdLineBurgerBtnRef;
     if (isDefined) {
       if (isOpen) {
-        firstLineBurgerBtnRef.current.style.transform = 'translateY(10px) rotate(45deg)';
+        firstLineBurgerBtnRef.current.style.transform =
+          'translateY(10px) rotate(45deg)';
         secondLineBurgerBtnRef.current.style.opacity = '0';
-        thirdLineBurgerBtnRef.current.style.transform = 'translateY(-10px) rotate(-45deg)';
+        thirdLineBurgerBtnRef.current.style.transform =
+          'translateY(-10px) rotate(-45deg)';
         document.body.style.overflow = 'hidden';
       } else {
-        firstLineBurgerBtnRef.current.style.transform = 'translateY(0px) rotate(0deg)';
+        firstLineBurgerBtnRef.current.style.transform =
+          'translateY(0px) rotate(0deg)';
         secondLineBurgerBtnRef.current.style.opacity = '1';
-        thirdLineBurgerBtnRef.current.style.transform = 'translateY(-0px) rotate(-0deg)';
+        thirdLineBurgerBtnRef.current.style.transform =
+          'translateY(-0px) rotate(-0deg)';
         document.body.style.overflow = 'visible';
       }
     }
   }
-
 
   function handleMenu() {
     if (windowWidth <= 920) {
       const isDefined = headerMobileAnimationRef.current;
       if (isDefined) {
         if (!isOpen) {
-          headerMobileAnimationRef.current.style.animation = 'showMenuContainer 0.3s linear forwards';
+          headerMobileAnimationRef.current.style.animation =
+            'showMenuContainer 0.3s linear forwards';
           headerOptionsRef.current.style.display = 'block';
           setTimeout(() => {
             headerOptionsRef.current.style.opacity = '1';
@@ -169,7 +186,8 @@ export const Header = () => {
           handleMenuBton(!isOpen);
           setIsOpen(!isOpen);
         } else {
-          headerMobileAnimationRef.current.style.animation = 'hideMenuContainer 0.3s linear forwards';
+          headerMobileAnimationRef.current.style.animation =
+            'hideMenuContainer 0.3s linear forwards';
           setTimeout(() => {
             headerOptionsRef.current.style.display = 'none';
           }, 300);
@@ -179,14 +197,14 @@ export const Header = () => {
         }
       }
     }
-
   }
 
   function handleCloseMenu() {
     if (windowWidth <= 920) {
-      const isDefined = headerMobileAnimationRef.current
+      const isDefined = headerMobileAnimationRef.current;
       if (isDefined) {
-        headerMobileAnimationRef.current.style.animation = 'hideMenuContainer 0.3s linear forwards';
+        headerMobileAnimationRef.current.style.animation =
+          'hideMenuContainer 0.3s linear forwards';
         setTimeout(() => {
           headerOptionsRef.current.style.display = 'none';
         }, 300);
@@ -202,7 +220,10 @@ export const Header = () => {
       <div ref={headerContainerRef} className='header-app__container'>
         {windowWidth ? (
           <>
-            <div ref={headerMobileAnimationRef} className='header-animation'></div>
+            <div
+              ref={headerMobileAnimationRef}
+              className='header-animation'
+            ></div>
             <div className='header-animation__header'>
               <button onClick={handleMenu}>
                 <span ref={firstLineBurgerBtnRef}></span>
@@ -217,10 +238,14 @@ export const Header = () => {
           <div ref={headerOptionsRef} className='header__options'>
             <div ref={navRef} className='app-header__navigation'>
               <nav className='nav-normal'>
-                <NavLink onClick={() => {
-                  showNavbar();
-                  handleCloseMenu();
-                }} className='app-navlink' to='/'>
+                <NavLink
+                  onClick={() => {
+                    showNavbar();
+                    handleCloseMenu();
+                  }}
+                  className='app-navlink'
+                  to='/'
+                >
                   Inicio
                 </NavLink>
                 <NavLink
@@ -261,46 +286,49 @@ export const Header = () => {
                   />
                   {showInformationProfile ? (
                     <>
-                      <div ref={windowInformationRef} className='information-profile__header'>
+                      <div
+                        ref={windowInformationRef}
+                        className='information-profile__header'
+                      >
                         <ol>
                           <li>
-                            <NavLink
-                              to='/configuracion'
-                              onClick={handleCloseMenu}
-                            >
-                              <span><i className="fa-solid fa-gear"></i></span> Configuración
+                            <NavLink to='/miPerfil'>
+                              <span>
+                                <i className='fa-solid fa-gear'></i>
+                              </span>{' '}
+                              Configuración
                             </NavLink>
                           </li>
                           <li>
-                            <NavLink
-                              to='/publicaciones'
-                              onClick={handleCloseMenu}
-                            >
-                              <span><i className="fa-solid fa-car-side"></i></span> publicaciones
+                            <NavLink to='/misPublicaciones'>
+                              <span>
+                                <i className='fa-solid fa-car-side'></i>
+                              </span>{' '}
+                              publicaciones
                             </NavLink>
                           </li>
                           <li>
-                            <NavLink
-                              to='/Favoritos'
-                              onClick={handleCloseMenu}
-                            >
-                              <span><i className="fa-solid fa-heart-circle-plus"></i></span> Favoritos
+                            <NavLink to='/favoritos'>
+                              <span>
+                                <i className='fa-solid fa-heart-circle-plus'></i>
+                              </span>{' '}
+                              Favoritos
                             </NavLink>
                           </li>
                           <li>
-                            <NavLink
-                              to='/Reseñas'
-                              onClick={handleCloseMenu}
-                            >
-                              <span><i className="fa-solid fa-star painted"></i></span> Reseñas
+                            <NavLink to='/misReseñas'>
+                              <span>
+                                <i className='fa-solid fa-star painted'></i>
+                              </span>{' '}
+                              Reseñas
                             </NavLink>
                           </li>
                           <li>
-                            <NavLink
-                              to='/cerrarSesio'
-                              onClick={handleCloseMenu}
-                            >
-                              <span><i className="fa-solid fa-right-from-bracket"></i></span> Cerrar sesión
+                            <NavLink onClick={handleCloseMenu}>
+                              <span>
+                                <i className='fa-solid fa-right-from-bracket'></i>
+                              </span>{' '}
+                              Cerrar sesión
                             </NavLink>
                           </li>
                         </ol>
@@ -318,9 +346,7 @@ export const Header = () => {
                   }}
                 >
                   <i className='fa-solid fa-user'></i>
-                  <span onClick={handleMenu}>
-                    Sign in
-                  </span>
+                  <span onClick={handleMenu}>Sign in</span>
                 </div>
               )}
             </div>
