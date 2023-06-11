@@ -10,7 +10,6 @@ import registroImg from '../../assets/img/registro/registroImg.png';
 import './Registro.css';
 
 export const Registro = ({ handleShowModal, handleShowPage }) => {
-
   const [showAlert, setShowAlert] = useState(false);
 
   const handleRegister = async (newUser) => {
@@ -25,23 +24,23 @@ export const Registro = ({ handleShowModal, handleShowPage }) => {
       const result = await response.json();
       console.log(result.message);
     } catch (error) {
-      console.log(error)
+      console.log(error);
       setShowAlert(true);
     }
   };
 
   useEffect(() => {
-    if(showAlert) {
+    if (showAlert) {
       setTimeout(() => {
         setShowAlert(false);
-      },4000);
+      }, 4000);
     }
-  },[showAlert]);
+  }, [showAlert]);
 
   return (
     <>
       {showAlert ? (
-        <Alert title={'Algo salio mal'} message={'bad request'}/>
+        <Alert title={'Algo salio mal'} message={'bad request'} />
       ) : null}
       <div className='register-container__modal'>
         <Modal width={900} heigth={750} handleModal={handleShowModal}>
@@ -66,7 +65,10 @@ export const Registro = ({ handleShowModal, handleShowPage }) => {
                 </div>
               </div>
               <div className='welcomed__img'>
-                <img src={registroImg} alt='vector that animates people to login' />
+                <img
+                  src={registroImg}
+                  alt='vector that animates people to login'
+                />
               </div>
               <div className='welcomed__no-account'>
                 <b>
@@ -76,9 +78,6 @@ export const Registro = ({ handleShowModal, handleShowPage }) => {
               </div>
             </div>
             <div className='container__form'>
-              <div className='google-login'>
-                <button>Registro con Google</button>
-              </div>
               <div className='form-register'>
                 <Form
                   inputs={[

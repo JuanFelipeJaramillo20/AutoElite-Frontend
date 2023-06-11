@@ -5,7 +5,12 @@ import logInImg from '../../assets/img/login/LoginImg.png';
 
 import './Login.css';
 import { Registro } from '../Registro/Registro';
+import { logIn } from '../../redux/usuario/services';
 export const Login = ({ handleShowModal, pageToShow, changePageToShow }) => {
+  const handleLogin = async (data) => {
+    console.log(data);
+    console.log(logIn(data));
+  };
   return (
     <>
       {pageToShow === 'registro' ? (
@@ -37,15 +42,12 @@ export const Login = ({ handleShowModal, pageToShow, changePageToShow }) => {
               </div>
             </div>
             <div className='container__form'>
-              <div className='google-login'>
-                <button>Ingresar con Google</button>
-              </div>
               <div className='form-login'>
                 <Form
                   inputs={[
                     {
                       type: 'email',
-                      id: 'email-login',
+                      id: 'email',
                       label: 'Correo electrónico',
                       placeHolder: 'Digita tu correo electrónico',
                       validacion: {
@@ -59,7 +61,7 @@ export const Login = ({ handleShowModal, pageToShow, changePageToShow }) => {
                     },
                     {
                       type: 'password',
-                      id: 'password',
+                      id: 'contrasena',
                       label: 'Contraseña',
                       placeHolder: 'Digita tu contraseña',
                       validacion: {
@@ -73,9 +75,7 @@ export const Login = ({ handleShowModal, pageToShow, changePageToShow }) => {
                     },
                   ]}
                   btnText={'Iniciar sesión'}
-                  onSubmit={(data) => {
-                    console.log(data);
-                  }}
+                  onSubmit={(data) => handleLogin(data)}
                 />
               </div>
               <div className='form_forgot-password'>

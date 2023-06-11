@@ -1,15 +1,61 @@
 import { useNavigate } from 'react-router-dom';
 import { Form } from '../../components/Form/Form';
 import './Contacto.css';
+import emailjs from '@emailjs/browser';
+import { Alert } from '../../components/Alert/Alert';
+import { useEffect, useState } from 'react';
 export const Contacto = () => {
   const navigate = useNavigate();
+  const [showCorreoEnviado, setShowCorreoEnviado] = useState(false);
+  const [errorMensaje, setErrorMensaje] = useState(false);
   const onSubmitContacto = (data, reset) => {
-    console.log(data);
+    emailjs
+      .sendForm(
+        'service_v833vlm',
+        'template_4f9v03',
+        '#contactForm',
+        'TKQEjfF3R4qahFGZW'
+      )
+      .then(
+        () => {
+          setShowCorreoEnviado(true);
+        },
+        () => {
+          setErrorMensaje(true);
+        }
+      );
     reset();
   };
+
+  useEffect(() => {
+    if (showCorreoEnviado) {
+      setTimeout(() => {
+        setShowCorreoEnviado(false);
+      }, 3000);
+    }
+  }, [showCorreoEnviado]);
+
+  useEffect(() => {
+    if (errorMensaje) {
+      setTimeout(() => {
+        setErrorMensaje(false);
+      }, 3000);
+    }
+  }, [errorMensaje]);
   return (
     <div className='app-contact'>
+      {showCorreoEnviado ? (
+        <Alert
+          title='Correo enviado. '
+          message='Correo enviado con éxito. Te contactamos pronto.'
+        />
+      ) : null}
+
+      {errorMensaje ? (
+        <Alert title='Ha surgido un error. ' message='Intentalo de nuevo.' />
+      ) : null}
       <Form
+        idForm='contactForm'
         inputs={[
           {
             type: 'text',
