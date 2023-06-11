@@ -12,7 +12,7 @@ export const Contacto = () => {
     emailjs
       .sendForm(
         'service_v833vlm',
-        'template_4f9v03',
+        'template_4f9v03u',
         '#contactForm',
         'TKQEjfF3R4qahFGZW'
       )
