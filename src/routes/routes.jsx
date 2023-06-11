@@ -28,7 +28,7 @@ export const RoutesConfiguration = () => {
         <Route path='/contacto' element={<Contacto />} />
         <Route path='/publicacion/:publicacionId' element={<Publicacion />} />
         <Route path='/perfil/:usuarioId' element={<PerfilVendedor />} />
-        <Route element={<PrivateRouter isAuth={false} />}>
+        <Route element={<PrivateRouter isAuth={true} />}>
           <Route path='/perfil' element={<PerfilUsuario />} />
           <Route path='/publicacion/nueva' element={<CrearPublicacion />} />
           <Route

@@ -11,6 +11,11 @@ import './Catalogo.css';
 
 export const Catalogo = () => {
   //para la paginación.
+  const [currentPage, setCurrentPage] = useState(1);
+  const [carsPerPage] = useState(8);
+  const [totalPages, setTotalPages] = useState(0);
+
+  //valores default que ayudarán al seleccionar limpiar filtro
   const defaultValuesSelection = {
     ubicacion: 'Seleccione una ubicación',
     year: 'Seleccione un año',
@@ -31,9 +36,6 @@ export const Catalogo = () => {
       manual: false,
     },
   };
-  const [currentPage, setCurrentPage] = useState(1);
-  const [carsPerPage] = useState(10);
-
   const [cars, setCars] = useState([]);
   const [allBrands, setAllBrands] = useState([]);
   const [allModels, setAllModels] = useState([]);
@@ -42,7 +44,6 @@ export const Catalogo = () => {
   const [filteredCars, setFilteredCars] = useState([]);
 
   const [removeFilter, setRemoveFilter] = useState(false);
-
   const [selectedOption, setSelectedOption] = useState(defaultValuesSelection);
 
   const handleSelectionChange = (event) => {
@@ -108,7 +109,6 @@ export const Catalogo = () => {
       }
     } else {
       setActiveFilters({});
-      console.log(activeFilters);
     }
   };
 
@@ -125,9 +125,7 @@ export const Catalogo = () => {
         const response = await fetch(
           'https://run.mocky.io/v3/ed65c29b-050d-401d-8a2b-7b363127e03e'
         );
-        console.log(response);
         const data = await response.json();
-        console.log(data.carros);
         setCars(data.carros);
       } catch (error) {
         console.error('Error fetching cars:', error);
@@ -153,6 +151,16 @@ export const Catalogo = () => {
       setAllModels(checkModels);
     }
   }, [cars]);
+
+  //set the total pages of the catalog
+  useEffect(() => {
+    setTotalPages(Math.ceil(cars.length / carsPerPage));
+  }, [cars]);
+
+  //set the total pages when the filtering is on.
+  useEffect(() => {
+    setTotalPages(Math.ceil(filteredCars.length / carsPerPage));
+  }, [filteredCars]);
 
   //filter
   useEffect(() => {
@@ -189,10 +197,10 @@ export const Catalogo = () => {
           return true;
         })
       );
+      setCurrentPage(1);
     };
     if (removeFilter || Object.keys(activeFilters).length > 0) {
       filter(activeFilters);
-      console.log(activeFilters);
       setRemoveFilter(false);
     }
   }, [activeFilters, cars, removeFilter]);
@@ -208,15 +216,10 @@ export const Catalogo = () => {
   // Handle page change
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  console.log(cars.length);
-
   return (
     <>
       <div className='catalog-page'>
         <div className='columna-filtros'>
-          {/* Filter options */}
-          {/* You can implement the filter options as form elements */}
-          {/* Example: */}
           <div className='remove-filters'>
             <Boton texto={'Limpiar filtro'} onClick={removeFilters} />
           </div>
@@ -405,7 +408,10 @@ export const Catalogo = () => {
               />
               Híbrido
             </label>
-            <label htmlFor='Eléctrico' className='input-label input-combustible'>
+            <label
+              htmlFor='Eléctrico'
+              className='input-label input-combustible'
+            >
               <input
                 type='radio'
                 id='Eléctrico'
@@ -424,7 +430,10 @@ export const Catalogo = () => {
 
           <label className='catalog-label'>Transmisión:</label>
           <li>
-            <label htmlFor='Automatica' className='input-label input-transmision'>
+            <label
+              htmlFor='Automatica'
+              className='input-label input-transmision'
+            >
               <input
                 type='radio'
                 id='Automatica'
@@ -472,7 +481,10 @@ export const Catalogo = () => {
               />
               Semiautomática
             </label>
-            <label htmlFor='Secuencial' className='input-label input-transmision'>
+            <label
+              htmlFor='Secuencial'
+              className='input-label input-transmision'
+            >
               <input
                 type='radio'
                 id='Secuencial'
@@ -525,13 +537,13 @@ export const Catalogo = () => {
           </div>
           {/* Add more filter options based on your requirements */}
         </div>
-        <div className='car-list'>
-          {cars.length === 0 ? (
-            <>
-              <Lottie className='loader-cars' animationData={loaderLottie} />
-            </>
-          ) :
-            (
+        <div className='catalog-page__column2'>
+          <div className='car-list'>
+            {cars.length === 0 ? (
+              <>
+                <Lottie className='loader-cars' animationData={loaderLottie} />
+              </>
+            ) : (
               <>
                 {filteredCars.length < 1 ? (
                   Object.keys(activeFilters).length !== 0 ? (
@@ -574,18 +586,50 @@ export const Catalogo = () => {
                       ></CardCar>
                     ))
                 )}
-                <div className='pagination'>
-                  {/* Pagination */}
-                  {Array.from({ length: Math.ceil(cars.length / carsPerPage) }).map(
-                    (_, index) => (
-                      <button key={index} onClick={() => paginate(index + 1)}>
-                        {index + 1}
-                      </button>
-                    )
-                  )}
-                </div>
               </>
             )}
+          </div>
+          <div className='pagination'>
+            {currentPage > 1 && currentPage == totalPages ? (
+              <div className='pagination__atras'>
+                <p>
+                  {currentPage} de {totalPages}
+                </p>
+                <Boton
+                  classIcon='fa-solid fa-arrow-left'
+                  texto='Atrás'
+                  tipo='button'
+                  onClick={() => paginate(currentPage - 1)}
+                />
+              </div>
+            ) : (
+              currentPage > 1 && (
+                <div className='pagination__atras'>
+                  <Boton
+                    classIcon='fa-solid fa-arrow-left'
+                    texto='Atrás'
+                    tipo='button'
+                    onClick={() => paginate(currentPage - 1)}
+                  />
+                </div>
+              )
+            )}
+            {currentPage < totalPages && (
+              <div className='pagination__adelante'>
+                <p>
+                  {currentPage} de {totalPages}
+                </p>
+                <Boton
+                  classIcon='fa-solid fa-arrow-right'
+                  texto='Siguiente'
+                  tipo='button'
+                  onClick={() => {
+                    paginate(currentPage + 1);
+                  }}
+                />
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </>
