@@ -1,8 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Form } from '../../components/Form/Form';
 import { Alert } from '../../components/Alert/Alert';
+
+import { register } from '../../redux/usuario/thunk';
 
 import registroImg from '../../assets/img/registro/registroImg.png';
 
@@ -11,37 +13,41 @@ import './Register.css';
 export const RegisterPage = () => {
   const history = useNavigate();
 
+  const [alertMessage, setAlertMessage] = useState('');
+  const [alertTitle, setAlertTitle] = useState('');
   const [showAlert, setShowAlert] = useState(false);
 
-  const handleRegister = async (newUser) => {
-    try {
-      const response = await fetch('http://localhost:8082/api/v1/usuarios', {
-        method: 'POST',
-        body: JSON.stringify(newUser),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      const result = await response.json();
-      console.log(result.message);
-    } catch (error) {
-      console.log(error);
+  const handleRegister = useCallback(async (newUser) => {
+
+    const registerResult = await register(newUser);
+    if (registerResult) {
+      setAlertMessage('Intenta otra vez');
+      setAlertTitle('Error');
       setShowAlert(true);
+      setShowAlert(true);
+    } else {
+      setAlertTitle('Bienvenido');
+      setAlertMessage('Por favor inicia sesión');
+      setShowAlert(true);
+      setTimeout(() => {
+        history('/login')
+      }, 2000);
     }
-  };
+
+  }, [history]);
 
   useEffect(() => {
     if (showAlert) {
       setTimeout(() => {
         setShowAlert(false);
-      }, 4000);
+      }, 2000);
     }
   }, [showAlert]);
 
   return (
     <>
       {showAlert ? (
-        <Alert title={'Algo salio mal'} message={'bad request'} />
+         <Alert title={alertTitle} message={alertMessage} />
       ) : null}
       <div className='registro-container--p'>
         <div className='container__welcomed--p'>
@@ -87,7 +93,7 @@ export const RegisterPage = () => {
               inputs={[
                 {
                   type: 'text',
-                  id: 'nombre-registro',
+                  id: 'nombres',
                   label: 'Nombre completo:',
                   placeHolder: 'Escribe tu nombre completo',
                   validacion: {
@@ -99,7 +105,7 @@ export const RegisterPage = () => {
                 },
                 {
                   type: 'email',
-                  id: 'email-registro',
+                  id: 'email',
                   label: 'Correo electrónico:',
                   placeHolder: 'Digita tu correo electrónico',
                   validacion: {
@@ -113,7 +119,7 @@ export const RegisterPage = () => {
                 },
                 {
                   type: 'text',
-                  id: 'phone-registro',
+                  id: 'telefono',
                   label: 'Teléfono:',
                   placeHolder: 'Teléfono',
                   validacion: {
@@ -129,7 +135,7 @@ export const RegisterPage = () => {
                 },
                 {
                   type: 'password',
-                  id: 'password-registro',
+                  id: 'contrasena',
                   label: 'Crear contraseña:',
                   placeHolder: 'Contraseña',
                   validacion: {
@@ -144,7 +150,6 @@ export const RegisterPage = () => {
               ]}
               btnText={'Registrate'}
               onSubmit={(newUser) => {
-                console.log(newUser);
                 handleRegister(newUser);
               }}
             />
