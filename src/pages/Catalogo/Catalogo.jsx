@@ -8,8 +8,13 @@ import { Boton } from '../../components/Boton/Boton';
 import { Filtro } from './components/Filtro/Filtro';
 
 import './Catalogo.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { cargarPublicaciones } from '../../redux/publicaciones/thunk';
+import { getPublicaciones } from '../../redux/publicaciones/selectors';
 
 export const Catalogo = () => {
+  const dispatch = useDispatch();
+  const resumenPublicaciones = useSelector(getPublicaciones);
   //para la paginación.
   const [currentPage, setCurrentPage] = useState(1);
   const [carsPerPage] = useState(8);
@@ -36,12 +41,11 @@ export const Catalogo = () => {
       manual: false,
     },
   };
-  const [cars, setCars] = useState([]);
   const [allBrands, setAllBrands] = useState([]);
   const [allModels, setAllModels] = useState([]);
 
   const [activeFilters, setActiveFilters] = useState({});
-  const [filteredCars, setFilteredCars] = useState([]);
+  const [filteredPublications, setFilteredPublication] = useState([]);
 
   const [removeFilter, setRemoveFilter] = useState(false);
   const [selectedOption, setSelectedOption] = useState(defaultValuesSelection);
@@ -119,19 +123,7 @@ export const Catalogo = () => {
   };
   // API call to fetch cars data
   useEffect(() => {
-    const fetchCars = async () => {
-      try {
-        // Mock data for testing
-        const response = await fetch(
-          'https://run.mocky.io/v3/ed65c29b-050d-401d-8a2b-7b363127e03e'
-        );
-        const data = await response.json();
-        setCars(data.carros);
-      } catch (error) {
-        console.error('Error fetching cars:', error);
-      }
-    };
-    fetchCars();
+    dispatch(cargarPublicaciones());
   }, []);
 
   //collect all brands and models from cars
@@ -139,58 +131,70 @@ export const Catalogo = () => {
     if (allBrands && allModels) {
       const checkBrands = [];
       const checkModels = [];
-      cars.forEach((car) => {
-        if (!checkBrands.includes(car['Marca'])) {
-          checkBrands.push(car['Marca']);
+      resumenPublicaciones.forEach((publicacion) => {
+        if (!checkBrands.includes(publicacion.carroPublicacion['marca'])) {
+          checkBrands.push(publicacion.carroPublicacion['marca']);
         }
-        if (!checkModels.includes(car['Modelo'])) {
-          checkModels.push(car['Modelo']);
+        if (!checkModels.includes(publicacion.carroPublicacion['tipo'])) {
+          checkModels.push(publicacion.carroPublicacion['tipo']);
         }
       });
       setAllBrands(checkBrands);
       setAllModels(checkModels);
     }
-  }, [cars]);
+  }, [resumenPublicaciones]);
 
   //set the total pages of the catalog
   useEffect(() => {
-    setTotalPages(Math.ceil(cars.length / carsPerPage));
-  }, [cars]);
+    setTotalPages(Math.ceil(resumenPublicaciones.length / carsPerPage));
+  }, [resumenPublicaciones]);
 
   //set the total pages when the filtering is on.
   useEffect(() => {
-    setTotalPages(Math.ceil(filteredCars.length / carsPerPage));
-  }, [filteredCars]);
+    setTotalPages(Math.ceil(filteredPublications.length / carsPerPage));
+  }, [filteredPublications]);
 
   //filter
   useEffect(() => {
     const filter = (filtros) => {
-      setFilteredCars(
-        cars.filter((carro) => {
+      setFilteredPublication(
+        resumenPublicaciones.filter((publicacion) => {
           for (let propiedad in filtros) {
             if (propiedad === 'PrecioMax' && filtros['PrecioMax'] > 0) {
-              if (carro['Precio'] > filtros['PrecioMax']) {
+              if (
+                publicacion.carroPublicacion['precio'] > filtros['PrecioMax']
+              ) {
                 return false;
               }
             } else if (propiedad === 'PrecioMin' && filtros['PrecioMin'] > 0) {
-              if (carro['Precio'] < filtros['PrecioMin']) {
+              if (
+                publicacion.carroPublicacion['precio'] < filtros['PrecioMin']
+              ) {
                 return false;
               }
             } else if (
               propiedad === 'KilometrajeMax' &&
               filtros['KilometrajeMax'] > 0
             ) {
-              if (carro['Kilometros'] > filtros['KilometrajeMax']) {
+              if (
+                publicacion.carroPublicacion['kilometraje'] >
+                filtros['KilometrajeMax']
+              ) {
                 return false;
               }
             } else if (
               propiedad === 'KilometrajeMin' &&
               filtros['KilometrajeMin'] > 0
             ) {
-              if (carro['Kilometros'] < filtros['KilometrajeMin']) {
+              if (
+                publicacion.carroPublicacion['kilometraje'] <
+                filtros['KilometrajeMin']
+              ) {
                 return false;
               }
-            } else if (carro[propiedad] !== filtros[propiedad]) {
+            } else if (
+              publicacion.carroPublicacion[propiedad] !== filtros[propiedad]
+            ) {
               return false;
             }
           }
@@ -203,15 +207,15 @@ export const Catalogo = () => {
       filter(activeFilters);
       setRemoveFilter(false);
     }
-  }, [activeFilters, cars, removeFilter]);
+  }, [activeFilters, resumenPublicaciones, removeFilter]);
 
   // Pagination logic
   const indexOfLastCar = currentPage * carsPerPage;
   const indexOfFirstCar = indexOfLastCar - carsPerPage;
-  const currentCars =
-    filteredCars.length > 0
-      ? filteredCars.slice(indexOfFirstCar, indexOfLastCar)
-      : cars.slice(indexOfFirstCar, indexOfLastCar);
+  const currentPublications =
+    filteredPublications.length > 0
+      ? filteredPublications.slice(indexOfFirstCar, indexOfLastCar)
+      : resumenPublicaciones.slice(indexOfFirstCar, indexOfLastCar);
 
   // Handle page change
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -272,14 +276,17 @@ export const Catalogo = () => {
             value={selectedOption.ubicacion}
             className='dropdown-menu-catalogo'
             onChange={(event) => {
-              addFilter('Ubicacion', event.target.value);
+              addFilter('ciudad', event.target.value);
               handleSelectionChange(event);
             }}
           >
             <option value=''>Seleccione una ubicación</option>
-            {cars.map((car) => (
-              <option value={car.Ubicacion} key={car.Ubicacion + Math.random()}>
-                {car.Ubicacion}
+            {resumenPublicaciones.map((publicacion) => (
+              <option
+                value={publicacion.carroPublicacion.ciudad}
+                key={publicacion.carroPublicacion.ciudad + Math.random()}
+              >
+                {publicacion.carroPublicacion.ciudad}
               </option>
             ))}
           </select>
@@ -292,14 +299,17 @@ export const Catalogo = () => {
             className='dropdown-menu-catalogo'
             value={selectedOption.year}
             onChange={(event) => {
-              addFilter('Year', parseInt(event.target.value));
+              addFilter('year', event.target.value);
               handleSelectionChange(event);
             }}
           >
             <option value=''>Seleccione un año</option>
-            {cars.map((car) => (
-              <option value={car.Year} key={car.Year + Math.random()}>
-                {car.Year}
+            {resumenPublicaciones.map((publicacion) => (
+              <option
+                value={publicacion.carroPublicacion.year}
+                key={publicacion.carroPublicacion.year + Math.random()}
+              >
+                {publicacion.carroPublicacion.year}
               </option>
             ))}
           </select>
@@ -311,7 +321,7 @@ export const Catalogo = () => {
             className='dropdown-menu-catalogo'
             value={selectedOption.marca}
             onChange={(event) => {
-              addFilter('Marca', event.target.value);
+              addFilter('marca', event.target.value);
               handleSelectionChange(event);
             }}
           >
@@ -329,7 +339,7 @@ export const Catalogo = () => {
             className='dropdown-menu-catalogo'
             value={selectedOption.modelo}
             onChange={(event) => {
-              addFilter('Modelo', event.target.value);
+              addFilter('tipo', event.target.value);
               handleSelectionChange(event);
             }}
           >
@@ -539,50 +549,58 @@ export const Catalogo = () => {
         </div>
         <div className='catalog-page__column2'>
           <div className='car-list'>
-            {cars.length === 0 ? (
+            {resumenPublicaciones.length === 0 ? (
               <>
                 <Lottie className='loader-cars' animationData={loaderLottie} />
               </>
             ) : (
               <>
-                {filteredCars.length < 1 ? (
+                {filteredPublications.length < 1 ? (
                   Object.keys(activeFilters).length !== 0 ? (
                     <p>No hay vehiculos que coincidan con los filtros</p>
                   ) : (
-                    currentCars.map((car) => (
+                    currentPublications.map((publicacion) => (
                       <CardCar
-                        key={car.Identificador}
-                        idPublicacion={car.Identificador}
+                        key={publicacion.idPublicacion}
+                        idPublicacion={publicacion.idPublicacion}
                         srcImageCar='https://i.imgur.com/xyiSDoE.jpeg'
-                        yearCarro={car.Year}
-                        modeloCarro={car.Modelo}
-                        marcaCarro={car.Marca}
-                        precio={car.Precio}
-                        ciudadVenta={car.Ubicacion}
-                        kilometraje={car.Kilometros}
-                        tipoTransmision={car.Transmision}
-                        tipoCombustible={car.Combustible}
-                        usado={car.Usado}
+                        yearCarro={publicacion.carroPublicacion.year}
+                        modeloCarro={publicacion.carroPublicacion.tipo}
+                        marcaCarro={publicacion.carroPublicacion.marca}
+                        precio={publicacion.carroPublicacion.precio}
+                        ciudadVenta={publicacion.carroPublicacion.ciudad}
+                        kilometraje={publicacion.carroPublicacion.kilometraje}
+                        tipoTransmision={
+                          publicacion.carroPublicacion.transmision
+                        }
+                        tipoCombustible={
+                          publicacion.carroPublicacion.combustible
+                        }
+                        estado={publicacion.carroPublicacion.estado}
                       ></CardCar>
                     ))
                   )
                 ) : (
-                  filteredCars
+                  filteredPublications
                     .slice(indexOfFirstCar, indexOfLastCar)
-                    .map((car) => (
+                    .map((publicacion) => (
                       <CardCar
-                        key={car.Identificador}
-                        idPublicacion={car.Identificador}
+                        key={publicacion.idPublicacion}
+                        idPublicacion={publicacion.idPublicacion}
                         srcImageCar='https://i.imgur.com/xyiSDoE.jpeg'
-                        yearCarro={car.Year}
-                        modeloCarro={car.Modelo}
-                        marcaCarro={car.Marca}
-                        precio={car.Precio}
-                        ciudadVenta={car.Ubicacion}
-                        kilometraje={car.Kilometros}
-                        tipoTransmision={car.Transmision}
-                        tipoCombustible={car.Combustible}
-                        usado={car.Usado}
+                        yearCarro={publicacion.carroPublicacion.year}
+                        modeloCarro={publicacion.carroPublicacion.tipo}
+                        marcaCarro={publicacion.carroPublicacion.marca}
+                        precio={publicacion.carroPublicacion.precio}
+                        ciudadVenta={publicacion.carroPublicacion.ciudad}
+                        kilometraje={publicacion.carroPublicacion.kilometraje}
+                        tipoTransmision={
+                          publicacion.carroPublicacion.transmision
+                        }
+                        tipoCombustible={
+                          publicacion.carroPublicacion.combustible
+                        }
+                        estado={publicacion.carroPublicacion.estado}
                       ></CardCar>
                     ))
                 )}
