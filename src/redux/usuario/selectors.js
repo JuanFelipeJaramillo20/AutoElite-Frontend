@@ -8,6 +8,8 @@ export const getEmail = (state) => state.usuario.email;
 
 export const getNroTel = (state) => state.usuario.nroTel;
 
+export const getId = (state) => state.usuario.id;
+
 export const getRol = (state) => state.usuario.rol;
 
 export const getCalificaciones = (state) => state.usuario.calificaciones;

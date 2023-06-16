@@ -6,6 +6,7 @@ const userInitialState = {
   email: '',
   nroTel: '',
   token: '',
+  id: '',
   calificaciones: [],
   /*Se guardan los ids de las publicaciones */
   listaGuardados: [],
@@ -24,6 +25,7 @@ export const usuarioReducer = (state = userInitialState, action) => {
         email: action.payload.email,
         nroTel: action.payload.nroTel,
         rol: action.payload.rol,
+        id: action.payload.id,
       };
     case types.SET_TOKEN:
       return {
