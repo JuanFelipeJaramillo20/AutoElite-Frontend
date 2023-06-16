@@ -1,46 +1,53 @@
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 import { Modal } from '../Modal/Modal';
 import { Form } from '../Form/Form';
 import { Alert } from '../Alert/Alert';
+
+import { register } from '../../redux/usuario/thunk';
 
 import registroImg from '../../assets/img/registro/registroImg.png';
 
 import './Registro.css';
 
 export const Registro = ({ handleShowModal, handleShowPage }) => {
-  const [showAlert, setShowAlert] = useState(false);
 
-  const handleRegister = async (newUser) => {
-    try {
-      const response = await fetch('http://localhost:8082/api/v1/usuarios', {
-        method: 'POST',
-        body: JSON.stringify(newUser),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      const result = await response.json();
-      console.log(result.message);
-    } catch (error) {
-      console.log(error);
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [alertTitle, setAlertTitle] = useState('');
+
+  const handleRegister = useCallback(async (newUser) => {
+
+    const registerResult = await register(newUser);
+    if (registerResult) {
+      setAlertMessage('Intenta otra vez');
+      setAlertTitle('Error');
       setShowAlert(true);
+      setShowAlert(true);
+    } else {
+      setAlertTitle('Bienvenido');
+      setAlertMessage('Por favor inicia sesión');
+      setShowAlert(true);
+      setTimeout(() => {
+        handleShowPage('login');
+      }, 2000)
     }
-  };
+
+  }, [handleShowPage]);
 
   useEffect(() => {
     if (showAlert) {
       setTimeout(() => {
         setShowAlert(false);
-      }, 4000);
+      }, 2000);
     }
   }, [showAlert]);
 
   return (
     <>
       {showAlert ? (
-        <Alert title={'Algo salio mal'} message={'bad request'} />
+        <Alert title={alertTitle} message={alertMessage} />
       ) : null}
       <div className='register-container__modal'>
         <Modal width={900} heigth={750} handleModal={handleShowModal}>
@@ -83,7 +90,7 @@ export const Registro = ({ handleShowModal, handleShowPage }) => {
                   inputs={[
                     {
                       type: 'text',
-                      id: 'nombre-registro',
+                      id: 'nombres',
                       label: 'Nombre completo:',
                       placeHolder: 'Escribe tu nombre completo',
                       validacion: {
@@ -95,7 +102,7 @@ export const Registro = ({ handleShowModal, handleShowPage }) => {
                     },
                     {
                       type: 'email',
-                      id: 'email-registro',
+                      id: 'email',
                       label: 'Correo electrónico:',
                       placeHolder: 'Digita tu correo electrónico',
                       validacion: {
@@ -109,7 +116,7 @@ export const Registro = ({ handleShowModal, handleShowPage }) => {
                     },
                     {
                       type: 'text',
-                      id: 'phone-registro',
+                      id: 'telefono',
                       label: 'Teléfono:',
                       placeHolder: 'Teléfono',
                       validacion: {
@@ -125,7 +132,7 @@ export const Registro = ({ handleShowModal, handleShowPage }) => {
                     },
                     {
                       type: 'password',
-                      id: 'password-registro',
+                      id: 'contrasena',
                       label: 'Crear contraseña:',
                       placeHolder: 'Contraseña',
                       validacion: {
@@ -140,7 +147,6 @@ export const Registro = ({ handleShowModal, handleShowPage }) => {
                   ]}
                   btnText={'Registrate'}
                   onSubmit={(newUser) => {
-                    console.log(newUser);
                     handleRegister(newUser);
                   }}
                 />

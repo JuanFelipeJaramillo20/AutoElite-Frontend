@@ -1,5 +1,26 @@
 import * as creators from './actions';
 
+export const register = async (newUser) => {
+  const completeNewUser = {
+    ...newUser,
+    rol: 'USER',
+  }
+  try {
+    const response = await fetch('http://localhost:8080/api/v1/registro', {
+      method: 'POST',
+      body: JSON.stringify(completeNewUser),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    if (response.status !== 200) {
+      return 'Error de registro';
+    }
+  } catch (error) {
+    return '';
+  }
+};
+
 export const logIn = (userData) => {
   return async (dispatch) => {
     const response = await fetch('http://localhost:8080/api/v1/userlogin', {
