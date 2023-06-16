@@ -4,7 +4,7 @@ export const register = async (newUser) => {
   const completeNewUser = {
     ...newUser,
     rol: 'USER',
-  }
+  };
   try {
     const response = await fetch('http://localhost:8080/api/v1/registro', {
       method: 'POST',
@@ -67,6 +67,7 @@ export const getDatosUsuario = async (idUsuario) => {
       email: result.email,
       nroTel: result.telefono,
       rol: result.rolUsuario,
+      id: result.id,
     };
   }
 };
