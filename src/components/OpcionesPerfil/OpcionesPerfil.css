@@ -1,5 +1,17 @@
 .app-configuracion__sideBar {
   width: 40%;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.app-configuracion__sideBar p {
+  margin-bottom: 0.5rem;
 }
 
 .app-configuracion__lstOp {
@@ -12,7 +24,7 @@
   text-decoration: none;
   color: var(--secundary-text-color);
   font-size: 1.125rem;
-  margin-bottom: 1rem;
+  padding: 1rem;
 }
 
 .active,

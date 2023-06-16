@@ -4,6 +4,8 @@ export const OpcionesPerfil = () => {
   const handleCloseMenu = () => {};
   return (
     <div className='app-configuracion__sideBar'>
+      <p>Veronica</p>
+      <p>3205698232</p>
       <li className='app-configuracion__lstOp'>
         <NavLink to='/miPerfil'>
           <span>

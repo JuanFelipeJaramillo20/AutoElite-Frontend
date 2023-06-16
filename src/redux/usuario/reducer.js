@@ -1,7 +1,7 @@
 import * as types from './actionTypes';
 
 const userInitialState = {
-  isAuth: true,
+  isAuth: false,
   nombre: '',
   email: '',
   nroTel: '',
@@ -11,24 +11,42 @@ const userInitialState = {
   listaGuardados: [],
   misPublicaciones: [],
   rol: '',
+  error: '',
 };
 
 export const usuarioReducer = (state = userInitialState, action) => {
   switch (action.type) {
     case types.SET_USER:
       return {
+        ...state,
         isAuth: true,
         nombre: action.payload.nombre,
         email: action.payload.email,
         nroTel: action.payload.nroTel,
-        token: action.payload.token,
-        calificaciones: action.payload.calificaciones,
-        listaGuardados: action.payload.listaGuardados,
-        misPublicaciones: action.payload.misPublicaciones,
-        rol: action.payload.role,
+        rol: action.payload.rol,
       };
-    case types.LOGOUT:
-      return userInitialState;
+    case types.SET_TOKEN:
+      return {
+        ...state,
+        token: action.payload,
+      };
+    case types.SET_GUARDADOS:
+      return {
+        ...state,
+        listaGuardados: action.payload,
+      };
+
+    case types.SET_PUBLICACIONES:
+      return {
+        ...state,
+        misPublicaciones: action.payload,
+      };
+
+    case types.SET_CALIFICACIONES:
+      return {
+        ...state,
+        calificaciones: action.payload,
+      };
 
     case types.DELETE_PUBLICACION:
       return {
@@ -45,6 +63,15 @@ export const usuarioReducer = (state = userInitialState, action) => {
           return idPublicacion !== action.payload;
         }),
       };
+
+    case types.LOGIN_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+      };
+
+    case types.LOGOUT:
+      return userInitialState;
 
     default:
       return state;

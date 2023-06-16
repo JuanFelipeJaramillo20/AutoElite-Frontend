@@ -1,13 +1,15 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import './Header.css';
 import { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getAuth } from '../../redux/usuario/selectors';
+import { logOut } from '../../redux/usuario/thunk';
 import { IconoPerfil } from '../IconoPerfil/IconoPerfil';
 import { Boton } from '../Boton/Boton';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { Login } from '../Login/Login';
 export const Header = () => {
+  const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
   const [toPage, setToPage] = useState('login');
   const [windowWidth, setWindowWidth] = useState(
@@ -16,7 +18,6 @@ export const Header = () => {
   const navRef = useRef();
   const navigate = useNavigate();
   const isLoggedIn = useSelector(getAuth);
-
   const headerContainerRef = useRef();
   const profileRef = useRef();
   const windowInformationRef = useRef();
@@ -25,7 +26,6 @@ export const Header = () => {
   const secondLineBurgerBtnRef = useRef();
   const thirdLineBurgerBtnRef = useRef();
   const headerOptionsRef = useRef();
-
   const [showInformationProfile, setShowInformationProfile] = useState(false);
   const [isADefinedObjet, setIsADefinedObject] = useState(false);
 
@@ -148,7 +148,7 @@ export const Header = () => {
         );
       }
     };
-  }, [isADefinedObjet]);
+  }, [isADefinedObjet, isLoggedIn]);
 
   function handleMenuBton(isOpen) {
     const isDefined =
@@ -324,7 +324,7 @@ export const Header = () => {
                             </NavLink>
                           </li>
                           <li>
-                            <NavLink onClick={handleCloseMenu}>
+                            <NavLink onClick={() => dispatch(logOut())}>
                               <span>
                                 <i className='fa-solid fa-right-from-bracket'></i>
                               </span>{' '}
