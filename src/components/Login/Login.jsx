@@ -66,14 +66,6 @@ export const Login = ({ handleShowModal, pageToShow, changePageToShow }) => {
                       id: 'contrasena',
                       label: 'Contraseña',
                       placeHolder: 'Digita tu contraseña',
-                      validacion: {
-                        required: true,
-                        minLength: 8,
-                      },
-                      error: {
-                        required: 'La contraseña es obligatoria.',
-                        minLength: 'Mínimo 8 caracteres.',
-                      },
                     },
                   ]}
                   btnText={'Iniciar sesión'}
