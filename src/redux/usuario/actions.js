@@ -7,9 +7,44 @@ export const iniciarSesion = (usuario) => {
   };
 };
 
+export const errorSesion = (error) => {
+  return {
+    type: types.LOGIN_ERROR,
+    payload: error,
+  };
+};
+
+export const establecerToken = (token) => {
+  return {
+    type: types.SET_TOKEN,
+    payload: token,
+  };
+};
+
 export const cerrarSesion = () => {
   return {
     type: types.LOGOUT,
+  };
+};
+
+export const cargarGuardados = (idPublicaciones) => {
+  return {
+    type: types.SET_GUARDADOS,
+    payload: idPublicaciones,
+  };
+};
+
+export const eliminarPublicacionGuardada = (idPublicacion) => {
+  return {
+    type: types.DELETE_GUARDADO,
+    payload: idPublicacion,
+  };
+};
+
+export const cargarPublicaciones = (idPublicaciones) => {
+  return {
+    type: types.SET_PUBLICACIONES,
+    payload: idPublicaciones,
   };
 };
 
@@ -20,9 +55,9 @@ export const eliminarMiPublicacion = (idPublicacion) => {
   };
 };
 
-export const eliminarPublicacionGuardada = (idPublicacion) => {
+export const cargarCalificaciones = (calificaciones) => {
   return {
-    type: types.DELETE_GUARDADO,
-    payload: idPublicacion,
+    type: types.SET_CALIFICACIONES,
+    payload: calificaciones,
   };
 };

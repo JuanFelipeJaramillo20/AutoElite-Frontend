@@ -5,11 +5,13 @@ import logInImg from '../../assets/img/login/LoginImg.png';
 
 import './Login.css';
 import { Registro } from '../Registro/Registro';
-import { logIn } from '../../redux/usuario/services';
+import { logIn } from '../../redux/usuario/thunk';
+import { useDispatch } from 'react-redux';
 export const Login = ({ handleShowModal, pageToShow, changePageToShow }) => {
-  const handleLogin = async (data) => {
-    console.log(data);
-    console.log(logIn(data));
+  const dispatch = useDispatch();
+  const handleLogin = (data) => {
+    dispatch(logIn(data));
+    handleShowModal();
   };
   return (
     <>
