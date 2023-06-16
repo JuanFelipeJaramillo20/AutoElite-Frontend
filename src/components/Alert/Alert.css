@@ -4,11 +4,12 @@
     top: 0;
     display: flex;
     justify-content: center;
-    z-index: 100;
+    z-index: 5000;
 }
 
 .alert__body {
     position: fixed;
+    z-index: 5000;
     top: 1%;
     background-color: white;
     padding: 1%;

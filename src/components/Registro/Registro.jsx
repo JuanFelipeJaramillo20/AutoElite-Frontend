@@ -12,18 +12,32 @@ import './Registro.css';
 export const Registro = ({ handleShowModal, handleShowPage }) => {
 
   const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [alertTitle, setAlertTitle] = useState('');
 
   const handleRegister = async (newUser) => {
+    const completeNewUser = {
+      ...newUser,
+      rol: 'USER',
+    }
     try {
-      const response = await fetch('http://localhost:8082/api/v1/usuarios', {
+      const response = await fetch('http://localhost:8080/api/v1/registro', {
         method: 'POST',
-        body: JSON.stringify(newUser),
+        body: JSON.stringify(completeNewUser),
         headers: {
           'Content-Type': 'application/json',
         },
       });
-      const result = await response.json();
-      console.log(result.message);
+      if (response.status === 200) {
+        setAlertTitle('Bienvenido');
+        setAlertMessage('Por favor inicia sesión');
+        setShowAlert(true);
+        handleShowPage('login');
+      } else {
+        setAlertMessage('Intenta otra vez');
+        setAlertTitle('Error');
+        setShowAlert(true);
+      }
     } catch (error) {
       console.log(error)
       setShowAlert(true);
@@ -41,7 +55,7 @@ export const Registro = ({ handleShowModal, handleShowPage }) => {
   return (
     <>
       {showAlert ? (
-        <Alert title={'Algo salio mal'} message={'bad request'}/>
+        <Alert title={alertTitle} message={alertMessage}/>
       ) : null}
       <div className='register-container__modal'>
         <Modal width={900} heigth={750} handleModal={handleShowModal}>
@@ -77,14 +91,13 @@ export const Registro = ({ handleShowModal, handleShowPage }) => {
             </div>
             <div className='container__form'>
               <div className='google-login'>
-                <button>Registro con Google</button>
               </div>
               <div className='form-register'>
                 <Form
                   inputs={[
                     {
                       type: 'text',
-                      id: 'nombre-registro',
+                      id: 'nombres',
                       label: 'Nombre completo:',
                       placeHolder: 'Escribe tu nombre completo',
                       validacion: {
@@ -96,7 +109,7 @@ export const Registro = ({ handleShowModal, handleShowPage }) => {
                     },
                     {
                       type: 'email',
-                      id: 'email-registro',
+                      id: 'email',
                       label: 'Correo electrónico:',
                       placeHolder: 'Digita tu correo electrónico',
                       validacion: {
@@ -110,7 +123,7 @@ export const Registro = ({ handleShowModal, handleShowPage }) => {
                     },
                     {
                       type: 'text',
-                      id: 'phone-registro',
+                      id: 'telefono',
                       label: 'Teléfono:',
                       placeHolder: 'Teléfono',
                       validacion: {
@@ -126,7 +139,7 @@ export const Registro = ({ handleShowModal, handleShowPage }) => {
                     },
                     {
                       type: 'password',
-                      id: 'password-registro',
+                      id: 'contrasena',
                       label: 'Crear contraseña:',
                       placeHolder: 'Contraseña',
                       validacion: {
