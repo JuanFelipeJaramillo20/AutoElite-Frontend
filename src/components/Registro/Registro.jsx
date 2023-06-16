@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 import { Modal } from '../Modal/Modal';
 import { Form } from '../Form/Form';
 import { Alert } from '../Alert/Alert';
+
+import { register } from '../../redux/usuario/thunk';
 
 import registroImg from '../../assets/img/registro/registroImg.png';
 
@@ -15,47 +17,37 @@ export const Registro = ({ handleShowModal, handleShowPage }) => {
   const [alertMessage, setAlertMessage] = useState('');
   const [alertTitle, setAlertTitle] = useState('');
 
-  const handleRegister = async (newUser) => {
-    const completeNewUser = {
-      ...newUser,
-      rol: 'USER',
-    }
-    try {
-      const response = await fetch('http://localhost:8080/api/v1/registro', {
-        method: 'POST',
-        body: JSON.stringify(completeNewUser),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      if (response.status === 200) {
-        setAlertTitle('Bienvenido');
-        setAlertMessage('Por favor inicia sesión');
-        setShowAlert(true);
-        handleShowPage('login');
-      } else {
-        setAlertMessage('Intenta otra vez');
-        setAlertTitle('Error');
-        setShowAlert(true);
-      }
-    } catch (error) {
-      console.log(error)
+  const handleRegister = useCallback(async (newUser) => {
+
+    const registerResult = await register(newUser);
+    if (registerResult) {
+      setAlertMessage('Intenta otra vez');
+      setAlertTitle('Error');
       setShowAlert(true);
+      setShowAlert(true);
+    } else {
+      setAlertTitle('Bienvenido');
+      setAlertMessage('Por favor inicia sesión');
+      setShowAlert(true);
+      setTimeout(() => {
+        handleShowPage('login');
+      }, 2000)
     }
-  };
+
+  }, [handleShowPage]);
 
   useEffect(() => {
-    if(showAlert) {
+    if (showAlert) {
       setTimeout(() => {
         setShowAlert(false);
-      },4000);
+      }, 2000);
     }
-  },[showAlert]);
+  }, [showAlert]);
 
   return (
     <>
       {showAlert ? (
-        <Alert title={alertTitle} message={alertMessage}/>
+        <Alert title={alertTitle} message={alertMessage} />
       ) : null}
       <div className='register-container__modal'>
         <Modal width={900} heigth={750} handleModal={handleShowModal}>
@@ -80,7 +72,10 @@ export const Registro = ({ handleShowModal, handleShowPage }) => {
                 </div>
               </div>
               <div className='welcomed__img'>
-                <img src={registroImg} alt='vector that animates people to login' />
+                <img
+                  src={registroImg}
+                  alt='vector that animates people to login'
+                />
               </div>
               <div className='welcomed__no-account'>
                 <b>
@@ -90,8 +85,6 @@ export const Registro = ({ handleShowModal, handleShowPage }) => {
               </div>
             </div>
             <div className='container__form'>
-              <div className='google-login'>
-              </div>
               <div className='form-register'>
                 <Form
                   inputs={[
@@ -154,7 +147,6 @@ export const Registro = ({ handleShowModal, handleShowPage }) => {
                   ]}
                   btnText={'Registrate'}
                   onSubmit={(newUser) => {
-                    console.log(newUser);
                     handleRegister(newUser);
                   }}
                 />

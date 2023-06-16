@@ -35,9 +35,6 @@ export const LoginPage = () => {
           </p>
         </div>
         <div className='container__form--p'>
-          <div className='google-login--p'>
-            <button>Ingresar con Google</button>
-          </div>
           <div className='form-login'>
             <Form
               inputs={[

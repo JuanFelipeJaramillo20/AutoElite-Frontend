@@ -146,7 +146,7 @@ export const Publicacion = () => {
               },
               {
                 type: 'text',
-                id: 'email',
+                id: 'email-publicacion',
                 placeHolder: 'Email*',
                 validacion: {
                   required: true,
@@ -159,7 +159,7 @@ export const Publicacion = () => {
               },
               {
                 type: 'number',
-                id: 'telefono',
+                id: 'telefono-publicacion',
                 placeHolder: 'Teléfono',
               },
               {

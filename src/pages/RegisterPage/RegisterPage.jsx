@@ -25,7 +25,7 @@ export const RegisterPage = () => {
       const result = await response.json();
       console.log(result.message);
     } catch (error) {
-      console.log(error)
+      console.log(error);
       setShowAlert(true);
     }
   };
@@ -37,7 +37,6 @@ export const RegisterPage = () => {
       }, 4000);
     }
   }, [showAlert]);
-
 
   return (
     <>
@@ -83,9 +82,6 @@ export const RegisterPage = () => {
           </p>
         </div>
         <div className='container__form--p'>
-          <div className='google-login--p'>
-            <button>Registro con Google</button>
-          </div>
           <div className='form-register'>
             <Form
               inputs={[

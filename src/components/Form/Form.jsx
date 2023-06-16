@@ -4,7 +4,7 @@ import { Input } from '../Input/Input';
 import { Boton } from '../Boton/Boton';
 import './Form.css';
 export const Form = (props) => {
-  const { inputs, btnText, onSubmit } = props;
+  const { idForm, inputs, btnText, onSubmit } = props;
 
   const {
     register,
@@ -17,7 +17,11 @@ export const Form = (props) => {
     onSubmit(data, reset);
   };
   return (
-    <form className='app-form' onSubmit={handleSubmit(handleSubmitForm)}>
+    <form
+      className='app-form'
+      id={idForm}
+      onSubmit={handleSubmit(handleSubmitForm)}
+    >
       {inputs.map((input) => {
         return (
           <div className='app-form__input' key={input.id}>
@@ -44,6 +48,7 @@ export const Form = (props) => {
 };
 
 Form.propTypes = {
+  idForm: PropTypes.string,
   inputs: PropTypes.arrayOf(PropTypes.object).isRequired,
   btnText: PropTypes.string,
   onSubmit: PropTypes.func,

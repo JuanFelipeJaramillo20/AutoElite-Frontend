@@ -14,9 +14,11 @@ import { Favoritos } from '../pages/Favoritos/Favoritos';
 import { PreguntasFrecuentes } from '../pages/PreguntasFrecuentes/PreguntasFrecuentes';
 import { LoginPage } from '../pages/LoginPage/LoginPage';
 import { RegisterPage } from '../pages/RegisterPage/RegisterPage';
+import { useSelector } from 'react-redux';
+import { getAuth } from '../redux/usuario/selectors';
 
 export const RoutesConfiguration = () => {
-  // <Header />
+  const isLoggedIn = useSelector(getAuth);
   return (
     <Router>
       <Header />
@@ -28,7 +30,7 @@ export const RoutesConfiguration = () => {
         <Route path='/contacto' element={<Contacto />} />
         <Route path='/publicacion/:publicacionId' element={<Publicacion />} />
         <Route path='/perfil/:usuarioId' element={<PerfilVendedor />} />
-        <Route element={<PrivateRouter isAuth={false} />}>
+        <Route element={<PrivateRouter isAuth={isLoggedIn} />}>
           <Route path='/perfil' element={<PerfilUsuario />} />
           <Route path='/publicacion/nueva' element={<CrearPublicacion />} />
           <Route
@@ -36,6 +38,8 @@ export const RoutesConfiguration = () => {
             element={<EditarPublicacion />}
           />
           <Route path='/favoritos' element={<Favoritos />} />
+
+          <Route path='/miPerfil' element={<PerfilUsuario />} />
         </Route>
         <Route path='/preguntasFrecuentes' element={<PreguntasFrecuentes />} />
       </Routes>
