@@ -51,10 +51,7 @@ export const CrearPublicacion = () => {
       descripcion: data.descripcion,
     }
 
-    console.log(newPost)
-    
-    const response = crearPublicacion(newPost);
-
+    const response = await crearPublicacion(newPost);
     if (response) {
       setAlertMessage('Intenta otra vez');
       setAlertTitle('Error');
