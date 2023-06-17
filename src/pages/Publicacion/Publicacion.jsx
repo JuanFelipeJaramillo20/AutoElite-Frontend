@@ -2,11 +2,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Form } from '../../components/Form/Form';
 import './Publicacion.css';
 import { useEffect, useState } from 'react';
+import { createImgBlob } from '../../helpers/createImg';
+import { IconoPerfil } from '../../components/IconoPerfil/IconoPerfil';
 
 export const Publicacion = () => {
   const { publicacionId } = useParams();
   const [publicacion, setPublicacion] = useState(null);
   const [esPrecioNegociable, setEsPrecioNegociable] = useState('No');
+  const [imgPerfil, setImgPerfil] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,6 +38,8 @@ export const Publicacion = () => {
       publicacion.carroPublicacion.esPrecioNegociable
     ) {
       setEsPrecioNegociable('Sí');
+    } else if (publicacion !== null) {
+      setImgPerfil(createImgBlob(publicacion.usuarioPublicacion.imagenPerfil));
     }
   }, [publicacion]);
   return publicacion !== null ? (
@@ -145,7 +150,7 @@ export const Publicacion = () => {
           }
         >
           <div className='app-publicacion__infoVendedor-datos'>
-            <div className='app-publicacion__fotoVendedor'></div>
+            <IconoPerfil srcImagenPerfil={imgPerfil} />
             <p className='app-publicacion__NombreVendedor'>
               {publicacion.usuarioPublicacion.nombres}
             </p>

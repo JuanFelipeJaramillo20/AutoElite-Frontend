@@ -13,6 +13,7 @@ const userInitialState = {
   misPublicaciones: [],
   rol: '',
   error: '',
+  img: '',
 };
 
 export const usuarioReducer = (state = userInitialState, action) => {
@@ -26,6 +27,7 @@ export const usuarioReducer = (state = userInitialState, action) => {
         nroTel: action.payload.nroTel,
         rol: action.payload.rol,
         id: action.payload.id,
+        img: action.payload.img,
       };
     case types.SET_TOKEN:
       return {

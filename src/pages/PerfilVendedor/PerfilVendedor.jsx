@@ -4,11 +4,11 @@ import { AddCalificacion } from './components/AddCalificacion/AddCalificacion';
 import { Form } from '../../components/Form/Form';
 
 import { REVIEWS } from '../../../constants';
-import fotoProfile from '../../assets/img/perfil/usuario.png';
 
 import './PerfilVendedor.css';
 import { useParams } from 'react-router';
 import { Publicaciones } from '../../components/Publicaciones/Publicaciones';
+import { createImgBlob } from '../../helpers/createImg';
 
 export const PerfilVendedor = () => {
   const { usuarioId } = useParams();
@@ -41,7 +41,7 @@ export const PerfilVendedor = () => {
       <header className='vendor-section__profile'>
         <div className='profile-data'>
           <div className='profile-data__img'>
-            <img src={fotoProfile} alt='user picture' />
+            <img src={createImgBlob(usuario.imagenPerfil)} alt='user picture' />
           </div>
           <div className='profile-data__personal-data'>
             <h2>{usuario.nombres}</h2>

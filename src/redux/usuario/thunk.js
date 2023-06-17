@@ -1,3 +1,4 @@
+import { createImgBlob } from '../../helpers/createImg';
 import * as creators from './actions';
 
 export const register = async (newUser) => {
@@ -61,6 +62,7 @@ export const getDatosUsuario = async (idUsuario) => {
   );
 
   const result = await response.json();
+  console.log(result);
   if (response.ok) {
     return {
       nombre: result.nombres,
@@ -68,6 +70,7 @@ export const getDatosUsuario = async (idUsuario) => {
       nroTel: result.telefono,
       rol: result.rolUsuario,
       id: result.id,
+      img: createImgBlob(result.imagenPerfil),
     };
   }
 };
