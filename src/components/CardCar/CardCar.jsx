@@ -82,7 +82,7 @@ export const CardCar = ({
 };
 
 CardCar.propTypes = {
-  idPublicacion: PropTypes.number.isRequired,
+  idPublicacion: PropTypes.string.isRequired,
   srcImageCar: PropTypes.string.isRequired,
   yearCarro: PropTypes.string.isRequired,
   modeloCarro: PropTypes.string.isRequired,

@@ -1,10 +1,43 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Form } from '../../components/Form/Form';
 import './Publicacion.css';
+import { useEffect, useState } from 'react';
 
 export const Publicacion = () => {
+  const { publicacionId } = useParams();
+  const [publicacion, setPublicacion] = useState(null);
+  const [esPrecioNegociable, setEsPrecioNegociable] = useState('No');
   const navigate = useNavigate();
-  return (
+
+  useEffect(() => {
+    const getDatosPublicacion = async (idPublicacion) => {
+      const response = await fetch(
+        `http://localhost:8080/api/v1/publicaciones/${idPublicacion}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      const result = await response.json();
+      if (response.ok) {
+        setPublicacion(result);
+      }
+    };
+
+    getDatosPublicacion(publicacionId);
+  }, []);
+
+  useEffect(() => {
+    if (
+      publicacion !== null &&
+      publicacion.carroPublicacion.esPrecioNegociable
+    ) {
+      setEsPrecioNegociable('Sí');
+    }
+  }, [publicacion]);
+  return publicacion !== null ? (
     <div className='app-publicacion'>
       <div
         className='app-publicacion__devolver'
@@ -17,7 +50,10 @@ export const Publicacion = () => {
       </div>
       <main className='app-publicacion__carro-detalles'>
         <div className='FotosCarro'>
-          <h1>Nombre del vehículo</h1>
+          <h1>
+            {publicacion.carroPublicacion.marca}{' '}
+            {publicacion.carroPublicacion.tipo}
+          </h1>
           <div className='imagenes'>
             <div className='imagen-principal'></div>
             <div className='imagen-secundaria'>
@@ -36,29 +72,29 @@ export const Publicacion = () => {
           <div className='app-publicacion__especificacionesLista'>
             <p className='item'>
               <span>Marca: </span>
-              marca
+              {publicacion.carroPublicacion.marca}
             </p>
             <p className='item'>
               <span>Modelo: </span>
-              modelo
+              {publicacion.carroPublicacion.tipo}
             </p>
             <p className='item'>
               <span>Color: </span>
-              color
+              {publicacion.carroPublicacion.color}
             </p>
             <p className='item'>
               <span>Tipo combustible: </span>
-              tipo
+              {publicacion.carroPublicacion.combustible}
             </p>
             <p className='item'>
               <span>Año: </span>
-              año
+              {publicacion.carroPublicacion.year}
             </p>
           </div>
           <div className='app-publicacion__especificacionesLista'>
             <p className='item'>
               <span>Precio negociable: </span>
-              si/no
+              {esPrecioNegociable}
             </p>
             <p className='item'>
               <span>Transmision: </span>
@@ -66,50 +102,40 @@ export const Publicacion = () => {
             </p>
             <p className='item'>
               <span>Kilometros: </span>
-              xxx km
+              {publicacion.carroPublicacion.kilometraje} km
             </p>
             <p className='item'>
               <span>Motor: </span>
-              motor
+              {publicacion.carroPublicacion.motor}
             </p>
             <p className='item'>
-              <span>Puertas: </span>x
+              <span>Puertas: </span>
+              {publicacion.carroPublicacion.puertas}
             </p>
           </div>
         </div>
         <div className='app-publicacion__descripcion'>
           <h2>Descripcion</h2>
-          <p>
-            Lorem tincidunt lectus vitae id vulputate diam quam. Imperdiet non
-            scelerisque turpis sed etiam ultrices. Blandit mollis dignissim
-            egestas consectetur porttitor. Vulputate dolor pretium, dignissim eu
-            augue sit ut convallis. Lectus est, magna urna feugiat sed ultricies
-            sed in lacinia. Fusce potenti sit id pharetra vel ornare. Vestibulum
-            sed tellus ullamcorper arcu. Asperiores eos molestias, aspernatur
-            assumenda vel corporis ex, magni excepturi totam exercitationem quia
-            inventore quod amet labore impedit quae distinctio? Officiis
-            blanditiis consequatur alias, atque, sed est incidunt accusamus
-            repudiandae tempora repellendus obcaecati delectus ducimus inventore
-            tempore harum numquam autem eligendi culpa.
-          </p>
+          <p>{publicacion.descripcion}</p>
         </div>
         <div className='app-publicacion__datosPublicacion'>
           <p className='app-publicacion__dato'>
             <span>Publicado: </span>
-            fecha
+            {publicacion.fechaPublicacion}
           </p>
           <p className='app-publicacion__dato'>
-            <span>Publicacion: </span>
-            #nro
+            <span>Publicacion: </span>#{publicacionId}
           </p>
         </div>
       </main>
       <div className='app-publicacion__infoPublicacion'>
         <div className='app-publicacion__info-uso'>
-          <p>Nuevo</p>
+          <p>{publicacion.carroPublicacion.estado}</p>
         </div>
-        <p className='app-publicacion__precio'>$XX,XX</p>
-        <p className='app-publicacion__ciudad'>Ciudad</p>
+        <p className='app-publicacion__precio'>
+          ${publicacion.carroPublicacion.precio}
+        </p>
+        <p className='app-publicacion__ciudad'>{publicacion.ciudad}</p>
       </div>
       <aside className='app-publicacion__sideBar'>
         <div
@@ -118,7 +144,9 @@ export const Publicacion = () => {
         >
           <div className='app-publicacion__infoVendedor-datos'>
             <div className='app-publicacion__fotoVendedor'></div>
-            <p className='app-publicacion__NombreVendedor'>Nombre vendedor</p>
+            <p className='app-publicacion__NombreVendedor'>
+              {publicacion.usuarioPublicacion.nombres}
+            </p>
           </div>
           <div className='estrellas'>
             <div className='estrella'></div>
@@ -177,5 +205,5 @@ export const Publicacion = () => {
         </div>
       </aside>
     </div>
-  );
+  ) : null;
 };

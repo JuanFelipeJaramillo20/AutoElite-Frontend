@@ -382,7 +382,7 @@ export const Catalogo = () => {
                 className='checkbox-input'
                 checked={selectedOption.combustible.gasolina}
                 onChange={(event) => {
-                  addFilter('Combustible', event.target.value);
+                  addFilter('combustible', event.target.value);
                   handleCheckedOption('combustible', 'gasolina');
                 }}
               />
@@ -397,7 +397,7 @@ export const Catalogo = () => {
                 className='checkbox-input'
                 checked={selectedOption.combustible.diesel}
                 onChange={(event) => {
-                  addFilter('Combustible', event.target.value);
+                  addFilter('combustible', event.target.value);
                   handleCheckedOption('combustible', 'diesel');
                 }}
               />
@@ -412,7 +412,7 @@ export const Catalogo = () => {
                 className='checkbox-input'
                 checked={selectedOption.combustible.hibrido}
                 onChange={(event) => {
-                  addFilter('Combustible', event.target.value);
+                  addFilter('combustible', event.target.value);
                   handleCheckedOption('combustible', 'hibrido');
                 }}
               />
@@ -430,7 +430,7 @@ export const Catalogo = () => {
                 className='checkbox-input'
                 checked={selectedOption.combustible.electrico}
                 onChange={(event) => {
-                  addFilter('Combustible', event.target.value);
+                  addFilter('combustible', event.target.value);
                   handleCheckedOption('combustible', 'electrico');
                 }}
               />
@@ -452,7 +452,7 @@ export const Catalogo = () => {
                 checked={selectedOption.transmision.automatica}
                 className='checkbox-input'
                 onChange={(event) => {
-                  addFilter('Transmision', event.target.value);
+                  addFilter('transmision', event.target.value);
                   handleCheckedOption('transmision', 'automatica');
                 }}
               />
@@ -467,7 +467,7 @@ export const Catalogo = () => {
                 checked={selectedOption.transmision.mecanica}
                 className='checkbox-input'
                 onChange={(event) => {
-                  addFilter('Transmision', event.target.value);
+                  addFilter('transmision', event.target.value);
                   handleCheckedOption('transmision', 'mecanica');
                 }}
               />
@@ -485,7 +485,7 @@ export const Catalogo = () => {
                 checked={selectedOption.transmision.semiautomatica}
                 className='checkbox-input'
                 onChange={(event) => {
-                  addFilter('Transmision', event.target.value);
+                  addFilter('transmision', event.target.value);
                   handleCheckedOption('transmision', 'semiautomatica');
                 }}
               />
@@ -503,7 +503,7 @@ export const Catalogo = () => {
                 checked={selectedOption.transmision.secuencial}
                 className='checkbox-input'
                 onChange={(event) => {
-                  addFilter('Transmision', event.target.value);
+                  addFilter('transmision', event.target.value);
                   handleCheckedOption('transmision', 'secuencial');
                 }}
               />
@@ -518,7 +518,7 @@ export const Catalogo = () => {
                 checked={selectedOption.transmision.manual}
                 className='checkbox-input'
                 onChange={(event) => {
-                  addFilter('Transmision', event.target.value);
+                  addFilter('transmision', event.target.value);
                   handleCheckedOption('transmision', 'manual');
                 }}
               />
