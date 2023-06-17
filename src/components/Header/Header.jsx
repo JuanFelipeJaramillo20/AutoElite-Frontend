@@ -274,7 +274,7 @@ export const Header = () => {
               </nav>
               {isLoggedIn ? (
                 <div className='app-header__logged-in'>
-                  <IconoPerfil srcImagenPerfil='/src/assets/img/perfil/perfil-ejemplo.jpg' />
+                  <IconoPerfil srcImagenPerfil='/src/assets/img/perfil/usuario.png' />
                   <Boton
                     classIcon='fa-solid fa-plus'
                     texto='Nueva publicación'

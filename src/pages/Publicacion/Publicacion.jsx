@@ -140,7 +140,9 @@ export const Publicacion = () => {
       <aside className='app-publicacion__sideBar'>
         <div
           className='app-publicacion__infoVendedor'
-          onClick={() => navigate('/perfil/:usuarioId')}
+          onClick={() =>
+            navigate(`/perfil/${publicacion.usuarioPublicacion.id}`)
+          }
         >
           <div className='app-publicacion__infoVendedor-datos'>
             <div className='app-publicacion__fotoVendedor'></div>

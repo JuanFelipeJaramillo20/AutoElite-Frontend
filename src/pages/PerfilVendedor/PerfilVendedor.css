@@ -1,124 +1,127 @@
 .vendor-section__profile {
-    grid-area: vendorProfile;
+  grid-area: vendorProfile;
 }
 
 .vendor-section__more {
-    grid-area: vendorMore;
+  grid-area: vendorMore;
 }
 
 .vendor-section__reviews {
-    grid-area: vendorReview;
+  grid-area: vendorReview;
 }
 
 .vendor-section {
-    display: grid;
-    grid-template-areas:
-        'vendorProfile vendorMore vendorMore'
-        'vendorReview vendorReview vendorReview';
-    gap: 0%;
-    padding: 10%;
-    place-items: center;
+  display: grid;
+  grid-template-areas:
+    'vendorProfile vendorMore vendorMore'
+    'vendorReview vendorReview vendorReview';
+  gap: 0%;
+  padding: 10%;
+  place-items: center;
 }
 
 .vendor-section__profile {
-    width: 100%;
-    top: 0;
-    border: 1px solid transparent;
+  width: 100%;
+  top: 0;
+  border: 1px solid transparent;
 }
 
 .profile-data {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 8%;
-    margin-bottom: 5%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8%;
+  margin-bottom: 5%;
 }
 
 .profile-data__personal-data {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.profile-data__personal-data>h2 {
-    width: 100%;
-    white-space: nowrap;
-    font-size: clamp(18px, 2vw, 20px);
+.profile-data__personal-data > h2 {
+  width: 100%;
+  white-space: nowrap;
+  font-size: clamp(18px, 2vw, 20px);
 }
 
-.profile-data__personal-data>p {
-    font-size: clamp(16px, 2vw, 18px);
+.profile-data__personal-data > p {
+  font-size: clamp(16px, 2vw, 18px);
 }
 
 .profile-data__img img {
-    width: 10vw;
-    min-width: 50px;
-    max-width: 80px;
-    border-radius: 50%;
+  width: 10vw;
+  min-width: 50px;
+  max-width: 80px;
+  border-radius: 50%;
 }
 
 .profile-data_about {
-    margin-bottom: 10%;
+  margin-bottom: 10%;
 }
 
-.profile-data_about>h2,
-.more-title>h2 {
-    font-size: clamp(18px, 2vw, 20px);
+.profile-data_about > h2,
+.more-title > h2 {
+  font-size: clamp(18px, 2vw, 20px);
 }
 
 .vendor-section__more {
-    width: 100%;
-    margin-inline: auto;
+  width: 100%;
+  margin-inline: auto;
 }
 
 .about-form {
-    width: 80%;
+  width: 80%;
 }
 
-.more__cars>div {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.more__cars {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.more__cars > .app-card {
+  width: 100%;
 }
 
 .more-title {
-    margin-bottom: 10%;
-    display: flex;
-    justify-content: center;
+  margin-bottom: 10%;
+  display: flex;
+  justify-content: center;
 }
 
 .vendor-section__reviews {
-    width: 100%;
+  width: 100%;
 }
 
-@media screen and (max-width:925px) {
-    .vendor-section {
-        display: flex;
-        flex-direction: column;
-    }
+@media screen and (max-width: 925px) {
+  .vendor-section {
+    display: flex;
+    flex-direction: column;
+  }
 
-    .vendor-section__profile {
-        height: auto;
-    }
+  .vendor-section__profile {
+    height: auto;
+  }
 
-    .profile-data,.profile-data_about {
-        width: 80%;
-        margin-inline: auto;
-        margin-bottom: 5%;
-    }
+  .profile-data,
+  .profile-data_about {
+    width: 80%;
+    margin-inline: auto;
+    margin-bottom: 5%;
+  }
 
-    .vendor-section__more {
-        margin-top: 5%;
-    }
+  .vendor-section__more {
+    margin-top: 5%;
+  }
 
-    .about-form {
-        margin-inline: auto;
-        width: 75%;
-    }
+  .about-form {
+    margin-inline: auto;
+    width: 75%;
+  }
 
-    .vendor-section__reviews {
-        margin-top: 5%;
-    }
+  .vendor-section__reviews {
+    margin-top: 5%;
+  }
 }
