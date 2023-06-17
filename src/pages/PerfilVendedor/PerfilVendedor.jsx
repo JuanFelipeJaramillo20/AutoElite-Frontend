@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import { AddCalificacion } from './components/AddCalificacion/AddCalificacion';
-import { CardCar } from '../../components/CardCar/CardCar';
 import { Form } from '../../components/Form/Form';
 
 import { REVIEWS } from '../../../constants';
@@ -9,28 +8,13 @@ import fotoProfile from '../../assets/img/perfil/usuario.png';
 
 import './PerfilVendedor.css';
 import { useParams } from 'react-router';
+import { Publicaciones } from '../../components/Publicaciones/Publicaciones';
 
 export const PerfilVendedor = () => {
   const { usuarioId } = useParams();
   const [usuario, setUsuario] = useState(null);
-  const [publicaciones, setPublicaciones] = useState(null);
+  const [cantidadPublicaciones, setCantidadPublicaciones] = useState(0);
 
-  const obtenerPublicaciones = async (emailAutor) => {
-    const response = await fetch(
-      `http://localhost:8080/api/v1/publicaciones/byuser/${emailAutor}`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
-
-    const result = await response.json();
-    if (response.ok) {
-      setPublicaciones(result);
-    }
-  };
   useEffect(() => {
     const getDatosUsuario = async (idUsuario) => {
       const response = await fetch(
@@ -52,12 +36,6 @@ export const PerfilVendedor = () => {
     getDatosUsuario(usuarioId);
   }, []);
 
-  useEffect(() => {
-    if (usuario !== null) {
-      obtenerPublicaciones(usuario.email);
-    }
-  }, [usuario]);
-
   return usuario !== null ? (
     <section className='vendor-section'>
       <header className='vendor-section__profile'>
@@ -72,8 +50,8 @@ export const PerfilVendedor = () => {
         </div>
         <div className='profile-data_about'>
           <h2>{usuario.email}</h2>
-          {publicaciones !== null ? (
-            <h2>Carros publicados {publicaciones.length}</h2>
+          {cantidadPublicaciones !== 0 ? (
+            <h2>Carros publicados {cantidadPublicaciones}</h2>
           ) : (
             <h2>Carros publicados 0</h2>
           )}
@@ -132,28 +110,12 @@ export const PerfilVendedor = () => {
           <h2>Carros disponibles</h2>
         </div>
         <div className='more__cars'>
-          {publicaciones !== null ? (
-            publicaciones.map((publicacion) => {
-              return (
-                <CardCar
-                  key={publicacion.id}
-                  idPublicacion={publicacion.id}
-                  srcImageCar='https://i.imgur.com/xyiSDoE.jpeg'
-                  yearCarro={publicacion.carroPublicacion.year}
-                  modeloCarro={publicacion.carroPublicacion.tipo}
-                  marcaCarro={publicacion.carroPublicacion.marca}
-                  precio={publicacion.carroPublicacion.precio}
-                  ciudadVenta={publicacion.carroPublicacion.ciudad}
-                  kilometraje={publicacion.carroPublicacion.kilometraje}
-                  tipoTransmision={publicacion.carroPublicacion.transmision}
-                  tipoCombustible={publicacion.carroPublicacion.combustible}
-                  estado={publicacion.carroPublicacion.estado}
-                ></CardCar>
-              );
-            })
-          ) : (
-            <h2>Ninguno</h2>
-          )}
+          <Publicaciones
+            userEmail={usuario.email}
+            setCantidadPublicaciones={(cantidad) =>
+              setCantidadPublicaciones(cantidad)
+            }
+          />
         </div>
       </article>
       <div className='vendor-section__reviews'>

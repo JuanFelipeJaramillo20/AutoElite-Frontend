@@ -1,6 +1,12 @@
 .app-configuracion {
   width: 90%;
-  height: 80vh;
-  margin: 4rem auto 0;
+  margin: 3rem auto 0;
   display: flex;
+  gap: 5%;
+}
+
+@media screen and (min-width: 1280px) {
+  .app-configuracion {
+    width: 70%;
+  }
 }

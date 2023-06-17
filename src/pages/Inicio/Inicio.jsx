@@ -10,47 +10,58 @@ import carroJuandaInicioTres from '../../assets/img/inicio/si.jpeg';
 
 import { CardCar } from '../../components/CardCar/CardCar';
 
-import { PUBLICACION, CARROS } from '../../../constants';
-
 import './inicio.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { cargarPublicaciones } from '../../redux/publicaciones/thunk';
+import { getMisPublicaciones } from '../../redux/usuario/selectors';
+import { useNavigate } from 'react-router-dom';
 
 export const Inicio = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const publicaciones = useSelector(getMisPublicaciones);
+  useEffect(() => {
+    if (publicaciones.length === 0) {
+      console.log('acá estoy');
+      dispatch(cargarPublicaciones());
+    }
+  }, []);
   const razones = [
     {
       id: 1,
-      razon_titulo: 'Razon 1',
+      razon_titulo: 'Un catálogo completo.',
       texto:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+        'Nuestro extenso catálogo te permitirá explorar diferentes  características y precios para que encuentres el carro que se adapte perfectamente a tus preferencias y necesidades.',
     },
     {
       id: 2,
-      razon_titulo: 'Razon 2',
+      razon_titulo: 'Publica tu carro',
       texto:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+        'Si estás buscando vender tu carro, nuestra página es el lugar ideal para publicarlo. Puedes crear anuncios detallados con imágenes, descripciones y datos relevantes.',
     },
     {
       id: 3,
-      razon_titulo: 'Razon 3',
+      razon_titulo: 'Información de vendedores',
       texto:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+        'Proporcionamos detalles de los vendedores, incluyendo su reputación, opiniones de otros compradores e información de contacto.',
     },
     {
       id: 4,
-      razon_titulo: 'Razon 4',
+      razon_titulo: 'Fácil filtrado.',
       texto:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+        'Con una interfaz intuitiva y herramientas de búsqueda avanzadas, podrás explorar y filtrar los carros según tus preferencias, como marca, modelo, año, precio y más.',
     },
     {
       id: 5,
-      razon_titulo: 'Razon 5',
+      razon_titulo: 'Guarda tus favoritos.',
       texto:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+        'Agrega publicaciones a tu lista de favoritos y recupéralas fácilmente más tarde. Nunca pierdas de vista los carros que te interesan y ten acceso rápido a ellos cuando lo desees.',
     },
     {
       id: 6,
-      razon_titulo: 'Razon 6',
+      razon_titulo: 'Seguridad de datos garantizada',
       texto:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+        'Nos comprometemos a proteger tus datos personales de forma segura. Puedes confiar en que tus datos estarán protegidos y que nos tomamos en serio la privacidad de nuestros usuarios. ',
     },
   ];
   const carrosJuanda = [
@@ -104,16 +115,16 @@ export const Inicio = () => {
           <div className='intro-section__table'>
             <header>
               <h2>
-                <b>Texto épico para encontrar carro</b>
+                <b>Descubre carros en un solor lugar</b>
               </h2>
             </header>
 
             <article>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                Explora nuestra página y encuentra una amplia variedad de carros
+                o crea tu propia publicación para dar visibilidad a tu carro.
+                ¡Sumérgete en una experiencia única y descubre el vehículo de
+                tus sueños hoy mismo!
               </p>
             </article>
           </div>
@@ -132,25 +143,30 @@ export const Inicio = () => {
         <section className='offer-section'>
           <header className='offer-section__header'>
             <h2>últimas ofertas</h2>
-            <p>Ver más</p>
+            <p
+              className='app-inicio__verMas'
+              onClick={() => navigate('/catalogo')}
+            >
+              Ver más
+            </p>
           </header>
           <article className='offer-section__content'>
             <div className='offer-car__container'>
-              {PUBLICACION.map((el, id) => {
+              {publicaciones.map((publicacion, id) => {
                 return id < 3 ? (
                   <CardCar
-                    key={el.IDCarro}
-                    ciudadVenta={el.Ciudad}
-                    idPublicacion={el.IDPublicación}
-                    kilometraje={CARROS[id].Kilómetros}
-                    marcaCarro={CARROS[id].Marca}
-                    modeloCarro={CARROS[id].Modelo}
-                    precio={CARROS[id].Precio}
-                    tipoCombustible={CARROS[id].Combustible}
-                    tipoTransmision={CARROS[id].Transmisión}
-                    yearCarro={CARROS[id].Año}
+                    key={publicacion.idPublicacion}
+                    ciudadVenta={publicacion.carroPublicacion.ciudad}
+                    idPublicacion={publicacion.idPublicacion}
+                    kilometraje={publicacion.carroPublicacion.kilometraje}
+                    marcaCarro={publicacion.carroPublicacion.marca}
+                    modeloCarro={publicacion.carroPublicacion.tipo}
+                    precio={publicacion.carroPublicacion.precio}
+                    tipoCombustible={publicacion.carroPublicacion.combustible}
+                    tipoTransmision={publicacion.carroPublicacion.transmision}
+                    yearCarro={publicacion.carroPublicacion.year}
                     srcImageCar={carrosJuanda[id]}
-                    usado={CARROS[id].Usado}
+                    estado={publicacion.carroPublicacion.estado}
                   />
                 ) : null;
               })}

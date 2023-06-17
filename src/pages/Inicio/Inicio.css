@@ -96,7 +96,13 @@
 .offer-section__header > p {
   font-size: clamp(15px, 4vw, 20px);
 }
+.app-inicio__verMas {
+  cursor: pointer;
+}
 
+.app-inicio__verMas:hover {
+  text-decoration: underline;
+}
 #see-more {
   font-size: clamp(15px, 4vw, 20px);
 }
