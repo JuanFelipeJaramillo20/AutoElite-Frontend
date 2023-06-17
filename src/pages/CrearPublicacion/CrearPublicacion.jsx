@@ -1,8 +1,8 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback } from 'react';
 
-import { Form } from "../../components/Form/Form";
+import { Form } from '../../components/Form/Form';
 import { CargarFotos } from '../../components/CargarFotos/CargarFotos';
-import { Alert } from "../../components/Alert/Alert";
+import { Alert } from '../../components/Alert/Alert';
 
 import { v4 as uuidv4 } from 'uuid';
 
@@ -11,7 +11,6 @@ import { crearPublicacion } from '../../redux/publicaciones/thunk';
 import './CrearPublicacion.css';
 
 export const CrearPublicacion = () => {
-
   const [year, setYear] = useState(0);
 
   const [showAlert, setShowAlert] = useState(false);
@@ -24,8 +23,9 @@ export const CrearPublicacion = () => {
   }, []);
 
   const handlePostCreation = useCallback(async (data) => {
-
-    const thisDate = `${new Date(Date.now()).getFullYear()}-${new Date(Date.now()).getMonth()}-${new Date(Date.now()).getDate()}`;
+    const thisDate = `${new Date(Date.now()).getFullYear()}-${new Date(
+      Date.now()
+    ).getMonth()}-${new Date(Date.now()).getDate()}`;
 
     const newPost = {
       id: `${uuidv4()}`,
@@ -49,7 +49,7 @@ export const CrearPublicacion = () => {
         precioEsNegociable: data.precioEsNegociable === 'si' ? true : false,
       },
       descripcion: data.descripcion,
-    }
+    };
 
     const response = await crearPublicacion(newPost);
     if (response) {
@@ -74,17 +74,13 @@ export const CrearPublicacion = () => {
 
   return (
     <>
-      {showAlert ? (
-        <Alert title={alertTitle} message={alertMessage} />
-      ) : null}
-      <section className="create-post">
-        <header className="post__title">
-          <h2>
-            Rellena el formulario para crear tú publicación
-          </h2>
+      {showAlert ? <Alert title={alertTitle} message={alertMessage} /> : null}
+      <section className='create-post'>
+        <header className='post__title'>
+          <h2>Rellena el formulario para crear tú publicación</h2>
         </header>
-        <article className="post__form">
-          <div className="form">
+        <article className='post__form'>
+          <div className='form'>
             <Form
               inputs={[
                 {
@@ -100,7 +96,7 @@ export const CrearPublicacion = () => {
                   error: {
                     required: 'La descripción del vehículo es obligatoria.',
                     minLength: 'Mínimo 10 caracteres.',
-                    maxLength: 'Máximo 100 caracteres'
+                    maxLength: 'Máximo 100 caracteres',
                   },
                 },
                 {
@@ -125,7 +121,7 @@ export const CrearPublicacion = () => {
                   error: {
                     required: 'El precio del vehículo es obligatorio.',
                     min: 'Precio mínimo $1.',
-                    max: 'Precio máximo $1.000.000.000'
+                    max: 'Precio máximo $1.000.000.000',
                   },
                 },
                 {
@@ -150,7 +146,7 @@ export const CrearPublicacion = () => {
                   error: {
                     required: 'El modelo del vehículo es obligatorio.',
                     minLength: 'Mínimo 3 caracteres.',
-                    maxLength: 'Máximo 20 caracteres'
+                    maxLength: 'Máximo 20 caracteres',
                   },
                 },
                 {
@@ -166,7 +162,7 @@ export const CrearPublicacion = () => {
                   error: {
                     required: 'La marca del vehículo es obligatoria.',
                     minLength: 'Mínimo 3 caracteres.',
-                    maxLength: 'Máximo 20 caracteres'
+                    maxLength: 'Máximo 20 caracteres',
                   },
                 },
                 {
@@ -182,7 +178,7 @@ export const CrearPublicacion = () => {
                   error: {
                     required: 'El color del vehículo es obligatorio.',
                     minLength: 'Mínimo 3 caracteres.',
-                    maxLength: 'Máximo 20 caracteres'
+                    maxLength: 'Máximo 20 caracteres',
                   },
                 },
                 {
@@ -198,7 +194,7 @@ export const CrearPublicacion = () => {
                   error: {
                     required: 'La transmisión del vehículo es obligatoria.',
                     minLength: 'Mínimo 3 caracteres.',
-                    maxLength: 'Máximo 20 caracteres'
+                    maxLength: 'Máximo 20 caracteres',
                   },
                 },
                 {
@@ -214,7 +210,7 @@ export const CrearPublicacion = () => {
                   error: {
                     required: 'La ciudad del vehículo es obligatoria.',
                     minLength: 'Mínimo 3 caracteres.',
-                    maxLength: 'Máximo 30 caracteres'
+                    maxLength: 'Máximo 30 caracteres',
                   },
                 },
                 {
@@ -228,9 +224,10 @@ export const CrearPublicacion = () => {
                     maxLength: 20,
                   },
                   error: {
-                    required: 'El tipo de combustible del vehículo es obligatoria.',
+                    required:
+                      'El tipo de combustible del vehículo es obligatoria.',
                     minLength: 'Mínimo 3 caracteres.',
-                    maxLength: 'Máximo 20 caracteres'
+                    maxLength: 'Máximo 20 caracteres',
                   },
                 },
                 {
@@ -244,9 +241,10 @@ export const CrearPublicacion = () => {
                     max: 10,
                   },
                   error: {
-                    required: 'La cantidad de puertas del vehículo es obligatoria.',
+                    required:
+                      'La cantidad de puertas del vehículo es obligatoria.',
                     min: 'Mínimo una puerta.',
-                    max: 'Máximo 10 puertas'
+                    max: 'Máximo 10 puertas',
                   },
                 },
                 {
@@ -256,13 +254,13 @@ export const CrearPublicacion = () => {
                   placeHolder: 'Digita el motor del vehículo',
                   validacion: {
                     required: true,
-                    minLength: 3,
+                    minLength: 2,
                     maxLength: 20,
                   },
                   error: {
                     required: 'El motor del vehículo es obligatorio.',
                     minLength: 'Mínimo 3 caracteres.',
-                    maxLength: 'Máximo 20 caracteres'
+                    maxLength: 'Máximo 20 caracteres',
                   },
                 },
                 {
@@ -278,7 +276,7 @@ export const CrearPublicacion = () => {
                   error: {
                     required: 'Los kilómetros del vehículo son obligatorios.',
                     min: 'Mínimo 0 kilómetros.',
-                    max: 'Máximo 200000'
+                    max: 'Máximo 200000',
                   },
                 },
                 {
@@ -294,7 +292,7 @@ export const CrearPublicacion = () => {
                   error: {
                     required: 'El año del vehículo es obligatorio.',
                     min: 'Año mínimo 1919.',
-                    max: `Año máximo ${year}`
+                    max: `Año máximo ${year}`,
                   },
                 },
                 {
@@ -310,14 +308,14 @@ export const CrearPublicacion = () => {
                   error: {
                     required: 'La descripción del vehículo es obligatoria.',
                     minLength: 'Mínimo 10 caracteres.',
-                    maxLength: 'Máximo 100 caracteres'
+                    maxLength: 'Máximo 100 caracteres',
                   },
                 },
               ]}
               btnText={'Crear vehículo'}
               onSubmit={handlePostCreation}
             />
-            <div className="form-pics">
+            <div className='form-pics'>
               <CargarFotos />
             </div>
           </div>
