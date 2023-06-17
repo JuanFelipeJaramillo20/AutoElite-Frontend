@@ -6,15 +6,48 @@ import logInImg from '../../assets/img/login/LoginImg.png';
 import './Login.css';
 import { Registro } from '../Registro/Registro';
 import { logIn } from '../../redux/usuario/thunk';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAuth, getError } from '../../redux/usuario/selectors';
+import { useEffect, useState } from 'react';
+import { Alert } from '../Alert/Alert';
+import { resetValores } from '../../redux/usuario/actions';
+
 export const Login = ({ handleShowModal, pageToShow, changePageToShow }) => {
   const dispatch = useDispatch();
+  const error = useSelector(getError);
+  const isAuth = useSelector(getAuth);
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [alertTitle, setAlertTitle] = useState('');
   const handleLogin = (data) => {
     dispatch(logIn(data));
-    handleShowModal();
   };
+
+  useEffect(() => {
+    if (error) {
+      setAlertMessage(error);
+      setAlertTitle('Intenta de nuevo');
+      setShowAlert(true);
+    }
+  }, [error]);
+
+  useEffect(() => {
+    if (isAuth) {
+      handleShowModal();
+    }
+  }, [isAuth]);
+
+  useEffect(() => {
+    if (showAlert) {
+      setTimeout(() => {
+        setShowAlert(false);
+        dispatch(resetValores());
+      }, 2000);
+    }
+  }, [showAlert]);
   return (
     <>
+      {showAlert ? <Alert title={alertTitle} message={alertMessage} /> : null}
       {pageToShow === 'registro' ? (
         <Registro
           handleShowModal={handleShowModal}

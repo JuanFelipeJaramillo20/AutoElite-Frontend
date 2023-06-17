@@ -12,6 +12,7 @@ export const getId = (state) => state.usuario.id;
 
 export const getRol = (state) => state.usuario.rol;
 
+export const getError = (state) => state.usuario.error;
 export const getCalificaciones = (state) => state.usuario.calificaciones;
 
 export const getListaGuardados = (state) => state.usuario.listaGuardados;

@@ -74,7 +74,8 @@ export const usuarioReducer = (state = userInitialState, action) => {
 
     case types.LOGOUT:
       return userInitialState;
-
+    case types.RESET_VALUES:
+      return userInitialState;
     default:
       return state;
   }
