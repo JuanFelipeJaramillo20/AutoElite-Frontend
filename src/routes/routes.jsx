@@ -10,12 +10,14 @@ import { Footer } from '../components/Footer/Footer';
 import { PrivateRouter } from './PrivateRouter';
 import { CrearPublicacion } from '../pages/CrearPublicacion/CrearPublicacion';
 import { EditarPublicacion } from '../pages/EditarPublicacion/EditarPublicacion';
-import { Favoritos } from '../pages/Favoritos/Favoritos';
+import { Favoritos } from '../pages/PerfilUsuario/Components/Favoritos/Favoritos';
 import { PreguntasFrecuentes } from '../pages/PreguntasFrecuentes/PreguntasFrecuentes';
 import { LoginPage } from '../pages/LoginPage/LoginPage';
 import { RegisterPage } from '../pages/RegisterPage/RegisterPage';
 import { useSelector } from 'react-redux';
 import { getAuth } from '../redux/usuario/selectors';
+import { MisPublicaciones } from '../pages/PerfilUsuario/Components/MisPublicaciones/MisPublicaciones';
+import { MisReseñas } from '../pages/PerfilUsuario/Components/MisReseñas/MisReseñas';
 
 export const RoutesConfiguration = () => {
   const isLoggedIn = useSelector(getAuth);
@@ -40,6 +42,10 @@ export const RoutesConfiguration = () => {
           <Route path='/favoritos' element={<Favoritos />} />
 
           <Route path='/miPerfil' element={<PerfilUsuario />} />
+
+          <Route path='/misPublicaciones' element={<MisPublicaciones />} />
+
+          <Route path='/misReseñas' element={<MisReseñas />} />
         </Route>
         <Route path='/preguntasFrecuentes' element={<PreguntasFrecuentes />} />
       </Routes>

@@ -21,16 +21,13 @@ export const cargarPublicaciones = () => {
 
 export const crearPublicacion = async (newPost) => {
   try {
-    const response = await fetch(`http://localhost:8080/api/v1/publicaciones`,
-      {
-        method: 'POST',
-        body: JSON.stringify(newPost),
-        headers: {
-          'Content-Type': 'application/json',
-        },
+    const response = await fetch(`http://localhost:8080/api/v1/publicaciones`, {
+      method: 'POST',
+      body: JSON.stringify(newPost),
+      headers: {
+        'Content-Type': 'application/json',
       },
-
-    );
+    });
     console.log(response);
     if (response.status !== 201) {
       return 'Error al crear la publicación';

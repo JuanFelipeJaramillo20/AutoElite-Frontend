@@ -1,5 +1,6 @@
 .app-configuracion__sideBar {
   width: 40%;
+  height: 75vh;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   padding: 1rem;
@@ -8,10 +9,14 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
-.app-configuracion__sideBar p {
-  margin-bottom: 0.5rem;
+.app-configuracion__sideBar .app-iconoPerfil {
+  margin: 2rem;
+}
+.app-configuracion__personalInfo {
+  margin-bottom: 1rem;
 }
 
 .app-configuracion__lstOp {
