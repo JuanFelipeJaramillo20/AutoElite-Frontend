@@ -14,6 +14,12 @@ export const errorSesion = (error) => {
   };
 };
 
+export const resetValores = () => {
+  return {
+    type: types.RESET_VALUES,
+  };
+};
+
 export const establecerToken = (token) => {
   return {
     type: types.SET_TOKEN,

@@ -12,29 +12,28 @@ import registroImg from '../../assets/img/registro/registroImg.png';
 import './Registro.css';
 
 export const Registro = ({ handleShowModal, handleShowPage }) => {
-
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [alertTitle, setAlertTitle] = useState('');
 
-  const handleRegister = useCallback(async (newUser) => {
-
-    const registerResult = await register(newUser);
-    if (registerResult) {
-      setAlertMessage('Intenta otra vez');
-      setAlertTitle('Error');
-      setShowAlert(true);
-      setShowAlert(true);
-    } else {
-      setAlertTitle('Bienvenido');
-      setAlertMessage('Por favor inicia sesión');
-      setShowAlert(true);
-      setTimeout(() => {
-        handleShowPage('login');
-      }, 2000)
-    }
-
-  }, [handleShowPage]);
+  const handleRegister = useCallback(
+    async (newUser) => {
+      const registerResult = await register(newUser);
+      if (registerResult) {
+        setAlertMessage('Intenta otra vez');
+        setAlertTitle('Error');
+        setShowAlert(true);
+      } else {
+        setAlertTitle('Bienvenido');
+        setAlertMessage('Por favor inicia sesión');
+        setShowAlert(true);
+        setTimeout(() => {
+          handleShowPage('login');
+        }, 2000);
+      }
+    },
+    [handleShowPage]
+  );
 
   useEffect(() => {
     if (showAlert) {
@@ -46,9 +45,7 @@ export const Registro = ({ handleShowModal, handleShowPage }) => {
 
   return (
     <>
-      {showAlert ? (
-        <Alert title={alertTitle} message={alertMessage} />
-      ) : null}
+      {showAlert ? <Alert title={alertTitle} message={alertMessage} /> : null}
       <div className='register-container__modal'>
         <Modal width={900} heigth={750} handleModal={handleShowModal}>
           <div className='registro-container'>
