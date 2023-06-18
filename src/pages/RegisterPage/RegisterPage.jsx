@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Form } from '../../components/Form/Form';
@@ -15,6 +15,7 @@ export const RegisterPage = () => {
 
   const [alertMessage, setAlertMessage] = useState('');
   const [alertTitle, setAlertTitle] = useState('');
+  const [alertType, setAlertType] = useState('');
   const [showAlert, setShowAlert] = useState(false);
 
   const handleRegister = useCallback(async (newUser) => {
@@ -23,31 +24,24 @@ export const RegisterPage = () => {
     if (registerResult) {
       setAlertMessage('Intenta otra vez');
       setAlertTitle('Error');
-      setShowAlert(true);
+      setAlertType('error');
       setShowAlert(true);
     } else {
       setAlertTitle('Bienvenido');
       setAlertMessage('Por favor inicia sesión');
+      setAlertType('exito');
       setShowAlert(true);
       setTimeout(() => {
         history('/login')
-      }, 2000);
+      }, 10000);
     }
 
   }, [history]);
 
-  useEffect(() => {
-    if (showAlert) {
-      setTimeout(() => {
-        setShowAlert(false);
-      }, 2000);
-    }
-  }, [showAlert]);
-
   return (
     <>
       {showAlert ? (
-         <Alert title={alertTitle} message={alertMessage} />
+         <Alert title={alertTitle} message={alertMessage} type={alertType} setShowModal={setShowAlert} />
       ) : null}
       <div className='registro-container--p'>
         <div className='container__welcomed--p'>

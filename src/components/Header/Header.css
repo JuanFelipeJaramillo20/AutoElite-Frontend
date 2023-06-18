@@ -119,11 +119,17 @@
   border: none;
   box-shadow: 0.2vw 0.2vw 0.4vw black;
   border-radius: 2vw;
+  overflow: hidden;
   background-color: white;
 }
 
 .information-profile__header li {
   margin-bottom: 5%;
+  transition: 0.3s;
+}
+
+.information-profile__header li:hover {
+  background-color: rgb(201, 201, 201);
 }
 
 .information-profile__header a {

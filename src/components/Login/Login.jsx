@@ -13,21 +13,27 @@ import { Alert } from '../Alert/Alert';
 import { resetValores } from '../../redux/usuario/actions';
 
 export const Login = ({ handleShowModal, pageToShow, changePageToShow }) => {
+
   const dispatch = useDispatch();
+
   const error = useSelector(getError);
   const isAuth = useSelector(getAuth);
+
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [alertTitle, setAlertTitle] = useState('');
+  const [alertType, setAlertType] = useState('');
+
   const handleLogin = (data) => {
     dispatch(logIn(data));
   };
 
   useEffect(() => {
     if (error) {
+      setShowAlert(true);
       setAlertMessage(error);
       setAlertTitle('Intenta de nuevo');
-      setShowAlert(true);
+      setAlertType('error');
     }
   }, [error]);
 
@@ -39,15 +45,14 @@ export const Login = ({ handleShowModal, pageToShow, changePageToShow }) => {
 
   useEffect(() => {
     if (showAlert) {
-      setTimeout(() => {
-        setShowAlert(false);
-        dispatch(resetValores());
-      }, 2000);
+      //setShowAlert(false);
+      dispatch(resetValores());
     }
   }, [showAlert]);
+
   return (
     <>
-      {showAlert ? <Alert title={alertTitle} message={alertMessage} /> : null}
+      {showAlert ? <Alert title={alertTitle} message={alertMessage} type={alertType} setShowModal={setShowAlert} /> : null}
       {pageToShow === 'registro' ? (
         <Registro
           handleShowModal={handleShowModal}
