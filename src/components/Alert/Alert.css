@@ -10,11 +10,75 @@
 .alert__body {
   position: fixed;
   top: 1%;
-  background-color: white;
-  padding: 1%;
+  background-color: rgb(31, 25, 36);
   margin-top: 1%;
   border: 1px solid black;
   border-radius: 2vw;
-  width: 25%;
+  width: 30%;
   text-align: center;
+  overflow: hidden;
+}
+
+.body-title>h2 {
+  font-size: clamp(20px,3vw,30px);
+  color: white;
+}
+
+.body-content>p {
+  font-size: clamp(16px,2vw,18px);
+  color: white;
+}
+
+.body-content {
+  margin-bottom: 10%;
+}
+
+.line>button{
+  position: absolute;
+  top: 18%;
+  right: 10%;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: clamp(15px,2vw,22px);
+  color: black;
+  transition: 0.3s;
+}
+
+.line>button:hover {
+  color: white;
+}
+
+.line {
+  position: relative;
+  height: 35px;
+  margin-left: 0vw;
+}
+
+.icon-modal {
+  font-size: clamp(20px, 4vw, 40px);
+}
+
+.error {
+  background-color: red;
+}
+
+.icon-error {
+  color: red;
+}
+
+.alerta {
+  background-color: yellow;
+}
+
+.icon-alerta {
+  color: yellow;
+}
+
+.exito {
+  background-color: green;
+}
+
+.icon-exito {
+  color: green;
 }
