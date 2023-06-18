@@ -74,3 +74,23 @@ export const getDatosUsuario = async (idUsuario) => {
     };
   }
 };
+
+export const guardarImagen = (idUsuario, file) => {
+  return async (dispatch) => {
+    const formData = new FormData();
+    formData.append('img', file);
+    const response = await fetch(
+      `http://localhost:8080/api/v1/usuarios/img/${idUsuario}`,
+      {
+        method: 'PUT',
+        body: formData,
+      }
+    );
+    console.log(response);
+    if (response.ok) {
+      console.log('Se cargó la foto');
+    } else {
+      dispatch(creators.errorSesion('No se pudo'));
+    }
+  };
+};

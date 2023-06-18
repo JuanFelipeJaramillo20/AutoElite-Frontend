@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import './IconoPerfil.css';
+
 export const IconoPerfil = ({ srcImagenPerfil }) => {
   return (
     <div className='app-iconoPerfil'>
