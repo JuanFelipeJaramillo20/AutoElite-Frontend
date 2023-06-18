@@ -18,6 +18,7 @@ import { useSelector } from 'react-redux';
 import { getAuth } from '../redux/usuario/selectors';
 import { MisPublicaciones } from '../pages/PerfilUsuario/Components/MisPublicaciones/MisPublicaciones';
 import { MisReseñas } from '../pages/PerfilUsuario/Components/MisReseñas/MisReseñas';
+import { NoEncontrado } from '../pages/NoEncontrado/NoEncontrado';
 
 export const RoutesConfiguration = () => {
   const isLoggedIn = useSelector(getAuth);
@@ -25,6 +26,7 @@ export const RoutesConfiguration = () => {
     <Router>
       <Header />
       <Routes>
+      <Route path='*' element={<NoEncontrado />} />
         <Route path='/' element={<Inicio />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/registro' element={<RegisterPage />} />
