@@ -1,39 +1,47 @@
 .not-found {
-    width: 99vw;
-    height: 100vh;
-    overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 99vw;
+  height: 80vh;
+  overflow: hidden;
+}
+
+.not-found + .footer {
+  position: fixed;
+  bottom: 0;
 }
 
 .error-loader {
-    width: 80%;
-    margin-inline: auto;
-    overflow: hidden;
+  width: 80%;
+  margin-inline: auto;
+  overflow: hidden;
 }
 
 .loader-not-found {
-    width: 80%;
-    margin-inline: auto;
-    overflow: hidden;
+  width: 80%;
+  margin-inline: auto;
+  overflow: hidden;
 }
 
 .back-error-page {
-    display: grid;
-    place-items: center;
+  display: grid;
+  place-items: center;
 }
 
-.back-error-page>button {
-    border: 1px solid var(--input-outline-color);
-    background-color: transparent;
-    font-size: clamp(15px,2.5vw,25px);
-    border-radius: 2vw;
-    padding: 2%;
-    width: 15%;
-    transition: 0.3s;
-    cursor: pointer;
-    color: black;
+.back-error-page > button {
+  border: 1px solid var(--input-outline-color);
+  background-color: transparent;
+  font-size: clamp(15px, 2.5vw, 25px);
+  border-radius: 2vw;
+  padding: 2%;
+  width: 15%;
+  transition: 0.3s;
+  cursor: pointer;
+  color: black;
 }
 
-.back-error-page>button:hover {
-    background-color: var(--input-outline-color);
-    color: white;
+.back-error-page > button:hover {
+  background-color: var(--input-outline-color);
+  color: white;
 }

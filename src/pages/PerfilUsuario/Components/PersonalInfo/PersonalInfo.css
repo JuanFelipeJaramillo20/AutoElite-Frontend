@@ -1,3 +1,73 @@
 .app-configuracion__infoUsuario {
   width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5%;
+  height: fit-content;
+  margin-bottom: 1rem;
+}
+
+.app-configuracion__editarInfo,
+.app-configuracion__infoUsuario .file-upload-label {
+  margin-bottom: 5%;
+}
+
+.app-configuracion__editarInfo {
+  width: 100%;
+  border-radius: 0.75rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  padding: 1rem;
+}
+
+.app-configuracion__editarInfo hr {
+  color: #f5f5f5;
+  margin-bottom: 1rem;
+}
+
+.app-configuracion__editarInfo > div {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app-configuracion__editarInfo .ap-configuracion__contra {
+  display: block;
+  margin: 0;
+}
+.app-configuracion__editarInfo .app-input {
+  width: 100%;
+}
+
+.app-configuracion__editarInfo .app-input__pass {
+  display: block;
+  position: relative;
+}
+
+.app-configuracion__editarInfo .fa-eye-slash,
+.app-configuracion__editarInfo .fa-eye {
+  position: absolute;
+  top: 22px;
+}
+
+.hide-input {
+  display: none;
+}
+
+.ap-configuracion__nombre p:first-of-type,
+.ap-configuracion__email p:first-of-type,
+.ap-configuracion__tel p:first-of-type,
+.ap-configuracion__contra p:first-of-type {
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.fa-pen-to-square {
+  cursor: pointer;
+}
+
+.fa-pen-to-square:hover,
+.fa-pen-to-square:active {
+  font-weight: bold;
 }

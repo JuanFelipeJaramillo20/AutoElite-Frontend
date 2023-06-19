@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import './Input.css';
+import { useState } from 'react';
 
 export const Input = (props) => {
   const {
@@ -12,6 +13,7 @@ export const Input = (props) => {
     validators,
     ...otherProps
   } = props;
+  const [showPwd, setShowPwd] = useState(false);
   if (type === 'textarea') {
     return (
       <label className='app-label'>
@@ -46,6 +48,32 @@ export const Input = (props) => {
           })}
         </select>
       </label>
+    );
+  } else if (type === 'password') {
+    return (
+      <div className='app-input__pass'>
+        <label htmlFor={id} className='app-label'>
+          {labelText}
+        </label>
+        <input
+          type={showPwd ? 'text' : type}
+          id={id}
+          name={id}
+          className={`app-input ${className ? className : ''}`}
+          {...(register && register(id, validators))}
+          {...otherProps}
+        />
+        <div
+          className='app-input__passIcon'
+          onClick={() => setShowPwd(!showPwd)}
+        >
+          {showPwd ? (
+            <i className='fa-solid fa-eye'></i>
+          ) : (
+            <i className='fa-solid fa-eye-slash'></i>
+          )}
+        </div>
+      </div>
     );
   } else {
     return (

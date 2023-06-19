@@ -42,6 +42,12 @@ export const Publicacion = () => {
       setImgPerfil(createImgBlob(publicacion.usuarioPublicacion.imagenPerfil));
     }
   }, [publicacion]);
+
+  useEffect(() => {
+    return () => {
+      URL.revokeObjectURL(imgPerfil);
+    };
+  }, [imgPerfil]);
   return publicacion !== null ? (
     <div className='app-publicacion'>
       <div
