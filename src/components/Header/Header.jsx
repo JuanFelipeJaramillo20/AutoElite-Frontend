@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import './Header.css';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAuth } from '../../redux/usuario/selectors';
+import { getAuth, getImagen } from '../../redux/usuario/selectors';
 import { logOut } from '../../redux/usuario/thunk';
 import { IconoPerfil } from '../IconoPerfil/IconoPerfil';
 import { Boton } from '../Boton/Boton';
@@ -18,6 +18,7 @@ export const Header = () => {
   const navRef = useRef();
   const navigate = useNavigate();
   const isLoggedIn = useSelector(getAuth);
+  const imgPerfil = useSelector(getImagen);
   const headerContainerRef = useRef();
   const profileRef = useRef();
   const windowInformationRef = useRef();
@@ -274,7 +275,7 @@ export const Header = () => {
               </nav>
               {isLoggedIn ? (
                 <div className='app-header__logged-in'>
-                  <IconoPerfil srcImagenPerfil='/src/assets/img/perfil/usuario.png' />
+                  <IconoPerfil srcImagenPerfil={imgPerfil} />
                   <Boton
                     classIcon='fa-solid fa-plus'
                     texto='Nueva publicación'

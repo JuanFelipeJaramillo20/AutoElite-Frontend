@@ -1,9 +1,10 @@
+import { compressImage } from '../../helpers/compressImg';
+import { createImgBlob } from '../../helpers/createImg';
 import * as creators from './actions';
-
 export const register = async (newUser) => {
   const completeNewUser = {
     ...newUser,
-    rol: 'USER',
+    rolUsuario: 'USER',
   };
   try {
     const response = await fetch('http://localhost:8080/api/v1/registro', {
@@ -13,8 +14,9 @@ export const register = async (newUser) => {
         'Content-Type': 'application/json',
       },
     });
+    const result = await response.json();
     if (response.status !== 200) {
-      return 'Error de registro';
+      return result.Error;
     }
   } catch (error) {
     return '';
@@ -33,41 +35,108 @@ export const logIn = (userData) => {
     const result = await response.json();
     console.log(result);
     if (response.ok) {
+      localStorage.setItem('token', result.jwTtoken);
+      localStorage.setItem('id', result.id);
       dispatch(creators.establecerToken(result.jwTtoken));
-      const userDetails = await getDatosUsuario(result.id);
-      dispatch(creators.iniciarSesion(userDetails));
+      dispatch(getDatosUsuario(result.id));
     } else {
-      dispatch(creators.errorSesion(result.message));
+      dispatch(creators.error(result.Error));
     }
   };
 };
 
 export const logOut = () => {
   return async (dispatch) => {
-    console.log('si estoy acá');
+    localStorage.removeItem('token');
+    localStorage.removeItem('id');
     dispatch(creators.cerrarSesion());
   };
 };
 
-export const getDatosUsuario = async (idUsuario) => {
-  const response = await fetch(
-    `http://localhost:8080/api/v1/usuarios/${idUsuario}`,
-    {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-  );
+export const getDatosUsuario = (idUsuario) => {
+  return async (dispatch) => {
+    const response = await fetch(
+      `http://localhost:8080/api/v1/usuarios/${idUsuario}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
 
-  const result = await response.json();
-  if (response.ok) {
-    return {
-      nombre: result.nombres,
-      email: result.email,
-      nroTel: result.telefono,
-      rol: result.rolUsuario,
-      id: result.id,
-    };
-  }
+    const result = await response.json();
+    if (response.ok) {
+      const userDetails = {
+        nombre: result.nombres,
+        email: result.email,
+        nroTel: result.telefono,
+        rol: result.rolUsuario,
+        id: result.id,
+        img: createImgBlob(result.imagenPerfil),
+      };
+      dispatch(creators.iniciarSesion(userDetails));
+    }
+  };
+};
+
+export const guardarImagen = (idUsuario, file) => {
+  return async (dispatch) => {
+    try {
+      const compressedFile = await compressImage(file);
+
+      const formData = new FormData();
+      formData.append('img', compressedFile);
+
+      const response = await fetch(
+        `http://localhost:8080/api/v1/usuarios/img/${idUsuario}`,
+        {
+          method: 'PUT',
+          body: formData,
+          headers: {
+            Authorization: localStorage.getItem('token'),
+          },
+        }
+      );
+      if (response.ok) {
+        const objUrl = URL.createObjectURL(compressedFile);
+        dispatch(creators.cambiarFotoPerfil(objUrl));
+      } else {
+        dispatch(creators.error('Error al comprimir la imagen'));
+      }
+    } catch (error) {
+      console.log(error);
+      dispatch(creators.error('Error en el servidor.'));
+    }
+  };
+};
+
+export const guardarCambios = (idUsuario, newData) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/v1/usuarios/${idUsuario}`,
+        {
+          method: 'PUT',
+          body: JSON.stringify(newData),
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: localStorage.getItem('token'),
+          },
+        }
+      );
+      const result = await response.json();
+      if (response.ok) {
+        if (newData['contrasena']) {
+          delete newData.contrasena;
+        }
+        dispatch(creators.cambiarDatos(newData));
+        dispatch(creators.exito('Los datos se actualizarón exitosamente'));
+      } else {
+        console.log(result.Error);
+      }
+    } catch (error) {
+      dispatch(creators.error('Error en el servidor al actualizar datos.'));
+    }
+  };
 };

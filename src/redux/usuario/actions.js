@@ -7,16 +7,29 @@ export const iniciarSesion = (usuario) => {
   };
 };
 
-export const errorSesion = (error) => {
+export const error = (error) => {
   return {
-    type: types.LOGIN_ERROR,
+    type: types.ERROR,
     payload: error,
+  };
+};
+
+export const exito = (mensajeExito) => {
+  return {
+    type: types.EXITO,
+    payload: mensajeExito,
   };
 };
 
 export const resetValores = () => {
   return {
     type: types.RESET_VALUES,
+  };
+};
+
+export const resetExito = () => {
+  return {
+    type: types.RESET_EXITO,
   };
 };
 
@@ -65,5 +78,19 @@ export const cargarCalificaciones = (calificaciones) => {
   return {
     type: types.SET_CALIFICACIONES,
     payload: calificaciones,
+  };
+};
+
+export const cambiarFotoPerfil = (foto) => {
+  return {
+    type: types.CHANGE_IMG,
+    payload: foto,
+  };
+};
+
+export const cambiarDatos = (datos) => {
+  return {
+    type: types.CHANGE_VALUES,
+    payload: datos,
   };
 };

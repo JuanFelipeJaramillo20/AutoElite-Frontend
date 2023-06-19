@@ -43,3 +43,15 @@
 .app-textarea:focus {
   outline: 1px solid var(--input-outline-color);
 }
+
+.app-input__pass {
+  position: relative;
+}
+
+.fa-eye,
+.fa-eye-slash {
+  position: absolute;
+  cursor: pointer;
+  top: 45px;
+  right: 15px;
+}

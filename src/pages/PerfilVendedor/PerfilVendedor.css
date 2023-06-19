@@ -24,6 +24,7 @@
   width: 100%;
   top: 0;
   border: 1px solid transparent;
+  align-self: self-start;
 }
 
 .profile-data {
@@ -48,13 +49,6 @@
 
 .profile-data__personal-data > p {
   font-size: clamp(16px, 2vw, 18px);
-}
-
-.profile-data__img img {
-  width: 10vw;
-  min-width: 50px;
-  max-width: 80px;
-  border-radius: 50%;
 }
 
 .profile-data_about {

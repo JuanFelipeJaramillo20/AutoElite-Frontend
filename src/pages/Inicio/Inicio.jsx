@@ -22,7 +22,6 @@ export const Inicio = () => {
   const publicaciones = useSelector(getMisPublicaciones);
   useEffect(() => {
     if (publicaciones.length === 0) {
-      console.log('acá estoy');
       dispatch(cargarPublicaciones());
     }
   }, []);

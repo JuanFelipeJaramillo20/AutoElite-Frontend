@@ -14,19 +14,26 @@ import { Favoritos } from '../pages/PerfilUsuario/Components/Favoritos/Favoritos
 import { PreguntasFrecuentes } from '../pages/PreguntasFrecuentes/PreguntasFrecuentes';
 import { LoginPage } from '../pages/LoginPage/LoginPage';
 import { RegisterPage } from '../pages/RegisterPage/RegisterPage';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getAuth } from '../redux/usuario/selectors';
 import { MisPublicaciones } from '../pages/PerfilUsuario/Components/MisPublicaciones/MisPublicaciones';
 import { MisReseñas } from '../pages/PerfilUsuario/Components/MisReseñas/MisReseñas';
 import { NoEncontrado } from '../pages/NoEncontrado/NoEncontrado';
+import { getDatosUsuario } from '../redux/usuario/thunk';
 
 export const RoutesConfiguration = () => {
+  const dispatch = useDispatch();
+  const token = localStorage.getItem('token');
+  const id = localStorage.getItem('id');
+  if (token && id) {
+    dispatch(getDatosUsuario(id));
+  }
   const isLoggedIn = useSelector(getAuth);
   return (
     <Router>
       <Header />
       <Routes>
-      <Route path='*' element={<NoEncontrado />} />
+        <Route path='*' element={<NoEncontrado />} />
         <Route path='/' element={<Inicio />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/registro' element={<RegisterPage />} />

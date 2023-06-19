@@ -2,9 +2,9 @@ import * as types from './actionTypes';
 
 const userInitialState = {
   isAuth: false,
-  nombre: '',
+  nombres: '',
   email: '',
-  nroTel: '',
+  telefono: '',
   token: '',
   id: '',
   calificaciones: [],
@@ -13,6 +13,8 @@ const userInitialState = {
   misPublicaciones: [],
   rol: '',
   error: '',
+  exito: '',
+  img: '',
 };
 
 export const usuarioReducer = (state = userInitialState, action) => {
@@ -21,16 +23,29 @@ export const usuarioReducer = (state = userInitialState, action) => {
       return {
         ...state,
         isAuth: true,
-        nombre: action.payload.nombre,
+        nombres: action.payload.nombre,
         email: action.payload.email,
-        nroTel: action.payload.nroTel,
+        telefono: action.payload.nroTel,
         rol: action.payload.rol,
         id: action.payload.id,
+        img: action.payload.img,
       };
     case types.SET_TOKEN:
       return {
         ...state,
         token: action.payload,
+      };
+
+    case types.CHANGE_IMG:
+      return {
+        ...state,
+        img: action.payload,
+      };
+
+    case types.CHANGE_VALUES:
+      return {
+        ...state,
+        ...action.payload,
       };
     case types.SET_GUARDADOS:
       return {
@@ -66,16 +81,29 @@ export const usuarioReducer = (state = userInitialState, action) => {
         }),
       };
 
-    case types.LOGIN_ERROR:
+    case types.ERROR:
       return {
         ...state,
         error: action.payload,
       };
 
+    case types.EXITO:
+      return {
+        ...state,
+        exito: action.payload,
+      };
+
     case types.LOGOUT:
       return userInitialState;
+
     case types.RESET_VALUES:
       return userInitialState;
+
+    case types.RESET_EXITO:
+      return {
+        ...state,
+        exito: '',
+      };
     default:
       return state;
   }

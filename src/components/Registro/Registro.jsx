@@ -12,7 +12,6 @@ import registroImg from '../../assets/img/registro/registroImg.png';
 import './Registro.css';
 
 export const Registro = ({ handleShowModal, handleShowPage }) => {
-
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [alertTitle, setAlertTitle] = useState('');
@@ -22,7 +21,7 @@ export const Registro = ({ handleShowModal, handleShowPage }) => {
     async (newUser) => {
       const registerResult = await register(newUser);
       if (registerResult) {
-        setAlertMessage('Intenta otra vez');
+        setAlertMessage(registerResult);
         setAlertTitle('Error');
         setAlertType('error');
         setShowAlert(true);
@@ -41,7 +40,14 @@ export const Registro = ({ handleShowModal, handleShowPage }) => {
 
   return (
     <>
-      {showAlert ? <Alert title={alertTitle} message={alertMessage} type={alertType} setShowModal={setShowAlert}/> : null}
+      {showAlert ? (
+        <Alert
+          title={alertTitle}
+          message={alertMessage}
+          type={alertType}
+          setShowModal={setShowAlert}
+        />
+      ) : null}
       <div className='register-container__modal'>
         <Modal width={900} heigth={750} handleModal={handleShowModal}>
           <div className='registro-container'>

@@ -1,20 +1,26 @@
 import { NavLink } from 'react-router-dom';
 import './OpcionesPerfil.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { getEmail, getNombre, getNroTel } from '../../redux/usuario/selectors';
+import {
+  getEmail,
+  getImagen,
+  getNombre,
+  getNroTel,
+} from '../../redux/usuario/selectors';
 import { IconoPerfil } from '../IconoPerfil/IconoPerfil';
 import { logOut } from '../../redux/usuario/thunk';
 export const OpcionesPerfil = () => {
   const nombre = useSelector(getNombre);
   const tel = useSelector(getNroTel);
   const correo = useSelector(getEmail);
+  const imgPerfil = useSelector(getImagen);
   const dispatch = useDispatch();
   const handleCloseMenu = () => {
     dispatch(logOut());
   };
   return (
     <div className='app-configuracion__sideBar'>
-      <IconoPerfil srcImagenPerfil='/src/assets/img/perfil/usuario.png' />
+      <IconoPerfil srcImagenPerfil={imgPerfil} />
       <div className='app-configuracion__personalInfo'>
         <p>{nombre}</p>
         <p>{tel}</p>
