@@ -19,7 +19,7 @@ export const register = async (newUser) => {
       return result.Error;
     }
   } catch (error) {
-    return '';
+    return 'error en el servidor';
   }
 };
 

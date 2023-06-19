@@ -292,7 +292,7 @@ export const Header = () => {
                         className='information-profile__header'
                       >
                         <ol>
-                          <li>
+                          <li onClick={handleCloseMenu}>
                             <NavLink to='/miPerfil'>
                               <span>
                                 <i className='fa-solid fa-gear'></i>
@@ -300,7 +300,7 @@ export const Header = () => {
                               Configuración
                             </NavLink>
                           </li>
-                          <li>
+                          <li onClick={handleCloseMenu}>
                             <NavLink to='/misPublicaciones'>
                               <span>
                                 <i className='fa-solid fa-car-side'></i>
@@ -308,7 +308,7 @@ export const Header = () => {
                               publicaciones
                             </NavLink>
                           </li>
-                          <li>
+                          <li onClick={handleCloseMenu}>
                             <NavLink to='/favoritos'>
                               <span>
                                 <i className='fa-solid fa-heart-circle-plus'></i>
@@ -316,7 +316,7 @@ export const Header = () => {
                               Favoritos
                             </NavLink>
                           </li>
-                          <li>
+                          <li onClick={handleCloseMenu}>
                             <NavLink to='/misReseñas'>
                               <span>
                                 <i className='fa-solid fa-star painted'></i>
@@ -324,7 +324,7 @@ export const Header = () => {
                               Reseñas
                             </NavLink>
                           </li>
-                          <li>
+                          <li onClick={handleCloseMenu}>
                             <NavLink onClick={() => dispatch(logOut())}>
                               <span>
                                 <i className='fa-solid fa-right-from-bracket'></i>
