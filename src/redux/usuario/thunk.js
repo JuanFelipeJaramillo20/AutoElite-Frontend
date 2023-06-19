@@ -17,7 +17,7 @@ export const register = async (newUser) => {
       return 'Error de registro';
     }
   } catch (error) {
-    return '';
+    return 'error en el servidor';
   }
 };
 
