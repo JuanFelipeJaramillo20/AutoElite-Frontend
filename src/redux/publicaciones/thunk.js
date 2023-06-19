@@ -19,13 +19,14 @@ export const cargarPublicaciones = () => {
   };
 };
 
-export const crearPublicacion = async (newPost) => {
+export const crearPublicacion = async (newPost, userToken) => {
   try {
     const response = await fetch(`http://localhost:8080/api/v1/publicaciones`, {
       method: 'POST',
       body: JSON.stringify(newPost),
       headers: {
         'Content-Type': 'application/json',
+        Authorization: userToken,
       },
     });
     console.log(response);

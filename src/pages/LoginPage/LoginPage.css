@@ -5,6 +5,11 @@
   grid-template-rows: 12% 80% 8%;
 }
 
+.logIn-container--p + .footer {
+  position: fixed;
+  bottom: 0;
+}
+
 @media screen and (min-width: 825px) {
   .logIn-container--p {
     grid-template-columns: repeat(2, 1fr);

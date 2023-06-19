@@ -9,13 +9,18 @@ import { v4 as uuidv4 } from 'uuid';
 import { crearPublicacion } from '../../redux/publicaciones/thunk';
 
 import './CrearPublicacion.css';
+import { useSelector } from 'react-redux';
+import { getId, getToken } from '../../redux/usuario/selectors';
 
 export const CrearPublicacion = () => {
+  const token = useSelector(getToken);
+  const idCreador = useSelector(getId);
   const [year, setYear] = useState(0);
 
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [alertTitle, setAlertTitle] = useState('');
+  const [alertType, setAlertType] = useState('');
 
   useEffect(() => {
     let currentYear = new Date(Date.now()).getFullYear();
@@ -31,7 +36,7 @@ export const CrearPublicacion = () => {
       id: `${uuidv4()}`,
       fechaPublicacion: thisDate,
       ciudad: data.ciudad,
-      usuarioId: 1,
+      usuarioId: idCreador,
       carro: {
         puertas: data.puertas,
         motor: data.motor,
@@ -51,30 +56,30 @@ export const CrearPublicacion = () => {
       descripcion: data.descripcion,
     };
 
-    const response = await crearPublicacion(newPost);
+    const response = await crearPublicacion(newPost, token);
     if (response) {
+      setShowAlert(true);
       setAlertMessage('Intenta otra vez');
       setAlertTitle('Error');
-      setShowAlert(true);
-      setShowAlert(true);
+      setAlertType('error');
     } else {
       setAlertTitle('Publicado');
       setAlertMessage('La publicación fue creada');
+      setAlertType('exito');
       setShowAlert(true);
     }
   }, []);
 
-  useEffect(() => {
-    if (showAlert) {
-      setTimeout(() => {
-        setShowAlert(false);
-      }, 2000);
-    }
-  }, [showAlert]);
-
   return (
     <>
-      {showAlert ? <Alert title={alertTitle} message={alertMessage} /> : null}
+      {showAlert ? (
+        <Alert
+          title={alertTitle}
+          message={alertMessage}
+          type={alertType}
+          setShowModal={setShowAlert}
+        />
+      ) : null}
       <section className='create-post'>
         <header className='post__title'>
           <h2>Rellena el formulario para crear tú publicación</h2>
@@ -182,19 +187,18 @@ export const CrearPublicacion = () => {
                   },
                 },
                 {
-                  type: 'text',
+                  type: 'selection',
                   id: 'transmision',
                   label: 'Transmisión',
-                  placeHolder: 'Digita la transmisión del vehículo',
-                  validacion: {
-                    required: true,
-                    minLength: 3,
-                    maxLength: 20,
-                  },
+                  options: [
+                    'Automática',
+                    'Mecánica',
+                    'Semiautomática',
+                    'Secuencial',
+                    'Manual',
+                  ],
                   error: {
-                    required: 'La transmisión del vehículo es obligatoria.',
-                    minLength: 'Mínimo 3 caracteres.',
-                    maxLength: 'Máximo 20 caracteres',
+                    notDefaultOpt: 'Debes seleccionar otra opción.',
                   },
                 },
                 {
@@ -214,20 +218,12 @@ export const CrearPublicacion = () => {
                   },
                 },
                 {
-                  type: 'text',
+                  type: 'selection',
                   id: 'combustible',
                   label: 'Combustible',
-                  placeHolder: 'Digita el tipo de combustible del vehículo',
-                  validacion: {
-                    required: true,
-                    minLength: 3,
-                    maxLength: 20,
-                  },
+                  options: ['Gasolina', 'Diesel', 'Híbrido', 'Eléctrico'],
                   error: {
-                    required:
-                      'El tipo de combustible del vehículo es obligatoria.',
-                    minLength: 'Mínimo 3 caracteres.',
-                    maxLength: 'Máximo 20 caracteres',
+                    notDefaultOpt: 'Debes seleccionar otra opción.',
                   },
                 },
                 {
@@ -238,13 +234,13 @@ export const CrearPublicacion = () => {
                   validacion: {
                     required: true,
                     min: 1,
-                    max: 10,
+                    max: 6,
                   },
                   error: {
                     required:
                       'La cantidad de puertas del vehículo es obligatoria.',
                     min: 'Mínimo una puerta.',
-                    max: 'Máximo 10 puertas',
+                    max: 'Máximo 6 puertas',
                   },
                 },
                 {

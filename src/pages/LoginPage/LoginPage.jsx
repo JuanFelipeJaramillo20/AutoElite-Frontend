@@ -1,15 +1,49 @@
 //import PropTypes from 'prop-types';
+import './LoginPage.css';
 import { useNavigate } from 'react-router-dom';
-
 import { Form } from '../../components/Form/Form';
 import logInImg from '../../assets/img/login/LoginImg.png';
-
-import './LoginPage.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { getError } from '../../redux/usuario/selectors';
+import { logIn } from '../../redux/usuario/thunk';
+import { useEffect, useState } from 'react';
+import { Alert } from '../../components/Alert/Alert';
+import { resetValores } from '../../redux/usuario/actions';
 
 export const LoginPage = () => {
   const history = useNavigate();
+  const dispatch = useDispatch();
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [alertTitle, setAlertTitle] = useState('');
+  const [alertType, setAlertType] = useState('');
+
+  const error = useSelector(getError);
+  useEffect(() => {
+    if (error) {
+      console.log('acá estoy');
+      setShowAlert(true);
+      setAlertMessage(error);
+      setAlertTitle('Intenta de nuevo');
+      setAlertType('error');
+    }
+  }, [error]);
+
+  useEffect(() => {
+    if (!showAlert) {
+      dispatch(resetValores());
+    }
+  }, [showAlert]);
   return (
     <>
+      {showAlert ? (
+        <Alert
+          title={alertTitle}
+          message={alertMessage}
+          type={alertType}
+          setShowModal={setShowAlert}
+        />
+      ) : null}
       <div className='logIn-container--p'>
         <div className='container__welcomed--p'>
           <div className='welcomed__title--p'>
@@ -40,7 +74,7 @@ export const LoginPage = () => {
               inputs={[
                 {
                   type: 'email',
-                  id: 'email-login',
+                  id: 'email',
                   label: 'Correo electrónico',
                   placeHolder: 'Digita tu correo electrónico',
                   validacion: {
@@ -54,22 +88,21 @@ export const LoginPage = () => {
                 },
                 {
                   type: 'password',
-                  id: 'password',
+                  id: 'contrasena',
                   label: 'Contraseña',
                   placeHolder: 'Digita tu contraseña',
                   validacion: {
                     required: true,
-                    minLength: 8,
                   },
                   error: {
                     required: 'La contraseña es obligatoria.',
-                    minLength: 'Mínimo 8 caracteres.',
                   },
                 },
               ]}
               btnText={'Iniciar sesión'}
               onSubmit={(data) => {
-                console.log(data);
+                dispatch(logIn(data));
+                history('/');
               }}
             />
           </div>

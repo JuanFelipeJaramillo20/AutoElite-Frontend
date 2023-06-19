@@ -13,7 +13,6 @@ import { Alert } from '../Alert/Alert';
 import { resetValores } from '../../redux/usuario/actions';
 
 export const Login = ({ handleShowModal, pageToShow, changePageToShow }) => {
-
   const dispatch = useDispatch();
 
   const error = useSelector(getError);
@@ -30,6 +29,7 @@ export const Login = ({ handleShowModal, pageToShow, changePageToShow }) => {
 
   useEffect(() => {
     if (error) {
+      console.log('acá estoy');
       setShowAlert(true);
       setAlertMessage(error);
       setAlertTitle('Intenta de nuevo');
@@ -44,15 +44,21 @@ export const Login = ({ handleShowModal, pageToShow, changePageToShow }) => {
   }, [isAuth]);
 
   useEffect(() => {
-    if (showAlert) {
-      //setShowAlert(false);
+    if (!showAlert) {
       dispatch(resetValores());
     }
   }, [showAlert]);
 
   return (
     <>
-      {showAlert ? <Alert title={alertTitle} message={alertMessage} type={alertType} setShowModal={setShowAlert} /> : null}
+      {showAlert ? (
+        <Alert
+          title={alertTitle}
+          message={alertMessage}
+          type={alertType}
+          setShowModal={setShowAlert}
+        />
+      ) : null}
       {pageToShow === 'registro' ? (
         <Registro
           handleShowModal={handleShowModal}
@@ -104,6 +110,12 @@ export const Login = ({ handleShowModal, pageToShow, changePageToShow }) => {
                       id: 'contrasena',
                       label: 'Contraseña',
                       placeHolder: 'Digita tu contraseña',
+                      validacion: {
+                        required: true,
+                      },
+                      error: {
+                        required: 'La contraseña es obligatoria.',
+                      },
                     },
                   ]}
                   btnText={'Iniciar sesión'}

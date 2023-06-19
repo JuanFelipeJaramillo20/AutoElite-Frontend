@@ -125,7 +125,6 @@ export const Catalogo = () => {
   useEffect(() => {
     dispatch(cargarPublicaciones());
   }, []);
-
   //collect all brands and models from cars
   useEffect(() => {
     if (allBrands && allModels) {
@@ -241,7 +240,7 @@ export const Catalogo = () => {
                   className='checkbox-input'
                   checked={selectedOption.estado.nuevo}
                   onChange={() => {
-                    addFilter('Usado', false);
+                    addFilter('estado', 'Nuevo');
                     handleCheckedOption('estado', 'nuevo');
                   }}
                 />
@@ -256,7 +255,7 @@ export const Catalogo = () => {
                   className='checkbox-input'
                   checked={selectedOption.estado.usado}
                   onChange={() => {
-                    addFilter('Usado', true);
+                    addFilter('estado', 'Usado');
                     handleCheckedOption('estado', 'usado');
                   }}
                 />
@@ -408,7 +407,7 @@ export const Catalogo = () => {
                 type='radio'
                 id='Hibrido'
                 name='combustible'
-                value='Hibrido'
+                value='Híbrido'
                 className='checkbox-input'
                 checked={selectedOption.combustible.hibrido}
                 onChange={(event) => {
@@ -448,7 +447,7 @@ export const Catalogo = () => {
                 type='radio'
                 id='Automatica'
                 name='transmision'
-                value='Automatica'
+                value='Automática'
                 checked={selectedOption.transmision.automatica}
                 className='checkbox-input'
                 onChange={(event) => {
@@ -463,7 +462,7 @@ export const Catalogo = () => {
                 type='radio'
                 id='Mecanica'
                 name='transmision'
-                value='Mecanica'
+                value='Mecánica'
                 checked={selectedOption.transmision.mecanica}
                 className='checkbox-input'
                 onChange={(event) => {
@@ -481,7 +480,7 @@ export const Catalogo = () => {
                 type='radio'
                 id='Semiautomatica'
                 name='transmision'
-                value='Semiautomatica'
+                value='Semiautomática'
                 checked={selectedOption.transmision.semiautomatica}
                 className='checkbox-input'
                 onChange={(event) => {
