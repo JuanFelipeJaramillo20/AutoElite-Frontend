@@ -184,3 +184,45 @@ export const removeReview = async (newReview, currentUserTOKEN) => {
     return err;
   }
 };
+
+export const getReviews = async (usuarioId) => {
+  try {
+    const response = await fetch(
+      `http://localhost:8080/api/v1/calificacion/${usuarioId}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    const result = await response.json();
+    if (response.ok) {
+      return result;
+    }
+  } catch (err) {
+    return false;
+  }
+};
+
+export const getUserData = async (idUsuario) => {
+  try {
+    const response = await fetch(
+      `http://localhost:8080/api/v1/usuarios/${idUsuario}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    const result = await response.json();
+    if (response.ok) {
+      return result;
+    }
+  } catch (err) {
+    return err;
+  }
+};

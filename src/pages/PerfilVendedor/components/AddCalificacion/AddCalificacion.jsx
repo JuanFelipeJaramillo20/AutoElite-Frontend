@@ -16,7 +16,7 @@ import noReview from '../../../../assets/animations/noReviws.json';
 import './AddCalificacion.css';
 
 export const AddCalificacion = (props) => {
-  const { totalReviewsVendor, wasReviewed, vendorID } = props;
+  const { totalReviewsVendor, wasReviewed, vendorID, titleSection } = props;
 
   let [fiveStars, setFiveStars] = useState(0);
   let [fourStars, setFourStars] = useState(0);
@@ -77,7 +77,7 @@ export const AddCalificacion = (props) => {
     <>
       <section className='reviews-section'>
         <header className='reviews-section__title'>
-          <h2>Reviews del vendedor ({totalReviewsVendor.length})</h2>
+          <h2>{titleSection} ({totalReviewsVendor.length})</h2>
           <div className='star-vendor__rate'>
             <Star
               five={fiveStars}
@@ -155,5 +155,6 @@ export const AddCalificacion = (props) => {
 AddCalificacion.propTypes = {
   totalReviewsVendor: PropTypes.arrayOf(PropTypes.object),
   wasReviewed: PropTypes.func,
-  vendorID: PropTypes.number
+  vendorID: PropTypes.number,
+  titleSection: PropTypes.string,
 };
