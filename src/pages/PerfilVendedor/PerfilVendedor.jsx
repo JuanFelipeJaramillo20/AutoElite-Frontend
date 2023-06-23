@@ -1,18 +1,21 @@
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
 
 import { AddCalificacion } from './components/AddCalificacion/AddCalificacion';
 import { Form } from '../../components/Form/Form';
 import { Alert } from '../../components/Alert/Alert';
-
-//import { REVIEWS } from '../../../constants';
-
-import './PerfilVendedor.css';
-import { useParams } from 'react-router';
 import { Publicaciones } from '../../components/Publicaciones/Publicaciones';
 import { createImgBlob } from '../../helpers/createImg';
 import { IconoPerfil } from '../../components/IconoPerfil/IconoPerfil';
 
+import { getReviews, getUserData } from '../../redux/usuario/thunk';
+
+//import { REVIEWS } from '../../../constants';
+
+import './PerfilVendedor.css';
+
 export const PerfilVendedor = () => {
+
   const { usuarioId } = useParams();
 
   const [usuario, setUsuario] = useState(null);
@@ -20,53 +23,30 @@ export const PerfilVendedor = () => {
   const [reviews, setReviews] = useState([]);
   const [wasReviewed, setWasReviewed] = useState(false);
 
-
   useEffect(() => {
-    const getDatosUsuario = async (idUsuario) => {
-      const response = await fetch(
-        `http://localhost:8080/api/v1/usuarios/${idUsuario}`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-
-      const result = await response.json();
-      if (response.ok) {
-        setUsuario(result);
+    const getDatosUsuario = async () => {
+      const res = await getUserData(usuarioId);
+      if (res) {
+        setUsuario(res);
       }
     };
-
     getDatosUsuario(usuarioId);
   }, []);
 
   useEffect(() => {
-    const getReviews = async () => {
-      const response = await fetch(
-        `http://localhost:8080/api/v1/calificacion/${usuarioId}`,
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-
-      const result = await response.json();
-      if (response.ok) {
-        setReviews(result);
-      }
-    };
-
-    getReviews();
+    const getApiReviews = async () => {
+      const res = await getReviews(usuarioId);
+      if (res) {
+        setReviews(res);
+      } 
+    }
+    getApiReviews();
   }, [wasReviewed]);
 
   return usuario !== null ? (
     <section className='vendor-section'>
       {wasReviewed ? (
-        <Alert type='exito' message='Dejaste tu review' title='Review exitosa' setShowModal={setWasReviewed}/>
+        <Alert type='exito' message='Dejaste tu review' title='Review exitosa' setShowModal={setWasReviewed} />
       ) : null}
       <header className='vendor-section__profile'>
         <div className='profile-data'>
@@ -151,7 +131,7 @@ export const PerfilVendedor = () => {
         </div>
       </article>
       <div className='vendor-section__reviews'>
-        <AddCalificacion totalReviewsVendor={reviews} wasReviewed={setWasReviewed} vendorID={usuarioId}  />
+        <AddCalificacion totalReviewsVendor={reviews} wasReviewed={setWasReviewed} vendorID={usuarioId} titleSection={'Reviews del vendedor'} />
       </div>
     </section>
   ) : null;
