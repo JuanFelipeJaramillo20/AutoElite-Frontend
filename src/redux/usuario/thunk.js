@@ -140,3 +140,47 @@ export const guardarCambios = (idUsuario, newData) => {
     }
   };
 };
+
+export const addReview = async (newReview, currentUserTOKEN) => {
+  try {
+    const response = await fetch(
+      `http://localhost:8080/api/v1/calificacion`,
+      {
+        method: 'POST',
+        body: JSON.stringify(newReview),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: currentUserTOKEN
+        },
+      }
+    );
+
+    if (response.status !== 201) {
+      return response.Error;
+    }
+  } catch (err) {
+    return err;
+  }
+};
+
+export const removeReview = async (newReview, currentUserTOKEN) => {
+  try {
+    const response = await fetch(
+      `http://localhost:8080/api/v1/calificacion/4`,
+      {
+        method: 'DELETE',
+        body: JSON.stringify(newReview),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: currentUserTOKEN
+        },
+      }
+    );
+
+    if (response.status !== 201) {
+      return response.Error;
+    }
+  } catch (err) {
+    return err;
+  }
+};

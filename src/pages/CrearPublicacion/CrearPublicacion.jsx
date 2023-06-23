@@ -100,8 +100,8 @@ export const CrearPublicacion = () => {
                   },
                   error: {
                     required: 'La descripción del vehículo es obligatoria.',
-                    minLength: 'Mínimo 10 caracteres.',
-                    maxLength: 'Máximo 100 caracteres',
+                    minLength: 'Mínimo 6 caracteres.',
+                    maxLength: 'Máximo 6 caracteres',
                   },
                 },
                 {

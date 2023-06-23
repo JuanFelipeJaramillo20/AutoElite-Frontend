@@ -20,7 +20,7 @@ export const Registro = ({ handleShowModal, handleShowPage }) => {
   const handleRegister = useCallback(
     async (newUser) => {
       const registerResult = await register(newUser);
-      if (registerResult === 'Error de registro' || (registerResult === 'error en el servidor')) {
+      if (registerResult) {
         setAlertMessage(registerResult);
         setAlertTitle('Error');
         setAlertType('error');

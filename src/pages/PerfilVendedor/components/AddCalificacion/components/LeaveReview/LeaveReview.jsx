@@ -1,27 +1,60 @@
 import PropTypes from "prop-types";
 
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 
 import { Boton } from '../../../../../../components/Boton/Boton';
+//import { Alert } from '../../../../../../components/Alert/Alert';
+
+import { getId, getToken } from "../../../../../../redux/usuario/selectors";
+import { addReview } from "../../../../../../redux/usuario/thunk";
 
 import './LeaveReview.css';
 
 export const LeaveReview = (props) => {
+    const { usuarioId } = useParams();
 
     const {
         handleCloseModal,
-    } = props
+        wasReviewed,
+    } = props;
+
+    const currentUserID = useSelector(getId);
+    const currentUserTOKEN = useSelector(getToken);
 
     const { register, handleSubmit, setValue } = useForm();
 
-    const onSubmit = (data) => {
-        console.log(data);
-        handleCloseModal();
-    };
-
     let [stars, setStars] = useState(0);
     let [dateReview, setDateReview] = useState();
+    /*const [showAlert, setShowAlert] = useState(false);
+    const [titleAlert, setTitleAlert] = useState('');
+    const [messageAlert, setMessageAlert] = useState('');
+    const [typeAlert, setTypeAlert] = useState('');*/
+
+    const onSubmit = async (data) => {
+        const review = {
+            "receiver": parseInt(usuarioId),
+            "sender": currentUserID,
+            "comentarios": data.Descripcion,
+            "numEstrellas": data.StarRate
+        };
+        const res = await addReview(review, currentUserTOKEN);
+        if (!res) {
+            /*setShowAlert(true);
+            setMessageAlert('Creada con exito');
+            setTitleAlert('Éxito!');
+            setTypeAlert('exito');*/
+            wasReviewed((prevValue) => !prevValue);
+            handleCloseModal();
+        } else {
+            /*setShowAlert(true);
+            setMessageAlert('Algo salió mal');
+            setTitleAlert('Error!');
+            setTypeAlert('error');*/
+        }
+    };
 
     function handleStarRate(id) {
         const selectedStar = document.getElementById(id);
@@ -56,6 +89,9 @@ export const LeaveReview = (props) => {
 
     return (
         <>
+            {/*showAlert ? (
+                <Alert type={typeAlert} message={messageAlert} title={titleAlert} setShowModal={setShowAlert} />
+            ) : null*/}
             <form onSubmit={handleSubmit(onSubmit)} className='review-form'>
                 <div className='review-valoration'>
                     <label htmlFor="star-input">
@@ -104,4 +140,5 @@ export const LeaveReview = (props) => {
 
 LeaveReview.propTypes = {
     handleCloseModal: PropTypes.func,
+    wasReviewed: PropTypes.func
 }

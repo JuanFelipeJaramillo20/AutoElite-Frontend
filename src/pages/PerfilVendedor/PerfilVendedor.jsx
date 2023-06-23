@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 
 import { AddCalificacion } from './components/AddCalificacion/AddCalificacion';
 import { Form } from '../../components/Form/Form';
+import { Alert } from '../../components/Alert/Alert';
 
-import { REVIEWS } from '../../../constants';
+//import { REVIEWS } from '../../../constants';
 
 import './PerfilVendedor.css';
 import { useParams } from 'react-router';
@@ -13,8 +14,12 @@ import { IconoPerfil } from '../../components/IconoPerfil/IconoPerfil';
 
 export const PerfilVendedor = () => {
   const { usuarioId } = useParams();
+
   const [usuario, setUsuario] = useState(null);
   const [cantidadPublicaciones, setCantidadPublicaciones] = useState(0);
+  const [reviews, setReviews] = useState([]);
+  const [wasReviewed, setWasReviewed] = useState(false);
+
 
   useEffect(() => {
     const getDatosUsuario = async (idUsuario) => {
@@ -37,8 +42,32 @@ export const PerfilVendedor = () => {
     getDatosUsuario(usuarioId);
   }, []);
 
+  useEffect(() => {
+    const getReviews = async () => {
+      const response = await fetch(
+        `http://localhost:8080/api/v1/calificacion/${usuarioId}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      const result = await response.json();
+      if (response.ok) {
+        setReviews(result);
+      }
+    };
+
+    getReviews();
+  }, [wasReviewed]);
+
   return usuario !== null ? (
     <section className='vendor-section'>
+      {wasReviewed ? (
+        <Alert type='exito' message='Dejaste tu review' title='Review exitosa' setShowModal={setWasReviewed}/>
+      ) : null}
       <header className='vendor-section__profile'>
         <div className='profile-data'>
           <div className='profile-data__img'>
@@ -122,7 +151,7 @@ export const PerfilVendedor = () => {
         </div>
       </article>
       <div className='vendor-section__reviews'>
-        <AddCalificacion totalReviewsVendor={REVIEWS} />
+        <AddCalificacion totalReviewsVendor={reviews} wasReviewed={setWasReviewed} vendorID={usuarioId}  />
       </div>
     </section>
   ) : null;

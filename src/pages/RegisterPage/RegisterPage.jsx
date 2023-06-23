@@ -22,7 +22,7 @@ export const RegisterPage = () => {
 
     const registerResult = await register(newUser);
     if (registerResult) {
-      setAlertMessage('Intenta otra vez');
+      setAlertMessage(registerResult);
       setAlertTitle('Error');
       setAlertType('error');
       setShowAlert(true);

@@ -11,6 +11,7 @@ export const Star = (props) => {
         three,
         two,
         one,
+        wasReviewed
     } = props;
 
     function removeDecimals(value) {
@@ -26,11 +27,13 @@ export const Star = (props) => {
     useEffect(() => {
         //%
         const totalReviews = five + four + three + two + one;
-        setFiveProgressBar((five / totalReviews) * 100);
-        setFourProgressBar((four / totalReviews) * 100);
-        setThreeProgressBar((three / totalReviews) * 100);
-        setTwoProgressBar((two / totalReviews) * 100);
-        setOneProgressBar((one / totalReviews) * 100);
+        if (totalReviews > 0) {
+            setFiveProgressBar((five / totalReviews) * 100);
+            setFourProgressBar((four / totalReviews) * 100);
+            setThreeProgressBar((three / totalReviews) * 100);
+            setTwoProgressBar((two / totalReviews) * 100);
+            setOneProgressBar((one / totalReviews) * 100);
+        }
         //elements
         const fiveStars = document.querySelector('.five');
         const fourStars = document.querySelector('.four');
@@ -47,7 +50,7 @@ export const Star = (props) => {
             twoStars.style.width = `${twoProgressBar}%`;
             oneStars.style.width = `${oneProgressBar}%`;
         }
-    }, [five, fiveProgressBar, four, fourProgressBar, one, oneProgressBar, three, threeProgressBar, two, twoProgressBar])
+    }, [five, fiveProgressBar, four, fourProgressBar, one, oneProgressBar, three, threeProgressBar, two, twoProgressBar, wasReviewed])
 
     return (
         <>
@@ -125,4 +128,5 @@ Star.propTypes = {
     three: PropTypes.number,
     two: PropTypes.number,
     one: PropTypes.number,
+    wasReviewed: PropTypes.bool,
 }
