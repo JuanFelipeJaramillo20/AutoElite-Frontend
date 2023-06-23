@@ -15,3 +15,8 @@
 .app-btn:hover {
   background-color: var(--btn-secundary-color);
 }
+
+.app-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
