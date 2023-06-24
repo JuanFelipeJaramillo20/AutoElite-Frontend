@@ -13,13 +13,13 @@ import { CardCar } from '../../components/CardCar/CardCar';
 import './inicio.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { cargarPublicaciones } from '../../redux/publicaciones/thunk';
-import { getMisPublicaciones } from '../../redux/usuario/selectors';
+import { getPublicaciones } from '../../redux/publicaciones/selectors';
 import { useNavigate } from 'react-router-dom';
 
 export const Inicio = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const publicaciones = useSelector(getMisPublicaciones);
+  const publicaciones = useSelector(getPublicaciones);
   useEffect(() => {
     if (publicaciones.length === 0) {
       dispatch(cargarPublicaciones());

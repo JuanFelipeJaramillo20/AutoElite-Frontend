@@ -7,7 +7,7 @@ import { Star } from './components/Star/Star';
 import { Modal } from '../../../../components/Modal/Modal';
 import { LeaveReview } from './components/LeaveReview/LeaveReview';
 
-import { getId } from '../../../../redux/usuario/selectors';
+import { getId, getAuth } from '../../../../redux/usuario/selectors';
 
 import testImg from '../../../../assets/img/perfil/perfil-ejemplo.jpg';
 import Lottie from 'lottie-react'
@@ -28,6 +28,7 @@ export const AddCalificacion = (props) => {
   const [wasReviewedByCurrentUser, setWasReviewedByCurrentUser] = useState(false);
 
   const currentUserID = useSelector(getId);
+  const isAuth = useSelector(getAuth);
 
   useEffect(() => {
     function getStars(reviews) {
@@ -73,6 +74,8 @@ export const AddCalificacion = (props) => {
     setShowLeaveReview(!ShowLeaveReview);
   }
 
+  console.log(isAuth)
+
   return (
     <>
       <section className='reviews-section'>
@@ -95,7 +98,9 @@ export const AddCalificacion = (props) => {
             onClick={handleShowLeaveReview}
             disabled={
               currentUserID === parseInt(vendorID) ||
-              wasReviewedByCurrentUser ? true : false
+              wasReviewedByCurrentUser ||
+              !isAuth ? 
+               true : false
             }
           >
             Dejar calificación

@@ -25,15 +25,28 @@ export const Form = (props) => {
       {inputs.map((input) => {
         return (
           <div className='app-form__input' key={input.id}>
-            <Input
-              labelText={input.label}
-              type={input.type}
-              id={input.id}
-              register={register}
-              validators={input.validacion}
-              placeholder={input.placeHolder}
-              opciones={input.options}
-            />
+            {input.value ? (
+              <Input
+                labelText={input.label}
+                type={input.type}
+                id={input.id}
+                register={register}
+                validators={input.validacion}
+                placeholder={input.placeHolder}
+                value={input.value}
+                opciones={input.options}
+              />
+            ) : (
+              <Input
+                labelText={input.label}
+                type={input.type}
+                id={input.id}
+                register={register}
+                validators={input.validacion}
+                placeholder={input.placeHolder}
+                opciones={input.options}
+              />
+            )}
             {errors[input.id] && (
               <p className='error-message'>
                 {input.error && input.error[errors[input.id].type]}

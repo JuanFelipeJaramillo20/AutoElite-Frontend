@@ -11,9 +11,13 @@ export const Input = (props) => {
     opciones,
     register,
     validators,
+    value,
+    onChange,
     ...otherProps
   } = props;
+
   const [showPwd, setShowPwd] = useState(false);
+
   if (type === 'textarea') {
     return (
       <label className='app-label'>
@@ -22,6 +26,8 @@ export const Input = (props) => {
           className='app-textarea'
           id={id}
           name={id}
+          value={value}
+          onChange={onChange}
           {...otherProps}
           {...(register && register(id, validators))}
         ></textarea>
@@ -33,6 +39,8 @@ export const Input = (props) => {
         {labelText}
         <select
           className='app-selection'
+          id={id}
+          onChange={onChange}
           {...(register &&
             register(id, {
               validate: {
@@ -44,7 +52,16 @@ export const Input = (props) => {
         >
           <option>Elige una opción</option>
           {opciones.map((opcion, index) => {
-            return <option key={index}>{opcion}</option>;
+            if (opcion === ('Si' || 'No') && value) {
+              return <option key={index} selected>{opcion}</option>;
+            } else if (opcion === ('Si' || 'No') && !value) {
+              return <option key={index} selected>{opcion}</option>;
+            } else
+            if (opcion === value) {
+              return <option key={index} selected>{opcion}</option>;
+            } else {
+              return <option key={index}>{opcion}</option>;
+            }
           })}
         </select>
       </label>
@@ -83,6 +100,8 @@ export const Input = (props) => {
           type={type}
           id={id}
           name={id}
+          value={value}
+          onChange={onChange}
           className={`app-input ${className ? className : ''}`}
           {...(register && register(id, validators))}
           {...otherProps}
@@ -100,4 +119,6 @@ Input.propTypes = {
   opciones: PropTypes.arrayOf(PropTypes.string),
   register: PropTypes.func,
   validators: PropTypes.object,
+  value: PropTypes.any,
+  onChange: PropTypes.func
 };

@@ -1,0 +1,20 @@
+@keyframes shakeInvalid {
+    0% {
+        transform: translateX(0%);
+    }
+    25% {
+        transform: translateX(-3vw);
+    }
+    50% {
+        transform: translateX(3vw);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+.edit-post .app-form input:invalid,
+.edit-post .app-form textarea:invalid{
+    background-color: rgba(255, 0, 0, 0.2);
+    animation: shakeInvalid 0.3s linear;
+}
