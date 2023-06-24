@@ -2,8 +2,18 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { CardCar } from '../CardCar/CardCar';
 import './Publicaciones.css';
-export const Publicaciones = ({ userEmail, setCantidadPublicaciones }) => {
+export const Publicaciones = ({
+  userEmail,
+  setCantidadPublicaciones,
+  showOpt,
+}) => {
   const [publicaciones, setPublicaciones] = useState(null);
+
+  const deletePublicacion = (idPublicacion) => {
+    setPublicaciones((prevPub) => {
+      return prevPub.filter((pub) => pub.id != idPublicacion);
+    });
+  };
   const obtenerPublicaciones = async (emailAutor) => {
     const response = await fetch(
       `http://localhost:8080/api/v1/publicaciones/byuser/${emailAutor}`,
@@ -20,6 +30,7 @@ export const Publicaciones = ({ userEmail, setCantidadPublicaciones }) => {
       setPublicaciones(result);
     }
   };
+
   useEffect(() => {
     obtenerPublicaciones(userEmail);
   }, []);
@@ -29,6 +40,7 @@ export const Publicaciones = ({ userEmail, setCantidadPublicaciones }) => {
       setCantidadPublicaciones(publicaciones.length);
     }
   }, [publicaciones]);
+
   return publicaciones !== null && publicaciones.length !== 0 ? (
     publicaciones.map((publicacion) => {
       return (
@@ -45,6 +57,8 @@ export const Publicaciones = ({ userEmail, setCantidadPublicaciones }) => {
           tipoTransmision={publicacion.carroPublicacion.transmision}
           tipoCombustible={publicacion.carroPublicacion.combustible}
           estado={publicacion.carroPublicacion.estado}
+          showOpt={showOpt}
+          deletePublicacion={deletePublicacion}
         ></CardCar>
       );
     })
@@ -56,4 +70,5 @@ export const Publicaciones = ({ userEmail, setCantidadPublicaciones }) => {
 Publicaciones.propTypes = {
   userEmail: PropTypes.string.isRequired,
   setCantidadPublicaciones: PropTypes.func,
+  showOpt: PropTypes.bool,
 };

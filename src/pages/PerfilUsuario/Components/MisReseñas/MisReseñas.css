@@ -1,21 +1,14 @@
-.app-configuracion {
-    display: grid;
-    grid-template-columns: repeat(2,50%);
+.app-configuracion .reviews-leave {
+  display: none;
 }
 
-.app-configuracion .reviews-leave{
-    display: none;
+.app-configuracion .reviews-section {
+  width: 60%;
 }
-
 .app-configuracion .user-review {
-    margin-top: 15%;
-} 
-
-.app-configuracion .progress-bar>p {
-    right: clamp(-45px,-15%,-100px);
+  margin-top: 15%;
 }
 
-.app-configuracion .app-configuracion__sideBar {
-    width: 70%;
-    min-width: 200px;
+.app-configuracion .progress-bar > p {
+  right: clamp(-45px, -15%, -100px);
 }

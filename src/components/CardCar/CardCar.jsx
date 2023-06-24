@@ -3,8 +3,7 @@ import { getAuth } from '../../redux/usuario/selectors';
 import './CardCar.css';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-// se agrega idPublicacion como props porque nos sirve para cuando se dé click a una card, al dirigirse uno a más información del vehículo el id de la publicación ayuda a recuperar el resto de información.
+import { NavLink, useNavigate } from 'react-router-dom';
 export const CardCar = ({
   idPublicacion,
   srcImageCar,
@@ -17,12 +16,51 @@ export const CardCar = ({
   tipoTransmision,
   tipoCombustible,
   estado,
+  showOpt,
+  deletePublicacion,
 }) => {
   const isLoggedIn = useSelector(getAuth);
   const [ShowFillHeart, setShowFillHeart] = useState(false);
+  const [showLstOp, setShowLstOp] = useState(false);
   const navigate = useNavigate();
   return (
     <div className='app-cardCar'>
+      {showOpt && (
+        <div
+          className='app-cardCar__opciones'
+          onClick={() => setShowLstOp(!showLstOp)}
+        >
+          <div className='app-cardCar__opciones-icon'>
+            <i className='fa-solid fa-ellipsis-vertical'></i>
+          </div>
+          <div
+            className={
+              showLstOp
+                ? 'app-cardCar__lstOp app-cardCar__lstOp--show'
+                : 'app-cardCar__lstOp'
+            }
+          >
+            <ul>
+              <li>
+                <NavLink>
+                  <span>
+                    <i className='fa-solid fa-pen-to-square'></i>
+                  </span>{' '}
+                  Editar
+                </NavLink>
+              </li>
+              <li>
+                <NavLink onClick={() => deletePublicacion(idPublicacion)}>
+                  <span>
+                    <i className='fa-solid fa-trash'></i>
+                  </span>{' '}
+                  Eliminar
+                </NavLink>
+              </li>
+            </ul>
+          </div>
+        </div>
+      )}
       <div
         className='app-cardCar__container-img'
         onClick={() => navigate(`/publicacion/${idPublicacion}`)}
@@ -93,4 +131,6 @@ CardCar.propTypes = {
   tipoTransmision: PropTypes.string.isRequired,
   tipoCombustible: PropTypes.string.isRequired,
   estado: PropTypes.string.isRequired,
+  showOpt: PropTypes.bool,
+  deletePublicacion: PropTypes.func,
 };

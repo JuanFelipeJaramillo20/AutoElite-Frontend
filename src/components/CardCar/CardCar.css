@@ -94,6 +94,64 @@
   border-radius: 6px;
 }
 
+.app-cardCar__opciones {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+.app-cardCar__opciones-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3.125rem;
+  height: 3.125rem;
+  border-radius: 50%;
+  background-color: var(--card-main-color);
+  color: var(--white-color);
+  transition: all 0.5s ease-in-out;
+  cursor: pointer;
+}
+
+.app-cardCar__opciones-icon:hover {
+  color: var(--card-main-color);
+  background-color: var(--white-color);
+}
+
+.app-cardCar__lstOp {
+  height: 5rem;
+  padding: 1rem;
+  margin-top: 4px;
+  background-color: var(--white-color);
+  border-radius: 8px;
+  display: none;
+}
+
+.app-cardCar__lstOp--show {
+  display: block;
+}
+.app-cardCar__lstOp ul {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  gap: 20%;
+  height: 100%;
+}
+
+.app-cardCar__lstOp a {
+  text-decoration: none;
+  color: var(--secundary-text-color);
+}
+
+.app-cardCar__lstOp a:hover {
+  text-decoration: none;
+  color: var(--main-txt-color);
+  font-weight: 700;
+}
+
 @media screen and (max-width: 620px) {
   .app-cardCar_other-info {
     width: 90%;
