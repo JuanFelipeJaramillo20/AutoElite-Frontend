@@ -29,7 +29,6 @@ export const crearPublicacion = async (newPost, userToken) => {
         Authorization: userToken,
       },
     });
-    console.log(response);
     if (response.status !== 201) {
       return 'Error al crear la publicación';
     }
