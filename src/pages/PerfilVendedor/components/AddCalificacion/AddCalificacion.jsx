@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import { Star } from './components/Star/Star';
 import { Modal } from '../../../../components/Modal/Modal';
@@ -17,6 +18,8 @@ import './AddCalificacion.css';
 
 export const AddCalificacion = (props) => {
   const { totalReviewsVendor, wasReviewed, vendorID, titleSection } = props;
+
+  const history = useNavigate();
 
   let [fiveStars, setFiveStars] = useState(0);
   let [fourStars, setFourStars] = useState(0);
@@ -74,8 +77,6 @@ export const AddCalificacion = (props) => {
     setShowLeaveReview(!ShowLeaveReview);
   }
 
-  console.log(isAuth)
-
   return (
     <>
       <section className='reviews-section'>
@@ -120,6 +121,7 @@ export const AddCalificacion = (props) => {
             <Lottie className='noreviews-data' animationData={noReview} />
           ) : null}
           {totalReviewsVendor.map((review) => {
+            console.log(review)
             return (
               <div key={review.IdReview} className='user-review'>
                 <div className='user-review__profile'>
@@ -129,6 +131,9 @@ export const AddCalificacion = (props) => {
                       alt='person'
                       width={'50px'}
                       height={'50px'}
+                      onClick={() => {
+                        history(`/perfil/${review.sender.id}`);
+                      }}
                     />
                     <p>
                       <b>{review.sender.nombres}</b>
