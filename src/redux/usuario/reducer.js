@@ -7,10 +7,8 @@ const userInitialState = {
   telefono: '',
   token: '',
   id: '',
-  calificaciones: [],
   /*Se guardan los ids de las publicaciones */
   listaGuardados: [],
-  misPublicaciones: [],
   rol: '',
   error: '',
   exito: '',
@@ -51,26 +49,6 @@ export const usuarioReducer = (state = userInitialState, action) => {
       return {
         ...state,
         listaGuardados: action.payload,
-      };
-
-    case types.SET_PUBLICACIONES:
-      return {
-        ...state,
-        misPublicaciones: action.payload,
-      };
-
-    case types.SET_CALIFICACIONES:
-      return {
-        ...state,
-        calificaciones: action.payload,
-      };
-
-    case types.DELETE_PUBLICACION:
-      return {
-        ...state,
-        misPublicaciones: state.misPublicaciones.filter((idPublicacion) => {
-          return idPublicacion !== action.payload;
-        }),
       };
 
     case types.DELETE_GUARDADO:
