@@ -26,11 +26,10 @@ export const EditarPublicacion = () => {
   const [year, setYear] = useState(0);
   const [postDetails, setPostDetails] = useState({});
 
-  const handlePostUpdate = useCallback(async (event, postDetails) => {
+  const handlePostUpdate = useCallback(async (event, postDetails, year) => {
     event.preventDefault();
 
     let isApproved = true;
-    console.log(postDetails)
 
     const approveTest = {
       'Placa': (postDetails.carro.placa.length === 6),
@@ -46,7 +45,7 @@ export const EditarPublicacion = () => {
       'Puertas': (parseInt(postDetails.carro.puertas) >= 2 && parseInt(postDetails.carro.puertas) <= 6),
       'Motor': (postDetails.carro.motor.length >= 3 && postDetails.carro.motor.length <= 20),
       'Kilometraje': (postDetails.carro.kilometraje >= 0 && postDetails.carro.kilometraje <= 100000),
-      'Año': (postDetails.carro.year >= 1919 && postDetails.carro.year <= year),
+      'Año': (parseInt(postDetails.carro.year) >= 1919 && parseInt(postDetails.carro.year) <= year),
       'Descripcion': (postDetails.descripcion.length >= 10 && postDetails.descripcion.length <= 100),
     };
 
@@ -76,7 +75,7 @@ export const EditarPublicacion = () => {
           "color": postDetails.carro.color,
           "tipo": postDetails.carro.tipo,
           "combustible": postDetails.carro.combustible,
-          "year": postDetails.carro.year,
+          "year": parseInt(postDetails.carro.year),
           "precio": postDetails.carro.precio,
           "estado": postDetails.carro.estado,
           "transmision": postDetails.carro.transmision,
@@ -127,7 +126,7 @@ export const EditarPublicacion = () => {
   useEffect(() => {
     let currentYear = new Date(Date.now()).getFullYear();
     setYear(currentYear + 1);
-  }, []);
+  }, [year]);
 
   useEffect(() => {
     const obtenerPublicaciones = async (publicacionID) => {
@@ -362,7 +361,7 @@ export const EditarPublicacion = () => {
                 />
                 <button
                   className='app-btn'
-                  onClick={(e) => { handlePostUpdate(e, postDetails) }}
+                  onClick={(e) => { handlePostUpdate(e, postDetails, year) }}
                   disabled={userId !== postDetails.usuarioID ? true : false}
                 >
                   Actualizar Publicación

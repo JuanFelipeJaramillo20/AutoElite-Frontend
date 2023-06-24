@@ -48,7 +48,7 @@ export const CardCar = ({
           >
             <ul>
               <li>
-                <NavLink>
+                <NavLink to={`/publicacion/editar/${idPublicacion}`}>
                   <span>
                     <i className='fa-solid fa-pen-to-square'></i>
                   </span>{' '}
