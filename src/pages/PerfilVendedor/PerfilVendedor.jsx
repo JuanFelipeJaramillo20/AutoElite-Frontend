@@ -5,7 +5,6 @@ import { AddCalificacion } from './components/AddCalificacion/AddCalificacion';
 import { Form } from '../../components/Form/Form';
 import { Alert } from '../../components/Alert/Alert';
 import { Publicaciones } from '../../components/Publicaciones/Publicaciones';
-import { createImgBlob } from '../../helpers/createImg';
 import { IconoPerfil } from '../../components/IconoPerfil/IconoPerfil';
 
 import { getReviews, getUserData } from '../../redux/usuario/thunk';
@@ -15,7 +14,6 @@ import { getReviews, getUserData } from '../../redux/usuario/thunk';
 import './PerfilVendedor.css';
 
 export const PerfilVendedor = () => {
-
   const { usuarioId } = useParams();
 
   const [usuario, setUsuario] = useState(null);
@@ -38,22 +36,25 @@ export const PerfilVendedor = () => {
       const res = await getReviews(usuarioId);
       if (res) {
         setReviews(res);
-      } 
-    }
+      }
+    };
     getApiReviews();
   }, [wasReviewed]);
 
   return usuario !== null ? (
     <section className='vendor-section'>
       {wasReviewed ? (
-        <Alert type='exito' message='Dejaste tu review' title='Review exitosa' setShowModal={setWasReviewed} />
+        <Alert
+          type='exito'
+          message='Dejaste tu review'
+          title='Review exitosa'
+          setShowModal={setWasReviewed}
+        />
       ) : null}
       <header className='vendor-section__profile'>
         <div className='profile-data'>
           <div className='profile-data__img'>
-            <IconoPerfil
-              srcImagenPerfil={createImgBlob(usuario.imagenPerfil)}
-            />
+            <IconoPerfil srcImagenPerfil={usuario.imagenPerfil} />
           </div>
           <div className='profile-data__personal-data'>
             <h2>{usuario.nombres}</h2>
@@ -131,7 +132,12 @@ export const PerfilVendedor = () => {
         </div>
       </article>
       <div className='vendor-section__reviews'>
-        <AddCalificacion totalReviewsVendor={reviews} wasReviewed={setWasReviewed} vendorID={usuarioId} titleSection={'Reviews del vendedor'} />
+        <AddCalificacion
+          totalReviewsVendor={reviews}
+          wasReviewed={setWasReviewed}
+          vendorID={usuarioId}
+          titleSection={'Reviews del vendedor'}
+        />
       </div>
     </section>
   ) : null;
