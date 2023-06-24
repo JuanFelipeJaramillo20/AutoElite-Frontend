@@ -14,7 +14,7 @@ export const MisPublicaciones = () => {
           Acá encontrarás las publicaciones que has realizado. <br />
           Editalas o eliminelas.
         </p>
-        <Publicaciones userEmail={correo} />
+        <Publicaciones userEmail={correo} showOpt={true} />
       </div>
     </div>
   );

@@ -10,7 +10,6 @@ import { getId } from '../../../../redux/usuario/selectors';
 import './MisReseñas.css';
 
 export const MisReseñas = () => {
-
   const usuarioId = useSelector(getId);
 
   const [reviews, setReviews] = useState([]);
@@ -21,14 +20,17 @@ export const MisReseñas = () => {
       if (res) {
         setReviews(res);
       }
-    }
+    };
     getApiReviews();
   }, []);
 
   return (
     <div className='app-configuracion'>
       <OpcionesPerfil />
-      <AddCalificacion totalReviewsVendor={reviews} titleSection={'Tus reviews'} />
+      <AddCalificacion
+        totalReviewsVendor={reviews}
+        titleSection={'Tus reviews'}
+      />
     </div>
   );
 };
