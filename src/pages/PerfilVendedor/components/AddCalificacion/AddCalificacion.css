@@ -12,12 +12,12 @@
 }
 
 .user-review {
-    padding: 1%;
+    padding: 2%;
     width: 100%;
     margin-bottom: 2%;
     border: 0px solid var(--checkbox-main-color);
     border-radius: 1vw;
-    box-shadow: 0.3vw 0.3vw 0.5vw var(--checkbox-main-color);
+    box-shadow: 0.3vw 0.3vw 0.5vw #6662768a;
 }
 
 .profile-username {
@@ -43,7 +43,14 @@
 }
 
 .reviews-leave {
+    margin-top: 5%;
     margin-bottom: 2.5%;
+}
+
+.noreviews-data {
+    width: 50%;
+    min-width: 200px;
+    margin-inline: auto;
 }
 
 @media screen and (max-width:700px) {

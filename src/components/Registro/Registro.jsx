@@ -28,8 +28,8 @@ export const Registro = ({ handleShowModal, handleShowPage }) => {
       } else {
         setAlertTitle('Bienvenido');
         setAlertMessage('Por favor inicia sesión');
-        setShowAlert(true);
         setAlertType('exito');
+        setShowAlert(true);
         setTimeout(() => {
           handleShowPage('login');
         }, 10000);
