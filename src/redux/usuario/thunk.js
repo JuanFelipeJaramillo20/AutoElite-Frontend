@@ -1,5 +1,3 @@
-import { compressImage } from '../../helpers/compressImg';
-import { createImgBlob } from '../../helpers/createImg';
 import * as creators from './actions';
 export const register = async (newUser) => {
   const completeNewUser = {
@@ -39,6 +37,7 @@ export const logIn = (userData) => {
       localStorage.setItem('id', result.id);
       dispatch(creators.establecerToken(result.jwTtoken));
       dispatch(getDatosUsuario(result.id));
+      dispatch(getFavorites(result.id));
     } else {
       dispatch(creators.error(result.Error));
     }
@@ -73,7 +72,7 @@ export const getDatosUsuario = (idUsuario) => {
         nroTel: result.telefono,
         rol: result.rolUsuario,
         id: result.id,
-        img: createImgBlob(result.imagenPerfil),
+        img: result.imagenPerfil,
       };
       dispatch(creators.iniciarSesion(userDetails));
     }
@@ -82,33 +81,39 @@ export const getDatosUsuario = (idUsuario) => {
 
 export const guardarImagen = (idUsuario, file) => {
   return async (dispatch) => {
-    try {
-      const compressedFile = await compressImage(file);
-
-      const formData = new FormData();
-      formData.append('img', compressedFile);
-
-      const response = await fetch(
-        `http://localhost:8080/api/v1/usuarios/img/${idUsuario}`,
-        {
-          method: 'PUT',
-          body: formData,
-          headers: {
-            Authorization: localStorage.getItem('token'),
-          },
-        }
-      );
-      if (response.ok) {
-        const objUrl = URL.createObjectURL(compressedFile);
-        dispatch(creators.cambiarFotoPerfil(objUrl));
-      } else {
-        dispatch(creators.error('Error al comprimir la imagen'));
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', 'fotoPerfil_usuarios');
+    const response = await fetch(
+      'https://api.cloudinary.com/v1_1/dxej0w19x/upload',
+      {
+        method: 'POST',
+        body: formData,
       }
-    } catch (error) {
-      console.log(error);
-      dispatch(creators.error('Error en el servidor.'));
+    );
+
+    const result = await response.json();
+    if (response.ok) {
+      dispatch(creators.cambiarFotoPerfil(result.secure_url));
+      guardarURLenBD(idUsuario, result.secure_url);
     }
   };
+};
+
+export const guardarURLenBD = async (idUsuario, url) => {
+  const response = await fetch(
+    `http://localhost:8080/api/v1/usuarios/img/${idUsuario}`,
+    {
+      method: 'PUT',
+      body: url,
+      headers: {
+        Authorization: localStorage.getItem('token'),
+      },
+    }
+  );
+  if (!response.ok) {
+    console.log('error en el servidor back');
+  }
 };
 
 export const guardarCambios = (idUsuario, newData) => {
@@ -143,17 +148,14 @@ export const guardarCambios = (idUsuario, newData) => {
 
 export const addReview = async (newReview, currentUserTOKEN) => {
   try {
-    const response = await fetch(
-      `http://localhost:8080/api/v1/calificacion`,
-      {
-        method: 'POST',
-        body: JSON.stringify(newReview),
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: currentUserTOKEN
-        },
-      }
-    );
+    const response = await fetch(`http://localhost:8080/api/v1/calificacion`, {
+      method: 'POST',
+      body: JSON.stringify(newReview),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: currentUserTOKEN,
+      },
+    });
 
     if (response.status !== 201) {
       return response.Error;
@@ -172,7 +174,7 @@ export const removeReview = async (newReview, currentUserTOKEN) => {
         body: JSON.stringify(newReview),
         headers: {
           'Content-Type': 'application/json',
-          Authorization: currentUserTOKEN
+          Authorization: currentUserTOKEN,
         },
       }
     );
@@ -204,6 +206,44 @@ export const getReviews = async (usuarioId) => {
   } catch (err) {
     return false;
   }
+};
+
+export const getFavorites = (idUsuario) => {
+  return async (dispatch) => {
+    const response = await fetch(
+      `http://localhost:8080/api/v1/usuarios/${idUsuario}/favorites`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    const result = await response.json();
+    console.log(result);
+    if (response.ok) {
+      const lstFavorites = [];
+      result.map((pub) => {
+        const favPub = {
+          id: pub.id,
+          yearCarro: pub.carroPublicacion.year,
+          modeloCarro: pub.carroPublicacion.tipo,
+          marcaCarro: pub.carroPublicacion.marca,
+          precio: pub.carroPublicacion.precio,
+          ciudadVenta: pub.carroPublicacion.ciudad,
+          kilometraje: pub.carroPublicacion.kilometraje,
+          tipoTransmision: pub.carroPublicacion.transmision,
+          tipoCombustible: pub.carroPublicacion.combustible,
+          estado: pub.carroPublicacion.estado,
+        };
+        lstFavorites.push(favPub);
+      });
+      dispatch(creators.cargarGuardados(lstFavorites));
+    } else {
+      dispatch(creators.error('Error cargando las publicaciones favoritas.'));
+    }
+  };
 };
 
 export const getUserData = async (idUsuario) => {
