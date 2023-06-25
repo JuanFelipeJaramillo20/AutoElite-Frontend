@@ -13,13 +13,13 @@ import { CardCar } from '../../components/CardCar/CardCar';
 import './inicio.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { cargarPublicaciones } from '../../redux/publicaciones/thunk';
-import { getMisPublicaciones } from '../../redux/usuario/selectors';
 import { useNavigate } from 'react-router-dom';
+import { getPublicaciones } from '../../redux/publicaciones/selectors';
 
 export const Inicio = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const publicaciones = useSelector(getMisPublicaciones);
+  const publicaciones = useSelector(getPublicaciones);
   useEffect(() => {
     if (publicaciones.length === 0) {
       dispatch(cargarPublicaciones());
@@ -151,7 +151,7 @@ export const Inicio = () => {
           </header>
           <article className='offer-section__content'>
             <div className='offer-car__container'>
-              {publicaciones.map((publicacion, id) => {
+              {publicaciones?.map((publicacion, id) => {
                 return id < 3 ? (
                   <CardCar
                     key={publicacion.idPublicacion}
