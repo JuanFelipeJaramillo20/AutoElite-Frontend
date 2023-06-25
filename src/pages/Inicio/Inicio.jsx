@@ -13,8 +13,8 @@ import { CardCar } from '../../components/CardCar/CardCar';
 import './inicio.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { cargarPublicaciones } from '../../redux/publicaciones/thunk';
-import { useNavigate } from 'react-router-dom';
 import { getPublicaciones } from '../../redux/publicaciones/selectors';
+import { useNavigate } from 'react-router-dom';
 
 export const Inicio = () => {
   const dispatch = useDispatch();

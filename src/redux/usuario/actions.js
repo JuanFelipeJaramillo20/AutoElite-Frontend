@@ -53,31 +53,17 @@ export const cargarGuardados = (idPublicaciones) => {
   };
 };
 
+export const addGuardado = (pubGuardada) => {
+  return {
+    type: types.ADD_GUARDADO,
+    payload: pubGuardada,
+  };
+};
+
 export const eliminarPublicacionGuardada = (idPublicacion) => {
   return {
     type: types.DELETE_GUARDADO,
     payload: idPublicacion,
-  };
-};
-
-export const cargarPublicaciones = (idPublicaciones) => {
-  return {
-    type: types.SET_PUBLICACIONES,
-    payload: idPublicaciones,
-  };
-};
-
-export const eliminarMiPublicacion = (idPublicacion) => {
-  return {
-    type: types.DELETE_PUBLICACION,
-    payload: idPublicacion,
-  };
-};
-
-export const cargarCalificaciones = (calificaciones) => {
-  return {
-    type: types.SET_CALIFICACIONES,
-    payload: calificaciones,
   };
 };
 

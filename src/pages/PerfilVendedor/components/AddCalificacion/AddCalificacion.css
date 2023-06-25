@@ -30,6 +30,7 @@
 
 .profile-username>img {
     border-radius: 50%;
+    cursor: pointer;
 }
 
 .profile-username>p:first-child {

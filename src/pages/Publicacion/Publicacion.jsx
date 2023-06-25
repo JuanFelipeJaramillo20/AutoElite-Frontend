@@ -2,7 +2,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Form } from '../../components/Form/Form';
 import './Publicacion.css';
 import { useEffect, useState } from 'react';
-import { createImgBlob } from '../../helpers/createImg';
 import { IconoPerfil } from '../../components/IconoPerfil/IconoPerfil';
 
 export const Publicacion = () => {
@@ -39,7 +38,7 @@ export const Publicacion = () => {
     ) {
       setEsPrecioNegociable('Sí');
     } else if (publicacion !== null) {
-      setImgPerfil(createImgBlob(publicacion.usuarioPublicacion.imagenPerfil));
+      setImgPerfil(publicacion.usuarioPublicacion.imagenPerfil);
     }
   }, [publicacion]);
 

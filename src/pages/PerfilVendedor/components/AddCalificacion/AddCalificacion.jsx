@@ -2,12 +2,13 @@ import PropTypes from 'prop-types';
 
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import { Star } from './components/Star/Star';
 import { Modal } from '../../../../components/Modal/Modal';
 import { LeaveReview } from './components/LeaveReview/LeaveReview';
 
-import { getId } from '../../../../redux/usuario/selectors';
+import { getId, getAuth } from '../../../../redux/usuario/selectors';
 
 import testImg from '../../../../assets/img/perfil/perfil-ejemplo.jpg';
 import Lottie from 'lottie-react'
@@ -17,6 +18,8 @@ import './AddCalificacion.css';
 
 export const AddCalificacion = (props) => {
   const { totalReviewsVendor, wasReviewed, vendorID, titleSection } = props;
+
+  const history = useNavigate();
 
   let [fiveStars, setFiveStars] = useState(0);
   let [fourStars, setFourStars] = useState(0);
@@ -28,6 +31,7 @@ export const AddCalificacion = (props) => {
   const [wasReviewedByCurrentUser, setWasReviewedByCurrentUser] = useState(false);
 
   const currentUserID = useSelector(getId);
+  const isAuth = useSelector(getAuth);
 
   useEffect(() => {
     function getStars(reviews) {
@@ -95,7 +99,9 @@ export const AddCalificacion = (props) => {
             onClick={handleShowLeaveReview}
             disabled={
               currentUserID === parseInt(vendorID) ||
-              wasReviewedByCurrentUser ? true : false
+              wasReviewedByCurrentUser ||
+              !isAuth ? 
+               true : false
             }
           >
             Dejar calificación
@@ -115,6 +121,7 @@ export const AddCalificacion = (props) => {
             <Lottie className='noreviews-data' animationData={noReview} />
           ) : null}
           {totalReviewsVendor.map((review) => {
+            console.log(review)
             return (
               <div key={review.IdReview} className='user-review'>
                 <div className='user-review__profile'>
@@ -124,6 +131,9 @@ export const AddCalificacion = (props) => {
                       alt='person'
                       width={'50px'}
                       height={'50px'}
+                      onClick={() => {
+                        history(`/perfil/${review.sender.id}`);
+                      }}
                     />
                     <p>
                       <b>{review.sender.nombres}</b>

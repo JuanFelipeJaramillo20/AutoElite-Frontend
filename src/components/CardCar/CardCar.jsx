@@ -1,9 +1,10 @@
 import { useSelector } from 'react-redux';
-import { getAuth } from '../../redux/usuario/selectors';
+import { getAuth, getListaGuardados } from '../../redux/usuario/selectors';
 import './CardCar.css';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { isIdIncluded } from '../../helpers/isIdIncluded';
 export const CardCar = ({
   idPublicacion,
   srcImageCar,
@@ -19,10 +20,15 @@ export const CardCar = ({
   showOpt,
   deletePublicacion,
 }) => {
+  const lstFavorites = useSelector(getListaGuardados);
   const isLoggedIn = useSelector(getAuth);
   const [ShowFillHeart, setShowFillHeart] = useState(false);
   const [showLstOp, setShowLstOp] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setShowFillHeart(isIdIncluded(lstFavorites, idPublicacion));
+  }, [lstFavorites]);
   return (
     <div className='app-cardCar'>
       {showOpt && (
@@ -42,7 +48,7 @@ export const CardCar = ({
           >
             <ul>
               <li>
-                <NavLink>
+                <NavLink to={`/publicacion/editar/${idPublicacion}`}>
                   <span>
                     <i className='fa-solid fa-pen-to-square'></i>
                   </span>{' '}
