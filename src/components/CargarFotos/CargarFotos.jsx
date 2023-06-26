@@ -26,7 +26,7 @@ export const CargarFotos = ({ setFiles }) => {
     event.preventDefault();
     setDragging(false);
     const files = event.dataTransfer.files;
-    if (files.length > 0 && selectedFiles.length + files.length <= 3) {
+    if (files.length > 0 && selectedFiles.length + files.length <= 5) {
       setSelectedFiles([...selectedFiles, ...files]);
     }
   };
