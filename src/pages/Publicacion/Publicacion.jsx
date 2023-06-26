@@ -65,13 +65,25 @@ export const Publicacion = () => {
             {publicacion.carroPublicacion.tipo}
           </h1>
           <div className='imagenes'>
-            <div className='imagen-principal'></div>
+            <div className='imagen-principal'>
+              <img src={publicacion.carroPublicacion.imagenes[0]} alt='' />
+            </div>
             <div className='imagen-secundaria'>
-              <div className='imagenPequeña '></div>
-              <div className='imagenPequeña'></div>
-              <div className='imagenPequeña'></div>
-              <div className='imagenPequeña'></div>
-              <div className='imagenPequeña '></div>
+              <div className='imagenPequeña '>
+                <img src={publicacion.carroPublicacion.imagenes[0]} alt='' />
+              </div>
+              <div className='imagenPequeña'>
+                <img src={publicacion.carroPublicacion.imagenes[1]} alt='' />
+              </div>
+              <div className='imagenPequeña'>
+                <img src={publicacion.carroPublicacion.imagenes[2]} alt='' />
+              </div>
+              <div className='imagenPequeña'>
+                <img src={publicacion.carroPublicacion.imagenes[3]} alt='' />
+              </div>
+              <div className='imagenPequeña '>
+                <img src={publicacion.carroPublicacion.imagenes[4]} alt='' />
+              </div>
             </div>
           </div>
         </div>

@@ -164,6 +164,13 @@
   margin-bottom: 2rem;
 }
 
+.imagenPequeña img,
+.imagen-principal img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 @media screen and (min-width: 940px) {
   .app-publicacion {
     grid-template-columns: 60% 40%;
