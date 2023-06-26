@@ -9,11 +9,9 @@ import { Input } from '../../components/Input/Input';
 import { getToken, getId } from '../../redux/usuario/selectors';
 import { crearPublicacion } from '../../redux/publicaciones/thunk';
 
-
 import './EditarPublicacion.css';
 
 export const EditarPublicacion = () => {
-
   const { publicacionId } = useParams();
 
   const userToken = useSelector(getToken);
@@ -26,102 +24,135 @@ export const EditarPublicacion = () => {
   const [year, setYear] = useState(0);
   const [postDetails, setPostDetails] = useState({});
 
-  const handlePostUpdate = useCallback(async (event, postDetails, year) => {
-    event.preventDefault();
+  const handlePostUpdate = useCallback(
+    async (event, postDetails, year) => {
+      event.preventDefault();
 
-    let isApproved = true;
+      let isApproved = true;
 
-    const approveTest = {
-      'Placa': (postDetails.carro.placa.length === 6),
-      'Estado': !(postDetails.carro.estado.includes('Elige una opción')),
-      'Precio': (postDetails.carro.precio >= 1 && postDetails.carro.precio <= 1000000000),
-      'Precio Negociable': (typeof postDetails.carro.precioEsNegociable === 'boolean') || !(postDetails.carro.precioEsNegociable.includes('Elige una opción')),
-      'Modelo': (postDetails.carro.tipo.length >= 3 && postDetails.carro.tipo.length <= 20),
-      'Marca': (postDetails.carro.marca.length >= 3 && postDetails.carro.marca.length <= 20),
-      'Color': (postDetails.carro.color.length >= 3 && postDetails.carro.color.length <= 20),
-      'Transmision': !(postDetails.carro.transmision.includes('Elige una opción')),
-      'Ciudad': (postDetails.carro.ciudad.length >= 3 && postDetails.carro.ciudad.length <= 20),
-      'Combustible': !(postDetails.carro.combustible.includes('Elige una opción')),
-      'Puertas': (parseInt(postDetails.carro.puertas) >= 2 && parseInt(postDetails.carro.puertas) <= 6),
-      'Motor': (postDetails.carro.motor.length >= 3 && postDetails.carro.motor.length <= 20),
-      'Kilometraje': (postDetails.carro.kilometraje >= 0 && postDetails.carro.kilometraje <= 100000),
-      'Año': (parseInt(postDetails.carro.year) >= 1919 && parseInt(postDetails.carro.year) <= year),
-      'Descripcion': (postDetails.descripcion.length >= 10 && postDetails.descripcion.length <= 100),
-    };
-
-    for (let property in approveTest) {
-      if (!approveTest[property]) {
-        isApproved = approveTest[property];
-        setShowAlert(true);
-        setAlertTitle(`Campo inválido`);
-        setAlertMessage(`${property} debe de ser correcto`);
-        setAlertType('alerta');
-        break;
-      }
-    }
-
-    if (isApproved) {
-      const updatedPost = {
-        "id": postDetails.id,
-        "fechaPublicacion": postDetails.fechaPublicacion,
-        "ciudad": postDetails.ciudad,
-        "usuarioId": userId,
-        "carro": {
-          "puertas": parseInt(postDetails.carro.puertas),
-          "motor": postDetails.carro.motor,
-          "ciudad": postDetails.carro.ciudad,
-          "marca": postDetails.carro.marca,
-          "placa": postDetails.carro.placa,
-          "color": postDetails.carro.color,
-          "tipo": postDetails.carro.tipo,
-          "combustible": postDetails.carro.combustible,
-          "year": parseInt(postDetails.carro.year),
-          "precio": postDetails.carro.precio,
-          "estado": postDetails.carro.estado,
-          "transmision": postDetails.carro.transmision,
-          "kilometraje": postDetails.carro.kilometraje,
-          "precioEsNegociable": (postDetails.carro.precioEsNegociable === 'Si') ? true : false,
-        },
-        "descripcion": postDetails.descripcion
+      const approveTest = {
+        Placa: postDetails.carro.placa.length === 6,
+        Estado: !postDetails.carro.estado.includes('Elige una opción'),
+        Precio:
+          postDetails.carro.precio >= 1 &&
+          postDetails.carro.precio <= 1000000000,
+        'Precio Negociable':
+          typeof postDetails.carro.precioEsNegociable === 'boolean' ||
+          !postDetails.carro.precioEsNegociable.includes('Elige una opción'),
+        Modelo:
+          postDetails.carro.tipo.length >= 3 &&
+          postDetails.carro.tipo.length <= 20,
+        Marca:
+          postDetails.carro.marca.length >= 3 &&
+          postDetails.carro.marca.length <= 20,
+        Color:
+          postDetails.carro.color.length >= 3 &&
+          postDetails.carro.color.length <= 20,
+        Transmision:
+          !postDetails.carro.transmision.includes('Elige una opción'),
+        Ciudad:
+          postDetails.carro.ciudad.length >= 3 &&
+          postDetails.carro.ciudad.length <= 20,
+        Combustible:
+          !postDetails.carro.combustible.includes('Elige una opción'),
+        Puertas:
+          parseInt(postDetails.carro.puertas) >= 2 &&
+          parseInt(postDetails.carro.puertas) <= 6,
+        Motor:
+          postDetails.carro.motor.length >= 3 &&
+          postDetails.carro.motor.length <= 20,
+        Kilometraje:
+          postDetails.carro.kilometraje >= 0 &&
+          postDetails.carro.kilometraje <= 100000,
+        Año:
+          parseInt(postDetails.carro.year) >= 1919 &&
+          parseInt(postDetails.carro.year) <= year,
+        Descripcion:
+          postDetails.descripcion.length >= 10 &&
+          postDetails.descripcion.length <= 100,
       };
 
-      const response = await crearPublicacion(updatedPost, userToken);
-      if (response) {
-        setShowAlert(true);
-        setAlertMessage('Intenta otra vez');
-        setAlertTitle('Error');
-        setAlertType('error');
-      } else {
-        setAlertTitle('Publicado');
-        setAlertMessage('La publicación fue creada');
-        setAlertType('exito');
-        setShowAlert(true);
+      for (let property in approveTest) {
+        if (!approveTest[property]) {
+          isApproved = approveTest[property];
+          setShowAlert(true);
+          setAlertTitle(`Campo inválido`);
+          setAlertMessage(`${property} debe de ser correcto`);
+          setAlertType('alerta');
+          break;
+        }
       }
 
-    }
-  }, [userId, userToken]);
+      if (isApproved) {
+        const updatedPost = {
+          id: postDetails.id,
+          fechaPublicacion: postDetails.fechaPublicacion,
+          ciudad: postDetails.ciudad,
+          usuarioId: userId,
+          carro: {
+            puertas: parseInt(postDetails.carro.puertas),
+            motor: postDetails.carro.motor,
+            ciudad: postDetails.carro.ciudad,
+            marca: postDetails.carro.marca,
+            placa: postDetails.carro.placa,
+            color: postDetails.carro.color,
+            tipo: postDetails.carro.tipo,
+            combustible: postDetails.carro.combustible,
+            year: parseInt(postDetails.carro.year),
+            precio: postDetails.carro.precio,
+            estado: postDetails.carro.estado,
+            transmision: postDetails.carro.transmision,
+            kilometraje: postDetails.carro.kilometraje,
+            precioEsNegociable:
+              postDetails.carro.precioEsNegociable === 'Si' ? true : false,
+          },
+          descripcion: postDetails.descripcion,
+        };
 
-  const handleChangeValues = useCallback((event) => {
-    setPostDetails((prevValue) => {
-      const property = event.target.id;
-      return {
-        ...prevValue,
-        carro: {
-          ...prevValue.carro,
-          [property]: event.target.value,
-        },
-      };
-    });
-  }, [postDetails]);
+        const response = await crearPublicacion(updatedPost, userToken);
+        if (response) {
+          setShowAlert(true);
+          setAlertMessage('Intenta otra vez');
+          setAlertTitle('Error');
+          setAlertType('error');
+        } else {
+          setAlertTitle('Publicado');
+          setAlertMessage('La publicación fue creada');
+          setAlertType('exito');
+          setShowAlert(true);
+        }
+      }
+    },
+    [userId, userToken]
+  );
 
-  const handleChangeDescription = useCallback((event) => {
-    setPostDetails((prevValue) => {
-      return {
-        ...prevValue,
-        "descripcion": event.target.value,
-      };
-    });
-  }, [postDetails]);
+  const handleChangeValues = useCallback(
+    (event) => {
+      setPostDetails((prevValue) => {
+        const property = event.target.id;
+        return {
+          ...prevValue,
+          carro: {
+            ...prevValue.carro,
+            [property]: event.target.value,
+          },
+        };
+      });
+    },
+    [postDetails]
+  );
+
+  const handleChangeDescription = useCallback(
+    (event) => {
+      setPostDetails((prevValue) => {
+        return {
+          ...prevValue,
+          descripcion: event.target.value,
+        };
+      });
+    },
+    [postDetails]
+  );
 
   useEffect(() => {
     let currentYear = new Date(Date.now()).getFullYear();
@@ -164,7 +195,7 @@ export const EditarPublicacion = () => {
               kilometraje: result.carroPublicacion.kilometraje,
               precioEsNegociable: result.carroPublicacion.precioEsNegociable,
             },
-            descripcion: result.descripcion
+            descripcion: result.descripcion,
           };
         });
       }
@@ -195,7 +226,7 @@ export const EditarPublicacion = () => {
                   type={'text'}
                   labelText={'Placa'}
                   value={postDetails.carro.placa}
-                  placeHolder={'Digita la placa'}
+                  placeholder={'Digita la placa'}
                   minLength={6}
                   maxLength={6}
                   required
@@ -268,11 +299,12 @@ export const EditarPublicacion = () => {
                   type={'selection'}
                   labelText={'Transmisión'}
                   opciones={[
-                    "Automática",
-                    "Mecánica",
-                    "Semiautomática",
-                    "Secuencial",
-                    "Manual",]}
+                    'Automática',
+                    'Mecánica',
+                    'Semiautomática',
+                    'Secuencial',
+                    'Manual',
+                  ]}
                   value={postDetails.carro.transmision}
                   onChange={handleChangeValues}
                   required
@@ -293,9 +325,7 @@ export const EditarPublicacion = () => {
                   id={'combustible'}
                   type={'selection'}
                   labelText={'Combustible'}
-                  opciones={[
-                    "Gasolina", "Diesel", "Híbrido", "Eléctrico"
-                  ]}
+                  opciones={['Gasolina', 'Diesel', 'Híbrido', 'Eléctrico']}
                   value={postDetails.carro.combustible}
                   onChange={handleChangeValues}
                   required
@@ -352,7 +382,9 @@ export const EditarPublicacion = () => {
                 />
                 <button
                   className='app-btn'
-                  onClick={(e) => { handlePostUpdate(e, postDetails, year) }}
+                  onClick={(e) => {
+                    handlePostUpdate(e, postDetails, year);
+                  }}
                   disabled={userId !== postDetails.usuarioID ? true : false}
                 >
                   Actualizar Publicación

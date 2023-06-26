@@ -11,61 +11,72 @@ import { crearPublicacion } from '../../redux/publicaciones/thunk';
 import './CrearPublicacion.css';
 import { useSelector } from 'react-redux';
 import { getId, getToken } from '../../redux/usuario/selectors';
+import { guardarImagen } from '../../helpers/guardarImagen';
 
 export const CrearPublicacion = () => {
   const token = useSelector(getToken);
   const idCreador = useSelector(getId);
   const [year, setYear] = useState(0);
-
+  const [files, setFiles] = useState([]);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [alertTitle, setAlertTitle] = useState('');
   const [alertType, setAlertType] = useState('');
-
   useEffect(() => {
     let currentYear = new Date(Date.now()).getFullYear();
     setYear(currentYear);
   }, []);
 
   const handlePostCreation = useCallback(async (data) => {
-    const thisDate = `${new Date(Date.now()).getFullYear()}-${new Date(
-      Date.now()
-    ).getMonth()}-${new Date(Date.now()).getDate()}`;
-
-    const newPost = {
-      id: `${uuidv4()}`,
-      fechaPublicacion: thisDate,
-      ciudad: data.ciudad,
-      usuarioId: idCreador,
-      carro: {
-        puertas: data.puertas,
-        motor: data.motor,
-        ciudad: data.ciudad,
-        marca: data.marca,
-        placa: data.placa,
-        color: data.color,
-        tipo: data.tipo,
-        combustible: data.combustible,
-        year: data.year,
-        estado: data.estado,
-        transmision: data.transmision,
-        precio: parseFloat(data.precio),
-        kilometraje: parseInt(data.kilometraje),
-        precioEsNegociable: data.precioEsNegociable === 'si' ? true : false,
-      },
-      descripcion: data.descripcion,
-    };
-
-    const response = await crearPublicacion(newPost, token);
-    if (response) {
-      setShowAlert(true);
-      setAlertMessage('Intenta otra vez');
-      setAlertTitle('Error');
-      setAlertType('error');
+    console.log(files);
+    if (files.length >= 3) {
+      const thisDate = `${new Date(Date.now()).getFullYear()}-${new Date(
+        Date.now()
+      ).getMonth()}-${new Date(Date.now()).getDate()}`;
+      const imagenes = await guardarImagen(files);
+      if (imagenes.length !== 0) {
+        console.log(imagenes);
+        const newPost = {
+          id: `${uuidv4()}`,
+          fechaPublicacion: thisDate,
+          ciudad: data.ciudad,
+          usuarioId: idCreador,
+          carro: {
+            puertas: data.puertas,
+            motor: data.motor,
+            ciudad: data.ciudad,
+            marca: data.marca,
+            placa: data.placa,
+            color: data.color,
+            tipo: data.tipo,
+            combustible: data.combustible,
+            year: data.year,
+            estado: data.estado,
+            transmision: data.transmision,
+            precio: parseFloat(data.precio),
+            kilometraje: parseInt(data.kilometraje),
+            precioEsNegociable: data.precioEsNegociable === 'si' ? true : false,
+            imagenes: imagenes,
+          },
+          descripcion: data.descripcion,
+        };
+        const response = await crearPublicacion(newPost, token);
+        if (response) {
+          setShowAlert(true);
+          setAlertMessage('Intenta otra vez');
+          setAlertTitle('Error');
+          setAlertType('error');
+        } else {
+          setAlertTitle('Publicado');
+          setAlertMessage('La publicación fue creada');
+          setAlertType('exito');
+          setShowAlert(true);
+        }
+      }
     } else {
-      setAlertTitle('Publicado');
-      setAlertMessage('La publicación fue creada');
-      setAlertType('exito');
+      setAlertTitle('Elige 5 imagenes');
+      setAlertMessage('Por favor selecciona 5 imagenes.');
+      setAlertType('error');
       setShowAlert(true);
     }
   }, []);
@@ -92,7 +103,7 @@ export const CrearPublicacion = () => {
                   type: 'text',
                   id: 'placa',
                   label: 'Placa',
-                  placeHolder: 'Digita la placa del vehículo',
+                  placeholder: 'Digita la placa del vehículo',
                   validacion: {
                     required: true,
                     minLength: 6,
@@ -117,7 +128,7 @@ export const CrearPublicacion = () => {
                   type: 'number',
                   id: 'precio',
                   label: 'Precio',
-                  placeHolder: 'Digita el precio del vehículo',
+                  placeholder: 'Digita el precio del vehículo',
                   validacion: {
                     required: true,
                     min: 1,
@@ -142,7 +153,7 @@ export const CrearPublicacion = () => {
                   type: 'text',
                   id: 'tipo',
                   label: 'Modelo',
-                  placeHolder: 'Digita el modelo del vehículo',
+                  placeholder: 'Digita el modelo del vehículo',
                   validacion: {
                     required: true,
                     minLength: 3,
@@ -158,7 +169,7 @@ export const CrearPublicacion = () => {
                   type: 'text',
                   id: 'marca',
                   label: 'Marca',
-                  placeHolder: 'Digita la marca del vehículo',
+                  placeholder: 'Digita la marca del vehículo',
                   validacion: {
                     required: true,
                     minLength: 3,
@@ -174,7 +185,7 @@ export const CrearPublicacion = () => {
                   type: 'text',
                   id: 'color',
                   label: 'Color',
-                  placeHolder: 'Digita el color del vehículo',
+                  placeholder: 'Digita el color del vehículo',
                   validacion: {
                     required: true,
                     minLength: 3,
@@ -205,7 +216,7 @@ export const CrearPublicacion = () => {
                   type: 'text',
                   id: 'ciudad',
                   label: 'Ciudad',
-                  placeHolder: 'Digita la ciudad del vehículo',
+                  placeholder: 'Digita la ciudad del vehículo',
                   validacion: {
                     required: true,
                     minLength: 3,
@@ -230,7 +241,7 @@ export const CrearPublicacion = () => {
                   type: 'number',
                   id: 'puertas',
                   label: 'Puertas',
-                  placeHolder: 'Digita la cantidad de puertas del vehículo',
+                  placeholder: 'Digita la cantidad de puertas del vehículo',
                   validacion: {
                     required: true,
                     min: 1,
@@ -247,7 +258,7 @@ export const CrearPublicacion = () => {
                   type: 'text',
                   id: 'motor',
                   label: 'Motor',
-                  placeHolder: 'Digita el motor del vehículo',
+                  placeholder: 'Digita el motor del vehículo',
                   validacion: {
                     required: true,
                     minLength: 2,
@@ -263,7 +274,7 @@ export const CrearPublicacion = () => {
                   type: 'number',
                   id: 'kilometraje',
                   label: 'Kilómetros',
-                  placeHolder: 'Digita los kilómetros del vehículo',
+                  placeholder: 'Digita los kilómetros del vehículo',
                   validacion: {
                     required: true,
                     min: 0,
@@ -279,7 +290,7 @@ export const CrearPublicacion = () => {
                   type: 'number',
                   id: 'year',
                   label: 'Año',
-                  placeHolder: 'Digita el año del vehículo',
+                  placeholder: 'Digita el año del vehículo',
                   validacion: {
                     required: true,
                     min: 1919,
@@ -295,7 +306,7 @@ export const CrearPublicacion = () => {
                   type: 'textarea',
                   id: 'descripcion',
                   label: 'Descripción',
-                  placeHolder: 'Da una descripción del vehículo',
+                  placeholder: 'Da una descripción del vehículo',
                   validacion: {
                     required: true,
                     minLength: 10,
@@ -312,7 +323,9 @@ export const CrearPublicacion = () => {
               onSubmit={handlePostCreation}
             />
             <div className='form-pics'>
-              <CargarFotos />
+              <CargarFotos
+                setFiles={(filesSelected) => setFiles(filesSelected)}
+              />
             </div>
           </div>
         </article>

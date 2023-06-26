@@ -9,8 +9,6 @@ import { Modal } from '../../../../components/Modal/Modal';
 import { LeaveReview } from './components/LeaveReview/LeaveReview';
 
 import { getId, getAuth } from '../../../../redux/usuario/selectors';
-
-import testImg from '../../../../assets/img/perfil/perfil-ejemplo.jpg';
 import Lottie from 'lottie-react';
 import noReview from '../../../../assets/animations/noReviws.json';
 
@@ -33,7 +31,6 @@ export const AddCalificacion = (props) => {
 
   const currentUserID = useSelector(getId);
   const isAuth = useSelector(getAuth);
-
   useEffect(() => {
     function getStars(reviews) {
       setFiveStars(0);
@@ -128,13 +125,16 @@ export const AddCalificacion = (props) => {
             <Lottie className='noreviews-data' animationData={noReview} />
           ) : null}
           {totalReviewsVendor.map((review) => {
-            console.log(review);
             return (
-              <div key={review.IdReview} className='user-review'>
+              <div key={review.id} className='user-review'>
                 <div className='user-review__profile'>
                   <div className='profile-username'>
                     <img
-                      src={testImg}
+                      src={
+                        review.sender.imagenPerfil
+                          ? review.sender.imagenPerfil
+                          : '../src/assets/img/perfil/usuario.png'
+                      }
                       alt='person'
                       width={'50px'}
                       height={'50px'}

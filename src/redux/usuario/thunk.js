@@ -314,15 +314,12 @@ export const getUserData = async (idUsuario) => {
 
 export const getAllUsers = async () => {
   try {
-    const response = await fetch(
-      `http://localhost:8080/api/v1/usuarios`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    const response = await fetch(`http://localhost:8080/api/v1/usuarios`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
     const result = await response.json();
     if (response.ok && !result.Error) {
