@@ -20,6 +20,7 @@ import { MisPublicaciones } from '../pages/PerfilUsuario/Components/MisPublicaci
 import { MisReseñas } from '../pages/PerfilUsuario/Components/MisReseñas/MisReseñas';
 import { NoEncontrado } from '../pages/NoEncontrado/NoEncontrado';
 import { getDatosUsuario } from '../redux/usuario/thunk';
+import { establecerToken } from '../redux/usuario/actions';
 
 export const RoutesConfiguration = () => {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ export const RoutesConfiguration = () => {
   const id = localStorage.getItem('id');
   if (token && id) {
     dispatch(getDatosUsuario(id));
+    dispatch(establecerToken(token));
   }
   const isLoggedIn = useSelector(getAuth);
   return (

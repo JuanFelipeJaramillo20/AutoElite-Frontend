@@ -1,11 +1,11 @@
 import { useSelector } from 'react-redux';
 import { OpcionesPerfil } from '../../../../components/OpcionesPerfil/OpcionesPerfil';
-import { getEmail } from '../../../../redux/usuario/selectors';
+import { getId } from '../../../../redux/usuario/selectors';
 import { Publicaciones } from '../../../../components/Publicaciones/Publicaciones';
 import './MisPublicaciones.css';
 
 export const MisPublicaciones = () => {
-  const correo = useSelector(getEmail);
+  const id = useSelector(getId);
   return (
     <div className='app-configuracion'>
       <OpcionesPerfil />
@@ -14,7 +14,7 @@ export const MisPublicaciones = () => {
           Acá encontrarás las publicaciones que has realizado. <br />
           Editalas o eliminelas.
         </p>
-        <Publicaciones userEmail={correo} showOpt={true} />
+        <Publicaciones userId={id} showOpt={true} />
       </div>
     </div>
   );

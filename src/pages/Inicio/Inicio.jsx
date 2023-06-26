@@ -114,7 +114,7 @@ export const Inicio = () => {
           <div className='intro-section__table'>
             <header>
               <h2>
-                <b>Descubre carros en un solor lugar</b>
+                <b>Descubre carros en un solo lugar</b>
               </h2>
             </header>
 

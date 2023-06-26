@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { CardCar } from '../CardCar/CardCar';
 import './Publicaciones.css';
 export const Publicaciones = ({
-  userEmail,
+  userId,
   setCantidadPublicaciones,
   showOpt,
 }) => {
@@ -14,9 +14,9 @@ export const Publicaciones = ({
       return prevPub.filter((pub) => pub.id != idPublicacion);
     });
   };
-  const obtenerPublicaciones = async (emailAutor) => {
+  const obtenerPublicaciones = async (userId) => {
     const response = await fetch(
-      `http://localhost:8080/api/v1/publicaciones/byuser/${emailAutor}`,
+      `http://localhost:8080/api/v1/publicaciones/byuser/${userId}`,
       {
         method: 'GET',
         headers: {
@@ -32,7 +32,7 @@ export const Publicaciones = ({
   };
 
   useEffect(() => {
-    obtenerPublicaciones(userEmail);
+    obtenerPublicaciones(userId);
   }, []);
 
   useEffect(() => {
@@ -68,7 +68,7 @@ export const Publicaciones = ({
 };
 
 Publicaciones.propTypes = {
-  userEmail: PropTypes.string.isRequired,
+  userId: PropTypes.number.isRequired,
   setCantidadPublicaciones: PropTypes.func,
   showOpt: PropTypes.bool,
 };
