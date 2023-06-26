@@ -74,6 +74,7 @@ export const getDatosUsuario = (idUsuario) => {
         img: result.imagenPerfil,
       };
       dispatch(creators.iniciarSesion(userDetails));
+      dispatch(getFavorites(result.id));
     }
   };
 };
@@ -241,6 +242,51 @@ export const getFavorites = (idUsuario) => {
       dispatch(creators.cargarGuardados(lstFavorites));
     } else {
       dispatch(creators.error('Error cargando las publicaciones favoritas.'));
+    }
+  };
+};
+
+export const setFavorites = (idPub, idUsuario) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/v1/usuarios/${idUsuario}/favoritos/${idPub}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: localStorage.getItem('token'),
+          },
+        }
+      );
+      if (response.ok) {
+        dispatch(getFavorites(idUsuario));
+      }
+    } catch (err) {
+      return dispatch(creators.error('Error con el servidor'));
+    }
+  };
+};
+
+export const deleteFavorites = (idPub, idUsuario) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/v1/usuarios/${idUsuario}/favorites/remove/${idPub}`,
+        {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: localStorage.getItem('token'),
+          },
+        }
+      );
+      console.log(response);
+      if (response.ok) {
+        dispatch(getFavorites(idUsuario));
+      }
+    } catch (err) {
+      return dispatch(creators.error('Error con el servidor'));
     }
   };
 };

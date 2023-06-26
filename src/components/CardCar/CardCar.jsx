@@ -1,10 +1,15 @@
-import { useSelector } from 'react-redux';
-import { getAuth, getListaGuardados } from '../../redux/usuario/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  getAuth,
+  getId,
+  getListaGuardados,
+} from '../../redux/usuario/selectors';
 import './CardCar.css';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { isIdIncluded } from '../../helpers/isIdIncluded';
+import { deleteFavorites, setFavorites } from '../../redux/usuario/thunk';
 export const CardCar = ({
   idPublicacion,
   srcImageCar,
@@ -21,14 +26,24 @@ export const CardCar = ({
   deletePublicacion,
 }) => {
   const lstFavorites = useSelector(getListaGuardados);
+  const idUsuario = useSelector(getId);
   const isLoggedIn = useSelector(getAuth);
   const [ShowFillHeart, setShowFillHeart] = useState(false);
   const [showLstOp, setShowLstOp] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setShowFillHeart(isIdIncluded(lstFavorites, idPublicacion));
   }, [lstFavorites]);
+
+  const darFavorito = () => {
+    dispatch(setFavorites(idPublicacion, idUsuario));
+  };
+
+  const quitarFavorito = () => {
+    dispatch(deleteFavorites(idPublicacion, idUsuario));
+  };
   return (
     <div className='app-cardCar'>
       {showOpt && (
@@ -86,12 +101,18 @@ export const CardCar = ({
           {ShowFillHeart ? (
             <i
               className='fa-solid fa-heart'
-              onClick={() => setShowFillHeart(false)}
+              onClick={() => {
+                setShowFillHeart(false);
+                quitarFavorito();
+              }}
             ></i>
           ) : (
             <i
               className='fa-regular fa-heart'
-              onClick={() => setShowFillHeart(true)}
+              onClick={() => {
+                setShowFillHeart(true);
+                darFavorito();
+              }}
             ></i>
           )}
         </div>

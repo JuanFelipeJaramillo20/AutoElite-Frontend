@@ -167,7 +167,7 @@ export const Inicio = () => {
           </header>
           <article className='offer-section__content'>
             <div className='offer-car__container'>
-              {publicaciones.map((publicacion, id) => {
+              {publicaciones?.map((publicacion, id) => {
                 return id < 3 ? (
                   <CardCar
                     key={publicacion.idPublicacion}

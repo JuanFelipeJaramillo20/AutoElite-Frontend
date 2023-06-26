@@ -124,7 +124,7 @@ export const PerfilVendedor = () => {
         </div>
         <div className='more__cars'>
           <Publicaciones
-            userEmail={usuario.email}
+            userId={usuarioId}
             setCantidadPublicaciones={(cantidad) =>
               setCantidadPublicaciones(cantidad)
             }
