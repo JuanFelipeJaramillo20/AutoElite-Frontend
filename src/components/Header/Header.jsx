@@ -1,24 +1,38 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import './Header.css';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAuth, getImagen } from '../../redux/usuario/selectors';
+
+import { getAuth, getImagen, getRol } from '../../redux/usuario/selectors';
+
 import { logOut } from '../../redux/usuario/thunk';
 import { IconoPerfil } from '../IconoPerfil/IconoPerfil';
 import { Boton } from '../Boton/Boton';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { Login } from '../Login/Login';
+
+import './Header.css';
+
 export const Header = () => {
+
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  const isLoggedIn = useSelector(getAuth);
+  const imgPerfil = useSelector(getImagen);
+  const userRole = useSelector(getRol);
+
   const [showModal, setShowModal] = useState(false);
   const [toPage, setToPage] = useState('login');
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== 'undefined' ? window.innerWidth : 0
   );
+  const [showInformationProfile, setShowInformationProfile] = useState(false);
+  const [isADefinedObjet, setIsADefinedObject] = useState(false);
+  //const [isScrolling, setScrolling] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
   const navRef = useRef();
-  const navigate = useNavigate();
-  const isLoggedIn = useSelector(getAuth);
-  const imgPerfil = useSelector(getImagen);
   const headerContainerRef = useRef();
   const profileRef = useRef();
   const windowInformationRef = useRef();
@@ -27,12 +41,6 @@ export const Header = () => {
   const secondLineBurgerBtnRef = useRef();
   const thirdLineBurgerBtnRef = useRef();
   const headerOptionsRef = useRef();
-  const [showInformationProfile, setShowInformationProfile] = useState(false);
-  const [isADefinedObjet, setIsADefinedObject] = useState(false);
-
-  const [isScrolling, setScrolling] = useState(false);
-
-  const [isOpen, setIsOpen] = useState(false);
 
   const showNavbar = () => {
     setShowModal(false);
@@ -79,7 +87,7 @@ export const Header = () => {
     }
   }, [windowWidth, showModal, toPage]);
 
-  useEffect(() => {
+  /*useEffect(() => {
     function handleScroll() {
       const scroll = window.scrollY;
       if (headerContainerRef.current) {
@@ -108,8 +116,8 @@ export const Header = () => {
 
     /*return () => {
       window.removeEventListener('scroll', handleScroll);
-    };*/
-  }, []);
+    };
+  }, []);*/
 
   useEffect(() => {
     const divContainerProfile = document.querySelector(
@@ -134,6 +142,11 @@ export const Header = () => {
           'mouseleave',
           handleHideInfoWindow
         );
+        if (userRole === 'ADMIN') {
+          windowInformationRef.current.classList.add('admin-profile__options');
+        } else {
+          windowInformationRef.current.classList.remove('admin-profile__options');
+        }
       }
     }
 
@@ -149,7 +162,7 @@ export const Header = () => {
         );
       }
     };
-  }, [isADefinedObjet, isLoggedIn]);
+  }, [isADefinedObjet, isLoggedIn, userRole]);
 
   function handleMenuBton(isOpen) {
     const isDefined =
@@ -239,39 +252,46 @@ export const Header = () => {
           <div ref={headerOptionsRef} className='header__options'>
             <div ref={navRef} className='app-header__navigation'>
               <nav className='nav-normal'>
+
                 <NavLink
                   onClick={() => {
                     showNavbar();
                     handleCloseMenu();
                   }}
                   className='app-navlink'
-                  to='/'
+                  to={ (userRole !== 'USER') && (userRole !== '') ? '/inicioAdmin' : '/'}
                 >
-                  Inicio
+                  {(userRole !== 'USER') && (userRole !== '') ? 'Usuarios' : 'Inicio'}
                 </NavLink>
+
                 <NavLink
                   onClick={() => {
                     showNavbar();
                     handleCloseMenu();
                   }}
                   className='app-navlink'
-                  to='/catalogo'
+                  to={(userRole !== 'USER') && (userRole !== '') ? '/publicaciones' : '/catalogo'}
                 >
-                  Catálogo
+                   {(userRole !== 'USER') && (userRole !== '') ? 'Publicaciones' : 'Catálogo'}
                 </NavLink>
-                <NavLink
-                  onClick={() => {
-                    showNavbar();
-                    handleCloseMenu();
-                  }}
-                  className='app-navlink'
-                  to='/contacto'
-                >
-                  Contáctanos
-                </NavLink>
+
+                {(userRole !== 'USER') && (userRole !== '') ? null : (
+                  <NavLink
+                    onClick={() => {
+                      showNavbar();
+                      handleCloseMenu();
+                    }}
+                    className='app-navlink'
+                    to='/contacto'
+                  >
+                    Contáctanos
+                  </NavLink>
+                )}
+
                 <button className='app-navBtn app-closeBtn'>
                   <FaTimes onClick={showNavbar} />
                 </button>
+
               </nav>
               {isLoggedIn ? (
                 <div className='app-header__logged-in'>
@@ -308,22 +328,26 @@ export const Header = () => {
                               publicaciones
                             </NavLink>
                           </li>
-                          <li onClick={handleCloseMenu}>
-                            <NavLink to='/favoritos'>
-                              <span>
-                                <i className='fa-solid fa-heart-circle-plus'></i>
-                              </span>{' '}
-                              Favoritos
-                            </NavLink>
-                          </li>
-                          <li onClick={handleCloseMenu}>
-                            <NavLink to='/misReseñas'>
-                              <span>
-                                <i className='fa-solid fa-star painted'></i>
-                              </span>{' '}
-                              Reseñas
-                            </NavLink>
-                          </li>
+                          {(userRole !== 'USER') && (userRole !== '') ? null : (
+                            <>
+                              <li onClick={handleCloseMenu}>
+                                <NavLink to='/favoritos'>
+                                  <span>
+                                    <i className='fa-solid fa-heart-circle-plus'></i>
+                                  </span>{' '}
+                                  Favoritos
+                                </NavLink>
+                              </li>
+                              <li onClick={handleCloseMenu}>
+                                <NavLink to='/misReseñas'>
+                                  <span>
+                                    <i className='fa-solid fa-star painted'></i>
+                                  </span>{' '}
+                                  Reseñas
+                                </NavLink>
+                              </li>
+                            </>
+                          )}
                           <li onClick={handleCloseMenu}>
                             <NavLink onClick={() => dispatch(logOut())}>
                               <span>
