@@ -4,82 +4,109 @@
   top: 0;
   display: flex;
   justify-content: center;
+  align-items: center;
+  width: 100%;
   z-index: 2100;
 }
 
 .alert__body {
+  display: flex;
+  flex-direction: row;
+  gap: 5%;
+  align-items: center;
+
   position: fixed;
-  top: 1%;
-  background-color: rgb(31, 25, 36);
+  top: 10%;
+
   margin-top: 1%;
   border: 1px solid black;
   border-radius: 2vw;
-  width: 30%;
-  min-width: 200px;
+
+  width: 50%;
+  min-width: 290px;
+  max-width: 1000px;
+
   text-align: center;
   overflow: hidden;
+
+  padding: 1%;
 }
 
 .body-title>h2 {
   font-size: clamp(20px,3vw,30px);
-  color: white;
+  color: black;
 }
 
 .body-content>p {
   font-size: clamp(16px,2vw,18px);
-  color: white;
-}
-
-.body-content {
-  margin-bottom: 10%;
-}
-
-.line>button{
-  position: absolute;
-  top: 18%;
-  right: 10%;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  font-size: clamp(15px,2vw,22px);
   color: black;
+}
+
+.alert__body>button{
+  position: absolute;
+  right: 3%;
+  top: 10%;
+
+  border: none;
+
+  background-color: transparent;
+  border-radius: 15px;
+
+  width: 5vw;
+  max-width: 25px;
+  min-width: 20px;
+  height: 5vw;
+  max-height: 25px;
+  min-height: 20px;
+
+  cursor: pointer;
+
+  font-size: clamp(15px,2vw,22px);
+
+  color: black;
+
   transition: 0.3s;
 }
 
-.line>button:hover {
-  color: white;
+.alert__body>button:hover {
+  background-color: rgba(255, 255, 255, 0.6);
 }
 
-.line {
-  position: relative;
-  height: 35px;
-  margin-left: 0vw;
+.text-alert {
+  width: 40%;
+
 }
 
 .icon-modal {
+  width: 10vw;
+  max-width: 80px;
+  min-width: 50px;
+  height: 10vw;
+  max-height: 80px;
+  min-height: 50px;
+
+  display: grid;
+  place-items: center;
+
   font-size: clamp(20px, 4vw, 40px);
+
+  background-color: red;
+
+  border-radius: 50%;
+}
+
+.icon {
+  color: white;
 }
 
 .error {
   background-color: red;
 }
 
-.icon-error {
-  color: red;
-}
-
 .alerta {
   background-color: yellow;
 }
 
-.icon-alerta {
-  color: yellow;
-}
-
 .exito {
   background-color: green;
-}
-
-.icon-exito {
-  color: green;
 }

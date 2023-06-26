@@ -31,7 +31,6 @@ export const logIn = (userData) => {
       },
     });
     const result = await response.json();
-    console.log(result);
     if (response.ok) {
       localStorage.setItem('token', result.jwTtoken);
       localStorage.setItem('id', result.id);
@@ -264,5 +263,28 @@ export const getUserData = async (idUsuario) => {
     }
   } catch (err) {
     return err;
+  }
+};
+
+export const getAllUsers = async () => {
+  try {
+    const response = await fetch(
+      `http://localhost:8080/api/v1/usuarios`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    const result = await response.json();
+    if (response.ok && !result.Error) {
+      return [true, result];
+    } else {
+      return [false, result.Error];
+    }
+  } catch (err) {
+    return [false, err];
   }
 };

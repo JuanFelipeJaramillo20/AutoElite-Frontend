@@ -238,7 +238,7 @@ export const EditarPublicacion = () => {
                   value={postDetails.carro.tipo}
                   onChange={handleChangeValues}
                   required
-                  minLength={3}
+                  minLength={2}
                   maxLength={20}
                 />
                 <Input
@@ -249,7 +249,7 @@ export const EditarPublicacion = () => {
                   value={postDetails.carro.marca}
                   onChange={handleChangeValues}
                   required
-                  minLength={3}
+                  minLength={2}
                   maxLength={20}
                 />
                 <Input
@@ -260,7 +260,7 @@ export const EditarPublicacion = () => {
                   value={postDetails.carro.color}
                   onChange={handleChangeValues}
                   required
-                  minLength={3}
+                  minLength={2}
                   maxLength={20}
                 />
                 <Input
@@ -286,7 +286,7 @@ export const EditarPublicacion = () => {
                   value={postDetails.carro.ciudad}
                   onChange={handleChangeValues}
                   required
-                  minLength={3}
+                  minLength={2}
                   maxLength={30}
                 />
                 <Input
@@ -297,15 +297,6 @@ export const EditarPublicacion = () => {
                     "Gasolina", "Diesel", "Híbrido", "Eléctrico"
                   ]}
                   value={postDetails.carro.combustible}
-                  onChange={handleChangeValues}
-                  required
-                />
-                <Input
-                  id={'precioEsNegociable'}
-                  type={'selection'}
-                  labelText={'Precio Negociable'}
-                  opciones={['Si', 'No']}
-                  value={postDetails.carro.precioEsNegociable}
                   onChange={handleChangeValues}
                   required
                 />
@@ -326,7 +317,7 @@ export const EditarPublicacion = () => {
                   value={postDetails.carro.motor}
                   onChange={handleChangeValues}
                   required
-                  minLength={3}
+                  minLength={2}
                   maxLength={20}
                 />
                 <Input

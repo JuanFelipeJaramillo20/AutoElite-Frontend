@@ -1,4 +1,6 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { Inicio } from '../pages/Inicio/Inicio';
 import { Catalogo } from '../pages/Catalogo/Catalogo';
 import { Contacto } from '../pages/Contacto/Contacto';
@@ -14,19 +16,25 @@ import { Favoritos } from '../pages/PerfilUsuario/Components/Favoritos/Favoritos
 import { PreguntasFrecuentes } from '../pages/PreguntasFrecuentes/PreguntasFrecuentes';
 import { LoginPage } from '../pages/LoginPage/LoginPage';
 import { RegisterPage } from '../pages/RegisterPage/RegisterPage';
-import { useDispatch, useSelector } from 'react-redux';
 import { getAuth } from '../redux/usuario/selectors';
 import { MisPublicaciones } from '../pages/PerfilUsuario/Components/MisPublicaciones/MisPublicaciones';
 import { MisReseñas } from '../pages/PerfilUsuario/Components/MisReseñas/MisReseñas';
+import { InicioAdmin } from '../pages/InicioAdmin/InicioAdmin';
+import { Publicaciones } from '../pages/Publicaciones/Publicaciones';
 import { NoEncontrado } from '../pages/NoEncontrado/NoEncontrado';
+
 import { getDatosUsuario } from '../redux/usuario/thunk';
+import { establecerToken } from '../redux/usuario/actions';
 
 export const RoutesConfiguration = () => {
   const dispatch = useDispatch();
+
   const token = localStorage.getItem('token');
   const id = localStorage.getItem('id');
+
   if (token && id) {
     dispatch(getDatosUsuario(id));
+    dispatch(establecerToken(token));
   }
   const isLoggedIn = useSelector(getAuth);
   return (
@@ -48,6 +56,9 @@ export const RoutesConfiguration = () => {
             path='/publicacion/editar/:publicacionId'
             element={<EditarPublicacion />}
           />
+          <Route path='/inicioAdmin' element={<InicioAdmin />} />
+          <Route path='/publicaciones' element={<Publicaciones />} />
+
           <Route path='/favoritos' element={<Favoritos />} />
 
           <Route path='/miPerfil' element={<PerfilUsuario />} />
