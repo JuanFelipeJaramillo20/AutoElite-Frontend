@@ -13,7 +13,8 @@
 }
 
 .error-loader {
-  width: 80%;
+  width: 100%;
+  max-width: 900px;
   margin-inline: auto;
   overflow: hidden;
 }
@@ -27,6 +28,7 @@
 .back-error-page {
   display: grid;
   place-items: center;
+  margin-bottom: 5%;
 }
 
 .back-error-page > button {
@@ -34,8 +36,9 @@
   background-color: transparent;
   font-size: clamp(15px, 2.5vw, 25px);
   border-radius: 2vw;
-  padding: 2%;
+  padding: 0.5%;
   width: 15%;
+  max-width: 180px;
   transition: 0.3s;
   cursor: pointer;
   color: black;

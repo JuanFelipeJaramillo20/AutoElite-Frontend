@@ -146,6 +146,15 @@
   transition: 0.3s;
 }
 
+.admin-profile__options {
+  display: grid;
+  align-items: center;
+
+  top: 100%;
+
+  height: 130px;
+}
+
 @media screen and (max-width: 920px) {
   .app-header {
     justify-content: space-between;
@@ -186,7 +195,7 @@
     display: grid;
     place-items: center;
     z-index: 1200;
-    top: 40%;
+    top: 5%;
     right: 5%;
     mix-blend-mode: difference;
     color: white;

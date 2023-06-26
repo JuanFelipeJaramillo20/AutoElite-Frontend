@@ -1,4 +1,7 @@
 import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
 //import homeCar from '../../assets/img/inicio/homeCar.png';
 import jdcar from '../../assets/img/inicio/finished-transformed.png';
 import backgroundLine from '../../assets/img/inicio/backgroundLine.png';
@@ -10,21 +13,27 @@ import carroJuandaInicioTres from '../../assets/img/inicio/si.jpeg';
 
 import { CardCar } from '../../components/CardCar/CardCar';
 
-import './inicio.css';
-import { useDispatch, useSelector } from 'react-redux';
 import { cargarPublicaciones } from '../../redux/publicaciones/thunk';
 import { getPublicaciones } from '../../redux/publicaciones/selectors';
-import { useNavigate } from 'react-router-dom';
+import { getRol } from '../../redux/usuario/selectors';
+
+import './inicio.css';
 
 export const Inicio = () => {
+
   const dispatch = useDispatch();
+
   const navigate = useNavigate();
+
   const publicaciones = useSelector(getPublicaciones);
+  const userRole = useSelector(getRol);
+
   useEffect(() => {
     if (publicaciones.length === 0) {
       dispatch(cargarPublicaciones());
     }
   }, []);
+
   const razones = [
     {
       id: 1,
@@ -63,11 +72,18 @@ export const Inicio = () => {
         'Nos comprometemos a proteger tus datos personales de forma segura. Puedes confiar en que tus datos estarán protegidos y que nos tomamos en serio la privacidad de nuestros usuarios. ',
     },
   ];
+
   const carrosJuanda = [
     carroJuandaInicioUno,
     carroJuandaInicioDos,
     carroJuandaInicioTres,
   ];
+
+  useEffect(() => {
+    if (userRole === 'ADMIN') {
+      navigate('/inicioAdmin');
+    }
+  }, [navigate, userRole]);
 
   useEffect(() => {
     const reasonCar = document.getElementById('little-car__movement');
@@ -114,7 +130,7 @@ export const Inicio = () => {
           <div className='intro-section__table'>
             <header>
               <h2>
-                <b>Descubre carros en un solor lugar</b>
+                <b>Descubre carros en un solo lugar</b>
               </h2>
             </header>
 

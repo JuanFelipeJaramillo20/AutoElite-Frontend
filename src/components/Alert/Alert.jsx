@@ -13,93 +13,60 @@ export const Alert = (props) => {
     } = props;
 
     const containerAlert = useRef();
-    const alertColorRef = useRef();
     const alertBodyRed = useRef();
 
     const [iconModal, setIconModal] = useState('');
-    const [containerAlertWidth, setContainerAlertWidth] = useState(0);
 
     useEffect(() => {
-        const areDefined = alertColorRef.current
+        const areDefined = alertBodyRed.current
         if (areDefined) {
             if (type === 'error') {
-                alertColorRef.current.style.backgroundColor = 'red';
-                //alertColorRef.current.classList.add('error');
+                alertBodyRed.current.style.backgroundColor = 'lightcoral';
+                alertBodyRed.current.style.border = '1px solid red';
                 setIconModal("error");
             }
             if (type === 'alerta') {
-                //alertColorRef.current.classList.add('alerta');
-                alertColorRef.current.style.backgroundColor = 'yellow';
+                alertBodyRed.current.style.backgroundColor = 'lightyellow';
+                alertBodyRed.current.style.border = '1px solid yellow';
                 setIconModal("alerta");
             }
             if (type === 'exito') {
-                //alertColorRef.current.classList.add('exito');
-                alertColorRef.current.style.backgroundColor = 'green';
+                alertBodyRed.current.style.backgroundColor = 'lightgreen';
+                alertBodyRed.current.style.border = '1px solid green';
                 setIconModal("exito");
             }
         }
     }, [type]);
-
-    useEffect(() => {
-        const handleResize = () => {
-            const areDefined = containerAlert.current && alertColorRef.current && alertBodyRed.current;
-            if (areDefined) {
-                setContainerAlertWidth(window.innerWidth * 0.98);
-                containerAlert.current.style.width = containerAlertWidth + 'px';
-                const widthNew = alertBodyRed.current.offsetWidth;
-                alertColorRef.current.style.width = `${widthNew + 20}px`;
-            }
-        };
-        handleResize();
-    }, [containerAlertWidth]);
-
-    useEffect(() => {
-        const handleResize = () => {
-            const areDefined = containerAlert.current && alertColorRef.current && alertBodyRed.current;
-            if (areDefined) {
-                setContainerAlertWidth(window.innerWidth * 0.98);
-                containerAlert.current.style.width = containerAlertWidth + 'px';
-                const widthNew = alertBodyRed.current.offsetWidth;
-                alertColorRef.current.style.width = `${widthNew + 20}px`;
-            }
-        };
-
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize)
-        };
-    }, [containerAlertWidth]);
 
     return (
         <>
             <div ref={containerAlert} className='container-alert'>
                 <div ref={alertBodyRed} className='alert__body'>
 
-                    <div ref={alertColorRef} className='line'>
-                        <button onClick={() => { setShowModal(false) }}>
-                            <i className="fa-solid fa-xmark"></i>
-                        </button>
-                    </div>
+                    <button onClick={() => { setShowModal(false) }}>
+                        <i className="fa-solid fa-xmark"></i>
+                    </button>
 
-                    <div className='icon-modal'>
+                    <div className={`icon-modal ${type}`}>
                         {(iconModal === 'error') ? (
-                            <i className="fa-solid fa-triangle-exclamation icon-error "></i>
+                            <i className="fa-solid fa-triangle-exclamation icon "></i>
                         ) : null}
                         {(iconModal === 'alerta') ? (
-                            <i className="fa-solid fa-circle-exclamation icon-alerta"></i>
+                            <i className="fa-solid fa-circle-exclamation icon"></i>
                         ) : null}
                         {(iconModal === 'exito') ? (
-                            <i className="fa-solid fa-circle-check icon-exito"></i>
+                            <i className="fa-solid fa-circle-check icon"></i>
                         ) : null}
                     </div>
 
-                    <div className='body-title'>
-                        <h2>{title}</h2>
-                    </div>
+                    <div className='text-alert'>
+                        <div className='body-title'>
+                            <h2>{title}</h2>
+                        </div>
 
-                    <div className='body-content'>
-                        <p>{message}</p>
+                        <div className='body-content'>
+                            <p>{message}</p>
+                        </div>
                     </div>
 
                 </div>
