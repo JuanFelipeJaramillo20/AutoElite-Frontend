@@ -21,6 +21,7 @@ import { MisPublicaciones } from '../pages/PerfilUsuario/Components/MisPublicaci
 import { MisReseñas } from '../pages/PerfilUsuario/Components/MisReseñas/MisReseñas';
 import { InicioAdmin } from '../pages/InicioAdmin/InicioAdmin';
 import { Publicaciones } from '../pages/Publicaciones/Publicaciones';
+import { EditarUsuario } from '../pages/InicioAdmin/EditarUsuario/EditarUsuario';
 import { NoEncontrado } from '../pages/NoEncontrado/NoEncontrado';
 
 import { getDatosUsuario } from '../redux/usuario/thunk';
@@ -57,6 +58,7 @@ export const RoutesConfiguration = () => {
             element={<EditarPublicacion />}
           />
           <Route path='/inicioAdmin' element={<InicioAdmin />} />
+          <Route path='/usuarios/editar/:userId' element={<EditarUsuario />} />
           <Route path='/publicaciones' element={<Publicaciones />} />
 
           <Route path='/favoritos' element={<Favoritos />} />

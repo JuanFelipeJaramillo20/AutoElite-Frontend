@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
-import { CargarFotos } from '../../../../components/CargarFotos/CargarFotos';
-import './PersonalInfo.css';
-import { Boton } from '../../../../components/Boton/Boton';
 import { useDispatch, useSelector } from 'react-redux';
+
+import { CargarFotos } from '../../../../components/CargarFotos/CargarFotos';
+import { Boton } from '../../../../components/Boton/Boton';
+import { Input } from '../../../../components/Input/Input';
+import { Alert } from '../../../../components/Alert/Alert';
+
 import { guardarCambios, guardarImagen } from '../../../../redux/usuario/thunk';
 import {
   getEmail,
@@ -11,13 +14,17 @@ import {
   getNombre,
   getNroTel,
 } from '../../../../redux/usuario/selectors';
-import { Input } from '../../../../components/Input/Input';
-import { Alert } from '../../../../components/Alert/Alert';
 import { resetExito } from '../../../../redux/usuario/actions';
+
+import './PersonalInfo.css';
+
 const PersonalInfo = () => {
+
   const dispatch = useDispatch();
+
   const id = useSelector(getId);
   const exito = useSelector(getExito);
+
   const [nombre, setNombre] = useState(useSelector(getNombre));
   const [email, setEmail] = useState(useSelector(getEmail));
   const [tel, setTel] = useState(useSelector(getNroTel));
@@ -30,6 +37,7 @@ const PersonalInfo = () => {
   const [alertMessage, setAlertMessage] = useState('');
   const [alertTitle, setAlertTitle] = useState('');
   const [alertType, setAlertType] = useState('');
+
   const realizarCambios = () => {
     console.log('Ando realizando cambios');
     const nuevosDatos = {
@@ -59,6 +67,7 @@ const PersonalInfo = () => {
       setClassName('hide-input');
     }
   };
+
   useEffect(() => {
     if (exito) {
       setShowAlert(true);
@@ -74,6 +83,7 @@ const PersonalInfo = () => {
       dispatch(resetExito());
     }
   }, [showAlert]);
+
   return (
     <div className='app-configuracion__infoUsuario'>
       {showAlert ? (

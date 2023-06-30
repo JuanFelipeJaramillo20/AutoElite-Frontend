@@ -9,7 +9,9 @@ import { Modal } from '../../../../components/Modal/Modal';
 import { LeaveReview } from './components/LeaveReview/LeaveReview';
 
 import { getId, getAuth } from '../../../../redux/usuario/selectors';
-import Lottie from 'lottie-react';
+
+import testImg from '../../../../assets/img/perfil/usuario.png';
+import Lottie from 'lottie-react'
 import noReview from '../../../../assets/animations/noReviws.json';
 
 import './AddCalificacion.css';
@@ -133,7 +135,7 @@ export const AddCalificacion = (props) => {
                       src={
                         review.sender.imagenPerfil
                           ? review.sender.imagenPerfil
-                          : '../src/assets/img/perfil/usuario.png'
+                          : testImg
                       }
                       alt='person'
                       width={'50px'}

@@ -53,26 +53,30 @@
 }
 
 .form .app-form div:nth-child(10) {
-    grid-area: fuel;
+    grid-area: location;
 }
 
 .form .app-form div:nth-child(11) {
-    grid-area: doors;
+    grid-area: fuel;
 }
 
 .form .app-form div:nth-child(12) {
-    grid-area: engine;
+    grid-area: doors;
 }
 
 .form .app-form div:nth-child(13) {
-    grid-area: kilometers;
+    grid-area: engine;
 }
 
 .form .app-form div:nth-child(14) {
-    grid-area: year;
+    grid-area: kilometers;
 }
 
 .form .app-form div:nth-child(15) {
+    grid-area: year;
+}
+
+.form .app-form div:nth-child(16) {
     grid-area: description;
 }
 
@@ -96,7 +100,7 @@
         'name model fuel'
         'state brand doors'
         'state color engine'
-        'state transmision kilometers'
+        'location transmision kilometers'
         'price city year'
         'isOffer description description'
         /*'photos photos photos'*/
@@ -122,6 +126,7 @@
     .form .app-form div:nth-child(13),
     .form .app-form div:nth-child(14),
     .form .app-form div:nth-child(15),
+    .form .app-form div:nth-child(16),
     .form .app-form .app-btn,
     .form-pics {
         grid-area: auto;

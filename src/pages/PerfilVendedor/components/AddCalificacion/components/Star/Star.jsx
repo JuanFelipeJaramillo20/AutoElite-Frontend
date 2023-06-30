@@ -147,10 +147,10 @@ export const Star = (props) => {
   );
 };
 Star.propTypes = {
-  five: PropTypes.number,
-  four: PropTypes.number,
-  three: PropTypes.number,
-  two: PropTypes.number,
-  one: PropTypes.number,
-  wasReviewed: PropTypes.func,
+    five: PropTypes.number,
+    four: PropTypes.number,
+    three: PropTypes.number,
+    two: PropTypes.number,
+    one: PropTypes.number,
+    wasReviewed: PropTypes.any,
 };

@@ -1,0 +1,70 @@
+.edit-user {
+    min-height: 100vh;
+
+    padding: 5%;
+
+    border: 1px solid transparent;
+}
+
+.edit-user input:invalid {
+    background-color: rgba(255, 0, 0, 0.3);
+}
+
+.edit-user__title {
+    margin-bottom: 5%;
+}
+
+.edit-user .user-data__change {
+    grid-area: data-user;
+}
+
+.edit-user .user-data__change-pic {
+    grid-area: data-pic;
+}
+
+.edit-user .save-changes {
+    grid-area: send;
+
+    margin-inline: auto;
+}
+
+.edit-user .app-configuracion__infoUsuario {
+    display: grid;
+    grid-template-areas: 
+    'data-user data-pic'
+    'send send';
+    gap: 10%;
+
+    margin-inline: auto;
+}
+
+.current-user__profile {
+    border-radius: 50%;
+
+    overflow: hidden;
+
+    width: 100px;
+    height: 100px;
+
+    margin-inline: auto;
+    margin-bottom: 5%;
+}
+
+.current-user__profile>img {
+    width: 100%;
+}
+
+@media screen and (max-width:1100px) {
+    .edit-user .app-configuracion__infoUsuario {
+        display: flex;
+        flex-direction: column;
+        gap: 10%;
+    
+        margin-inline: auto;
+    }
+
+    .edit-user .user-data__change,
+    .edit-user .user-data__change-pic  {
+        margin-bottom: 7%;
+    }
+}
