@@ -10,7 +10,7 @@ import { getAllUsers } from '../../redux/usuario/thunk';
 import { getToken, getRol, getId } from '../../redux/usuario/selectors';
 
 import noUsers from '../../assets/animations/noUsers.json';
-import img from '../../assets/img/perfil/perfil-ejemplo.jpg';
+import img from '../../assets/img/perfil/usuario.png';
 
 import './InicioAdmin.css';
 
@@ -62,7 +62,7 @@ export const InicioAdmin = () => {
                                             <div key={user.id} className={user.bloqueado ? 'user-information bloqueado' : 'user-information'}>
                                                 <div>
                                                     <div onClick={() => {navigate(`/perfil/${user.id}`)}}>
-                                                        <img src={img} alt="user profile img" />
+                                                        <img src={user.imagenPerfil ? user.imagenPerfil : img} alt="user profile img" />
                                                     </div>
                                                 </div>
                                                 <div>
@@ -90,7 +90,7 @@ export const InicioAdmin = () => {
                                                     <button>
                                                         <span><i className="fa-solid fa-user-slash"></i></span>
                                                     </button>
-                                                    <button>
+                                                    <button onClick={() => { navigate(`/usuarios/editar/${user.id}`) }}>
                                                         <span><i className="fa-solid fa-user-pen"></i></span>
                                                     </button>
                                                 </div>

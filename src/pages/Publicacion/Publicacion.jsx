@@ -1,15 +1,24 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { Form } from '../../components/Form/Form';
-import './Publicacion.css';
 import { useEffect, useState } from 'react';
+
+import { getReviews } from '../../redux/usuario/thunk';
+
 import { IconoPerfil } from '../../components/IconoPerfil/IconoPerfil';
+import { Form } from '../../components/Form/Form';
+
+import './Publicacion.css';
 
 export const Publicacion = () => {
+
   const { publicacionId } = useParams();
+
+  const navigate = useNavigate();
+
   const [publicacion, setPublicacion] = useState(null);
   const [esPrecioNegociable, setEsPrecioNegociable] = useState('No');
   const [imgPerfil, setImgPerfil] = useState('');
-  const navigate = useNavigate();
+  const [reviews, setReviews] = useState([]);
+  const [startRate, setStarRate] = useState(''); 
 
   useEffect(() => {
     const getDatosPublicacion = async (idPublicacion) => {
@@ -47,6 +56,38 @@ export const Publicacion = () => {
       URL.revokeObjectURL(imgPerfil);
     };
   }, [imgPerfil]);
+
+  useEffect(() => {
+    if (publicacion?.usuarioPublicacion?.id) {
+      const getApiReviews = async () => {
+        const res = await getReviews(publicacion.usuarioPublicacion.id);
+        if (res) {
+          setReviews(res);
+        }
+      };
+      getApiReviews();
+    }
+  }, [publicacion]);
+
+  useEffect(() => {
+    if (reviews.length > 0) {
+      setStarRate(() => {
+        let avg = 0;
+        reviews.forEach((number)=> {
+          avg += number.numEstrellas;
+        });
+        const [number, decimal] = `${(avg/reviews.length)}`.split('.');
+        if (decimal) {
+          return `${number},${decimal[0]}`;
+        } else {
+          return `${number}`;
+        }
+      });
+    } else {
+      setStarRate('0');
+    }
+  }, [publicacion, reviews]);
+
   return publicacion !== null ? (
     <div className='app-publicacion'>
       <div
@@ -173,14 +214,27 @@ export const Publicacion = () => {
             </p>
           </div>
           <div className='estrellas'>
-            <div className='estrella'></div>
-            <div className='estrella'></div>
-            <div className='estrella'></div>
-            <div className='estrella'></div>
-            <div className='estrella'></div>
+            {Array(5).fill().map((el, id) => {
+              if (parseInt(startRate[0]) > id) {
+                  return(
+                    <i key={id} className="fa-solid fa-star"></i>
+                  );
+              } else {
+                if (parseInt(startRate[2]) >= 5 && id === parseInt(startRate[0])){
+                  return (
+                    <i key={id} className="fa-solid fa-star-half-stroke"></i>
+                  );
+                } else {
+                  return(
+                    <i key={id} className="fa-regular fa-star"></i>
+                  );
+                }
+              }
+            })}
+            <p>{startRate}</p>
           </div>
           <div className='reviews'>
-            <p>(x reviews)</p>
+            <p>Total de reseñas: {reviews.length}</p>
           </div>
         </div>
         <div className='app-publicacion__contactoVendedor'>
