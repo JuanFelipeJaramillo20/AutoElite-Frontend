@@ -3,11 +3,14 @@ import { Form } from '../../components/Form/Form';
 import './Contacto.css';
 import emailjs from '@emailjs/browser';
 import { Alert } from '../../components/Alert/Alert';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { guardarMensaje } from '../../helpers/guardarMensaje';
 export const Contacto = () => {
   const navigate = useNavigate();
-  const [showCorreoEnviado, setShowCorreoEnviado] = useState(false);
-  const [errorMensaje, setErrorMensaje] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [alertTitle, setAlertTitle] = useState('');
+  const [alertType, setAlertType] = useState('');
   const onSubmitContacto = (data, reset) => {
     emailjs
       .sendForm(
@@ -18,41 +21,31 @@ export const Contacto = () => {
       )
       .then(
         () => {
-          setShowCorreoEnviado(true);
+          guardarMensaje(data);
+          setShowAlert(true);
+          setAlertTitle('Correo enviado.');
+          setAlertMessage('Correo enviado con éxito. Te contactamos pronto.');
+          setAlertType('exito');
         },
         () => {
-          setErrorMensaje(true);
+          setShowAlert(true);
+          setAlertTitle('Correo no enviado.');
+          setAlertMessage('No se pudo enviar el mensaje.');
+          setAlertType('error');
         }
       );
     reset();
   };
 
-  useEffect(() => {
-    if (showCorreoEnviado) {
-      setTimeout(() => {
-        setShowCorreoEnviado(false);
-      }, 3000);
-    }
-  }, [showCorreoEnviado]);
-
-  useEffect(() => {
-    if (errorMensaje) {
-      setTimeout(() => {
-        setErrorMensaje(false);
-      }, 3000);
-    }
-  }, [errorMensaje]);
   return (
     <div className='app-contact'>
-      {showCorreoEnviado ? (
+      {showAlert ? (
         <Alert
-          title='Correo enviado. '
-          message='Correo enviado con éxito. Te contactamos pronto.'
+          title={alertTitle}
+          message={alertMessage}
+          type={alertType}
+          setShowModal={setShowAlert}
         />
-      ) : null}
-
-      {errorMensaje ? (
-        <Alert title='Ha surgido un error. ' message='Intentalo de nuevo.' />
       ) : null}
       <Form
         idForm='contactForm'

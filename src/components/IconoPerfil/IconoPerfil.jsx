@@ -14,5 +14,5 @@ export const IconoPerfil = ({ srcImagenPerfil }) => {
 };
 
 IconoPerfil.propTypes = {
-  srcImagenPerfil: PropTypes.string.isRequired,
+  srcImagenPerfil: PropTypes.string,
 };

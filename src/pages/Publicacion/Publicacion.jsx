@@ -18,7 +18,7 @@ export const Publicacion = () => {
   const [esPrecioNegociable, setEsPrecioNegociable] = useState('No');
   const [imgPerfil, setImgPerfil] = useState('');
   const [reviews, setReviews] = useState([]);
-  const [startRate, setStarRate] = useState(0); 
+  const [startRate, setStarRate] = useState(''); 
 
   useEffect(() => {
     const getDatosPublicacion = async (idPublicacion) => {
@@ -77,7 +77,11 @@ export const Publicacion = () => {
           avg += number.numEstrellas;
         });
         const [number, decimal] = `${(avg/reviews.length)}`.split('.');
-        return `${number},${decimal[0]}`;
+        if (decimal) {
+          return `${number},${decimal[0]}`;
+        } else {
+          return `${number}`;
+        }
       });
     } else {
       setStarRate('0');
@@ -102,13 +106,25 @@ export const Publicacion = () => {
             {publicacion.carroPublicacion.tipo}
           </h1>
           <div className='imagenes'>
-            <div className='imagen-principal'></div>
+            <div className='imagen-principal'>
+              <img src={publicacion.carroPublicacion.imagenes[0]} alt='' />
+            </div>
             <div className='imagen-secundaria'>
-              <div className='imagenPequeña '></div>
-              <div className='imagenPequeña'></div>
-              <div className='imagenPequeña'></div>
-              <div className='imagenPequeña'></div>
-              <div className='imagenPequeña '></div>
+              <div className='imagenPequeña '>
+                <img src={publicacion.carroPublicacion.imagenes[0]} alt='' />
+              </div>
+              <div className='imagenPequeña'>
+                <img src={publicacion.carroPublicacion.imagenes[1]} alt='' />
+              </div>
+              <div className='imagenPequeña'>
+                <img src={publicacion.carroPublicacion.imagenes[2]} alt='' />
+              </div>
+              <div className='imagenPequeña'>
+                <img src={publicacion.carroPublicacion.imagenes[3]} alt='' />
+              </div>
+              <div className='imagenPequeña '>
+                <img src={publicacion.carroPublicacion.imagenes[4]} alt='' />
+              </div>
             </div>
           </div>
         </div>

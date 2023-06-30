@@ -67,7 +67,7 @@ export const EditarPublicacion = () => {
         "id": postDetails.id,
         "fechaPublicacion": postDetails.fechaPublicacion,
         "ciudad": postDetails.ubicacion,
-        "usuarioId": userId,
+        "usuarioId": postDetails.usuarioID,
         "carro": {
           "puertas": parseInt(postDetails.carro.puertas),
           "motor": postDetails.carro.motor,

@@ -28,11 +28,11 @@ export const AddCalificacion = (props) => {
   let [oneStars, setOneStars] = useState(0);
 
   let [ShowLeaveReview, setShowLeaveReview] = useState(false);
-  const [wasReviewedByCurrentUser, setWasReviewedByCurrentUser] = useState(false);
+  const [wasReviewedByCurrentUser, setWasReviewedByCurrentUser] =
+    useState(false);
 
   const currentUserID = useSelector(getId);
   const isAuth = useSelector(getAuth);
-
   useEffect(() => {
     function getStars(reviews) {
       setFiveStars(0);
@@ -81,7 +81,9 @@ export const AddCalificacion = (props) => {
     <>
       <section className='reviews-section'>
         <header className='reviews-section__title'>
-          <h2>{titleSection} ({totalReviewsVendor.length})</h2>
+          <h2>
+            {titleSection} ({totalReviewsVendor.length})
+          </h2>
           <div className='star-vendor__rate'>
             <Star
               five={fiveStars}
@@ -100,8 +102,9 @@ export const AddCalificacion = (props) => {
             disabled={
               currentUserID === parseInt(vendorID) ||
               wasReviewedByCurrentUser ||
-              !isAuth ? 
-               true : false
+              !isAuth
+                ? true
+                : false
             }
           >
             Dejar calificación
@@ -111,7 +114,10 @@ export const AddCalificacion = (props) => {
         {ShowLeaveReview ? (
           <>
             <Modal handleModal={handleShowLeaveReview} width={400} heigth={300}>
-              <LeaveReview handleCloseModal={handleShowLeaveReview} wasReviewed={wasReviewed} />
+              <LeaveReview
+                handleCloseModal={handleShowLeaveReview}
+                wasReviewed={wasReviewed}
+              />
             </Modal>
           </>
         ) : null}
@@ -121,13 +127,16 @@ export const AddCalificacion = (props) => {
             <Lottie className='noreviews-data' animationData={noReview} />
           ) : null}
           {totalReviewsVendor.map((review) => {
-            console.log(review)
             return (
-              <div key={review.IdReview} className='user-review'>
+              <div key={review.id} className='user-review'>
                 <div className='user-review__profile'>
                   <div className='profile-username'>
                     <img
-                      src={review.sender.imagenPerfil ? review.sender.imagenPerfil : testImg}
+                      src={
+                        review.sender.imagenPerfil
+                          ? review.sender.imagenPerfil
+                          : testImg
+                      }
                       alt='person'
                       width={'50px'}
                       height={'50px'}
@@ -165,6 +174,6 @@ export const AddCalificacion = (props) => {
 AddCalificacion.propTypes = {
   totalReviewsVendor: PropTypes.arrayOf(PropTypes.object),
   wasReviewed: PropTypes.func,
-  vendorID: PropTypes.number,
+  vendorID: PropTypes.string,
   titleSection: PropTypes.string,
 };

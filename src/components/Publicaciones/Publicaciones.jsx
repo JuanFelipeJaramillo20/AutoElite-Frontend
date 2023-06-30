@@ -2,21 +2,39 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { CardCar } from '../CardCar/CardCar';
 import './Publicaciones.css';
+import { useSelector } from 'react-redux';
+import { getId } from '../../redux/usuario/selectors';
 export const Publicaciones = ({
-  userEmail,
+  userId,
   setCantidadPublicaciones,
   showOpt,
 }) => {
   const [publicaciones, setPublicaciones] = useState(null);
-
-  const deletePublicacion = (idPublicacion) => {
+  const token = useSelector(getId);
+  const deletePublicacion = async (idPublicacion) => {
     setPublicaciones((prevPub) => {
       return prevPub.filter((pub) => pub.id != idPublicacion);
     });
-  };
-  const obtenerPublicaciones = async (emailAutor) => {
     const response = await fetch(
-      `http://localhost:8080/api/v1/publicaciones/byuser/${emailAutor}`,
+      `http://localhost:8080/api/v1/publicaciones/${idPublicacion}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: token,
+        },
+      }
+    );
+    if (response.ok) {
+      console.log('Se eliminó correctamente');
+    } else {
+      console.log('falla');
+    }
+  };
+
+  const obtenerPublicaciones = async (userId) => {
+    const response = await fetch(
+      `http://localhost:8080/api/v1/publicaciones/byuser/${userId}`,
       {
         method: 'GET',
         headers: {
@@ -32,7 +50,7 @@ export const Publicaciones = ({
   };
 
   useEffect(() => {
-    obtenerPublicaciones(userEmail);
+    obtenerPublicaciones(userId);
   }, []);
 
   useEffect(() => {
@@ -68,7 +86,7 @@ export const Publicaciones = ({
 };
 
 Publicaciones.propTypes = {
-  userEmail: PropTypes.string.isRequired,
+  userId: PropTypes.number.isRequired,
   setCantidadPublicaciones: PropTypes.func,
   showOpt: PropTypes.bool,
 };
