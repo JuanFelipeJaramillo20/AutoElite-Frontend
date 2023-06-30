@@ -71,12 +71,14 @@ export const CargarFotos = ({ setFiles }) => {
           onChange={(event) => {
             const files = event.target.files;
             if (files.length > 0) {
-              setSelectedFiles([...selectedFiles, ...files]);
+              if (selectedFiles.length + files.length <= 5) {
+                setSelectedFiles([...selectedFiles, ...files]);
+              }
             }
           }}
         />
       </label>
-      <div ref={showUploadedImagesContainer} className='show-images__car'>
+      <div ref={showUploadedImagesContainer} className='show-images'>
         {selectedFiles.map((file, index) => (
           <div key={index} className='image-card'>
             <button

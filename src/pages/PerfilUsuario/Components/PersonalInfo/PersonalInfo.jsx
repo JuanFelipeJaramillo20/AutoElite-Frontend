@@ -5,7 +5,6 @@ import { Boton } from '../../../../components/Boton/Boton';
 import { useDispatch, useSelector } from 'react-redux';
 import { guardarCambios, guardarImagen } from '../../../../redux/usuario/thunk';
 import {
-  getEmail,
   getExito,
   getId,
   getNombre,
@@ -19,11 +18,9 @@ const PersonalInfo = () => {
   const id = useSelector(getId);
   const exito = useSelector(getExito);
   const [nombre, setNombre] = useState(useSelector(getNombre));
-  const [email, setEmail] = useState(useSelector(getEmail));
   const [tel, setTel] = useState(useSelector(getNroTel));
   const [contra, setContra] = useState('');
   const [classNombre, setClassNombre] = useState('hide-input');
-  const [classEmail, setClassEmail] = useState('hide-input');
   const [classTel, setClassTel] = useState('hide-input');
   const [files, setFiles] = useState([]);
   const [showAlert, setShowAlert] = useState(false);
@@ -31,10 +28,8 @@ const PersonalInfo = () => {
   const [alertTitle, setAlertTitle] = useState('');
   const [alertType, setAlertType] = useState('');
   const realizarCambios = () => {
-    console.log('Ando realizando cambios');
     const nuevosDatos = {
       nombres: nombre,
-      email,
       telefono: tel,
     };
     if (files.length !== 0) {
@@ -86,7 +81,7 @@ const PersonalInfo = () => {
       ) : null}
       <h2>Información personal</h2>
       <div className='app-configuracion__editarInfo'>
-        <div className='ap-configuracion__nombre'>
+        <div className='app-configuracion__nombre'>
           <div>
             <p>Nombre completo</p>
             <p>{nombre || 'No especificado'}</p>
@@ -103,24 +98,7 @@ const PersonalInfo = () => {
           onChange={(e) => setNombre(e.target.value)}
         />
         <hr />
-        <div className='ap-configuracion__email'>
-          <div>
-            <p>Correo electrónico</p>
-            <p>{email || 'No especificado'}</p>
-          </div>
-          <i
-            onClick={() => toggleClassName(classEmail, setClassEmail)}
-            className='fa-regular fa-pen-to-square'
-          ></i>
-        </div>
-        <Input
-          className={classEmail}
-          type='email'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <hr />
-        <div className='ap-configuracion__tel'>
+        <div className='app-configuracion__tel'>
           <div>
             <p>Télefono</p>
             <p>{tel || 'No especificado'}</p>
@@ -137,7 +115,7 @@ const PersonalInfo = () => {
           onChange={(e) => setTel(e.target.value)}
         />
         <hr />
-        <div className='ap-configuracion__contra'>
+        <div className='app-configuracion__contra'>
           <p>Cambiar contraseña:</p>
         </div>
         <Input

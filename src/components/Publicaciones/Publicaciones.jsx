@@ -3,14 +3,14 @@ import { useEffect, useState } from 'react';
 import { CardCar } from '../CardCar/CardCar';
 import './Publicaciones.css';
 import { useSelector } from 'react-redux';
-import { getId } from '../../redux/usuario/selectors';
+import { getToken } from '../../redux/usuario/selectors';
 export const Publicaciones = ({
   userId,
   setCantidadPublicaciones,
   showOpt,
 }) => {
   const [publicaciones, setPublicaciones] = useState(null);
-  const token = useSelector(getId);
+  const token = useSelector(getToken);
   const deletePublicacion = async (idPublicacion) => {
     setPublicaciones((prevPub) => {
       return prevPub.filter((pub) => pub.id != idPublicacion);
@@ -27,8 +27,6 @@ export const Publicaciones = ({
     );
     if (response.ok) {
       console.log('Se eliminó correctamente');
-    } else {
-      console.log('falla');
     }
   };
 
@@ -86,7 +84,7 @@ export const Publicaciones = ({
 };
 
 Publicaciones.propTypes = {
-  userId: PropTypes.number.isRequired,
+  userId: PropTypes.string.isRequired,
   setCantidadPublicaciones: PropTypes.func,
   showOpt: PropTypes.bool,
 };

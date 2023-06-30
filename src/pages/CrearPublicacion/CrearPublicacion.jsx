@@ -27,8 +27,9 @@ export const CrearPublicacion = () => {
     setYear(currentYear);
   }, []);
 
-  const handlePostCreation = useCallback(async (data) => {
+  const handlePostCreation = useCallback(async (data, files = []) => {
     console.log(files);
+    console.log(data);
     if (files.length >= 3) {
       const thisDate = `${new Date(Date.now()).getFullYear()}-${new Date(
         Date.now()
@@ -320,7 +321,7 @@ export const CrearPublicacion = () => {
                 },
               ]}
               btnText={'Crear vehículo'}
-              onSubmit={handlePostCreation}
+              onSubmit={(data) => handlePostCreation(data, files)}
             />
             <div className='form-pics'>
               <CargarFotos

@@ -13,7 +13,6 @@ import { Login } from '../Login/Login';
 import './Header.css';
 
 export const Header = () => {
-
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -29,7 +28,6 @@ export const Header = () => {
   );
   const [showInformationProfile, setShowInformationProfile] = useState(false);
   const [isADefinedObjet, setIsADefinedObject] = useState(false);
-  //const [isScrolling, setScrolling] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
   const navRef = useRef();
@@ -87,38 +85,6 @@ export const Header = () => {
     }
   }, [windowWidth, showModal, toPage]);
 
-  /*useEffect(() => {
-    function handleScroll() {
-      const scroll = window.scrollY;
-      if (headerContainerRef.current) {
-        const noScrolling =
-          headerContainerRef.current.getClientRects()[0].height;
-        if (scroll > noScrolling) {
-          headerContainerRef.current.style.transform = `translateY(-100%)`;
-          clearTimeout(isScrolling);
-
-          setShowInformationProfile(false);
-          setIsADefinedObject(false);
-
-          setScrolling(() => {
-            setTimeout(() => {
-              setScrolling(false);
-              headerContainerRef.current.style.transform = `translateY(0%)`;
-            }, 500);
-          });
-        } else {
-          headerContainerRef.current.style.transform = `translateY(0%)`;
-        }
-      }
-    }
-    handleScroll();
-    //window.addEventListener('scroll', handleScroll);
-
-    /*return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);*/
-
   useEffect(() => {
     const divContainerProfile = document.querySelector(
       '.app-header__logged-in'
@@ -145,7 +111,9 @@ export const Header = () => {
         if (userRole === 'ADMIN') {
           windowInformationRef.current.classList.add('admin-profile__options');
         } else {
-          windowInformationRef.current.classList.remove('admin-profile__options');
+          windowInformationRef.current.classList.remove(
+            'admin-profile__options'
+          );
         }
       }
     }
@@ -252,16 +220,21 @@ export const Header = () => {
           <div ref={headerOptionsRef} className='header__options'>
             <div ref={navRef} className='app-header__navigation'>
               <nav className='nav-normal'>
-
                 <NavLink
                   onClick={() => {
                     showNavbar();
                     handleCloseMenu();
                   }}
                   className='app-navlink'
-                  to={ (userRole !== 'USER') && (userRole !== '') ? '/inicioAdmin' : '/'}
+                  to={
+                    userRole !== 'USER' && userRole !== ''
+                      ? '/inicioAdmin'
+                      : '/'
+                  }
                 >
-                  {(userRole !== 'USER') && (userRole !== '') ? 'Usuarios' : 'Inicio'}
+                  {userRole !== 'USER' && userRole !== ''
+                    ? 'Usuarios'
+                    : 'Inicio'}
                 </NavLink>
 
                 <NavLink
@@ -270,12 +243,18 @@ export const Header = () => {
                     handleCloseMenu();
                   }}
                   className='app-navlink'
-                  to={(userRole !== 'USER') && (userRole !== '') ? '/publicaciones' : '/catalogo'}
+                  to={
+                    userRole !== 'USER' && userRole !== ''
+                      ? '/publicaciones'
+                      : '/catalogo'
+                  }
                 >
-                   {(userRole !== 'USER') && (userRole !== '') ? 'Publicaciones' : 'Catálogo'}
+                  {userRole !== 'USER' && userRole !== ''
+                    ? 'Publicaciones'
+                    : 'Catálogo'}
                 </NavLink>
 
-                {(userRole !== 'USER') && (userRole !== '') ? null : (
+                {userRole !== 'USER' && userRole !== '' ? null : (
                   <NavLink
                     onClick={() => {
                       showNavbar();
@@ -291,7 +270,6 @@ export const Header = () => {
                 <button className='app-navBtn app-closeBtn'>
                   <FaTimes onClick={showNavbar} />
                 </button>
-
               </nav>
               {isLoggedIn ? (
                 <div className='app-header__logged-in'>
@@ -328,7 +306,7 @@ export const Header = () => {
                               publicaciones
                             </NavLink>
                           </li>
-                          {(userRole !== 'USER') && (userRole !== '') ? null : (
+                          {userRole !== 'USER' && userRole !== '' ? null : (
                             <>
                               <li onClick={handleCloseMenu}>
                                 <NavLink to='/favoritos'>
