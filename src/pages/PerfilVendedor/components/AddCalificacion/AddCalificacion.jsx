@@ -10,7 +10,7 @@ import { LeaveReview } from './components/LeaveReview/LeaveReview';
 
 import { getId, getAuth } from '../../../../redux/usuario/selectors';
 
-import testImg from '../../../../assets/img/perfil/perfil-ejemplo.jpg';
+import testImg from '../../../../assets/img/perfil/usuario.png';
 import Lottie from 'lottie-react'
 import noReview from '../../../../assets/animations/noReviws.json';
 
@@ -127,7 +127,7 @@ export const AddCalificacion = (props) => {
                 <div className='user-review__profile'>
                   <div className='profile-username'>
                     <img
-                      src={testImg}
+                      src={review.sender.imagenPerfil ? review.sender.imagenPerfil : testImg}
                       alt='person'
                       width={'50px'}
                       height={'50px'}

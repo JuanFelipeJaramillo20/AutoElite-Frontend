@@ -145,6 +145,51 @@ export const guardarCambios = (idUsuario, newData) => {
   };
 };
 
+export const editUser = async (userId, newValues) => {
+  try {
+    const response = await fetch(
+      `http://localhost:8080/api/v1/usuarios/${userId}`,
+      {
+        method: 'PUT',
+        body: JSON.stringify(newValues),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: localStorage.getItem('token'),
+        },
+      }
+    );
+    const result = await response.json();
+    if (response.ok) {
+      return [true, result.correcto];
+    } else {
+      return [false, result.Error]
+    }
+  } catch (err) {
+    return [false, err];
+  }
+};
+
+export const saveNewImg =  async (userID, newFile) => {
+  const formData = new FormData();
+  formData.append('file', newFile);
+  formData.append('upload_preset', 'fotoPerfil_usuarios');
+  const response = await fetch(
+    'https://api.cloudinary.com/v1_1/dxej0w19x/upload',
+    {
+      method: 'POST',
+      body: formData,
+    }
+  );
+  const result = await response.json();
+  if (response.ok) {
+    guardarURLenBD(userID, result.secure_url);
+  }
+};
+
+export const blockUser = (userID, token) => {
+  
+};
+
 export const addReview = async (newReview, currentUserTOKEN) => {
   try {
     const response = await fetch(`http://localhost:8080/api/v1/calificacion`, {

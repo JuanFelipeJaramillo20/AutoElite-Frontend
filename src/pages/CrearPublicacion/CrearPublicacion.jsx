@@ -35,7 +35,7 @@ export const CrearPublicacion = () => {
     const newPost = {
       id: `${uuidv4()}`,
       fechaPublicacion: thisDate,
-      ciudad: data.ciudad,
+      ciudad: data.ubicacion,
       usuarioId: idCreador,
       carro: {
         puertas: data.puertas,
@@ -204,8 +204,24 @@ export const CrearPublicacion = () => {
                 {
                   type: 'text',
                   id: 'ciudad',
-                  label: 'Ciudad',
+                  label: 'Ciudad del carro',
                   placeHolder: 'Digita la ciudad del vehículo',
+                  validacion: {
+                    required: true,
+                    minLength: 3,
+                    maxLength: 30,
+                  },
+                  error: {
+                    required: 'La ciudad del vehículo es obligatoria.',
+                    minLength: 'Mínimo 3 caracteres.',
+                    maxLength: 'Máximo 30 caracteres',
+                  },
+                },
+                {
+                  type: 'text',
+                  id: 'ubicacion',
+                  label: 'Ubicación',
+                  placeHolder: 'Digita la Ubicación del vehículo',
                   validacion: {
                     required: true,
                     minLength: 3,

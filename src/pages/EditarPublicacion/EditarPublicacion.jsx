@@ -6,7 +6,7 @@ import { CargarFotos } from '../../components/CargarFotos/CargarFotos';
 import { Alert } from '../../components/Alert/Alert';
 import { Input } from '../../components/Input/Input';
 
-import { getToken, getId } from '../../redux/usuario/selectors';
+import { getToken, getId, getRol } from '../../redux/usuario/selectors';
 import { crearPublicacion } from '../../redux/publicaciones/thunk';
 
 
@@ -18,6 +18,7 @@ export const EditarPublicacion = () => {
 
   const userToken = useSelector(getToken);
   const userId = useSelector(getId);
+  const userRole = useSelector(getRol);
 
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
@@ -36,14 +37,15 @@ export const EditarPublicacion = () => {
       'Estado': !(postDetails.carro.estado.includes('Elige una opción')),
       'Precio': (postDetails.carro.precio >= 1 && postDetails.carro.precio <= 1000000000),
       'Precio Negociable': (typeof postDetails.carro.precioEsNegociable === 'boolean') || !(postDetails.carro.precioEsNegociable.includes('Elige una opción')),
-      'Modelo': (postDetails.carro.tipo.length >= 3 && postDetails.carro.tipo.length <= 20),
-      'Marca': (postDetails.carro.marca.length >= 3 && postDetails.carro.marca.length <= 20),
-      'Color': (postDetails.carro.color.length >= 3 && postDetails.carro.color.length <= 20),
+      'Modelo': (postDetails.carro.tipo.length >= 2 && postDetails.carro.tipo.length <= 20),
+      'Marca': (postDetails.carro.marca.length >= 2 && postDetails.carro.marca.length <= 20),
+      'Color': (postDetails.carro.color.length >= 2 && postDetails.carro.color.length <= 20),
       'Transmision': !(postDetails.carro.transmision.includes('Elige una opción')),
-      'Ciudad': (postDetails.carro.ciudad.length >= 3 && postDetails.carro.ciudad.length <= 20),
+      'Ciudad': (postDetails.carro.ciudad.length >= 2 && postDetails.carro.ciudad.length <= 20),
+      'Ubicación': (postDetails.ubicacion.length >= 2 && postDetails.ubicacion.length <= 20),
       'Combustible': !(postDetails.carro.combustible.includes('Elige una opción')),
       'Puertas': (parseInt(postDetails.carro.puertas) >= 2 && parseInt(postDetails.carro.puertas) <= 6),
-      'Motor': (postDetails.carro.motor.length >= 3 && postDetails.carro.motor.length <= 20),
+      'Motor': (postDetails.carro.motor.length >= 2 && postDetails.carro.motor.length <= 20),
       'Kilometraje': (postDetails.carro.kilometraje >= 0 && postDetails.carro.kilometraje <= 100000),
       'Año': (parseInt(postDetails.carro.year) >= 1919 && parseInt(postDetails.carro.year) <= year),
       'Descripcion': (postDetails.descripcion.length >= 10 && postDetails.descripcion.length <= 100),
@@ -64,7 +66,7 @@ export const EditarPublicacion = () => {
       const updatedPost = {
         "id": postDetails.id,
         "fechaPublicacion": postDetails.fechaPublicacion,
-        "ciudad": postDetails.ciudad,
+        "ciudad": postDetails.ubicacion,
         "usuarioId": userId,
         "carro": {
           "puertas": parseInt(postDetails.carro.puertas),
@@ -114,11 +116,11 @@ export const EditarPublicacion = () => {
     });
   }, [postDetails]);
 
-  const handleChangeDescription = useCallback((event) => {
+  const handleChangeOtherValues = useCallback((event) => {
     setPostDetails((prevValue) => {
       return {
         ...prevValue,
-        "descripcion": event.target.value,
+        [event.target.id]: event.target.value,
       };
     });
   }, [postDetails]);
@@ -127,6 +129,11 @@ export const EditarPublicacion = () => {
     let currentYear = new Date(Date.now()).getFullYear();
     setYear(currentYear + 1);
   }, [year]);
+
+  useEffect(() => {
+    console.log((userId !== postDetails.usuarioID || userId === postDetails.usuarioID), userRole === 'ADMIN');
+    console.log(userRole !== 'ADMIN', userId === postDetails.usuarioID);
+  }, [postDetails.usuarioID, userId, userRole]);
 
   useEffect(() => {
     const obtenerPublicaciones = async (publicacionID) => {
@@ -146,7 +153,7 @@ export const EditarPublicacion = () => {
           return {
             id: result.id,
             fechaPublicacion: result.fechaPublicacion,
-            ciudad: result.ciudad,
+            ubicacion: result.ciudad,
             usuarioID: result.usuarioPublicacion.id,
             carro: {
               puertas: result.carroPublicacion.puertas,
@@ -282,9 +289,19 @@ export const EditarPublicacion = () => {
                   type={'text'}
                   labelText={'Ciudad'}
                   placeHolder={'Digita la ciudad'}
-                  opciones={['Si', 'No']}
                   value={postDetails.carro.ciudad}
                   onChange={handleChangeValues}
+                  required
+                  minLength={2}
+                  maxLength={30}
+                />
+                <Input
+                  id={'ubicacion'}
+                  type={'text'}
+                  labelText={'Ubicación'}
+                  placeHolder={'Digita la ubicación'}
+                  value={postDetails.ubicacion}
+                  onChange={handleChangeOtherValues}
                   required
                   minLength={2}
                   maxLength={30}
@@ -345,7 +362,7 @@ export const EditarPublicacion = () => {
                   type={'textarea'}
                   labelText={'Descripción'}
                   value={postDetails.descripcion}
-                  onChange={handleChangeDescription}
+                  onChange={handleChangeOtherValues}
                   required
                   minLength={10}
                   maxLength={100}
@@ -353,7 +370,9 @@ export const EditarPublicacion = () => {
                 <button
                   className='app-btn'
                   onClick={(e) => { handlePostUpdate(e, postDetails, year) }}
-                  disabled={userId !== postDetails.usuarioID ? true : false}
+                  disabled={
+                    ((userId !== postDetails.usuarioID || userId === postDetails.usuarioID) && userRole === 'ADMIN') ||
+                      (userRole !== 'ADMIN' && userId === postDetails.usuarioID) ? false : true}
                 >
                   Actualizar Publicación
                 </button>

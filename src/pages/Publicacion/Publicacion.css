@@ -140,6 +140,10 @@
   margin: 0;
 }
 
+.estrellas>p {
+  margin-left: clamp(5px,5%,20px);
+}
+
 .estrellas {
   display: flex;
   align-items: center;

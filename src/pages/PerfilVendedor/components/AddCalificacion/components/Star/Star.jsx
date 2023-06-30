@@ -128,5 +128,5 @@ Star.propTypes = {
     three: PropTypes.number,
     two: PropTypes.number,
     one: PropTypes.number,
-    wasReviewed: PropTypes.bool,
+    wasReviewed: PropTypes.any,
 }
