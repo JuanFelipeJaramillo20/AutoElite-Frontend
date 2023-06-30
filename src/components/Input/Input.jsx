@@ -53,12 +53,23 @@ export const Input = (props) => {
           <option>Elige una opción</option>
           {opciones.map((opcion, index) => {
             if (opcion === ('Si' || 'No') && value) {
-              return <option key={index} selected>{opcion}</option>;
+              return (
+                <option key={index} selected>
+                  {opcion}
+                </option>
+              );
             } else if (opcion === ('Si' || 'No') && !value) {
-              return <option key={index} selected>{opcion}</option>;
-            } else
-            if (opcion === value) {
-              return <option key={index} selected>{opcion}</option>;
+              return (
+                <option key={index} selected>
+                  {opcion}
+                </option>
+              );
+            } else if (opcion === value) {
+              return (
+                <option key={index} selected>
+                  {opcion}
+                </option>
+              );
             } else {
               return <option key={index}>{opcion}</option>;
             }
@@ -120,5 +131,5 @@ Input.propTypes = {
   register: PropTypes.func,
   validators: PropTypes.object,
   value: PropTypes.any,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
 };

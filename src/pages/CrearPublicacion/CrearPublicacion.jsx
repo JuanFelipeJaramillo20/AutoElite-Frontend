@@ -27,54 +27,17 @@ export const CrearPublicacion = () => {
     setYear(currentYear);
   }, []);
 
-  const handlePostCreation = useCallback(async (data) => {
-    const thisDate = `${new Date(Date.now()).getFullYear()}-${new Date(
-      Date.now()
-    ).getMonth()}-${new Date(Date.now()).getDate()}`;
-
-    const newPost = {
-      id: `${uuidv4()}`,
-      fechaPublicacion: thisDate,
-      ciudad: data.ubicacion,
-      usuarioId: idCreador,
-      carro: {
-        puertas: data.puertas,
-        motor: data.motor,
-        ciudad: data.ciudad,
-        marca: data.marca,
-        placa: data.placa,
-        color: data.color,
-        tipo: data.tipo,
-        combustible: data.combustible,
-        year: data.year,
-        estado: data.estado,
-        transmision: data.transmision,
-        precio: parseFloat(data.precio),
-        kilometraje: parseInt(data.kilometraje),
-        precioEsNegociable: data.precioEsNegociable === 'si' ? true : false,
-      },
-      descripcion: data.descripcion,
-    };
-
-    const response = await crearPublicacion(newPost, token);
-    if (response) {
-      setShowAlert(true);
-      setAlertMessage('Intenta otra vez');
-      setAlertTitle('Error');
-      setAlertType('error');
-    }
-    console.log(files);
+  const handlePostCreation = useCallback(async (data, files = []) => {
     if (files.length >= 3) {
       const thisDate = `${new Date(Date.now()).getFullYear()}-${new Date(
         Date.now()
       ).getMonth()}-${new Date(Date.now()).getDate()}`;
       const imagenes = await guardarImagen(files);
       if (imagenes.length !== 0) {
-        console.log(imagenes);
         const newPost = {
           id: `${uuidv4()}`,
           fechaPublicacion: thisDate,
-          ciudad: data.ciudad,
+          ciudad: data.ubicacion,
           usuarioId: idCreador,
           carro: {
             puertas: data.puertas,
@@ -145,7 +108,7 @@ export const CrearPublicacion = () => {
                     maxLength: 6,
                   },
                   error: {
-                    required: 'La descripción del vehículo es obligatoria.',
+                    required: 'La placa del vehículo es obligatoria.',
                     minLength: 'Mínimo 6 caracteres.',
                     maxLength: 'Máximo 6 caracteres',
                   },
@@ -360,18 +323,16 @@ export const CrearPublicacion = () => {
                   placeholder: 'Da una descripción del vehículo',
                   validacion: {
                     required: true,
-                    minLength: 10,
-                    maxLength: 100,
+                    maxLength: 1000,
                   },
                   error: {
                     required: 'La descripción del vehículo es obligatoria.',
-                    minLength: 'Mínimo 10 caracteres.',
                     maxLength: 'Máximo 100 caracteres',
                   },
                 },
               ]}
               btnText={'Crear vehículo'}
-              onSubmit={handlePostCreation}
+              onSubmit={(data) => handlePostCreation(data, files)}
             />
             <div className='form-pics'>
               <CargarFotos
