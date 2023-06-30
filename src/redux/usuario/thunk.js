@@ -187,8 +187,48 @@ export const saveNewImg =  async (userID, newFile) => {
   }
 };
 
-export const blockUser = (userID, token) => {
-  
+export const blockUser = async (userID) => {
+  try {
+    const response = await fetch(
+      `http://localhost:8080/api/v1/admin/users/${userID}/block`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: localStorage.getItem('token'),
+        },
+      }
+    );
+    if (response.status === 204) {
+      return [true, `Usuario ${userID} bloqueado`];
+    } else {
+      return [false, 'Intenta otra vez'];
+    }
+  } catch (err) {
+    return [false, err];
+  }
+};
+
+export const deleteUser = async (userID) => {
+  try {
+    const response = await fetch(
+      `http://localhost:8080/api/v1/admin/users/${userID}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: localStorage.getItem('token'),
+        },
+      }
+    );
+    if (response.status === 204) {
+      return [true, `Usuario ${userID} eliminado`];
+    } else {
+      return [false, 'Intenta otra vez'];
+    }
+  } catch (err) {
+    return [false, err];
+  }
 };
 
 export const addReview = async (newReview, currentUserTOKEN) => {
