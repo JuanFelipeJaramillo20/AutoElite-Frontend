@@ -25,6 +25,10 @@
   margin-bottom: 1rem;
 }
 
+.app-configuracion__editarInfo .app-label:last-of-type {
+  margin-bottom: 1.625rem;
+}
+
 .app-configuracion__editarInfo > div {
   margin-bottom: 1rem;
   display: flex;
@@ -55,10 +59,9 @@
   display: none;
 }
 
-.ap-configuracion__nombre p:first-of-type,
-.ap-configuracion__email p:first-of-type,
-.ap-configuracion__tel p:first-of-type,
-.ap-configuracion__contra p:first-of-type {
+.app-configuracion__nombre p:first-of-type,
+.app-configuracion__tel p:first-of-type,
+.app-configuracion__contra p:first-of-type {
   font-weight: bold;
   margin-bottom: 6px;
 }

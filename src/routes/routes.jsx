@@ -26,17 +26,21 @@ import { NoEncontrado } from '../pages/NoEncontrado/NoEncontrado';
 
 import { getDatosUsuario } from '../redux/usuario/thunk';
 import { establecerToken } from '../redux/usuario/actions';
+import { useEffect } from 'react';
 
 export const RoutesConfiguration = () => {
   const dispatch = useDispatch();
 
-  const token = localStorage.getItem('token');
-  const id = localStorage.getItem('id');
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const id = localStorage.getItem('id');
 
-  if (token && id) {
-    dispatch(getDatosUsuario(id));
-    dispatch(establecerToken(token));
-  }
+    if (token && id) {
+      dispatch(getDatosUsuario(id));
+      dispatch(establecerToken(token));
+    }
+  }, [dispatch]);
+
   const isLoggedIn = useSelector(getAuth);
   return (
     <Router>
