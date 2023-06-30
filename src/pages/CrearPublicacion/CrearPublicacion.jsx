@@ -28,19 +28,16 @@ export const CrearPublicacion = () => {
   }, []);
 
   const handlePostCreation = useCallback(async (data, files = []) => {
-    console.log(files);
-    console.log(data);
     if (files.length >= 3) {
       const thisDate = `${new Date(Date.now()).getFullYear()}-${new Date(
         Date.now()
       ).getMonth()}-${new Date(Date.now()).getDate()}`;
       const imagenes = await guardarImagen(files);
       if (imagenes.length !== 0) {
-        console.log(imagenes);
         const newPost = {
           id: `${uuidv4()}`,
           fechaPublicacion: thisDate,
-          ciudad: data.ciudad,
+          ciudad: data.ubicacion,
           usuarioId: idCreador,
           carro: {
             puertas: data.puertas,
@@ -111,7 +108,7 @@ export const CrearPublicacion = () => {
                     maxLength: 6,
                   },
                   error: {
-                    required: 'La descripción del vehículo es obligatoria.',
+                    required: 'La placa del vehículo es obligatoria.',
                     minLength: 'Mínimo 6 caracteres.',
                     maxLength: 'Máximo 6 caracteres',
                   },
@@ -326,12 +323,10 @@ export const CrearPublicacion = () => {
                   placeholder: 'Da una descripción del vehículo',
                   validacion: {
                     required: true,
-                    minLength: 10,
-                    maxLength: 100,
+                    maxLength: 1000,
                   },
                   error: {
                     required: 'La descripción del vehículo es obligatoria.',
-                    minLength: 'Mínimo 10 caracteres.',
                     maxLength: 'Máximo 100 caracteres',
                   },
                 },
