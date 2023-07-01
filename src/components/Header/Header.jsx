@@ -62,11 +62,11 @@ export const Header = () => {
             type: 'alerta'
           }
         });
+        dispatch(logOut());
       }
     };
     if (userId) {
       checkBlockedUser();
-      dispatch(logOut());
     }
   }, [userId]);
 
