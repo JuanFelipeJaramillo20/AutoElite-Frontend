@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Lottie from 'lottie-react';
 import loaderLottie from '../../assets/animations/carLoader.json';
@@ -9,7 +10,7 @@ import { Alert } from '../../components/Alert/Alert';
 
 import './Publicaciones.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { cargarPublicaciones } from '../../redux/publicaciones/thunk';
+import { cargarPublicaciones, loadReportPosts } from '../../redux/publicaciones/thunk';
 import { getPublicaciones } from '../../redux/publicaciones/selectors';
 import { getToken } from '../../redux/usuario/selectors';
 
@@ -20,12 +21,15 @@ export const Publicaciones = () => {
     const token = useSelector(getToken);
     const resumenPublicaciones = useSelector(getPublicaciones);
 
+    const history = useNavigate();
+
     const [currentPage, setCurrentPage] = useState(1);
     const [carsPerPage] = useState(8);
     const [totalPages, setTotalPages] = useState(0);
     const [allPosts, setAllPosts] = useState([]);
     const [alert, setAlert] = useState({});
     const [showAlert, setShowAlert] = useState(false);
+    const [reportComments, setReportComments] = useState([]);
 
     const deletePublicacion = async (idPublicacion) => {
         const response = await fetch(
@@ -38,7 +42,6 @@ export const Publicaciones = () => {
                 },
             }
         );
-        console.log(token)
         if (response.ok) {
             setAllPosts((prevPub) => {
                 return prevPub.filter((pub) => pub.id != idPublicacion);
@@ -46,7 +49,7 @@ export const Publicaciones = () => {
             setShowAlert(true);
             setAlert(() => {
                 return {
-                    title:'Operación realizada',
+                    title: 'Operación realizada',
                     message: 'Eliminada con éxito',
                     type: 'exito',
                 };
@@ -55,7 +58,7 @@ export const Publicaciones = () => {
             setShowAlert(true);
             setAlert(() => {
                 return {
-                    title:'Operación no realizada',
+                    title: 'Operación no realizada',
                     message: 'Intenta otra vez',
                     type: 'error',
                 };
@@ -66,7 +69,7 @@ export const Publicaciones = () => {
     // API call to fetch cars data
     useEffect(() => {
         dispatch(cargarPublicaciones());
-        setAllPosts(resumenPublicaciones);
+        //setAllPosts(resumenPublicaciones);
     }, []);
 
     //set the total pages of the catalog
@@ -74,6 +77,39 @@ export const Publicaciones = () => {
         setTotalPages(Math.ceil(resumenPublicaciones.length / carsPerPage));
     }, [resumenPublicaciones]);
 
+    useEffect(() => {
+        const loadData = async () => {
+            const posts = await loadReportPosts();
+            let newArray = [];
+            if (posts) {
+                newArray = posts.map((post) => {
+                    return {
+                        "carroPublicacion": post.reportePublicacion.carroPublicacion,
+                        "idPublicacion": post.reportePublicacion.id
+                    };
+                });
+                setReportComments(
+                    posts.map((data) => {
+                        return {
+                            "id": data.id,
+                            "comentario": data.comentarios,
+                            "usuarioReporte": data.reportePublicacion.usuarioPublicacion.id,
+                        };
+                    })
+                );
+            }
+            const uniqueData = newArray.filter((obj, index, self) => {
+                const currentIndex = self.findIndex((o) => o.idPublicacion === obj.idPublicacion);
+                return currentIndex === index;
+            });
+            setAllPosts(uniqueData);
+        };
+        loadData();
+    }, []);
+
+    useEffect(() => {
+        console.log(reportComments);
+    }, [reportComments]);
 
     // Handle page change
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -96,26 +132,46 @@ export const Publicaciones = () => {
                                 <>
                                     {allPosts.map((publicacion) => {
                                         return (
-                                            <CardCar
-                                                key={publicacion.idPublicacion}
-                                                idPublicacion={publicacion.idPublicacion}
-                                                srcImageCar='https://i.imgur.com/xyiSDoE.jpeg'
-                                                yearCarro={publicacion.carroPublicacion.year}
-                                                modeloCarro={publicacion.carroPublicacion.tipo}
-                                                marcaCarro={publicacion.carroPublicacion.marca}
-                                                precio={publicacion.carroPublicacion.precio}
-                                                ciudadVenta={publicacion.carroPublicacion.ciudad}
-                                                kilometraje={publicacion.carroPublicacion.kilometraje}
-                                                tipoTransmision={
-                                                    publicacion.carroPublicacion.transmision
-                                                }
-                                                tipoCombustible={
-                                                    publicacion.carroPublicacion.combustible
-                                                }
-                                                estado={publicacion.carroPublicacion.estado}
-                                                deletePublicacion={deletePublicacion}
-                                                showOpt={true}
-                                            ></CardCar>
+                                            <>
+                                                <CardCar
+                                                    key={publicacion.idPublicacion}
+                                                    idPublicacion={publicacion.idPublicacion}
+                                                    srcImageCar='https://i.imgur.com/xyiSDoE.jpeg'
+                                                    yearCarro={publicacion.carroPublicacion.year}
+                                                    modeloCarro={publicacion.carroPublicacion.tipo}
+                                                    marcaCarro={publicacion.carroPublicacion.marca}
+                                                    precio={publicacion.carroPublicacion.precio}
+                                                    ciudadVenta={publicacion.carroPublicacion.ciudad}
+                                                    kilometraje={publicacion.carroPublicacion.kilometraje}
+                                                    tipoTransmision={
+                                                        publicacion.carroPublicacion.transmision
+                                                    }
+                                                    tipoCombustible={
+                                                        publicacion.carroPublicacion.combustible
+                                                    }
+                                                    estado={publicacion.carroPublicacion.estado}
+                                                    deletePublicacion={deletePublicacion}
+                                                    showOpt={true}
+                                                ></CardCar>
+                                                <div className='reports'>
+                                                    <h2>Comentarios ({reportComments.length})</h2>
+                                                    {reportComments.map((comment, id) => {
+                                                        if (id < 10) {
+                                                            return (
+                                                                <div className='report-comments' key={comment.id}>
+                                                                    <div onClick={() => { history(`/perfil/${comment.usuarioReporte}`) }}>
+                                                                        <p>
+                                                                            Comentario:<span>{comment.comentario}</span>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            );
+                                                        }
+                                                    })}
+                                                </div>
+
+                                            </>
+
                                         );
                                     })
                                     }

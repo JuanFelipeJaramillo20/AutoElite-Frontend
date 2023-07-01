@@ -175,6 +175,26 @@
   object-fit: cover;
 }
 
+.report-post {
+  margin-bottom: 1%;
+}
+
+.report-post>button {
+  font-size: 18px;
+  padding: 0;
+}
+
+.leave-report {
+  padding: 7%;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+}
+
 @media screen and (min-width: 940px) {
   .app-publicacion {
     grid-template-columns: 60% 40%;
