@@ -80,3 +80,7 @@
 .form_forgot-password {
   margin-top: 5%;
 }
+
+.form_forgot-password>p {
+  cursor: pointer;
+}

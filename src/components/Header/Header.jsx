@@ -2,13 +2,14 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getAuth, getImagen, getRol } from '../../redux/usuario/selectors';
+import { getAuth, getImagen, getRol, getId } from '../../redux/usuario/selectors';
+import { getUserData, logOut } from '../../redux/usuario/thunk';
 
-import { logOut } from '../../redux/usuario/thunk';
 import { IconoPerfil } from '../IconoPerfil/IconoPerfil';
 import { Boton } from '../Boton/Boton';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { Login } from '../Login/Login';
+import { Alert } from '../Alert/Alert';
 
 import './Header.css';
 
@@ -20,6 +21,7 @@ export const Header = () => {
   const isLoggedIn = useSelector(getAuth);
   const imgPerfil = useSelector(getImagen);
   const userRole = useSelector(getRol);
+  const userId = useSelector(getId);
 
   const [showModal, setShowModal] = useState(false);
   const [toPage, setToPage] = useState('login');
@@ -29,6 +31,9 @@ export const Header = () => {
   const [showInformationProfile, setShowInformationProfile] = useState(false);
   const [isADefinedObjet, setIsADefinedObject] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+
+  const [alert, setAlert] = useState({});
+  const [showAlert, setShowAlert] = useState(false);
 
   const navRef = useRef();
   const headerContainerRef = useRef();
@@ -44,6 +49,26 @@ export const Header = () => {
     setShowModal(false);
     navRef.current.classList.toggle('app-header__responsive-navigation');
   };
+
+  useEffect(() => {
+    const checkBlockedUser = async () => {
+      const response = await getUserData(userId);
+      if (response.bloqueado) {
+        setShowAlert(true);
+        setAlert(() => {
+          return {
+            title: 'Estas bloqueado',
+            message: 'No tienes permiso para iniciar sesión',
+            type: 'alerta'
+          }
+        });
+      }
+    };
+    if (userId) {
+      checkBlockedUser();
+      dispatch(logOut());
+    }
+  }, [userId]);
 
   useEffect(() => {
     const resizeCalc = () => {
@@ -199,6 +224,9 @@ export const Header = () => {
 
   return (
     <>
+      {showAlert ? (
+        <Alert type={alert.type} title={alert.title} message={alert.message} setShowModal={setShowAlert} />
+      ) : null}
       <div ref={headerContainerRef} className='header-app__container'>
         {windowWidth ? (
           <>

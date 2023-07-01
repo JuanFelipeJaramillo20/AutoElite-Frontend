@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-//import homeCar from '../../assets/img/inicio/homeCar.png';
 import jdcar from '../../assets/img/inicio/finished-transformed.png';
 import backgroundLine from '../../assets/img/inicio/backgroundLine.png';
 import carRoad from '../../assets/img/inicio/carRoad.png';
@@ -29,6 +28,7 @@ export const Inicio = () => {
       dispatch(cargarPublicaciones());
     }
   }, []);
+
 
   const razones = [
     {
