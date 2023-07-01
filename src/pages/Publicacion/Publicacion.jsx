@@ -25,6 +25,11 @@ export const Publicacion = () => {
   const [alert, setAlert] = useState({});
   const [showAlert, setShowAlert] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [mainPicture, setMainPicture] = useState(0);
+
+  const handleImageChange = (event) => {
+    setMainPicture(parseInt(event.target.id));
+  };
 
   useEffect(() => {
     const getDatosPublicacion = async (idPublicacion) => {
@@ -174,23 +179,48 @@ export const Publicacion = () => {
           </h1>
           <div className='imagenes'>
             <div className='imagen-principal'>
-              <img src={publicacion.carroPublicacion.imagenes[0]} alt='' />
+              <img src={publicacion.carroPublicacion.imagenes[mainPicture]} alt='' />
             </div>
             <div className='imagen-secundaria'>
-              <div className='imagenPequeña '>
-                <img src={publicacion.carroPublicacion.imagenes[0]} alt='' />
+              <div className={`imagenPequeña ${(mainPicture === 0) ? 'selected-file__img' : ''}`}>
+                <img
+                  id='0'
+                  onClick={handleImageChange}
+                  src={publicacion.carroPublicacion.imagenes[0]}
+                  alt=''
+                />
               </div>
-              <div className='imagenPequeña'>
-                <img src={publicacion.carroPublicacion.imagenes[1]} alt='' />
+              <div className={`imagenPequeña ${(mainPicture === 1) ? 'selected-file__img' : ''}`}>
+                <img
+                  id='1'
+                  onClick={handleImageChange}
+                  src={publicacion.carroPublicacion.imagenes[1]}
+                  alt=''
+                />
               </div>
-              <div className='imagenPequeña'>
-                <img src={publicacion.carroPublicacion.imagenes[2]} alt='' />
+              <div className={`imagenPequeña ${(mainPicture === 2) ? 'selected-file__img' : ''}`}>
+                <img
+                  id='2'
+                  onClick={handleImageChange}
+                  src={publicacion.carroPublicacion.imagenes[2]}
+                  alt=''
+                />
               </div>
-              <div className='imagenPequeña'>
-                <img src={publicacion.carroPublicacion.imagenes[3]} alt='' />
+              <div className={`imagenPequeña ${(mainPicture === 3) ? 'selected-file__img' : ''}`}>
+                <img
+                  id='3'
+                  onClick={handleImageChange}
+                  src={publicacion.carroPublicacion.imagenes[3]}
+                  alt=''
+                />
               </div>
-              <div className='imagenPequeña '>
-                <img src={publicacion.carroPublicacion.imagenes[4]} alt='' />
+              <div className={`imagenPequeña ${(mainPicture === 4) ? 'selected-file__img' : ''}`}>
+                <img
+                  id='4'
+                  onClick={handleImageChange}
+                  src={publicacion.carroPublicacion.imagenes[4]}
+                  alt=''
+                />
               </div>
             </div>
           </div>
@@ -276,8 +306,8 @@ export const Publicacion = () => {
               id === ''
                 ? true
                 : id == publicacion.usuarioPublicacion.id
-                ? true
-                : false
+                  ? true
+                  : false
             }
           >
             Reportar
@@ -368,8 +398,8 @@ export const Publicacion = () => {
               id === ''
                 ? true
                 : id == publicacion.usuarioPublicacion.id
-                ? true
-                : false
+                  ? true
+                  : false
             }
           />
         </div>
