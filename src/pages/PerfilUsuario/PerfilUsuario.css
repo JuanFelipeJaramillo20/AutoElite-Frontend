@@ -10,3 +10,14 @@
     width: 70%;
   }
 }
+
+@media screen and (max-width: 720px) {
+  .app-configuracion {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .app-configuracion__sideBar {
+    width: 80%;
+  }
+}
