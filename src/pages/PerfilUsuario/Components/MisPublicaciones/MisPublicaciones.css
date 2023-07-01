@@ -10,3 +10,9 @@
   text-align: center;
   margin-bottom: 5%;
 }
+
+@media screen and (max-width: 720px) {
+  .app-configuracion__misPublicaciones {
+    width: 80%;
+  }
+}

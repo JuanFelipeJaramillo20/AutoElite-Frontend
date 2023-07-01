@@ -215,7 +215,7 @@ export const CrearPublicacion = () => {
                   type: 'text',
                   id: 'ciudad',
                   label: 'Ciudad del carro',
-                  placeHolder: 'Digita la ciudad del vehículo',
+                  placeholder: 'Digita la ciudad del vehículo',
                   validacion: {
                     required: true,
                     minLength: 3,
@@ -231,7 +231,7 @@ export const CrearPublicacion = () => {
                   type: 'text',
                   id: 'ubicacion',
                   label: 'Ubicación',
-                  placeHolder: 'Digita la Ubicación del vehículo',
+                  placeholder: 'Digita la Ubicación del vehículo',
                   validacion: {
                     required: true,
                     minLength: 3,
