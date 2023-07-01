@@ -4,7 +4,7 @@ import { Input } from '../Input/Input';
 import { Boton } from '../Boton/Boton';
 import './Form.css';
 export const Form = (props) => {
-  const { idForm, inputs, btnText, onSubmit } = props;
+  const { idForm, inputs, btnText, onSubmit, disableBtn } = props;
 
   const {
     register,
@@ -32,7 +32,7 @@ export const Form = (props) => {
                 id={input.id}
                 register={register}
                 validators={input.validacion}
-                placeholder={input.placeHolder}
+                placeholder={input.placeholder}
                 value={input.value}
                 opciones={input.options}
               />
@@ -43,7 +43,7 @@ export const Form = (props) => {
                 id={input.id}
                 register={register}
                 validators={input.validacion}
-                placeholder={input.placeHolder}
+                placeholder={input.placeholder}
                 opciones={input.options}
               />
             )}
@@ -55,7 +55,7 @@ export const Form = (props) => {
           </div>
         );
       })}
-      <Boton texto={btnText} tipo='submit' />
+      <Boton texto={btnText} tipo='submit' isDisabled={disableBtn} />
     </form>
   );
 };
@@ -65,4 +65,5 @@ Form.propTypes = {
   inputs: PropTypes.arrayOf(PropTypes.object).isRequired,
   btnText: PropTypes.string,
   onSubmit: PropTypes.func,
+  disableBtn: PropTypes.bool,
 };

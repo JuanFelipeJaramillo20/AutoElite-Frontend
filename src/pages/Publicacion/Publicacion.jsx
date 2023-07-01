@@ -7,18 +7,19 @@ import { IconoPerfil } from '../../components/IconoPerfil/IconoPerfil';
 import { Form } from '../../components/Form/Form';
 
 import './Publicacion.css';
+import { useSelector } from 'react-redux';
+import { getId } from '../../redux/usuario/selectors';
 
 export const Publicacion = () => {
-
   const { publicacionId } = useParams();
-
+  const id = useSelector(getId);
   const navigate = useNavigate();
 
   const [publicacion, setPublicacion] = useState(null);
   const [esPrecioNegociable, setEsPrecioNegociable] = useState('No');
   const [imgPerfil, setImgPerfil] = useState('');
   const [reviews, setReviews] = useState([]);
-  const [startRate, setStarRate] = useState(''); 
+  const [startRate, setStarRate] = useState('');
 
   useEffect(() => {
     const getDatosPublicacion = async (idPublicacion) => {
@@ -41,13 +42,12 @@ export const Publicacion = () => {
   }, []);
 
   useEffect(() => {
-    if (
-      publicacion !== null &&
-      publicacion.carroPublicacion.esPrecioNegociable
-    ) {
-      setEsPrecioNegociable('Sí');
-    } else if (publicacion !== null) {
+    if (publicacion !== null) {
       setImgPerfil(publicacion.usuarioPublicacion.imagenPerfil);
+
+      publicacion.carroPublicacion.precioEsNegociable
+        ? setEsPrecioNegociable('Sí')
+        : setEsPrecioNegociable('No');
     }
   }, [publicacion]);
 
@@ -73,10 +73,10 @@ export const Publicacion = () => {
     if (reviews.length > 0) {
       setStarRate(() => {
         let avg = 0;
-        reviews.forEach((number)=> {
+        reviews.forEach((number) => {
           avg += number.numEstrellas;
         });
-        const [number, decimal] = `${(avg/reviews.length)}`.split('.');
+        const [number, decimal] = `${avg / reviews.length}`.split('.');
         if (decimal) {
           return `${number},${decimal[0]}`;
         } else {
@@ -214,23 +214,24 @@ export const Publicacion = () => {
             </p>
           </div>
           <div className='estrellas'>
-            {Array(5).fill().map((el, id) => {
-              if (parseInt(startRate[0]) > id) {
-                  return(
-                    <i key={id} className="fa-solid fa-star"></i>
-                  );
-              } else {
-                if (parseInt(startRate[2]) >= 5 && id === parseInt(startRate[0])){
-                  return (
-                    <i key={id} className="fa-solid fa-star-half-stroke"></i>
-                  );
+            {Array(5)
+              .fill()
+              .map((el, id) => {
+                if (parseInt(startRate[0]) > id) {
+                  return <i key={id} className='fa-solid fa-star'></i>;
                 } else {
-                  return(
-                    <i key={id} className="fa-regular fa-star"></i>
-                  );
+                  if (
+                    parseInt(startRate[2]) >= 5 &&
+                    id === parseInt(startRate[0])
+                  ) {
+                    return (
+                      <i key={id} className='fa-solid fa-star-half-stroke'></i>
+                    );
+                  } else {
+                    return <i key={id} className='fa-regular fa-star'></i>;
+                  }
                 }
-              }
-            })}
+              })}
             <p>{startRate}</p>
           </div>
           <div className='reviews'>
@@ -244,7 +245,7 @@ export const Publicacion = () => {
               {
                 type: 'text',
                 id: 'nombre',
-                placeHolder: 'Asunto*',
+                placeholder: 'Asunto*',
                 validacion: { required: true },
                 error: {
                   required: 'Campo obligatorio',
@@ -253,7 +254,7 @@ export const Publicacion = () => {
               {
                 type: 'text',
                 id: 'email-publicacion',
-                placeHolder: 'Email*',
+                placeholder: 'Email*',
                 validacion: {
                   required: true,
                   pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
@@ -266,12 +267,12 @@ export const Publicacion = () => {
               {
                 type: 'number',
                 id: 'telefono-publicacion',
-                placeHolder: 'Teléfono',
+                placeholder: 'Teléfono',
               },
               {
                 type: 'text',
                 id: 'mensaje',
-                placeHolder: 'Escribe un mensaje*',
+                placeholder: 'Escribe un mensaje*',
                 validacion: { required: true },
                 error: {
                   required: 'Campo obligatorio',
@@ -279,6 +280,13 @@ export const Publicacion = () => {
               },
             ]}
             btnText='Enviar mensaje'
+            disableBtn={
+              id === ''
+                ? true
+                : id == publicacion.usuarioPublicacion.id
+                ? true
+                : false
+            }
           />
         </div>
       </aside>
