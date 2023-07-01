@@ -155,6 +155,7 @@ export const Publicaciones = () => {
                                                 ></CardCar>
                                                 <div className='reports'>
                                                     <h2>Comentarios ({reportComments.length})</h2>
+                                                    <div className='none-none'></div>
                                                     {reportComments.map((comment, id) => {
                                                         if (id < 10) {
                                                             return (
