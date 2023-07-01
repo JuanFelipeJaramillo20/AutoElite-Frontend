@@ -1,20 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-//import homeCar from '../../assets/img/inicio/homeCar.png';
 import jdcar from '../../assets/img/inicio/finished-transformed.png';
 import backgroundLine from '../../assets/img/inicio/backgroundLine.png';
 import carRoad from '../../assets/img/inicio/carRoad.png';
 import roadLine from '../../assets/img/inicio/roadLine.png';
 
 import { CardCar } from '../../components/CardCar/CardCar';
-import { Alert } from '../../components/Alert/Alert';
 
 import { cargarPublicaciones } from '../../redux/publicaciones/thunk';
-import { getUserData, logOut } from '../../redux/usuario/thunk';
 import { getPublicaciones } from '../../redux/publicaciones/selectors';
-import { getRol, getId } from '../../redux/usuario/selectors';
+import { getRol } from '../../redux/usuario/selectors';
 
 import './inicio.css';
 
@@ -25,10 +22,6 @@ export const Inicio = () => {
 
   const publicaciones = useSelector(getPublicaciones);
   const userRole = useSelector(getRol);
-  const userId = useSelector(getId);
-
-  const [alert, setAlert] = useState({});
-  const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
     if (publicaciones.length === 0) {
@@ -36,25 +29,6 @@ export const Inicio = () => {
     }
   }, []);
 
-  useEffect(() => {
-    const checkBlockedUser = async () => {
-      const response = await getUserData(userId);
-      if (response.bloqueado) {
-        setShowAlert(true);
-        setAlert(() => {
-          return {
-            title: 'Estas bloqueado',
-            message: 'No tienes permiso para iniciar sesión',
-            type: 'alerta'
-          }
-        });
-      }
-    };
-    if (userId) {
-      checkBlockedUser();
-      dispatch(logOut());
-    }
-  }, [userId]);
 
   const razones = [
     {
@@ -138,9 +112,6 @@ export const Inicio = () => {
 
   return (
     <>
-    {showAlert ? (
-      <Alert type={alert.type} title={alert.title} message={alert.message} setShowModal={setShowAlert} />
-    ) : null}
       <main className='home'>
         <section className='intro-section'>
           <div className='intro-section__background-line'>
