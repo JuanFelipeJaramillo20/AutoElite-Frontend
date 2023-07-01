@@ -84,7 +84,7 @@ export const Publicaciones = ({
 };
 
 Publicaciones.propTypes = {
-  userId: PropTypes.string.isRequired,
+  userId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   setCantidadPublicaciones: PropTypes.func,
   showOpt: PropTypes.bool,
 };

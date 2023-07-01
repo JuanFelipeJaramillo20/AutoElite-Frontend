@@ -27,8 +27,8 @@ export const CrearPublicacion = () => {
     setYear(currentYear);
   }, []);
 
-  const handlePostCreation = useCallback(async (data, files = []) => {
-    if (files.length >= 3) {
+  const handlePostCreation = useCallback(async (data, files = [], reset) => {
+    if (files.length >= 4) {
       const thisDate = `${new Date(Date.now()).getFullYear()}-${new Date(
         Date.now()
       ).getMonth()}-${new Date(Date.now()).getDate()}`;
@@ -69,6 +69,7 @@ export const CrearPublicacion = () => {
           setAlertMessage('La publicación fue creada');
           setAlertType('exito');
           setShowAlert(true);
+          reset();
         }
       }
     } else {
@@ -332,7 +333,7 @@ export const CrearPublicacion = () => {
                 },
               ]}
               btnText={'Crear vehículo'}
-              onSubmit={(data) => handlePostCreation(data, files)}
+              onSubmit={(data, reset) => handlePostCreation(data, files, reset)}
             />
             <div className='form-pics'>
               <CargarFotos

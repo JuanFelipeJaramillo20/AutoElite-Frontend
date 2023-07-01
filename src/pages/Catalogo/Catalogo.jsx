@@ -562,7 +562,7 @@ export const Catalogo = () => {
                       <CardCar
                         key={publicacion.idPublicacion}
                         idPublicacion={publicacion.idPublicacion}
-                        srcImageCar='https://i.imgur.com/xyiSDoE.jpeg'
+                        srcImageCar={publicacion.carroPublicacion.imagenes[0]}
                         yearCarro={publicacion.carroPublicacion.year}
                         modeloCarro={publicacion.carroPublicacion.tipo}
                         marcaCarro={publicacion.carroPublicacion.marca}

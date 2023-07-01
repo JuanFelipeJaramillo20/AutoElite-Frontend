@@ -2,10 +2,10 @@ import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './CargarFotos.css';
 
-export const CargarFotos = ({ setFiles }) => {
+export const CargarFotos = ({ setFiles, filesUploaded = [] }) => {
   const showUploadedImagesContainer = useRef();
 
-  const [selectedFiles, setSelectedFiles] = useState([]);
+  const [selectedFiles, setSelectedFiles] = useState(filesUploaded);
   const [dragging, setDragging] = useState(false);
 
   const handleDragEnter = (event) => {
@@ -92,7 +92,7 @@ export const CargarFotos = ({ setFiles }) => {
             </button>
             <img
               className='card-image__uploaded'
-              src={URL.createObjectURL(file)}
+              src={typeof file === 'string' ? file : URL.createObjectURL(file)}
               alt={`Image ${index}`}
             />
           </div>
@@ -104,4 +104,5 @@ export const CargarFotos = ({ setFiles }) => {
 
 CargarFotos.propTypes = {
   setFiles: PropTypes.func,
+  filesUploaded: PropTypes.array,
 };

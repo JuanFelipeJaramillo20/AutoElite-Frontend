@@ -12,15 +12,16 @@ import { getReviews, getUserData } from '../../redux/usuario/thunk';
 //import { REVIEWS } from '../../../constants';
 
 import './PerfilVendedor.css';
+import { useSelector } from 'react-redux';
+import { getId } from '../../redux/usuario/selectors';
 
 export const PerfilVendedor = () => {
   const { usuarioId } = useParams();
-
+  const id = useSelector(getId);
   const [usuario, setUsuario] = useState(null);
   const [cantidadPublicaciones, setCantidadPublicaciones] = useState(0);
   const [reviews, setReviews] = useState([]);
   const [wasReviewed, setWasReviewed] = useState(false);
-
   useEffect(() => {
     const getDatosUsuario = async () => {
       const res = await getUserData(usuarioId);
@@ -74,47 +75,43 @@ export const PerfilVendedor = () => {
             inputs={[
               {
                 type: 'text',
-                id: 'name-send',
-                label: 'Nombre completo',
-                placeHolder: 'Digita tu nombre',
-                validacion: {
-                  required: true,
-                },
+                id: 'nombre',
+                placeholder: 'Asunto*',
+                validacion: { required: true },
                 error: {
-                  required: 'El nombre es obligatorio.',
+                  required: 'Campo obligatorio',
                 },
               },
               {
-                type: 'email',
-                id: 'email-send',
-                label: 'Correo electrónico',
-                placeHolder: 'Digita tu correo',
+                type: 'text',
+                id: 'email-publicacion',
+                placeholder: 'Email*',
                 validacion: {
                   required: true,
                   pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
                 },
                 error: {
-                  required: 'El nombre es obligatorio.',
-                  pattern: 'Correo electrónico no válido',
+                  required: 'Campo obligatorio',
+                  pattern: 'Email no válido.',
                 },
               },
               {
-                type: 'textarea',
-                id: 'message-send',
-                label: 'Motivo',
-                placeHolder: 'Quiero comprar tu carro!',
-                validacion: {
-                  required: true,
-                },
+                type: 'number',
+                id: 'telefono-publicacion',
+                placeholder: 'Teléfono',
+              },
+              {
+                type: 'text',
+                id: 'mensaje',
+                placeholder: 'Escribe un mensaje*',
+                validacion: { required: true },
                 error: {
-                  required: 'El motivo es obligatorio.',
+                  required: 'Campo obligatorio',
                 },
               },
             ]}
-            btnText={'Enviar mensaje'}
-            onSubmit={(data) => {
-              console.log(data);
-            }}
+            btnText='Enviar mensaje'
+            disableBtn={id === '' ? true : id == usuarioId ? true : false}
           />
         </div>
       </header>
