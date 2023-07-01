@@ -149,3 +149,14 @@ li {
     width: 20%;
   }
 }
+
+@media screen and (max-width: 920px) {
+  .catalog-page {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .columna-filtros {
+    width: 80%;
+  }
+}

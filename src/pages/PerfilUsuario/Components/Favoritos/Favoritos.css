@@ -1,3 +1,15 @@
 .app-configuracion__guardados {
   width: 60%;
 }
+
+.app-configuracion__guardados p {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+@media screen and (max-width: 720px) {
+  .app-configuracion__guardados {
+    width: 80%;
+  }
+}

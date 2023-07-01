@@ -12,3 +12,9 @@
 .app-configuracion .progress-bar > p {
   right: clamp(-45px, -15%, -100px);
 }
+
+@media screen and (max-width: 720px) {
+  .app-configuracion .reviews-section {
+    width: 80%;
+  }
+}
