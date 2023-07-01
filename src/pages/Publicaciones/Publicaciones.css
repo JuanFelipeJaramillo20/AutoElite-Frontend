@@ -1,16 +1,25 @@
 .publicaciones-section {
-  min-height: 100dvh;
+  min-height: 100vh;
   padding: 5%;
+
+  overflow: hidden;
 }
 
 .publicaciones-section__title {
   font-size: clamp(20px, 2.5vw, 25px);
+
+  margin-bottom: 5%;
 }
 
 .publicaciones-section .car-list {
   display: flex;
   flex-direction: row;
   gap: 5%;
+
+  width: 80vw;
+
+  margin-inline: auto;
+  margin-bottom: 50%;
 }
 
 .reports {
@@ -28,9 +37,9 @@
   margin: 0;
 }
 
-.reports > h2 {
+.reports>h2 {
   position: absolute;
-  top: 5%;
+  top: 0%;
 
   width: 100%;
   height: 30px;
@@ -39,31 +48,71 @@
   font-size: 20px;
 }
 
+.comments-report__container {
+  position: absolute;
+  top: 30px;
+
+  height: auto;
+  width: 100%;
+}
+
 .report-comments {
   background-color: white;
   border-radius: 20px;
 
-  padding: 2%;
+  padding: 1%;
+  margin-bottom: 1%;
+
+  min-width: 200px;
+  max-width: 200px;
+
   border: 1px solid rgba(0, 0, 0, 0.5);
 
   cursor: pointer;
 }
 
-.report-comments > div > p {
+.report-comments>div>p {
   display: flex;
+  flex-direction: column;
   align-items: center;
 
   font-size: 18px;
+  font-weight: 600;
 }
 
-.none-none {
-  width: 100%;
-  height: 0;
-  margin-bottom: 34px;
-}
-
-.report-comments > div > p > span {
+.report-comments>div>p>span {
   font-size: 16px;
+  font-weight: 200;
 
   margin-left: 10px;
+}
+
+.catalog-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 0;
+}
+
+@media screen and (max-width:950px) {
+  .publicaciones-section .car-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5%;
+  
+    width: 50vw;
+    max-width: 500px;
+    min-width: 270px;
+  
+    margin-inline: auto;
+  }
+
+  .comments-report__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
