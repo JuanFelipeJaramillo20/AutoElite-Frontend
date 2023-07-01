@@ -7,9 +7,6 @@ import jdcar from '../../assets/img/inicio/finished-transformed.png';
 import backgroundLine from '../../assets/img/inicio/backgroundLine.png';
 import carRoad from '../../assets/img/inicio/carRoad.png';
 import roadLine from '../../assets/img/inicio/roadLine.png';
-import carroJuandaInicioUno from '../../assets/img/inicio/carroJuanda.jpeg';
-import carroJuandaInicioDos from '../../assets/img/inicio/elMejor.jpeg';
-import carroJuandaInicioTres from '../../assets/img/inicio/si.jpeg';
 
 import { CardCar } from '../../components/CardCar/CardCar';
 
@@ -20,7 +17,6 @@ import { getRol } from '../../redux/usuario/selectors';
 import './inicio.css';
 
 export const Inicio = () => {
-
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -71,12 +67,6 @@ export const Inicio = () => {
       texto:
         'Nos comprometemos a proteger tus datos personales de forma segura. Puedes confiar en que tus datos estarán protegidos y que nos tomamos en serio la privacidad de nuestros usuarios. ',
     },
-  ];
-
-  const carrosJuanda = [
-    carroJuandaInicioUno,
-    carroJuandaInicioDos,
-    carroJuandaInicioTres,
   ];
 
   useEffect(() => {
@@ -180,7 +170,7 @@ export const Inicio = () => {
                     tipoCombustible={publicacion.carroPublicacion.combustible}
                     tipoTransmision={publicacion.carroPublicacion.transmision}
                     yearCarro={publicacion.carroPublicacion.year}
-                    srcImageCar={carrosJuanda[id]}
+                    srcImageCar={publicacion.carroPublicacion.imagenes[0]}
                     estado={publicacion.carroPublicacion.estado}
                   />
                 ) : null;
