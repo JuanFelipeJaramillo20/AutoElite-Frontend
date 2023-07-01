@@ -170,7 +170,7 @@ export const editUser = async (userId, newValues) => {
   }
 };
 
-export const saveNewImg =  async (userID, newFile) => {
+export const saveNewImg = async (userID, newFile) => {
   const formData = new FormData();
   formData.append('file', newFile);
   formData.append('upload_preset', 'fotoPerfil_usuarios');
@@ -187,8 +187,48 @@ export const saveNewImg =  async (userID, newFile) => {
   }
 };
 
-export const blockUser = (userID, token) => {
-  
+export const blockUser = async (userID) => {
+  try {
+    const response = await fetch(
+      `http://localhost:8080/api/v1/admin/users/${userID}/block`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: localStorage.getItem('token'),
+        },
+      }
+    );
+    if (response.status === 204) {
+      return [true, `Usuario ${userID} bloqueado`];
+    } else {
+      return [false, 'Intenta otra vez'];
+    }
+  } catch (err) {
+    return [false, err];
+  }
+};
+
+export const deleteUser = async (userID) => {
+  try {
+    const response = await fetch(
+      `http://localhost:8080/api/v1/admin/users/${userID}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: localStorage.getItem('token'),
+        },
+      }
+    );
+    if (response.status === 204) {
+      return [true, `Usuario ${userID} eliminado`];
+    } else {
+      return [false, 'Intenta otra vez'];
+    }
+  } catch (err) {
+    return [false, err];
+  }
 };
 
 export const addReview = async (newReview, currentUserTOKEN) => {
@@ -266,7 +306,6 @@ export const getFavorites = (idUsuario) => {
     );
 
     const result = await response.json();
-    console.log(result);
     if (response.ok) {
       const lstFavorites = [];
       result.map((pub) => {
@@ -369,6 +408,28 @@ export const getAllUsers = async () => {
     const result = await response.json();
     if (response.ok && !result.Error) {
       return [true, result];
+    } else {
+      return [false, result.Error];
+    }
+  } catch (err) {
+    return [false, err];
+  }
+};
+
+export const addReport = async (report) => {
+  try {
+    const response = await fetch(`http://localhost:8080/api/v1/reporte`, {
+      method: 'POST',
+      body: JSON.stringify(report),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('token'),
+      },
+    });
+    console.log(report)
+    const result = await response.json();
+    if (response.status === 201) {
+      return [true, result.correcto];
     } else {
       return [false, result.Error];
     }

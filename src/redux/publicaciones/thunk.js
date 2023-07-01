@@ -36,3 +36,23 @@ export const crearPublicacion = async (newPost, userToken) => {
     return '';
   }
 };
+
+export const loadReportPosts = async () => {
+  try {
+    const response = await fetch(`http://localhost:8080/api/v1/reporte`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('token'),
+      },
+    });
+    const res = await response.json();
+    if (response.status === 200) {
+      return res;
+    } else {
+      return [];
+    }
+  } catch (error) {
+    return '';
+  }
+};

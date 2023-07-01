@@ -1,18 +1,29 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Lottie from 'lottie-react';
 import loaderLottie from '../../assets/animations/carLoader.json';
 
 import { CardCar } from '../../components/CardCar/CardCar';
 import { Boton } from '../../components/Boton/Boton';
+import { Alert } from '../../components/Alert/Alert';
 
 import './Publicaciones.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { cargarPublicaciones } from '../../redux/publicaciones/thunk';
+import {
+  cargarPublicaciones,
+  loadReportPosts,
+} from '../../redux/publicaciones/thunk';
 import { getPublicaciones } from '../../redux/publicaciones/selectors';
+import { getToken } from '../../redux/usuario/selectors';
 
 export const Publicaciones = () => {
   const dispatch = useDispatch();
+  const resumenPublicaciones = useSelector(getPublicaciones);
+
+  const dispatch = useDispatch();
+
+  const token = useSelector(getToken);
   const resumenPublicaciones = useSelector(getPublicaciones);
 
   const [currentPage, setCurrentPage] = useState(1);

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -6,7 +6,7 @@ import { Alert } from '../../components/Alert/Alert';
 import { NoEncontrado } from '../NoEncontrado/NoEncontrado';
 import Lottie from 'lottie-react';
 
-import { getAllUsers } from '../../redux/usuario/thunk';
+import { getAllUsers, blockUser, deleteUser } from '../../redux/usuario/thunk';
 import { getToken, getRol, getId } from '../../redux/usuario/selectors';
 
 import noUsers from '../../assets/animations/noUsers.json';
@@ -25,7 +25,41 @@ export const InicioAdmin = () => {
     const [showAlert, setShowAlert] = useState(false);
     const [titleAlert, setTitleAlert] = useState('');
     const [messageAlert, setMessageAlert] = useState('');
+    const [typeAlert, setTypeAlert] = useState('');
     const [userList, setUserList] = useState([]);
+    const [reload, setReload] = useState(0);
+
+    const handleBlockUser = useCallback(async (idUser) => {
+        const [status, response] = await blockUser(idUser);
+        if (status) {
+            setShowAlert(true);
+            setTypeAlert('exito');
+            setTitleAlert('Operación realizada');
+            setMessageAlert(response);
+        } else {
+            setShowAlert(true);
+            setTypeAlert('error');
+            setTitleAlert('Algo salió mal');
+            setMessageAlert(response);
+        }
+        setReload((prevValue) => {return (prevValue + 1)});
+    }, []);
+
+    const handleDeleteUser = useCallback(async (idUser) => {
+        const [state, response] = await deleteUser(idUser);
+        if (state) {
+            setShowAlert(true);
+            setTypeAlert('exito');
+            setTitleAlert('Operación realizada');
+            setMessageAlert(response);
+        } else {
+            setShowAlert(true);
+            setTypeAlert('error');
+            setTitleAlert('Algo salió mal');
+            setMessageAlert(response);
+        }
+        setReload((prevValue) => {return (prevValue + 1)});
+    }, []);
 
     useEffect(() => {
         const getUsers = async () => {
@@ -41,14 +75,14 @@ export const InicioAdmin = () => {
             }
         };
         getUsers();
-    }, [userRole, userToken]);
+    }, [userRole, userToken,reload]);
 
     return (
         <>
             {userRole === 'ADMIN' ? (
                 <>
                     {showAlert ? (
-                        <Alert type='error' title={titleAlert} message={messageAlert} setShowModal={setShowAlert} />
+                        <Alert type={typeAlert} title={titleAlert} message={messageAlert} setShowModal={setShowAlert} />
                     ) : null}
                     <section className='users-section'>
                         <header className='users-section__title'>
@@ -61,7 +95,7 @@ export const InicioAdmin = () => {
                                         return (
                                             <div key={user.id} className={user.bloqueado ? 'user-information bloqueado' : 'user-information'}>
                                                 <div>
-                                                    <div onClick={() => {navigate(`/perfil/${user.id}`)}}>
+                                                    <div onClick={() => { navigate(`/perfil/${user.id}`) }}>
                                                         <img src={user.imagenPerfil ? user.imagenPerfil : img} alt="user profile img" />
                                                     </div>
                                                 </div>
@@ -83,11 +117,16 @@ export const InicioAdmin = () => {
                                                         <span>{user.telefono}</span>
                                                     </p>
                                                 </div>
-                                                <div>
-                                                    <button>
+                                                <div className='admin-controller'>
+                                                    <button 
+                                                        onClick={() => {handleDeleteUser(user.id)}}
+                                                    >
                                                         <span><i className="fa-solid fa-user-minus"></i></span>
                                                     </button>
-                                                    <button>
+                                                    <button
+                                                        onClick={() => { handleBlockUser(user.id) }}
+                                                        disabled={user.bloqueado}
+                                                    >
                                                         <span><i className="fa-solid fa-user-slash"></i></span>
                                                     </button>
                                                     <button onClick={() => { navigate(`/usuarios/editar/${user.id}`) }}>

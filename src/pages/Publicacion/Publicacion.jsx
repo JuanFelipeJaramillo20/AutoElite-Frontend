@@ -1,10 +1,12 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-import { getReviews } from '../../redux/usuario/thunk';
+import { getReviews, addReport } from '../../redux/usuario/thunk';
 
 import { IconoPerfil } from '../../components/IconoPerfil/IconoPerfil';
+import { Alert } from '../../components/Alert/Alert';
 import { Form } from '../../components/Form/Form';
+import { Modal } from '../../components/Modal/Modal';
 
 import './Publicacion.css';
 import { useSelector } from 'react-redux';
@@ -20,6 +22,9 @@ export const Publicacion = () => {
   const [imgPerfil, setImgPerfil] = useState('');
   const [reviews, setReviews] = useState([]);
   const [startRate, setStarRate] = useState('');
+  const [alert, setAlert] = useState({});
+  const [showAlert, setShowAlert] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const getDatosPublicacion = async (idPublicacion) => {
@@ -37,9 +42,36 @@ export const Publicacion = () => {
         setPublicacion(result);
       }
     };
-
     getDatosPublicacion(publicacionId);
   }, []);
+
+  function handleShowModal() {
+    setShowModal(!showModal);
+  }
+
+  const handleReport = async (data) => {
+    const newReport = {
+      "comentarios": data.comments,
+      "publicacionId": publicacionId,
+    };
+    const [status, res] = await addReport(newReport);
+    if (status) {
+      setShowAlert(true);
+      setAlert({
+        title: 'Operación realizada',
+        message: res,
+        type: 'exito'
+      });
+      handleShowModal();
+    } else {
+      setShowAlert(true);
+      setAlert({
+        title: 'Operación no realizada',
+        message: res,
+        type: 'error'
+      });
+    }
+  };
 
   useEffect(() => {
     if (publicacion !== null) {
@@ -76,7 +108,7 @@ export const Publicacion = () => {
         reviews.forEach((number) => {
           avg += number.numEstrellas;
         });
-        const [number, decimal] = `${avg / reviews.length}`.split('.');
+        const [number, decimal] = `${(avg / reviews.length)}`.split('.');
         if (decimal) {
           return `${number},${decimal[0]}`;
         } else {
@@ -90,6 +122,37 @@ export const Publicacion = () => {
 
   return publicacion !== null ? (
     <div className='app-publicacion'>
+      {showAlert ? (
+        <Alert type={alert.type} title={alert.title} message={alert.message} setShowModal={setShowAlert} />
+      ) : null}
+      {showModal ? (
+        <Modal width={300} heigth={400} handleModal={handleShowModal}>
+          <div className='leave-report'>
+            <Form
+              inputs={[
+                {
+                  type: 'textarea',
+                  id: 'comments',
+                  label: 'Reporte',
+                  placeholder: '¿Por qué reportas?',
+                  validacion: {
+                    required: true,
+                    minLength: 2,
+                    maxLength: 30,
+                  },
+                  error: {
+                    required: 'El reporte es obligatorio.',
+                    minLength: 'Mínimo 2 caracteres.',
+                    maxLength: 'Máximo 30 caracteres',
+                  },
+                },
+              ]}
+              btnText={'Enviar reporte'}
+              onSubmit={(data) => handleReport(data)}
+            />
+          </div>
+        </Modal>
+      ) : null}
       <div
         className='app-publicacion__devolver'
         onClick={() => {
@@ -199,6 +262,11 @@ export const Publicacion = () => {
           ${publicacion.carroPublicacion.precio}
         </p>
         <p className='app-publicacion__ciudad'>{publicacion.ciudad}</p>
+        <div className='report-post'>
+          <button onClick={() => {setShowModal(true)}} className='app-btn'>
+            Reportar
+          </button>
+        </div>
       </div>
       <aside className='app-publicacion__sideBar'>
         <div
@@ -214,22 +282,20 @@ export const Publicacion = () => {
             </p>
           </div>
           <div className='estrellas'>
-            {Array(5)
-              .fill()
-              .map((el, id) => {
-                if (parseInt(startRate[0]) > id) {
-                  return <i key={id} className='fa-solid fa-star'></i>;
+            {Array(5).fill().map((el, id) => {
+              if (parseInt(startRate[0]) > id) {
+                return (
+                  <i key={id} className="fa-solid fa-star"></i>
+                );
+              } else {
+                if (parseInt(startRate[2]) >= 5 && id === parseInt(startRate[0])) {
+                  return (
+                    <i key={id} className="fa-solid fa-star-half-stroke"></i>
+                  );
                 } else {
-                  if (
-                    parseInt(startRate[2]) >= 5 &&
-                    id === parseInt(startRate[0])
-                  ) {
-                    return (
-                      <i key={id} className='fa-solid fa-star-half-stroke'></i>
-                    );
-                  } else {
-                    return <i key={id} className='fa-regular fa-star'></i>;
-                  }
+                  return (
+                    <i key={id} className="fa-regular fa-star"></i>
+                  );
                 }
               })}
             <p>{startRate}</p>
