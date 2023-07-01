@@ -195,6 +195,18 @@
   height: 100%;
 }
 
+.imagenPequeña{
+  cursor: pointer;
+
+  border: 5px solid transparent;
+
+  transition: 0.3s;
+}
+
+.selected-file__img {
+  border: 5px solid rgb(47, 39, 66, 0.8);
+}
+
 @media screen and (min-width: 940px) {
   .app-publicacion {
     grid-template-columns: 60% 40%;
