@@ -27,6 +27,7 @@ import { NoEncontrado } from '../pages/NoEncontrado/NoEncontrado';
 import { getDatosUsuario } from '../redux/usuario/thunk';
 import { establecerToken } from '../redux/usuario/actions';
 import { useEffect } from 'react';
+import { Mensajes } from '../pages/PerfilUsuario/Components/Mensajes/Mensajes';
 
 export const RoutesConfiguration = () => {
   const dispatch = useDispatch();
@@ -72,6 +73,8 @@ export const RoutesConfiguration = () => {
           <Route path='/misPublicaciones' element={<MisPublicaciones />} />
 
           <Route path='/misReseñas' element={<MisReseñas />} />
+
+          <Route path='/misMensajes' element={<Mensajes />} />
         </Route>
         <Route path='/preguntasFrecuentes' element={<PreguntasFrecuentes />} />
       </Routes>

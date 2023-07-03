@@ -106,9 +106,6 @@ export const LoginPage = () => {
               }}
             />
           </div>
-          <div className='form_forgot-password'>
-            <p>Olvidé la contraseña</p>
-          </div>
         </div>
       </div>
     </>

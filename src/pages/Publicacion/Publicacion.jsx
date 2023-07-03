@@ -39,6 +39,7 @@ export const Publicacion = () => {
       telefono: data['telefono-publicacion'],
       sender: id,
       receiver: publicacion.usuarioPublicacion.id,
+      asunto: data.asunto,
     };
     const successEnvio = await sendMessage(mensaje);
 

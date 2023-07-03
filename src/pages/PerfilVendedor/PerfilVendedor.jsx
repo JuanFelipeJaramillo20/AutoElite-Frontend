@@ -33,10 +33,10 @@ export const PerfilVendedor = () => {
       email: email,
       mensaje: data.mensaje,
       telefono: data['telefono-publicacion'],
-      sender: id,
-      receiver: usuarioId,
+      sender: id.toString(),
+      receiver: usuarioId.toString,
+      asunto: data.asunto,
     };
-    console.log(mensaje);
     const successEnvio = await sendMessage(mensaje);
 
     if (successEnvio) {
@@ -117,7 +117,7 @@ export const PerfilVendedor = () => {
             inputs={[
               {
                 type: 'text',
-                id: 'nombre',
+                id: 'asunto',
                 placeholder: 'Asunto*',
                 validacion: { required: true },
                 error: {

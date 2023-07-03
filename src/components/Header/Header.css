@@ -102,6 +102,10 @@
   font-size: 2rem;
 }
 
+.fa-envelope {
+  font-size: 1rem;
+}
+
 .app-header .app-header__logged-in {
   position: relative;
 }
@@ -109,7 +113,7 @@
 .information-profile__header {
   position: absolute;
   z-index: 10;
-  bottom: -300%;
+  bottom: -360%;
   left: -39%;
   width: 100%;
   padding-top: 4%;
