@@ -163,7 +163,7 @@ export const editUser = async (userId, newValues) => {
     if (response.ok) {
       return [true, result.correcto];
     } else {
-      return [false, result.Error]
+      return [false, result.Error];
     }
   } catch (err) {
     return [false, err];
@@ -320,6 +320,7 @@ export const getFavorites = (idUsuario) => {
           tipoTransmision: pub.carroPublicacion.transmision,
           tipoCombustible: pub.carroPublicacion.combustible,
           estado: pub.carroPublicacion.estado,
+          imagen: pub.carroPublicacion.imagenes[0],
         };
         lstFavorites.push(favPub);
       });
@@ -426,7 +427,6 @@ export const addReport = async (report) => {
         Authorization: localStorage.getItem('token'),
       },
     });
-    console.log(report)
     const result = await response.json();
     if (response.status === 201) {
       return [true, result.correcto];
@@ -435,5 +435,28 @@ export const addReport = async (report) => {
     }
   } catch (err) {
     return [false, err];
+  }
+};
+
+export const sendMessage = async (mensaje) => {
+  try {
+    const response = await fetch(
+      `http://localhost:8080/api/v1/mensajeVendedor`,
+      {
+        method: 'POST',
+        body: JSON.stringify(mensaje),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: localStorage.getItem('token'),
+        },
+      }
+    );
+    if (response.status === 201) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (err) {
+    return false;
   }
 };

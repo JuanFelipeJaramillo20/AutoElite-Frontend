@@ -15,7 +15,7 @@ export const Favoritos = () => {
               <CardCar
                 key={publicacion.id}
                 idPublicacion={publicacion.id}
-                srcImageCar='https://i.imgur.com/xyiSDoE.jpeg'
+                srcImageCar={publicacion.imagen}
                 yearCarro={publicacion.yearCarro}
                 modeloCarro={publicacion.modeloCarro}
                 marcaCarro={publicacion.marcaCarro}
@@ -29,7 +29,9 @@ export const Favoritos = () => {
             );
           })
         ) : (
-          <p>No has dado favorito a ninguna publicación</p>
+          <p className='no-favoritos'>
+            No has dado favorito a ninguna publicación
+          </p>
         )}
       </div>
     </div>

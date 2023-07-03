@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-import { getReviews, addReport } from '../../redux/usuario/thunk';
+import { getReviews, addReport, sendMessage } from '../../redux/usuario/thunk';
 
 import { IconoPerfil } from '../../components/IconoPerfil/IconoPerfil';
 import { Alert } from '../../components/Alert/Alert';
@@ -10,13 +10,14 @@ import { Modal } from '../../components/Modal/Modal';
 
 import './Publicacion.css';
 import { useSelector } from 'react-redux';
-import { getId } from '../../redux/usuario/selectors';
+import { getEmail, getId } from '../../redux/usuario/selectors';
 
 export const Publicacion = () => {
   const { publicacionId } = useParams();
 
   const navigate = useNavigate();
   const id = useSelector(getId);
+  const email = useSelector(getEmail);
   const [publicacion, setPublicacion] = useState(null);
   const [esPrecioNegociable, setEsPrecioNegociable] = useState('No');
   const [imgPerfil, setImgPerfil] = useState('');
@@ -29,6 +30,34 @@ export const Publicacion = () => {
 
   const handleImageChange = (event) => {
     setMainPicture(parseInt(event.target.id));
+  };
+
+  const handleEnvioMensaje = async (data, reset) => {
+    const mensaje = {
+      email,
+      mensaje: data.mensaje,
+      telefono: data['telefono-publicacion'],
+      sender: id,
+      receiver: publicacion.usuarioPublicacion.id,
+    };
+    const successEnvio = await sendMessage(mensaje);
+
+    if (successEnvio) {
+      setShowAlert(true);
+      setAlert({
+        title: 'Mensaje enviado',
+        message: 'Se envió el mensaje correctamente',
+        type: 'exito',
+      });
+    } else {
+      setShowAlert(true);
+      setAlert({
+        title: 'Fallo al enviar el mensaje.',
+        message: 'Envia de nuevo el mensaje.',
+        type: 'error',
+      });
+    }
+    reset();
   };
 
   useEffect(() => {
@@ -179,10 +208,17 @@ export const Publicacion = () => {
           </h1>
           <div className='imagenes'>
             <div className='imagen-principal'>
-              <img src={publicacion.carroPublicacion.imagenes[mainPicture]} alt='' />
+              <img
+                src={publicacion.carroPublicacion.imagenes[mainPicture]}
+                alt=''
+              />
             </div>
             <div className='imagen-secundaria'>
-              <div className={`imagenPequeña ${(mainPicture === 0) ? 'selected-file__img' : ''}`}>
+              <div
+                className={`imagenPequeña ${
+                  mainPicture === 0 ? 'selected-file__img' : ''
+                }`}
+              >
                 <img
                   id='0'
                   onClick={handleImageChange}
@@ -190,7 +226,11 @@ export const Publicacion = () => {
                   alt=''
                 />
               </div>
-              <div className={`imagenPequeña ${(mainPicture === 1) ? 'selected-file__img' : ''}`}>
+              <div
+                className={`imagenPequeña ${
+                  mainPicture === 1 ? 'selected-file__img' : ''
+                }`}
+              >
                 <img
                   id='1'
                   onClick={handleImageChange}
@@ -198,7 +238,11 @@ export const Publicacion = () => {
                   alt=''
                 />
               </div>
-              <div className={`imagenPequeña ${(mainPicture === 2) ? 'selected-file__img' : ''}`}>
+              <div
+                className={`imagenPequeña ${
+                  mainPicture === 2 ? 'selected-file__img' : ''
+                }`}
+              >
                 <img
                   id='2'
                   onClick={handleImageChange}
@@ -206,7 +250,11 @@ export const Publicacion = () => {
                   alt=''
                 />
               </div>
-              <div className={`imagenPequeña ${(mainPicture === 3) ? 'selected-file__img' : ''}`}>
+              <div
+                className={`imagenPequeña ${
+                  mainPicture === 3 ? 'selected-file__img' : ''
+                }`}
+              >
                 <img
                   id='3'
                   onClick={handleImageChange}
@@ -214,7 +262,11 @@ export const Publicacion = () => {
                   alt=''
                 />
               </div>
-              <div className={`imagenPequeña ${(mainPicture === 4) ? 'selected-file__img' : ''}`}>
+              <div
+                className={`imagenPequeña ${
+                  mainPicture === 4 ? 'selected-file__img' : ''
+                }`}
+              >
                 <img
                   id='4'
                   onClick={handleImageChange}
@@ -258,7 +310,7 @@ export const Publicacion = () => {
             </p>
             <p className='item'>
               <span>Transmision: </span>
-              transmision
+              {publicacion.carroPublicacion.transmision}
             </p>
             <p className='item'>
               <span>Kilometros: </span>
@@ -306,8 +358,8 @@ export const Publicacion = () => {
               id === ''
                 ? true
                 : id == publicacion.usuarioPublicacion.id
-                  ? true
-                  : false
+                ? true
+                : false
             }
           >
             Reportar
@@ -358,7 +410,7 @@ export const Publicacion = () => {
             inputs={[
               {
                 type: 'text',
-                id: 'nombre',
+                id: 'asunto',
                 placeholder: 'Asunto*',
                 validacion: { required: true },
                 error: {
@@ -366,25 +418,16 @@ export const Publicacion = () => {
                 },
               },
               {
-                type: 'text',
-                id: 'email-publicacion',
-                placeholder: 'Email*',
-                validacion: {
-                  required: true,
-                  pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
-                },
-                error: {
-                  required: 'Campo obligatorio',
-                  pattern: 'Email no válido.',
-                },
-              },
-              {
                 type: 'number',
                 id: 'telefono-publicacion',
                 placeholder: 'Teléfono',
+                validacion: { required: true },
+                error: {
+                  required: 'Campo obligatorio',
+                },
               },
               {
-                type: 'text',
+                type: 'textarea',
                 id: 'mensaje',
                 placeholder: 'Escribe un mensaje*',
                 validacion: { required: true },
@@ -398,9 +441,12 @@ export const Publicacion = () => {
               id === ''
                 ? true
                 : id == publicacion.usuarioPublicacion.id
-                  ? true
-                  : false
+                ? true
+                : false
             }
+            onSubmit={(data, reset) => {
+              handleEnvioMensaje(data, reset);
+            }}
           />
         </div>
       </aside>
