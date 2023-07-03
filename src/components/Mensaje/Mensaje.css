@@ -1,0 +1,34 @@
+.app-mensaje {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 500px;
+  margin-bottom: 1rem;
+  background-color: #282435;
+  color: #fff;
+  gap: 2%;
+  padding: 2%;
+}
+
+.app-mensaje .fa-inbox {
+  margin-right: 0.5rem;
+}
+
+.app-mensaje__info {
+  padding: 2%;
+  width: 80%;
+  background-color: #fff;
+  color: #282435;
+  height: 60%;
+  overflow-y: scroll;
+  border-radius: 5%;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.mensaje--resaltado {
+  color: #666276;
+  font-weight: 700;
+  margin-right: 0.5rem;
+}

@@ -122,9 +122,6 @@ export const Login = ({ handleShowModal, pageToShow, changePageToShow }) => {
                   onSubmit={(data) => handleLogin(data)}
                 />
               </div>
-              <div className='form_forgot-password'>
-                <p>Olvidé la contraseña</p>
-              </div>
             </div>
           </div>
         </Modal>

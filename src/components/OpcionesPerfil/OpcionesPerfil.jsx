@@ -64,6 +64,14 @@ export const OpcionesPerfil = () => {
                 Reseñas
               </NavLink>
             </li>
+            <li>
+              <NavLink to='/misMensajes'>
+                <span>
+                  <i className='fa-solid fa-envelope'></i>
+                </span>{' '}
+                Mensajes
+              </NavLink>
+            </li>
           </React.Fragment>
         )}
         <li>

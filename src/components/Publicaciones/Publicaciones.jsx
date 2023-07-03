@@ -2,19 +2,22 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { CardCar } from '../CardCar/CardCar';
 import './Publicaciones.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getToken } from '../../redux/usuario/selectors';
+import { eliminarPublicacionGuardada } from '../../redux/usuario/actions';
 export const Publicaciones = ({
   userId,
   setCantidadPublicaciones,
   showOpt,
 }) => {
   const [publicaciones, setPublicaciones] = useState(null);
+  const dispatch = useDispatch();
   const token = useSelector(getToken);
   const deletePublicacion = async (idPublicacion) => {
     setPublicaciones((prevPub) => {
       return prevPub.filter((pub) => pub.id != idPublicacion);
     });
+    dispatch(eliminarPublicacionGuardada(idPublicacion));
     const response = await fetch(
       `http://localhost:8080/api/v1/publicaciones/${idPublicacion}`,
       {
@@ -63,7 +66,7 @@ export const Publicaciones = ({
         <CardCar
           key={publicacion.id}
           idPublicacion={publicacion.id}
-          srcImageCar='https://i.imgur.com/xyiSDoE.jpeg'
+          srcImageCar={publicacion.carroPublicacion.imagenes[0]}
           yearCarro={publicacion.carroPublicacion.year}
           modeloCarro={publicacion.carroPublicacion.tipo}
           marcaCarro={publicacion.carroPublicacion.marca}

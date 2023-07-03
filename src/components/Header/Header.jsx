@@ -2,7 +2,12 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getAuth, getImagen, getRol, getId } from '../../redux/usuario/selectors';
+import {
+  getAuth,
+  getImagen,
+  getRol,
+  getId,
+} from '../../redux/usuario/selectors';
 import { getUserData, logOut } from '../../redux/usuario/thunk';
 
 import { IconoPerfil } from '../IconoPerfil/IconoPerfil';
@@ -59,8 +64,8 @@ export const Header = () => {
           return {
             title: 'Estas bloqueado',
             message: 'No tienes permiso para iniciar sesión',
-            type: 'alerta'
-          }
+            type: 'alerta',
+          };
         });
         dispatch(logOut());
       }
@@ -225,7 +230,12 @@ export const Header = () => {
   return (
     <>
       {showAlert ? (
-        <Alert type={alert.type} title={alert.title} message={alert.message} setShowModal={setShowAlert} />
+        <Alert
+          type={alert.type}
+          title={alert.title}
+          message={alert.message}
+          setShowModal={setShowAlert}
+        />
       ) : null}
       <div ref={headerContainerRef} className='header-app__container'>
         {windowWidth ? (
@@ -350,6 +360,14 @@ export const Header = () => {
                                     <i className='fa-solid fa-star painted'></i>
                                   </span>{' '}
                                   Reseñas
+                                </NavLink>
+                              </li>
+                              <li onClick={handleCloseMenu}>
+                                <NavLink to='/misMensajes'>
+                                  <span>
+                                    <i className='fa-solid fa-envelope'></i>
+                                  </span>{' '}
+                                  Mensajes
                                 </NavLink>
                               </li>
                             </>

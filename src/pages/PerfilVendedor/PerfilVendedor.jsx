@@ -7,21 +7,55 @@ import { Alert } from '../../components/Alert/Alert';
 import { Publicaciones } from '../../components/Publicaciones/Publicaciones';
 import { IconoPerfil } from '../../components/IconoPerfil/IconoPerfil';
 
-import { getReviews, getUserData } from '../../redux/usuario/thunk';
-
-//import { REVIEWS } from '../../../constants';
+import {
+  getReviews,
+  getUserData,
+  sendMessage,
+} from '../../redux/usuario/thunk';
 
 import './PerfilVendedor.css';
 import { useSelector } from 'react-redux';
-import { getId } from '../../redux/usuario/selectors';
+import { getEmail, getId } from '../../redux/usuario/selectors';
 
 export const PerfilVendedor = () => {
   const { usuarioId } = useParams();
   const id = useSelector(getId);
+  const email = useSelector(getEmail);
   const [usuario, setUsuario] = useState(null);
   const [cantidadPublicaciones, setCantidadPublicaciones] = useState(0);
   const [reviews, setReviews] = useState([]);
   const [wasReviewed, setWasReviewed] = useState(false);
+  const [alert, setAlert] = useState({});
+  const [showAlert, setShowAlert] = useState(false);
+
+  const handleEnvioMensaje = async (data, reset) => {
+    const mensaje = {
+      email: email,
+      mensaje: data.mensaje,
+      telefono: data['telefono-publicacion'],
+      sender: id.toString(),
+      receiver: usuarioId.toString,
+      asunto: data.asunto,
+    };
+    const successEnvio = await sendMessage(mensaje);
+
+    if (successEnvio) {
+      setShowAlert(true);
+      setAlert({
+        title: 'Mensaje enviado',
+        message: 'Se envió el mensaje correctamente',
+        type: 'exito',
+      });
+    } else {
+      setShowAlert(true);
+      setAlert({
+        title: 'Fallo al enviar el mensaje.',
+        message: 'Envia de nuevo el mensaje.',
+        type: 'error',
+      });
+    }
+    reset();
+  };
   useEffect(() => {
     const getDatosUsuario = async () => {
       const res = await getUserData(usuarioId);
@@ -52,6 +86,14 @@ export const PerfilVendedor = () => {
           setShowModal={setWasReviewed}
         />
       ) : null}
+      {showAlert ? (
+        <Alert
+          type={alert.type}
+          title={alert.title}
+          message={alert.message}
+          setShowModal={setShowAlert}
+        />
+      ) : null}
       <header className='vendor-section__profile'>
         <div className='profile-data'>
           <div className='profile-data__img'>
@@ -75,24 +117,11 @@ export const PerfilVendedor = () => {
             inputs={[
               {
                 type: 'text',
-                id: 'nombre',
+                id: 'asunto',
                 placeholder: 'Asunto*',
                 validacion: { required: true },
                 error: {
                   required: 'Campo obligatorio',
-                },
-              },
-              {
-                type: 'text',
-                id: 'email-publicacion',
-                placeholder: 'Email*',
-                validacion: {
-                  required: true,
-                  pattern: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
-                },
-                error: {
-                  required: 'Campo obligatorio',
-                  pattern: 'Email no válido.',
                 },
               },
               {
@@ -101,7 +130,7 @@ export const PerfilVendedor = () => {
                 placeholder: 'Teléfono',
               },
               {
-                type: 'text',
+                type: 'textarea',
                 id: 'mensaje',
                 placeholder: 'Escribe un mensaje*',
                 validacion: { required: true },
@@ -112,6 +141,9 @@ export const PerfilVendedor = () => {
             ]}
             btnText='Enviar mensaje'
             disableBtn={id === '' ? true : id == usuarioId ? true : false}
+            onSubmit={(data, reset) => {
+              handleEnvioMensaje(data, reset);
+            }}
           />
         </div>
       </header>
