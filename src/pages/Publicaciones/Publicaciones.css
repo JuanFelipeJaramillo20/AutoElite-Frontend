@@ -101,7 +101,7 @@
   margin: 0;
 }
 
-@media screen and (max-width:950px) {
+@media screen and (max-width:2000px) {
   .publicaciones-section .car-list {
     display: flex;
     flex-direction: column;
@@ -126,9 +126,11 @@
     align-items: center;
   
     width: 100%;
+
+    border: 5px solid transparent;
   
-    padding: 0;
-    margin: 0;
+    padding: 2%;
+    margin-bottom: 10%;
     overflow-y: auto;
   }
 }
