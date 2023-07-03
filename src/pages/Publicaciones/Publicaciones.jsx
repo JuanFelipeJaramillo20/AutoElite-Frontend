@@ -111,10 +111,6 @@ export const Publicaciones = () => {
     loadData();
   }, []);
 
-  useEffect(() => {
-    console.log(reportComments);
-  }, [reportComments]);
-
   // Handle page change
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -148,7 +144,7 @@ export const Publicaciones = () => {
                         <CardCar
                           key={publicacion.idPublicacion}
                           idPublicacion={publicacion.idPublicacion}
-                          srcImageCar='https://i.imgur.com/xyiSDoE.jpeg'
+                          srcImageCar={publicacion.carroPublicacion.imagenes[0]}
                           yearCarro={publicacion.carroPublicacion.year}
                           modeloCarro={publicacion.carroPublicacion.tipo}
                           marcaCarro={publicacion.carroPublicacion.marca}
@@ -167,30 +163,32 @@ export const Publicaciones = () => {
                         ></CardCar>
                         <div className='reports'>
                           <h2>Comentarios ({reportComments.length})</h2>
-                          <div className='none-none'></div>
-                          {reportComments.map((comment, id) => {
-                            if (id < 10) {
-                              return (
-                                <div
-                                  className='report-comments'
-                                  key={comment.id}
-                                >
+                          <div className='comments-report__container'>
+                            {reportComments.map((comment, id) => {
+                              if (id < 10) {
+                                return (
                                   <div
-                                    onClick={() => {
-                                      history(
-                                        `/perfil/${comment.usuarioReporte}`
-                                      );
-                                    }}
+                                    className='report-comments'
+                                    key={comment.id}
                                   >
-                                    <p>
-                                      Comentario:
-                                      <span>{comment.comentario}</span>
-                                    </p>
+                                    <div
+                                      onClick={() => {
+                                        history(
+                                          `/perfil/${comment.usuarioReporte}`
+                                        );
+                                      }}
+                                    >
+                                      <p>
+                                        
+                                        <span>{comment.comentario}</span>
+                                      </p>
+                                    </div>
                                   </div>
-                                </div>
-                              );
-                            }
-                          })}
+                                );
+                              }
+                            })}
+                          </div>
+
                         </div>
                       </>
                     );
