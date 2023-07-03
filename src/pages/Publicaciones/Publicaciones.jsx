@@ -96,6 +96,7 @@ export const Publicaciones = () => {
               id: data.id,
               comentario: data.comentarios,
               usuarioReporte: data.reportePublicacion.usuarioPublicacion.id,
+              postID: data.reportePublicacion.id,
             };
           })
         );
@@ -162,10 +163,14 @@ export const Publicaciones = () => {
                           showOpt={true}
                         ></CardCar>
                         <div className='reports'>
-                          <h2>Comentarios ({reportComments.length})</h2>
+                          <h2>Comentarios ({reportComments.filter((report) => {
+                            if (report.postID === publicacion.idPublicacion) {
+                              return true;
+                            }
+                          }).length})</h2>
                           <div className='comments-report__container'>
                             {reportComments.map((comment, id) => {
-                              if (id < 10) {
+                              if (id < 10 && comment.postID === publicacion.idPublicacion) {
                                 return (
                                   <div
                                     className='report-comments'
@@ -179,7 +184,6 @@ export const Publicaciones = () => {
                                       }}
                                     >
                                       <p>
-                                        
                                         <span>{comment.comentario}</span>
                                       </p>
                                     </div>
